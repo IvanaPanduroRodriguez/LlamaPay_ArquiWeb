@@ -1,0 +1,20 @@
+package pe.edu.upc.llamapaytf.servicesimplements;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import pe.edu.upc.llamapaytf.entities.Servicio;
+import pe.edu.upc.llamapaytf.repositories.IServicioRepository;
+import pe.edu.upc.llamapaytf.servicesinterfaces.IServicioService;
+
+import java.util.List;
+
+@Service
+public class ServicioServiceImplement implements IServicioService {
+    @Autowired
+    private IServicioRepository sR;
+
+    @Override
+    public List<Servicio> list() {
+        return sR.findAll();
+    }
+}
