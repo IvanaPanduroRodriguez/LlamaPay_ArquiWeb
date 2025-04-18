@@ -3,7 +3,7 @@ package pe.edu.upc.llamapaytf.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Service")
+@Table(name = "Servicios")
 public class Servicio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,13 +13,20 @@ public class Servicio {
     @Column(name = "nameCompanyService", nullable = false, length = 50)
     private String nameCompanyService;
 
+    //llave foranea
+    @ManyToOne
+    @JoinColumn (name = "idCategory")//voy a trabajar con un campo en comun
+    private Category category;
+
+
     public Servicio() {
     }
 
-    public Servicio(int idService, String nameService, String nameCompanyService) {
+    public Servicio(int idService, String nameService, String nameCompanyService, Category category) {
         this.idService = idService;
         this.nameService = nameService;
         this.nameCompanyService = nameCompanyService;
+        this.category = category;
     }
 
     public int getIdService() {
@@ -44,6 +51,14 @@ public class Servicio {
 
     public void setNameCompanyService(String nameCompanyService) {
         this.nameCompanyService = nameCompanyService;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
 
