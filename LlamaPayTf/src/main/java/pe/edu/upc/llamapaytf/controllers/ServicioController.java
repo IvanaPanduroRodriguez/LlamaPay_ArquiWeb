@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.llamapaytf.dtos.ServicioDTO;
 import pe.edu.upc.llamapaytf.entities.Servicio;
+import pe.edu.upc.llamapaytf.entities.User;
 import pe.edu.upc.llamapaytf.servicesinterfaces.IServicioService;
 
 import java.util.List;
@@ -37,5 +38,17 @@ public class ServicioController {
             ModelMapper m = new ModelMapper();
             return m.map(z, ServicioDTO.class);
         }).collect(Collectors.toList());
+    }
+
+    @PutMapping("/actualizar")
+    public void modificar(@RequestBody ServicioDTO dto){ //modificar los datos ingresados
+        ModelMapper m = new ModelMapper();
+        Servicio s = m.map(dto, Servicio.class);
+        sS.update(s);
+    }
+
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable("id") int id){ //eliminar todos los atributos que yo elija
+        sS.delete(id);
     }
 }

@@ -8,4 +8,6 @@ public interface IServicioService {
     public List<Servicio> list();
     public void insertar (Servicio servicio);
     public List <Servicio> buscar(String n); //nombre de compañia
+    public void update(Servicio s);
+    public void delete(int id);
 }

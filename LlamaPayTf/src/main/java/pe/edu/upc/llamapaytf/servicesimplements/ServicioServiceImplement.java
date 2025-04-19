@@ -29,4 +29,14 @@ public class ServicioServiceImplement implements IServicioService {
         return sR.buscarCompania (n);
     }
 
+    @Override
+    public void update(Servicio s) {
+        sR.save(s);
+    }
+
+    @Override
+    public void delete(int id) {
+        sR.deleteById(id);
+    }
+
 }
