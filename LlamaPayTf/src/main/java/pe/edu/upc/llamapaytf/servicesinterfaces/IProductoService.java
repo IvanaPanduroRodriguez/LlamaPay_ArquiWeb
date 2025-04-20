@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface IProductoService {
     public List<Producto> list();
-    public void insert(Producto p);
-    public void delete(int Producto_id);
-    public Producto listId(int Producto_id);
-    public List<Producto> findByName(String Nombre_Producto);
+    public void insertar(Producto p);
+    public Producto listarId(int Producto_id);
+    public void modificar(Producto p);
+    public elimiar(int id);
 }
 
 

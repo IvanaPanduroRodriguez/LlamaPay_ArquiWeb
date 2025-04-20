@@ -1,5 +1,4 @@
 package upc.edu.pe.llamapaytf.dtos;
-import lombok.AllArgsConstructor;
 
 public class ProductoDTO {
     private int Producto_id;

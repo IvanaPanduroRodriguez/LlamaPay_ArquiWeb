@@ -17,23 +17,20 @@ public class TiendaServiceImplement implements ITiendaService {
         return tR.findAll();
     }
     @Override
-    public void insert(Tienda t) {
+    public void insertar(Tienda t) {
         tR.save(t);
     }
     @Override
-    public void delete(int id_tienda) {
+    public void eliminar(int id_tienda) {
         tR.deleteById(id_tienda);
     }
     @Override
     public Tienda listId(int id_tienda) {
         return tR.findById(id_tienda).orElse(new Tienda());
     }
+
     @Override
-    public List<Tienda> findByName(String nombre_tienda) {
-        return tR.findByName(nombre_tienda);
-    }
-    @Override
-    public void update(Tienda t) {
+    public void modificar(Tienda t) {
         tR.save(t);
     }
 }

@@ -3,9 +3,9 @@ import pe.edu.upc.llamapaytf.entities.Tienda;
 import java.util.List;
 
 public interface TiendaService {
-    public void insert(Tienda t);
+    public void insertar(Tienda t);
     public List<Tienda> list();
-    public void delete(int Tienda_id);
-    public Tienda listId(int Tienda_id);
-    public List<Tienda> findByName(String Nombre_tienda);
+    public Tienda listarId(int Tienda_id);
+    public void modificar(Tienda t);
+    public void eliminar(int id);
 }

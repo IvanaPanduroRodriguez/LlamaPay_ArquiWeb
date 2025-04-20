@@ -19,11 +19,11 @@ public class ProductTypeServiceImplement implements IProductTypeService {
         return pR.findAll();
     }
     @Override
-    public void insert(ProductType id_producto) {
+    public void insertar(ProductType id_producto) {
         pR.save(id_producto);
     }
     @Override
-    public void delete(int id_producto) {
+    public void eliminar(int id_producto) {
         pR.deleteById(id_producto);
     }
     @Override
@@ -35,7 +35,7 @@ public class ProductTypeServiceImplement implements IProductTypeService {
         return pR.findByName(nombre);
     }
     @Override
-    public void update(ProductType id_producto) {
+    public void modificar(ProductType id_producto) {
         pR.save(id_producto);
     }
 }
