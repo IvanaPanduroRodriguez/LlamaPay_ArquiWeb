@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.llamapaytf.dtos.ServicioDTO;
 import pe.edu.upc.llamapaytf.entities.Servicio;
-import pe.edu.upc.llamapaytf.entities.User;
 import pe.edu.upc.llamapaytf.servicesinterfaces.IServicioService;
 
 import java.util.List;
