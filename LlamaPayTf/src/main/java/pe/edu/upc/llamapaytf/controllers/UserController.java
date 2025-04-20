@@ -50,4 +50,6 @@ public class UserController {
     public void eliminar(@PathVariable("id") int id){ //eliminar todos los atributos que yo elija
         uS.delete(id);
     }
+
+    //test
 }
