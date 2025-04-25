@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.llamapaytf.dtos.TiendaDTO;
+import pe.edu.upc.llamapaytf.dtos.UserDTO;
 import pe.edu.upc.llamapaytf.entities.Tienda;
 import pe.edu.upc.llamapaytf.servicesinterfaces.ITiendaService;
 
@@ -40,5 +41,12 @@ public class TiendaController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") int id) {
         tS.delete(id);
+    }
+
+    @GetMapping("/{id}")
+    public TiendaDTO buscarID(@PathVariable("id") int id) { //debe tener indicado que variable estara en la ruta
+        ModelMapper m = new ModelMapper();
+        TiendaDTO dto=m.map(tS.listarId(id),TiendaDTO.class);
+        return dto;
     }
 }
