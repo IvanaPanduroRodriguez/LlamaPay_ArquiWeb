@@ -38,4 +38,12 @@ public class ProductTypeServiceImplement implements IProductTypeService {
     public void modificar(ProductType id_producto) {
         pR.save(id_producto);
     }
+    @Override
+    public List<String[]>productosandpriceandunit(){}
+        return pR.productosandpriceandunit();
+    }
+    @Override
+    public List<String[]>t()productosandtienda{}
+        return pR.productosandtienda();
+    }
 }

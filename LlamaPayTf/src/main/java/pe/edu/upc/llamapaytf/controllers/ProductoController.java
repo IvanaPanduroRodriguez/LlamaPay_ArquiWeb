@@ -46,5 +46,35 @@ public class ProductoController {
     public void eliminar(@PathVariable("id") int id) {
         pS.eliminar(id);
     }
+
+    @GetMapping("/tienda_producto")
+    public List<String[]> productosandtienda() {
+        List<String[]> fila = pS.productosandtienda();
+        List<ProductoDTO> dtoLista=new ArrayList<>();
+        for(String[] columna: fila){
+            ProductoDTO dto=new ProductoDTO();
+            dto.setId_producto(Integer.parseInt(columna[0]));
+            dto.setNombre_producto(columna[1]);
+            dto.setPrecio_producto(Double.parseDouble(columna[2]));
+            dto.setUnidad_producto(columna[3]);
+            dto.setNombre_tienda(columna[4]);
+            dtoLista.add(dto);
+        }
+        return dtoLista;
+    }
+    @GetMapping("/producto_precio_unidad")
+    public List<String[]> productosandpriceandunit() {
+        List<String[]> fila = pS.productosandpriceandunit();
+        List<ProductoDTO> dtoLista=new ArrayList<>();
+        for(String[] columna: fila){
+            ProductoDTO dto=new ProductoDTO();
+            dto.setId_producto(Integer.parseInt(columna[0]));
+            dto.setNombre_producto(columna[1]);
+            dto.setPrecio_producto(Double.parseDouble(columna[2]));
+            dto.setUnidad_producto(columna[3]);
+            dtoLista.add(dto);
+        }
+        return dtoLista;
+    }
 }
 

@@ -11,6 +11,8 @@ public interface IProductoService {
     public Producto listarId(int Producto_id);
     public void modificar(Producto p);
     public elimiar(int id);
+    public List<String[]> productosandpriceandunit();
+    public List<String[]> productosandtienda();
 }
 
 
