@@ -4,7 +4,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.llamapaytf.dtos.TiendaDTO;
-import pe.edu.upc.llamapaytf.dtos.UserDTO;
 import pe.edu.upc.llamapaytf.entities.Tienda;
 import pe.edu.upc.llamapaytf.servicesinterfaces.ITiendaService;
 
