@@ -41,4 +41,11 @@ public class TiendaController {
     public void eliminar(@PathVariable("id") int id) {
         tS.delete(id);
     }
+
+    @GetMapping("/{id}")
+    public TiendaDTO buscarID(@PathVariable("id") int id) { //debe tener indicado que variable estara en la ruta
+        ModelMapper m = new ModelMapper();
+        TiendaDTO dto=m.map(tS.listarId(id),TiendaDTO.class);
+        return dto;
+    }
 }
