@@ -5,11 +5,10 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "MetodoPago")
 public class MetodoPago {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MetodoPago_id")
-    private int id;
+    private int idMetodoPago;
 
     @Column(name = "Nombre_metodoPago", nullable = false, length = 30)
     private String nombreMetodoPago;
@@ -20,21 +19,22 @@ public class MetodoPago {
     @Column(name = "descripcion", nullable = true, columnDefinition = "TEXT")
     private String descripcion;
 
-    public MetodoPago() {}
+    public MetodoPago() {
+    }
 
-    public MetodoPago(int id, String nombreMetodoPago, String tipoMetodoPago, String descripcion) {
-        this.id = id;
+    public MetodoPago(int idMetodoPago, String nombreMetodoPago, String tipoMetodoPago, String descripcion) {
+        this.idMetodoPago = idMetodoPago;
         this.nombreMetodoPago = nombreMetodoPago;
         this.tipoMetodoPago = tipoMetodoPago;
         this.descripcion = descripcion;
     }
 
-    public int getId() {
-        return id;
+    public int getIdMetodoPago() {
+        return idMetodoPago;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdMetodoPago(int idMetodoPago) {
+        this.idMetodoPago = idMetodoPago;
     }
 
     public String getNombreMetodoPago() {
@@ -61,4 +61,3 @@ public class MetodoPago {
         this.descripcion = descripcion;
     }
 }
-

@@ -1,47 +1,53 @@
 package pe.edu.upc.llamapaytf.controllers;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.llamapaytf.dtos.MetodoPagoDTO;
 import pe.edu.upc.llamapaytf.entities.MetodoPago;
 import pe.edu.upc.llamapaytf.servicesinterfaces.IMetodoPagoService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/metodospago")
+@RequestMapping("/metodospagos")
 public class MetodoPagoController {
-
     @Autowired
-    private IMetodoPagoService metodoPagoService;
-
-    @PostMapping
-    public void registrar(@RequestBody MetodoPago metodoPago) {
-        metodoPagoService.registrar(metodoPago);
-    }
+    private IMetodoPagoService mpS;
 
     @GetMapping
-    public List<MetodoPago> listar() {
-        return metodoPagoService.listar();
+    public List<MetodoPagoDTO> listar() {
+        return mpS.list().stream().map(x->{
+            ModelMapper modelMapper = new ModelMapper();
+            return modelMapper.map(x, MetodoPagoDTO.class);
+        }).collect(Collectors.toList());
     }
 
-    @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable("id") int id) {
-        metodoPagoService.eliminar(id);
+    @PostMapping
+    public void insertar(@RequestBody MetodoPagoDTO dto) {
+        ModelMapper m = new ModelMapper();
+        MetodoPago mp = m.map(dto, MetodoPago.class);
+        mpS.insertar(mp);
     }
 
     @GetMapping("/{id}")
-    public MetodoPago buscarPorId(@PathVariable("id") int id) {
-        return metodoPagoService.buscarPorId(id);
-    }
-
-    @GetMapping("/buscar")
-    public List<MetodoPago> buscarPorNombre(@RequestParam("nombre") String nombre) {
-        return metodoPagoService.buscarPorNombre(nombre);
+    public MetodoPagoDTO buscarID(@PathVariable("id") int id) {
+        ModelMapper m = new ModelMapper();
+        MetodoPagoDTO dto=m.map(mpS.listId(id),MetodoPagoDTO.class);
+        return dto;
     }
 
     @PutMapping
-    public void actualizar(@RequestBody MetodoPago metodoPago) {
-        metodoPagoService.registrar(metodoPago);
+    public void modificar(@RequestBody MetodoPagoDTO dto){
+        ModelMapper m = new ModelMapper();
+        MetodoPago mp = m.map(dto, MetodoPago.class);
+        mpS.update(mp);
     }
-}
 
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable("id") int id){
+        mpS.delete(id);
+    }
+
+}

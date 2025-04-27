@@ -1,0 +1,53 @@
+package pe.edu.upc.llamapaytf.controllers;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.llamapaytf.dtos.TipoCuentaDTO;
+import pe.edu.upc.llamapaytf.entities.TipoCuenta;
+import pe.edu.upc.llamapaytf.servicesinterfaces.ITipoCuentaService;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@RestController
+@RequestMapping("/tiposcuentas")
+public class TipoCuentaController {
+    @Autowired
+    private ITipoCuentaService tcS;
+
+    @GetMapping
+    public List<TipoCuentaDTO> listar() {
+        return tcS.list().stream().map(x -> {
+            ModelMapper modelMapper = new ModelMapper();
+            return modelMapper.map(x, TipoCuentaDTO.class);
+        }).collect(Collectors.toList());
+    }
+
+    @PostMapping("registrar")
+    public void registrar(@RequestBody TipoCuentaDTO tc) {
+        ModelMapper modelMapper = new ModelMapper();
+        TipoCuenta tcs = modelMapper.map(tc, TipoCuenta.class);
+        tcS.insertar(tcs);
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    public void eliminar(@PathVariable("id") int id) {
+        tcS.delete(id);
+    }
+
+    @PutMapping("/actualizar")
+    public void actualizar(@RequestBody TipoCuentaDTO tcd) {
+        ModelMapper modelMapper = new ModelMapper();
+        TipoCuenta tc = modelMapper.map(tcd, TipoCuenta.class);
+        tcS.update(tc);
+    }
+
+    @GetMapping("/usuario/{userId}")
+    public List<TipoCuentaDTO> obtenerTiposCuentasPorUsuario(@PathVariable int userId) {
+        return tcS.findTipoCuentaByUserId(userId).stream().map(x -> {
+            ModelMapper modelMapper = new ModelMapper();
+            return modelMapper.map(x, TipoCuentaDTO.class);
+        }).collect(Collectors.toList());
+    }
+}

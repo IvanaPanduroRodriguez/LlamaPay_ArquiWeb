@@ -1,26 +1,17 @@
 package pe.edu.upc.llamapaytf.dtos;
 
 public class MetodoPagoDTO {
-    private int id;
+    private int idMetodoPago;
     private String nombreMetodoPago;
     private String tipoMetodoPago;
     private String descripcion;
 
-    public MetodoPagoDTO() {}
-
-    public MetodoPagoDTO(int id, String nombreMetodoPago, String tipoMetodoPago, String descripcion) {
-        this.id = id;
-        this.nombreMetodoPago = nombreMetodoPago;
-        this.tipoMetodoPago = tipoMetodoPago;
-        this.descripcion = descripcion;
+    public int getIdMetodoPago() {
+        return idMetodoPago;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setIdMetodoPago(int idMetodoPago) {
+        this.idMetodoPago = idMetodoPago;
     }
 
     public String getNombreMetodoPago() {
@@ -47,4 +38,3 @@ public class MetodoPagoDTO {
         this.descripcion = descripcion;
     }
 }
-

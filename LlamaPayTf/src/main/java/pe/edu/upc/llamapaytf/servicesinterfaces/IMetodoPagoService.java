@@ -5,11 +5,10 @@ import pe.edu.upc.llamapaytf.entities.MetodoPago;
 import java.util.List;
 
 public interface IMetodoPagoService {
-    List<MetodoPago> listarMetodoPagos();
-    void registrar(MetodoPago metodoPago);
-    List<MetodoPago> listar();
-    void eliminar(int id);
-    MetodoPago buscarPorId(int id);
-    List<MetodoPago> buscarPorNombre(String nombre);
+    public List<MetodoPago> list();
+    public void insertar(MetodoPago mp);
+    public void update (MetodoPago mp);
+    public void delete(int id);
+    public MetodoPago listId(int id);
+    //public List<MetodoPago> buscarPorNombre(String nombre);
 }
-
