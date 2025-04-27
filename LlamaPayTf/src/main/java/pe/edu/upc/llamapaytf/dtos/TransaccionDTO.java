@@ -1,52 +1,24 @@
-package pe.edu.upc.llamapaytf.entities;
+package pe.edu.upc.llamapaytf.dtos;
 
-import jakarta.persistence.*;
+import pe.edu.upc.llamapaytf.entities.MetodoPago;
+import pe.edu.upc.llamapaytf.entities.Servicio;
+import pe.edu.upc.llamapaytf.entities.TipoCuenta;
+import pe.edu.upc.llamapaytf.entities.TipoTransaccion;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Timestamp;
 
-@Entity
-@Table(name="transaccion")
-public class Transaccion {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+public class TransaccionDTO {
     private int idTransaccion;
-    @Column(name = "fechaTransaccion",nullable = false)
     private Date fechaTransaccion;
-    @Column(name = "montoTransaccion",nullable = false,precision = 10,scale = 2)
     private BigDecimal montoTransaccion;
-    @Column(name = "descripcionTransaccion",nullable = false, length = 50)
     private String descripcionTransaccion;
-
-    @ManyToOne
-    @JoinColumn(name = "idTipoCuenta")
     private TipoCuenta tipocuenta;
-
-    @ManyToOne
-    @JoinColumn(name = "MetodoPago_id")
     private MetodoPago metodopago;
-
-    @ManyToOne
-    @JoinColumn(name = "idService")
     private Servicio servicio;
-
-    @ManyToOne
-    @JoinColumn(name = "tipoGastoId")
     private TipoTransaccion tipotransaccion;
-
-    public Transaccion() {
-    }
-
-    public Transaccion(int idTransaccion, Date fechaTransaccion, BigDecimal montoTransaccion, String descripcionTransaccion, TipoCuenta tipocuenta, MetodoPago metodopago, Servicio servicio, TipoTransaccion tipotransaccion) {
-        this.idTransaccion = idTransaccion;
-        this.fechaTransaccion = fechaTransaccion;
-        this.montoTransaccion = montoTransaccion;
-        this.descripcionTransaccion = descripcionTransaccion;
-        this.tipocuenta = tipocuenta;
-        this.metodopago = metodopago;
-        this.servicio = servicio;
-        this.tipotransaccion = tipotransaccion;
-    }
 
     public int getIdTransaccion() {
         return idTransaccion;
