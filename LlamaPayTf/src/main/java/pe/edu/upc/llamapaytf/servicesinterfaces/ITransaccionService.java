@@ -2,6 +2,7 @@ package pe.edu.upc.llamapaytf.servicesinterfaces;
 
 import pe.edu.upc.llamapaytf.entities.Transaccion;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ITransaccionService {
@@ -10,4 +11,7 @@ public interface ITransaccionService {
     void delete(int id);
     List<Transaccion> list();
     Transaccion listID(int id);
+
+    List<Transaccion> findByTipoTransaccion(String tipo);
+    List<Transaccion> findByMontoMayor(BigDecimal monto);
 }
