@@ -9,11 +9,13 @@ import java.util.List;
 
 @Repository
 public interface IProductoRepository extends JpaRepository<Producto,Integer> {
+    //productos y sus precios
     @Query(value="Select p.Unidad_medida, p.Precio_producto\n" +
             "FROM Producto p \n" +
             "WHERE Nombre_producto = 'NombreDelProducto'",nativeQuery = true)
     public List<String[]>productosandpriceandunit();
 
+    //productos y sus tiendas
     @Query(value="Select \n" +
             "    p.Nombre_producto, \n" +
             "    p.Unidad_medida, \n" +
