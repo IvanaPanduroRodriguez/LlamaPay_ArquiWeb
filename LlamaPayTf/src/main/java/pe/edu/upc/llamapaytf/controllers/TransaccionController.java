@@ -7,6 +7,7 @@ import pe.edu.upc.llamapaytf.dtos.TransaccionDTO;
 import pe.edu.upc.llamapaytf.entities.Transaccion;
 import pe.edu.upc.llamapaytf.servicesinterfaces.ITransaccionService;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,5 +50,21 @@ public class TransaccionController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") int id) {
         transaccionService.delete(id);
+    }
+
+    @GetMapping("/tipo/{tipo}")
+    public List<TransaccionDTO> buscarPorTipo(@PathVariable("tipo") String tipo) {
+        return transaccionService.findByTipoTransaccion(tipo).stream().map(t -> {
+            ModelMapper modelMapper = new ModelMapper();
+            return modelMapper.map(t, TransaccionDTO.class);
+        }).collect(Collectors.toList());
+    }
+
+    @GetMapping("/monto/{monto}")
+    public List<TransaccionDTO> buscarPorMontoMayor(@PathVariable("monto") BigDecimal monto) {
+        return transaccionService.findByMontoMayor(monto).stream().map(t -> {
+            ModelMapper modelMapper = new ModelMapper();
+            return modelMapper.map(t, TransaccionDTO.class);
+        }).collect(Collectors.toList());
     }
 }
