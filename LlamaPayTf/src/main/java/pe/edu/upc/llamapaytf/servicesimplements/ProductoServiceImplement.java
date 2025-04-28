@@ -32,4 +32,13 @@ public class ProductoServiceImplement implements IProductoService {
     public void delete(int id) {
         pR.deleteById(id);
     }
+
+    @Override
+    public List<String[]> productosandpriceandunit() {
+        return pR.productosandpriceandunit();
+    }
+    @Override
+    public List<String[]> productosandtienda() {
+        return pR.productosandtienda();
+    }
 }

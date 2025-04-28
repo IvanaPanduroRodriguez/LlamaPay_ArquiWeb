@@ -39,4 +39,9 @@ public class ServicioServiceImplement implements IServicioService {
         sR.deleteById(id);
     }
 
+    @Override
+    public List<String[]> FindServicebyCategory() {
+        return sR.FindServicebyCategory();
+    }
+
 }

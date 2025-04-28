@@ -3,10 +3,12 @@ package pe.edu.upc.llamapaytf.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.llamapaytf.dtos.ServicioCategoriaDTO;
 import pe.edu.upc.llamapaytf.dtos.ServicioDTO;
 import pe.edu.upc.llamapaytf.entities.Servicio;
 import pe.edu.upc.llamapaytf.servicesinterfaces.IServicioService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +39,19 @@ public class ServicioController {
             ModelMapper m = new ModelMapper();
             return m.map(z, ServicioDTO.class);
         }).collect(Collectors.toList());
+    }
+
+    @GetMapping("/servicioxcategoria")
+    public List<ServicioCategoriaDTO>cantidadServicioporCategoria() {
+        List<ServicioCategoriaDTO> dtoLista=new ArrayList<>();
+        List<String[]>lista=sS.FindServicebyCategory();
+        for(String[] columna:lista){
+            ServicioCategoriaDTO dto=new ServicioCategoriaDTO();
+            dto.setNameCategory(columna[0]);
+            dto.setCantidadServicio(Integer.parseInt(columna[1]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
     }
 
     @PutMapping("/actualizar")

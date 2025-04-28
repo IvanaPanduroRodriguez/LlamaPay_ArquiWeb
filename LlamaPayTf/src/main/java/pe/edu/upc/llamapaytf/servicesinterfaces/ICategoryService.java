@@ -10,4 +10,5 @@ public interface ICategoryService {
     public Category listID(int id); //listar server por ID
     public void update(Category c);
     public void delete(int id);
+    public List<String[]>FindMontoByCategory();
 }

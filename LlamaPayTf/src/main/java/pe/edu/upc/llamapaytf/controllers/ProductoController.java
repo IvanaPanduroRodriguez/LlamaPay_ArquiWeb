@@ -7,6 +7,7 @@ import pe.edu.upc.llamapaytf.dtos.ProductoDTO;
 import pe.edu.upc.llamapaytf.entities.Producto;
 import pe.edu.upc.llamapaytf.servicesinterfaces.IProductoService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,5 +40,34 @@ public class ProductoController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") int id) {
         pS.delete(id);
+    }
+    @GetMapping("/tienda_producto")
+    public List<ProductoDTO> productosandtienda() {
+        List<String[]> fila = pS.productosandtienda();
+        List<ProductoDTO> dtoLista=new ArrayList<>();
+        for(String[] columna: fila){
+            ProductoDTO dto=new ProductoDTO();
+            dto.setProducto_id(Integer.parseInt(columna[0]));
+            dto.setNombre_producto(columna[1]);
+            dto.setPrecio_Producto((int) Double.parseDouble(columna[2]));
+            dto.setUnidad_medida(columna[3]);
+            dto.setTienda(columna[4]);
+            dtoLista.add(dto);
+        }
+        return dtoLista;
+    }
+    @GetMapping("/producto_precio_unidad")
+    public List<ProductoDTO> productosandpriceandunit() {
+        List<String[]> fila = pS.productosandpriceandunit();
+        List<ProductoDTO> dtoLista=new ArrayList<>();
+        for(String[] columna: fila){
+            ProductoDTO dto=new ProductoDTO();
+            dto.setProducto_id(Integer.parseInt(columna[0]));
+            dto.setNombre_producto(columna[1]);
+            dto.setPrecio_Producto((int) Double.parseDouble(columna[2]));
+            dto.setUnidad_medida(columna[3]);
+            dtoLista.add(dto);
+        }
+        return dtoLista;
     }
 }

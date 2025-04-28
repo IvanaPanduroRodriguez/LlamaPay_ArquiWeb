@@ -3,10 +3,12 @@ package pe.edu.upc.llamapaytf.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.llamapaytf.dtos.CategoriaMontoDTO;
 import pe.edu.upc.llamapaytf.dtos.CategoryDTO;
 import pe.edu.upc.llamapaytf.entities.Category;
 import pe.edu.upc.llamapaytf.servicesinterfaces.ICategoryService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +41,19 @@ public class CategoryController {
         return dto;
     }
 
+    @GetMapping("/montoxcategoria")
+    public List<CategoriaMontoDTO>buscarMontoCategoria() {
+        List<CategoriaMontoDTO> dtoLista=new ArrayList<>();
+        List<String[]>lista=cS.FindMontoByCategory();
+        for(String[] columna:lista){
+            CategoriaMontoDTO dto=new CategoriaMontoDTO();
+            dto.setNameCategory(columna[0]);
+            dto.setTotalGasto(Double.parseDouble(columna[1]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
+    }
+
     @PutMapping
     public void modificar(@RequestBody CategoryDTO dto){
         ModelMapper m = new ModelMapper();
@@ -50,6 +65,7 @@ public class CategoryController {
     public void eliminar(@PathVariable("id") int id){
         cS.delete(id);
     }
+
 
 
 }
