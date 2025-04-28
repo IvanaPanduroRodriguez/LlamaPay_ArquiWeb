@@ -8,9 +8,12 @@ public class UserDTO {
     private String nameUser;
     private String lastnameUser;
     private String emailUser;
-    private String passwordUser;
     private Date birthdayUser;
     private Timestamp registrationDateUser;
+    private String username;
+    private String password;
+    private Boolean enabled;
+
 
     public int getIdUser() {
         return idUser;
@@ -44,14 +47,6 @@ public class UserDTO {
         this.emailUser = emailUser;
     }
 
-    public String getPasswordUser() {
-        return passwordUser;
-    }
-
-    public void setPasswordUser(String passwordUser) {
-        this.passwordUser = passwordUser;
-    }
-
     public Date getBirthdayUser() {
         return birthdayUser;
     }
@@ -66,5 +61,29 @@ public class UserDTO {
 
     public void setRegistrationDateUser(Timestamp registrationDateUser) {
         this.registrationDateUser = registrationDateUser;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }
