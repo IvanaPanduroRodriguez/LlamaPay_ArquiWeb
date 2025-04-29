@@ -1,5 +1,11 @@
-FROM amazoncorretto:23-alpine-jdk
+FROM eclipse-temurin:17-jdk AS builder
+WORKDIR/app
+COPY . .
+RUN ./mvnw clean package -DskipTests
+FROM eclipse-temurin:17-jre
 
-COPY target/LlamaPaytf-0.0.1-SNAPSHOT.jar app.jar
+WORKDIR/app
+COPY --from=builder /app/target/*.jar app.jar
+EXPOSE 8085
 
 ENTRYPOINT ["java","-jar","/app.jar"]
