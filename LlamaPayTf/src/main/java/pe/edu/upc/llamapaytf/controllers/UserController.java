@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.llamapaytf.dtos.UserDTO;
+import pe.edu.upc.llamapaytf.dtos.UsuarioInfoDTO;
 import pe.edu.upc.llamapaytf.entities.User;
 import pe.edu.upc.llamapaytf.servicesinterfaces.IUserService;
 
@@ -18,10 +19,10 @@ public class UserController {
     private IUserService uS;
 
     @GetMapping
-    public List<UserDTO> listar() {
+    public List<UsuarioInfoDTO> listar() {
         return uS.list().stream().map(x->{
             ModelMapper modelMapper = new ModelMapper();
-            return modelMapper.map(x,UserDTO.class);
+            return modelMapper.map(x,UsuarioInfoDTO.class);
         }).collect(Collectors.toList());
     }
 
@@ -33,9 +34,9 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public UserDTO buscarID(@PathVariable("id") int id) { //debe tener indicado que variable estara en la ruta
+    public UsuarioInfoDTO buscarID(@PathVariable("id") int id) { //debe tener indicado que variable estara en la ruta
         ModelMapper m = new ModelMapper();
-        UserDTO dto=m.map(uS.listID(id),UserDTO.class);
+        UsuarioInfoDTO dto=m.map(uS.listID(id),UsuarioInfoDTO.class);
         return dto;
     }
 

@@ -40,7 +40,13 @@ public class CategoryServiceImplement implements ICategoryService {
     }
 
     @Override
-    public List<String[]> FindMontoByCategory() {
-        return cR.FindMontoByCategory();
+    public List<String[]> FindMontoByCategoryMesAndAnio(int mes, int anio) {
+        return cR.FindMontoByCategoryMesAndAnio(mes,anio);
     }
+
+    @Override
+    public List<String[]> FindMontoByCategoryAnio(int anio) {
+        return cR.FindMontoByCategoryAnio(anio);
+    }
+
 }
