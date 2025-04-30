@@ -2,6 +2,7 @@ package pe.edu.upc.llamapaytf.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pe.edu.upc.llamapaytf.entities.Category;
 
@@ -10,13 +11,28 @@ import java.util.List;
 @Repository
 public interface ICategoryRepository extends JpaRepository<Category, Integer> {
 
-    @Query(value = "Select c.name_category as Nombre_Categoria,SUM(t.monto_transaccion) as Total_Gasto \n" +
-            "From transaccion t \n" +
-            "inner join servicios s on t.id_service = s.id_service\n" +
-            "inner join category c on s.id_category = c.id_category\n" +
-            "inner join tipotransaccion tt on t.tipo_gasto_id = tt.tipo_gasto_id\n" +
-            "where tt.descripcion ='Gasto'\n" +
-            "group by c.name_category\n" +
-            "order by Total_Gasto DESC", nativeQuery = true)
-    public List<String[]> FindMontoByCategory();
+    @Query(value = "SELECT c.name_category AS Nombre_Categoria," +
+            "           SUM(t.monto_transaccion) AS Total_Gasto" +
+            "    FROM transaccion t" +
+            "    INNER JOIN servicios s ON t.id_service = s.id_service" +
+            "    INNER JOIN category c ON s.id_category = c.id_category" +
+            "    INNER JOIN tipotransaccion tt ON t.tipo_gasto_id = tt.tipo_gasto_id" +
+            "    WHERE tt.descripcion = 'Gasto'" +
+            "      AND EXTRACT(MONTH FROM t.fecha_transaccion) = :mes" +
+            "      AND EXTRACT(YEAR FROM t.fecha_transaccion) = :anio" +
+            "    GROUP BY c.name_category" +
+            "    ORDER BY Total_Gasto DESC", nativeQuery = true)
+    public List<String[]> FindMontoByCategoryMesAndAnio(@Param("mes") int mes, @Param("anio") int anio);
+
+    @Query(value ="SELECT c.name_category AS Nombre_Categoria," +
+            "           SUM(t.monto_transaccion) AS Total_Gasto" +
+            "    FROM transaccion t" +
+            "    INNER JOIN servicios s ON t.id_service = s.id_service" +
+            "    INNER JOIN category c ON s.id_category = c.id_category" +
+            "    INNER JOIN tipotransaccion tt ON t.tipo_gasto_id = tt.tipo_gasto_id" +
+            "    WHERE tt.descripcion = 'Gasto'" +
+            "      AND EXTRACT(YEAR FROM t.fecha_transaccion) = :anio" +
+            "    GROUP BY c.name_category" +
+            "    ORDER BY Total_Gasto DESC",nativeQuery = true)
+    public List<String[]>FindMontoByCategoryAnio(@Param("anio") int anio);
 }

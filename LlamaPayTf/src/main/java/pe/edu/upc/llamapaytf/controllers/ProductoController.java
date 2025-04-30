@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.llamapaytf.dtos.ProductoDTO;
 import pe.edu.upc.llamapaytf.entities.Producto;
+import pe.edu.upc.llamapaytf.entities.Tienda;
 import pe.edu.upc.llamapaytf.servicesinterfaces.IProductoService;
 
 import java.util.ArrayList;
@@ -51,7 +52,9 @@ public class ProductoController {
             dto.setNombre_producto(columna[1]);
             dto.setPrecio_Producto((int) Double.parseDouble(columna[2]));
             dto.setUnidad_medida(columna[3]);
-            dto.setTienda(columna[4]);
+            Tienda tienda = new Tienda();
+            tienda.setTienda_id(Integer.parseInt(columna[4]));
+            dto.setTienda(tienda);
             dtoLista.add(dto);
         }
         return dtoLista;

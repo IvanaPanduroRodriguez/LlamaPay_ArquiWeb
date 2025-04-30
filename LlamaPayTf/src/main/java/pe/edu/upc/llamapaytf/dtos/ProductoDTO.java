@@ -10,7 +10,7 @@ public class ProductoDTO {
     private String Unidad_medida;
     private int Precio_Producto;
     private User user;
-    private String tienda;
+    private Tienda tienda;
 
     public int getProducto_id() {
         return Producto_id;
@@ -60,11 +60,11 @@ public class ProductoDTO {
         this.user = user;
     }
 
-    public String getTienda() {
+    public Tienda getTienda() {
         return tienda;
     }
 
-    public void setTienda(String tienda) {
+    public void setTienda(Tienda tienda) {
         this.tienda = tienda;
     }
 }

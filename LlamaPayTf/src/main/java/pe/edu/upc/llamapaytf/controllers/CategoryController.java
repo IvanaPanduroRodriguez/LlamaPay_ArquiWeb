@@ -2,7 +2,9 @@ package pe.edu.upc.llamapaytf.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import pe.edu.upc.llamapaytf.dtos.CategoriaMontoDTO;
 import pe.edu.upc.llamapaytf.dtos.CategoryDTO;
 import pe.edu.upc.llamapaytf.entities.Category;
@@ -42,9 +44,22 @@ public class CategoryController {
     }
 
     @GetMapping("/montoxcategoria")
-    public List<CategoriaMontoDTO>buscarMontoCategoria() {
+    public List<CategoriaMontoDTO>buscarMontoCategoria(@RequestParam(required = false) Integer mes, @RequestParam(required = false) Integer anio) {
         List<CategoriaMontoDTO> dtoLista=new ArrayList<>();
-        List<String[]>lista=cS.FindMontoByCategory();
+        List<String[]> lista = new ArrayList<>();
+        if (mes != null && anio == null) { //busqueda para el mes del año actual
+            int anioActual = java.time.LocalDate.now().getYear();  // Obtenemos el año actual
+            lista = cS.FindMontoByCategoryMesAndAnio(mes, anioActual);  // Buscar por mes y el año actual
+        }
+        else if (mes != null && anio != null) { //busqueda por mes y año
+            lista = cS.FindMontoByCategoryMesAndAnio(mes, anio);
+        }
+        else if (mes == null && anio != null) { //busqueda solo por año
+            lista = cS.FindMontoByCategoryAnio(anio);  // Buscar por solo el año
+        }
+        else { //retorno de vacio
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Debes proporcionar al menos el mes o el año.");
+        }
         for(String[] columna:lista){
             CategoriaMontoDTO dto=new CategoriaMontoDTO();
             dto.setNameCategory(columna[0]);
