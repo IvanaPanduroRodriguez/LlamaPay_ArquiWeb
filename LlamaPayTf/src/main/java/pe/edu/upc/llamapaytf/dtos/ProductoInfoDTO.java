@@ -1,5 +1,7 @@
 package pe.edu.upc.llamapaytf.dtos;
 
+import pe.edu.upc.llamapaytf.entities.Tienda;
+
 public class ProductoInfoDTO {
     private int Producto_id;
     private String Nombre_producto;
@@ -8,7 +10,24 @@ public class ProductoInfoDTO {
     private int Precio_Producto;
     private int Usuario_id;
     private int Tienda_id;
+    private int Total_Unidades;
+    private String Nombre_tienda;
 
+    public String getNombre_tienda() {
+        return Nombre_tienda;
+    }
+
+    public void setNombre_tienda(String nombre_tienda) {
+        Nombre_tienda = nombre_tienda;
+    }
+
+    public int getTotal_Unidades() {
+        return Total_Unidades;
+    }
+
+    public void setTotal_Unidades(int total_Unidades) {
+        Total_Unidades = total_Unidades;
+    }
     public int getProducto_id() {
         return Producto_id;
     }

@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.llamapaytf.dtos.ProductoDTO;
+import pe.edu.upc.llamapaytf.dtos.ProductoInfoDTO;
 import pe.edu.upc.llamapaytf.entities.Producto;
 import pe.edu.upc.llamapaytf.servicesinterfaces.IProductoService;
 
@@ -57,15 +58,15 @@ public class ProductoController {
         return dtoLista;
     }
     @GetMapping("/producto_precio_unidad")
-    public List<ProductoDTO> productosandpriceandunit() {
+    public List<ProductoInfoDTO> productosandpriceandunit() {
         List<String[]> fila = pS.productosandpriceandunit();
-        List<ProductoDTO> dtoLista=new ArrayList<>();
+        List<ProductoInfoDTO> dtoLista=new ArrayList<>();
         for(String[] columna: fila){
-            ProductoDTO dto=new ProductoDTO();
-            dto.setProducto_id(Integer.parseInt(columna[0]));
-            dto.setNombre_producto(columna[1]);
-            dto.setPrecio_Producto((int) Double.parseDouble(columna[2]));
-            dto.setUnidad_medida(columna[3]);
+            ProductoInfoDTO dto=new ProductoInfoDTO();
+            dto.setNombre_producto(columna[0]);
+            dto.setPrecio_Producto((int) Double.parseDouble(columna[1]));
+            dto.setUnidad_medida(columna[2]);
+            dto.setNombre_tienda(columna[3]);
             dtoLista.add(dto);
         }
         return dtoLista;
