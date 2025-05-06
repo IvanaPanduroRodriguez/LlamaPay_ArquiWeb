@@ -42,6 +42,7 @@ public class ProductoController {
     public void eliminar(@PathVariable("id") int id) {
         pS.delete(id);
     }
+
     @GetMapping("/tienda_producto")
     public List<ProductoDTO> productosandtienda() {
         List<String[]> fila = pS.productosandtienda();
