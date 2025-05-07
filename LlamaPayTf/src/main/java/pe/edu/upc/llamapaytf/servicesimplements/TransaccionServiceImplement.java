@@ -41,12 +41,12 @@ public class TransaccionServiceImplement implements ITransaccionService {
     }
 
     @Override
-    public List<Transaccion> findByTipoTransaccion(String tipo) {
-        return transaccionRepository.findByTipoTransaccion(tipo);
+    public List<Transaccion> findByMontoMayorAndMes(BigDecimal monto, int mes) {
+        return transaccionRepository.findByMontoMayorAndMes(monto, mes);
     }
 
     @Override
-    public List<Transaccion> findByMontoMayor(BigDecimal monto) {
-        return transaccionRepository.findByMontoMayor(monto);
+    public List<Transaccion> findByDescripcionAndMes(String descripcion, int mes) {
+        return transaccionRepository.findByDescripcionAndMes(descripcion, mes);
     }
 }
