@@ -12,6 +12,6 @@ public interface ITransaccionService {
     List<Transaccion> list();
     Transaccion listID(int id);
 
-    List<Transaccion> findByTipoTransaccion(String tipo);
-    List<Transaccion> findByMontoMayor(BigDecimal monto);
+    List<Transaccion> findByMontoMayorAndMes(BigDecimal monto, int mes);
+    List<Transaccion> findByDescripcionAndMes(String descripcion, int mes);
 }
