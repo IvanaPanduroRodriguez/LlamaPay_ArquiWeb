@@ -10,11 +10,11 @@ import java.util.List;
 
 public interface ITransaccionRepository extends JpaRepository<Transaccion, Integer> {
 
-    // 1. Buscar transacciones por tipo
-    @Query("SELECT t FROM Transaccion t WHERE t.tipoTransaccion = :tipo")
-    List<Transaccion> findByTipoTransaccion(@Param("tipo") String tipo);
+    // Buscar transacciones con monto mayor a un valor Y filtradas por mes.
+    @Query("SELECT t FROM Transaccion t WHERE t.monto > :monto AND FUNCTION('MONTH', t.fechaTransaccion) = :mes")
+    List<Transaccion> findByMontoMayorAndMes(@Param("monto") BigDecimal monto, @Param("mes") int mes);
 
-    // 2. Buscar transacciones con monto mayor a un valor
-    @Query("SELECT t FROM Transaccion t WHERE t.monto > :monto")
-    List<Transaccion> findByMontoMayor(@Param("monto") BigDecimal monto);
+    // Buscar transacciones por descripción parcial y mes.
+    @Query("SELECT t FROM Transaccion t WHERE LOWER(t.descripcion) LIKE LOWER(CONCAT('%', :descripcion, '%')) AND FUNCTION('MONTH', t.fechaTransaccion) = :mes")
+    List<Transaccion> findByDescripcionAndMes(@Param("descripcion") String descripcion, @Param("mes") int mes);
 }
