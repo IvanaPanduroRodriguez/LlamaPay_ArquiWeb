@@ -12,7 +12,6 @@ public class TransaccionDTO {
     private int transaccionId;
     private LocalDateTime fechaTransaccion;
     private BigDecimal monto;
-    private String tipoTransaccion;
     private String descripcion;
 
     private TipoCuenta tipoCuenta;
@@ -20,7 +19,6 @@ public class TransaccionDTO {
     private Servicio servicio;
     private TipoTransaccion tipoTransaccionObj;
 
-    // Getters y Setters
     public int getTransaccionId() {
         return transaccionId;
     }
@@ -43,14 +41,6 @@ public class TransaccionDTO {
 
     public void setMonto(BigDecimal monto) {
         this.monto = monto;
-    }
-
-    public String getTipoTransaccion() {
-        return tipoTransaccion;
-    }
-
-    public void setTipoTransaccion(String tipoTransaccion) {
-        this.tipoTransaccion = tipoTransaccion;
     }
 
     public String getDescripcion() {
