@@ -1,13 +1,13 @@
 package pe.edu.upc.llamapaytf.entities;
 
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Transaccion")
 public class Transaccion {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int transaccionId;
@@ -17,9 +17,6 @@ public class Transaccion {
 
     @Column(name = "Monto", nullable = false)
     private BigDecimal monto;
-
-    @Column(name = "TipoTransaccion", nullable = false, length = 50)
-    private String tipoTransaccion;
 
     @Column(name = "Descripcion", nullable = false, length = 255)
     private String descripcion;
@@ -40,18 +37,15 @@ public class Transaccion {
     @JoinColumn(name = "tipotransaccion_id")
     private TipoTransaccion tipoTransaccionObj;
 
-    // Constructor vacío
     public Transaccion() {
     }
 
-    // Constructor completo
-    public Transaccion(int transaccionId, LocalDateTime fechaTransaccion, BigDecimal monto, String tipoTransaccion,
-                       String descripcion, TipoCuenta tipoCuenta, MetodoPago metodoPago, Servicio servicio,
-                       TipoTransaccion tipoTransaccionObj) {
+    public Transaccion(int transaccionId, LocalDateTime fechaTransaccion, BigDecimal monto,
+                       String descripcion, TipoCuenta tipoCuenta, MetodoPago metodoPago,
+                       Servicio servicio, TipoTransaccion tipoTransaccionObj) {
         this.transaccionId = transaccionId;
         this.fechaTransaccion = fechaTransaccion;
         this.monto = monto;
-        this.tipoTransaccion = tipoTransaccion;
         this.descripcion = descripcion;
         this.tipoCuenta = tipoCuenta;
         this.metodoPago = metodoPago;
@@ -59,7 +53,6 @@ public class Transaccion {
         this.tipoTransaccionObj = tipoTransaccionObj;
     }
 
-    // Getters y Setters
     public int getTransaccionId() {
         return transaccionId;
     }
@@ -82,14 +75,6 @@ public class Transaccion {
 
     public void setMonto(BigDecimal monto) {
         this.monto = monto;
-    }
-
-    public String getTipoTransaccion() {
-        return tipoTransaccion;
-    }
-
-    public void setTipoTransaccion(String tipoTransaccion) {
-        this.tipoTransaccion = tipoTransaccion;
     }
 
     public String getDescripcion() {
