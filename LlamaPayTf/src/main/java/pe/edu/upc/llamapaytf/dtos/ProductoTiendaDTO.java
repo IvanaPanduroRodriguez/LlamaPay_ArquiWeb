@@ -1,8 +1,8 @@
 package pe.edu.upc.llamapaytf.dtos;
 
-public class ProductoInfoDTO {
+public class ProductoTiendaDTO {
     private String nombreProducto;
-    private int totalUnidades;
+    private String unidadMedida;
     private int precioProducto;
     private String nombreTienda;
 
@@ -14,12 +14,12 @@ public class ProductoInfoDTO {
         this.nombreProducto = nombreProducto;
     }
 
-    public int getTotalUnidades() {
-        return totalUnidades;
+    public String getUnidadMedida() {
+        return unidadMedida;
     }
 
-    public void setTotalUnidades(int totalUnidades) {
-        this.totalUnidades = totalUnidades;
+    public void setUnidadMedida(String unidadMedida) {
+        this.unidadMedida = unidadMedida;
     }
 
     public int getPrecioProducto() {
