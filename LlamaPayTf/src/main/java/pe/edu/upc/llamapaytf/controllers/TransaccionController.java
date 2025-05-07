@@ -36,8 +36,7 @@ public class TransaccionController {
     @GetMapping("/{id}")
     public TransaccionDTO buscarID(@PathVariable("id") int id) {
         ModelMapper modelMapper = new ModelMapper();
-        TransaccionDTO dto = modelMapper.map(transaccionService.listID(id), TransaccionDTO.class);
-        return dto;
+        return modelMapper.map(transaccionService.listID(id), TransaccionDTO.class);
     }
 
     @PutMapping
@@ -52,17 +51,19 @@ public class TransaccionController {
         transaccionService.delete(id);
     }
 
-    @GetMapping("/tipo/{tipo}")
-    public List<TransaccionDTO> buscarPorTipo(@PathVariable("tipo") String tipo) {
-        return transaccionService.findByTipoTransaccion(tipo).stream().map(t -> {
+    @GetMapping("/monto/{monto}/mes/{mes}")
+    public List<TransaccionDTO> buscarPorMontoMayorYMes(@PathVariable("monto") BigDecimal monto,
+                                                        @PathVariable("mes") int mes) {
+        return transaccionService.findByMontoMayorAndMes(monto, mes).stream().map(t -> {
             ModelMapper modelMapper = new ModelMapper();
             return modelMapper.map(t, TransaccionDTO.class);
         }).collect(Collectors.toList());
     }
 
-    @GetMapping("/monto/{monto}")
-    public List<TransaccionDTO> buscarPorMontoMayor(@PathVariable("monto") BigDecimal monto) {
-        return transaccionService.findByMontoMayor(monto).stream().map(t -> {
+    @GetMapping("/descripcion/{descripcion}/mes/{mes}")
+    public List<TransaccionDTO> buscarPorDescripcionYMes(@PathVariable("descripcion") String descripcion,
+                                                         @PathVariable("mes") int mes) {
+        return transaccionService.findByDescripcionAndMes(descripcion, mes).stream().map(t -> {
             ModelMapper modelMapper = new ModelMapper();
             return modelMapper.map(t, TransaccionDTO.class);
         }).collect(Collectors.toList());
