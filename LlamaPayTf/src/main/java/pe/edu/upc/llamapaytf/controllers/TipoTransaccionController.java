@@ -47,7 +47,6 @@ public class TipoTransaccionController {
     @GetMapping("/{id}")
     public TipoTransaccionDTO buscarPorId(@PathVariable("id") int id) {
         ModelMapper m = new ModelMapper();
-        TipoTransaccionDTO dto = m.map(tipoTransaccionService.listID(id), TipoTransaccionDTO.class);
-        return dto;
+        return m.map(tipoTransaccionService.listID(id), TipoTransaccionDTO.class);
     }
 }
