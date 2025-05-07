@@ -33,4 +33,14 @@ public class TransaccionServiceImplement implements ITransaccionService {
     public List<Transaccion> list() {
         return transaccionR.findAll();
     }
+
+    @Override
+    public List<String[]> contarTransaccionesPorFecha() {
+        return transaccionR.contarTransaccionesPorFecha();
+    }
+
+    @Override
+    public List<String[]> sumarMontosPorFecha() {
+        return transaccionR.sumarMontosPorFecha();
+    }
 }

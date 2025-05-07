@@ -9,4 +9,7 @@ public interface ITransaccionService {
     public void update(Transaccion tr);
     public void delete(int id);
     public List<Transaccion> list();
+
+    public List<String[]>contarTransaccionesPorFecha();
+    public List<String[]>sumarMontosPorFecha();
 }

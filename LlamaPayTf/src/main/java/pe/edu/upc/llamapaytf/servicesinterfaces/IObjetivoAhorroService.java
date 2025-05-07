@@ -9,5 +9,9 @@ public interface IObjetivoAhorroService {
     void update(ObjetivoAhorro objetivoAhorro);
     void deleteById(int id);
     public List<ObjetivoAhorro> listar();
-    List<ObjetivoAhorro> buscarPorUsuario(int userId); // <- NUEVO
+
+    //busquedas
+    List<ObjetivoAhorro> buscarPorUsuario(int userId);
+    List<String[]> obtenerMontoAhorradoXUsuario();
+    List<String[]> contarObjetivosPorMes();
 }
