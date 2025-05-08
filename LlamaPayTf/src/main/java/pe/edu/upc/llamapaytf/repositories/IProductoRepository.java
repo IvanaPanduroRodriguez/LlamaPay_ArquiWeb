@@ -10,29 +10,36 @@ import java.util.List;
 @Repository
 public interface IProductoRepository extends JpaRepository<Producto,Integer> {
     @Query(value="SELECT \n" +
-            "    p.Nombre_producto, \n" +
-            "    SUM(p.Producto_id) AS Total_Unidades, \n" +
-            "    p.Precio_producto, \n" +
-            "    t.Nombre_tienda\n" +
+            "    u.name_user AS Nombre_Usuario, \n" +
+            "    SUM(p.precio_producto) AS MontoProductos, \n" +
+            "    oa.monto_meta AS MontoMeta\n" +
             "FROM \n" +
-            "    Producto p\n" +
+            "    Users u\n" +
             "INNER JOIN \n" +
-            "    Tienda t ON p.Tienda_id = t.Tienda_id\n" +
+            "    objetivo_ahorro oa ON  oa.usuario_id = u.id_user\n" +
+            "INNER JOIN \n" +
+            "    Producto p ON u.id_user = p.usuario_id\n" +
             "GROUP BY \n" +
-            "    p.Nombre_producto, p.Precio_producto, t.Nombre_tienda\n" +
+            "    u.name_user, oa.monto_meta\n" +
             "ORDER BY \n" +
-            "    p.Nombre_producto;",nativeQuery = true)
+            "    u.name_user;",nativeQuery = true)
     public List<String[]>productosandpriceandunit();
 
-    @Query(value="Select \n" +
-            "    p.Nombre_producto, \n" +
-            "    p.Unidad_medida, \n" +
-            "    p.Precio_producto, \n" +
-            "    t.Nombre_tienda\n" +
+    @Query(value="SELECT \n" +
+            "    u.name_user AS Nombre_Usuario, \n" +
+            "    SUM(p.precio_producto) AS MontoProductos, \n" +
+            "    oa.monto_meta AS MontoMeta\n" +
             "FROM \n" +
-            "    Producto p inner join Tienda t\n" +
-            "    On p.Tienda_id = t.Tienda_id\n" +
-            "WHERE \n" +
-            "    p.Nombre_producto = 'NombreDelProducto';",nativeQuery = true)
+            "    Users u\n" +
+            "INNER JOIN \n" +
+            "    objetivo_ahorro oa ON  oa.usuario_id = u.id_user\n" +
+            "INNER JOIN \n" +
+            "    Producto p ON u.id_user = p.usuario_id\n" +
+            "GROUP BY \n" +
+            "    u.name_user, oa.monto_meta\n" +
+            "ORDER BY \n" +
+            "    u.name_user;",nativeQuery = true)
     public List<String[]> productosandtienda();
+    //@Param(nombreProducto) String nombreProducto
+
 }
