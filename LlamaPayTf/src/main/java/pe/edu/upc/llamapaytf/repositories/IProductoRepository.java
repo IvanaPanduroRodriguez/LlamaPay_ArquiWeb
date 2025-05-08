@@ -39,7 +39,7 @@ public interface IProductoRepository extends JpaRepository<Producto,Integer> {
             "    u.name_user, oa.monto_meta\n" +
             "ORDER BY \n" +
             "    u.name_user;",nativeQuery = true)
-    public List<String[]> productosandtienda();
+    public List<String[]> montosobjetivo();
     //@Param(nombreProducto) String nombreProducto
 
 }

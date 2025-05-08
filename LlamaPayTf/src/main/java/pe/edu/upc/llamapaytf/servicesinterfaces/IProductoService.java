@@ -11,5 +11,5 @@ public interface IProductoService {
     public void update(Producto p);
     public void delete(int id);
     public List<String[]> productosandpriceandunit();
-    public List<String[]> productosandtienda();
+    public List<String[]> montosobjetivo();
 }

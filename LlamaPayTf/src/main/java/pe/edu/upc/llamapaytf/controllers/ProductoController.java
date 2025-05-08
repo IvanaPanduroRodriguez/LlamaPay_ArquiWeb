@@ -45,9 +45,9 @@ public class ProductoController {
         pS.delete(id);
     }
 
-    @GetMapping("/tienda_producto")
-    public List<MetaCestaPrDTO> productosandtienda() {
-        List<String[]> fila = pS.productosandtienda();
+    @GetMapping("/objetivo_cesta")
+    public List<MetaCestaPrDTO> montosobjetivo() {
+        List<String[]> fila = pS.montosobjetivo();
         List<MetaCestaPrDTO> dtoLista=new ArrayList<>();
         for(String[] columna: fila){
             MetaCestaPrDTO dto=new MetaCestaPrDTO();
