@@ -3,11 +3,13 @@ package pe.edu.upc.llamapaytf.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.llamapaytf.dtos.PrMetaCestaDTO;
 import pe.edu.upc.llamapaytf.dtos.ProductoDTO;
+import pe.edu.upc.llamapaytf.dtos.ProductoInfoDTO;
 import pe.edu.upc.llamapaytf.entities.Producto;
-import pe.edu.upc.llamapaytf.entities.Tienda;
 import pe.edu.upc.llamapaytf.servicesinterfaces.IProductoService;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,33 +44,30 @@ public class ProductoController {
     public void eliminar(@PathVariable("id") int id) {
         pS.delete(id);
     }
-    @GetMapping("/tienda_producto")
-    public List<ProductoDTO> productosandtienda() {
-        List<String[]> fila = pS.productosandtienda();
-        List<ProductoDTO> dtoLista=new ArrayList<>();
+
+    @GetMapping("/objetivo_cesta")
+    public List<PrMetaCestaDTO> montosobjetivo() {
+        List<String[]> fila = pS.montosobjetivo();
+        List<PrMetaCestaDTO> dtoLista=new ArrayList<>();
         for(String[] columna: fila){
-            ProductoDTO dto=new ProductoDTO();
-            dto.setProducto_id(Integer.parseInt(columna[0]));
-            dto.setNombre_producto(columna[1]);
-            dto.setPrecio_Producto((int) Double.parseDouble(columna[2]));
-            dto.setUnidad_medida(columna[3]);
-            Tienda tienda = new Tienda();
-            tienda.setTienda_id(Integer.parseInt(columna[4]));
-            dto.setTienda(tienda);
+            PrMetaCestaDTO dto=new PrMetaCestaDTO();
+            dto.setNombreusuario(columna[0]);
+            dto.setMontototal(Integer.parseInt(columna[1]));
+            dto.setMontoobjetivo(new BigDecimal(columna[2]));
             dtoLista.add(dto);
         }
         return dtoLista;
     }
     @GetMapping("/producto_precio_unidad")
-    public List<ProductoDTO> productosandpriceandunit() {
+    public List<ProductoInfoDTO> productosandpriceandunit() {
         List<String[]> fila = pS.productosandpriceandunit();
-        List<ProductoDTO> dtoLista=new ArrayList<>();
+        List<ProductoInfoDTO> dtoLista=new ArrayList<>();
         for(String[] columna: fila){
-            ProductoDTO dto=new ProductoDTO();
-            dto.setProducto_id(Integer.parseInt(columna[0]));
-            dto.setNombre_producto(columna[1]);
+            ProductoInfoDTO dto=new ProductoInfoDTO();
+            dto.setNombre_producto(columna[0]);
+            dto.setTotal_Unidades(Integer.parseInt(columna[1]));
             dto.setPrecio_Producto((int) Double.parseDouble(columna[2]));
-            dto.setUnidad_medida(columna[3]);
+            dto.setNombre_tienda(columna[3]);
             dtoLista.add(dto);
         }
         return dtoLista;
