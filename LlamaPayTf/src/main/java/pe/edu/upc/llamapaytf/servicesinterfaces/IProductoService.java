@@ -10,6 +10,6 @@ public interface IProductoService {
     //public Producto listarId(int Producto_id);
     public void update(Producto p);
     public void delete(int id);
-    public List<String[]>productosandpriceandunit();
-    public List<String[]> productosandtienda();
+    public List<String[]> productosandpriceandunit();
+    public List<String[]> montosobjetivo();
 }

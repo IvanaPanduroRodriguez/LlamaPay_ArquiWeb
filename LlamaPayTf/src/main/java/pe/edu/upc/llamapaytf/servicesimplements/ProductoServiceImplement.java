@@ -37,8 +37,10 @@ public class ProductoServiceImplement implements IProductoService {
     public List<String[]> productosandpriceandunit() {
         return pR.productosandpriceandunit();
     }
+
     @Override
-    public List<String[]> productosandtienda() {
-        return pR.productosandtienda();
+    public List<String[]> montosobjetivo() {
+        return pR.montosobjetivo();
     }
+
 }
