@@ -24,6 +24,11 @@ public class ProductoServiceImplement implements IProductoService {
     }
 
     @Override
+    public List<Producto> buscarPorProducto(String producto) {
+        return pR.buscarPorProducto(producto);
+    }
+
+    @Override
     public void update(Producto p) {
         pR.save(p);
     }

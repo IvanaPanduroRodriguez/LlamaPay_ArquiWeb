@@ -37,4 +37,9 @@ public class TipoCuentaServiceImplement implements ITipoCuentaService {
     public void delete(int id) {
         tcR.deleteById(id);
     }
+
+    @Override
+    public List<TipoCuenta> buscarPorNombre(String nombre) {
+        return tcR.buscarPorNombre(nombre);
+    }
 }

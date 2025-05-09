@@ -6,4 +6,5 @@ import pe.edu.upc.llamapaytf.entities.Tienda;
 
 @Repository
 public interface ITiendaRepository extends JpaRepository<Tienda,Integer> {
+
 }
