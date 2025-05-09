@@ -45,6 +45,14 @@ public class ProductoController {
         pS.delete(id);
     }
 
+    @GetMapping("/buscar/{producto}")
+    public List<ProductoDTO> buscarPorProducto(@PathVariable("producto") String producto) {
+        return pS.buscarPorProducto(producto).stream().map(x->{
+            ModelMapper m = new ModelMapper();
+            return m.map(x, ProductoDTO.class);
+        }).collect(Collectors.toList());
+    }
+
     @GetMapping("/objetivo_cesta")
     public List<PrMetaCestaDTO> montosobjetivo() {
         List<String[]> fila = pS.montosobjetivo();

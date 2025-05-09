@@ -42,4 +42,12 @@ public class RecordatorioController {
     public void eliminar(@PathVariable("id") int id) {
         rS.delete(id);
     }
+
+    @GetMapping("/buscar/{recordatorio}")
+    public List<RecordatorioDTO> buscarPorRecordatorio(@PathVariable("recordatorio") String recordatorio) {
+        return rS.buscarPorRecordatorio(recordatorio).stream().map(x -> {
+            ModelMapper modelMapper = new ModelMapper();
+            return modelMapper.map(x, RecordatorioDTO.class);
+        }).collect(Collectors.toList());
+    }
 }
