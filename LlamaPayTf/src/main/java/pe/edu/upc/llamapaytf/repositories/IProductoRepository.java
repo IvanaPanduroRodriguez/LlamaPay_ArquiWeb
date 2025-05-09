@@ -2,6 +2,7 @@ package pe.edu.upc.llamapaytf.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pe.edu.upc.llamapaytf.entities.Producto;
 
@@ -39,6 +40,9 @@ public interface IProductoRepository extends JpaRepository<Producto,Integer> {
             "ORDER BY \n" +
             "    u.name_user;",nativeQuery = true)
     public List<String[]> montosobjetivo();
+
+    @Query("SELECT p FROM Producto p WHERE p.Nombre_producto LIKE %:nproducto%")
+    List<Producto> buscarPorProducto(@Param("nproducto") String nproducto);
     //@Param(nombreProducto) String nombreProducto
 
 }

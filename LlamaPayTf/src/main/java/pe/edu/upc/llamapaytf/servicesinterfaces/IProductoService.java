@@ -12,4 +12,5 @@ public interface IProductoService {
     public void delete(int id);
     public List<String[]> productosandpriceandunit();
     public List<String[]> montosobjetivo();
+    public List<Producto> buscarPorProducto(String producto);
 }

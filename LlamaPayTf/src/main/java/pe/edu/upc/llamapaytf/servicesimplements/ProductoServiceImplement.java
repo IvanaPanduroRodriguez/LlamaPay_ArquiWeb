@@ -41,4 +41,8 @@ public class ProductoServiceImplement implements IProductoService {
     public List<String[]> montosobjetivo() {
         return pR.montosobjetivo();
     }
+    @Override
+    public List<Producto> buscarPorProducto(String producto) {
+        return pR.buscarPorProducto(producto);
+    }
 }

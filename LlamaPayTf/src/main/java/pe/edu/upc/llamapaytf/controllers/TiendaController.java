@@ -48,4 +48,11 @@ public class TiendaController {
         TiendaDTO dto=m.map(tS.listarId(id),TiendaDTO.class);
         return dto;
     }
+    @GetMapping("/nombre/{tienda}")
+    public List<TiendaDTO> buscarTiendaNombre(@PathVariable("tienda") String tienda) {
+        return tS.buscartiendanombre(tienda).stream().map(x->{
+            ModelMapper modelMapper = new ModelMapper();
+            return modelMapper.map(x, TiendaDTO.class);
+        }).collect(Collectors.toList());
+    }
 }

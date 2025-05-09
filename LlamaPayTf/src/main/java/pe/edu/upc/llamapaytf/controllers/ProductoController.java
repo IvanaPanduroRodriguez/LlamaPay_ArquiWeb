@@ -73,4 +73,11 @@ public class ProductoController {
         }
         return dtoLista;
     }
+    @GetMapping("/buscar/{producto}")
+    public List<ProductoDTO> buscarPorProducto(@PathVariable("producto") String producto) {
+        return pS.buscarPorProducto(producto).stream().map(x->{
+            ModelMapper m = new ModelMapper();
+            return m.map(x, ProductoDTO.class);
+        }).collect(Collectors.toList());
+    }
 }
