@@ -16,7 +16,7 @@ public class TiendaController {
     @Autowired
     private ITiendaService tS;
 
-    @GetMapping
+    @GetMapping("/listar")
     public List<TiendaDTO> listar() {
         return tS.list().stream().map(x->{
             ModelMapper modelMapper = new ModelMapper();
@@ -24,20 +24,20 @@ public class TiendaController {
         }).collect(Collectors.toList());
     }
 
-    @PostMapping
+    @PostMapping("/insertar")
     public void insertar(@RequestBody TiendaDTO dto) {
         ModelMapper m = new ModelMapper();
         Tienda t = m.map(dto, Tienda.class);
         tS.insertar(t);
     }
 
-    @PutMapping
+    @PutMapping("/actualizar")
     public void modificar(@RequestBody TiendaDTO dto) {
         ModelMapper m = new ModelMapper();
         Tienda t = m.map(dto, Tienda.class);
         tS.update(t);
     }
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/eliminar/{id}")
     public void eliminar(@PathVariable("id") int id) {
         tS.delete(id);
     }

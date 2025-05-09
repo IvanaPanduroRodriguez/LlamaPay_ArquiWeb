@@ -21,27 +21,27 @@ public class ProductoController {
     @Autowired
     private IProductoService pS;
 
-    @GetMapping
+    @GetMapping("/listar")
     public List<ProductoDTO> listar() {
         return pS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
             return m.map(x, ProductoDTO.class);
         }).collect(Collectors.toList());
     }
-    @PostMapping
+    @PostMapping("/insertar")
     public void insertar(@RequestBody ProductoDTO productoDTO) {
         ModelMapper m = new ModelMapper();
         Producto p = m.map(productoDTO, Producto.class);
         pS.insertar(p);
     }
 
-    @PutMapping
+    @PutMapping("/actualizar")
     public void modificar(@RequestBody ProductoDTO productoDTO) {
         ModelMapper m = new ModelMapper();
         Producto p = m.map(productoDTO, Producto.class);
         pS.update(p);
     }
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/eliminar/{id}")
     public void eliminar(@PathVariable("id") int id) {
         pS.delete(id);
     }
