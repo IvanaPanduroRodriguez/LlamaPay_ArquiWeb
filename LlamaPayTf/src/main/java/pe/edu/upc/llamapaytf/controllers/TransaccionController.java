@@ -68,4 +68,12 @@ public class TransaccionController {
             return modelMapper.map(t, TransaccionDTO.class);
         }).collect(Collectors.toList());
     }
+
+    @GetMapping("/descripcion/{descripcion}")
+    public List<TransaccionDTO> buscarPorDescripcion(@PathVariable("descripcion") String descripcion) {
+        return transaccionService.findByDescripcion(descripcion).stream().map(t -> {
+            ModelMapper modelMapper = new ModelMapper();
+            return modelMapper.map(t, TransaccionDTO.class);
+        }).collect(Collectors.toList());
+    }
 }
