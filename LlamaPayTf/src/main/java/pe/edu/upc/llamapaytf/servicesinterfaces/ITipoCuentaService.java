@@ -11,4 +11,5 @@ public interface ITipoCuentaService {
     public List<TipoCuenta> findTipoCuentaByUserId(int userId);
     public void update(TipoCuenta tc);
     public void delete(int id);
+    List<TipoCuenta> buscarPorNombre(String nombre);
 }

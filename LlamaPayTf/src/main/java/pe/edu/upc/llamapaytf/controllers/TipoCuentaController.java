@@ -50,4 +50,13 @@ public class TipoCuentaController {
             return modelMapper.map(x, TipoCuentaDTO.class);
         }).collect(Collectors.toList());
     }
+
+    @GetMapping("/buscar")
+    public List<TipoCuentaDTO> buscarPorNombre(@RequestParam("nombre") String nombre) {
+        List<TipoCuenta> lista = tcS.buscarPorNombre(nombre);
+        return lista.stream().map(tc -> {
+            ModelMapper modelMapper = new ModelMapper();
+            return modelMapper.map(tc, TipoCuentaDTO.class);
+        }).collect(Collectors.toList());
+    }
 }
