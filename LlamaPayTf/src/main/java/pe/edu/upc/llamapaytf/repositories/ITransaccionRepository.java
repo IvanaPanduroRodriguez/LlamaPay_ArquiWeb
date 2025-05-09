@@ -10,11 +10,15 @@ import java.util.List;
 
 public interface ITransaccionRepository extends JpaRepository<Transaccion, Integer> {
 
-    // Buscar transacciones con monto mayor a un valor Y filtradas por mes.
-    @Query("SELECT t FROM Transaccion t WHERE t.monto > :monto AND FUNCTION('MONTH', t.fechaTransaccion) = :mes")
+    //Buscar transacciones con monto mayor a un valor y por mes
+    @Query(value = "SELECT * FROM transaccion WHERE monto > :monto AND EXTRACT(MONTH FROM fecha_transaccion) = :mes", nativeQuery = true)
     List<Transaccion> findByMontoMayorAndMes(@Param("monto") BigDecimal monto, @Param("mes") int mes);
 
-    // Buscar transacciones por descripción parcial y mes.
-    @Query("SELECT t FROM Transaccion t WHERE LOWER(t.descripcion) LIKE LOWER(CONCAT('%', :descripcion, '%')) AND FUNCTION('MONTH', t.fechaTransaccion) = :mes")
+    //Buscar transacciones por descripción parcial y mes
+    @Query(value = "SELECT * FROM transaccion WHERE LOWER(descripcion) LIKE LOWER(CONCAT('%', :descripcion, '%')) AND EXTRACT(MONTH FROM fecha_transaccion) = :mes", nativeQuery = true)
     List<Transaccion> findByDescripcionAndMes(@Param("descripcion") String descripcion, @Param("mes") int mes);
+
+    //Busqueda simple: Buscar transacciones solo por descripción parcial (sin mes)
+    @Query(value = "SELECT * FROM transaccion WHERE LOWER(descripcion) LIKE LOWER(CONCAT('%', :descripcion, '%'))", nativeQuery = true)
+    List<Transaccion> findByDescripcion(@Param("descripcion") String descripcion);
 }
