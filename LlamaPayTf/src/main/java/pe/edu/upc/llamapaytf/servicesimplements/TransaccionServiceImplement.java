@@ -16,8 +16,18 @@ public class TransaccionServiceImplement implements ITransaccionService {
     private ITransaccionRepository transaccionRepository;
 
     @Override
+    public List<Transaccion> list() {
+        return transaccionRepository.findAll();
+    }
+
+    @Override
     public void insert(Transaccion transaccion) {
         transaccionRepository.save(transaccion);
+    }
+
+    @Override
+    public Transaccion listID(int id) {
+        return transaccionRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -31,16 +41,6 @@ public class TransaccionServiceImplement implements ITransaccionService {
     }
 
     @Override
-    public List<Transaccion> list() {
-        return transaccionRepository.findAll();
-    }
-
-    @Override
-    public Transaccion listID(int id) {
-        return transaccionRepository.findById(id).orElse(new Transaccion());
-    }
-
-    @Override
     public List<Transaccion> findByMontoMayorAndMes(BigDecimal monto, int mes) {
         return transaccionRepository.findByMontoMayorAndMes(monto, mes);
     }
@@ -48,5 +48,10 @@ public class TransaccionServiceImplement implements ITransaccionService {
     @Override
     public List<Transaccion> findByDescripcionAndMes(String descripcion, int mes) {
         return transaccionRepository.findByDescripcionAndMes(descripcion, mes);
+    }
+
+    @Override
+    public List<Transaccion> findByDescripcion(String descripcion) {
+        return transaccionRepository.findByDescripcion(descripcion);
     }
 }
