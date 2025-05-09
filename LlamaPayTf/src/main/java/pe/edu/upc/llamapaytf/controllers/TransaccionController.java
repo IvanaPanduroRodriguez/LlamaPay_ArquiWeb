@@ -3,15 +3,14 @@ package pe.edu.upc.llamapaytf.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.llamapaytf.dtos.CantidadTransaccionesPorFechaDTO;
-import pe.edu.upc.llamapaytf.dtos.MontoTransaccionesPorFechaDTO;
-import pe.edu.upc.llamapaytf.dtos.TipoCuentaDTO;
-import pe.edu.upc.llamapaytf.dtos.TransaccionDTO;
+import pe.edu.upc.llamapaytf.dtos.*;
 import pe.edu.upc.llamapaytf.entities.TipoCuenta;
 import pe.edu.upc.llamapaytf.entities.Transaccion;
 import pe.edu.upc.llamapaytf.servicesinterfaces.ITransaccionService;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,5 +67,40 @@ public class TransaccionController {
             dto.setMontoTotal(Double.valueOf((fila[1])));
             return dto;
         }).collect(Collectors.toList());
+    }
+    @GetMapping("/descripcion/{descripcion}")
+    public List<TransaccionDTO> buscarPorDescripcion(@PathVariable("descripcion") String descripcion) {
+        return transaccionS.findByDescripcion(descripcion).stream().map(t -> {
+            ModelMapper modelMapper = new ModelMapper();
+            return modelMapper.map(t, TransaccionDTO.class);
+        }).collect(Collectors.toList());
+    }
+
+    @GetMapping("/transacciones-monto-mes-joao")
+    public List<TransaccionInfoDTO> transaccionesPorMontoYMes(@RequestParam BigDecimal monto, @RequestParam int mes) {
+        List<TransaccionInfoDTO> dtoLista = new ArrayList<>();
+        List<String[]> lista = transaccionS.findByMontoMayorAndMes(monto, mes);
+        for (String[] columna : lista) {
+            TransaccionInfoDTO dto = new TransaccionInfoDTO();
+            dto.setDescripcion(columna[0]);
+            dto.setMonto(new BigDecimal(columna[1]));
+            dto.setFechaTransaccion(LocalDate.parse(columna[2]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
+    }
+
+    @GetMapping("/transacciones-descripcion-mes-joao")
+    public List<TransaccionInfoDTO> transaccionesPorDescripcionYMes(@RequestParam String descripcion, @RequestParam int mes) {
+        List<TransaccionInfoDTO> dtoLista = new ArrayList<>();
+        List<String[]> lista = transaccionS.findByDescripcionAndMes(descripcion, mes);
+        for (String[] columna : lista) {
+            TransaccionInfoDTO dto = new TransaccionInfoDTO();
+            dto.setDescripcion(columna[0]);
+            dto.setMonto(new BigDecimal(columna[1]));
+            dto.setFechaTransaccion(LocalDate.parse(columna[2]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
     }
 }
