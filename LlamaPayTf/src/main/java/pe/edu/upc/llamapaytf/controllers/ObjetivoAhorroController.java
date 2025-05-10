@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/ObjetivoAhorrado")
+@RequestMapping("/ObjetivoAhorro")
 public class ObjetivoAhorroController {
     @Autowired
     private IObjetivoAhorroService oS;
