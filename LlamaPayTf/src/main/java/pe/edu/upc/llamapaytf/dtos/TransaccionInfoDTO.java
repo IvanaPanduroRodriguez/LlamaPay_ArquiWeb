@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 public class TransaccionInfoDTO {
     private String descripcion;
-    private BigDecimal monto;
+    private BigDecimal montoTransaccion;
     private LocalDate fechaTransaccion;
 
     public String getDescripcion() {
@@ -16,12 +16,12 @@ public class TransaccionInfoDTO {
         this.descripcion = descripcion;
     }
 
-    public BigDecimal getMonto() {
-        return monto;
+    public BigDecimal getMontoTransaccion() {
+        return montoTransaccion;
     }
 
-    public void setMonto(BigDecimal monto) {
-        this.monto = monto;
+    public void setMontoTransaccion(BigDecimal montoTransaccion) {
+        this.montoTransaccion = montoTransaccion;
     }
 
     public LocalDate getFechaTransaccion() {

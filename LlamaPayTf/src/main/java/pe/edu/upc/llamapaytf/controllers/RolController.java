@@ -2,6 +2,7 @@ package pe.edu.upc.llamapaytf.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.llamapaytf.dtos.RolDTO;
 import pe.edu.upc.llamapaytf.entities.Rol;
@@ -12,6 +13,8 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/roles")
+@PreAuthorize("hasAuthority('ADMIN')")
+
 public class RolController {
     @Autowired
     private IRolService roS;

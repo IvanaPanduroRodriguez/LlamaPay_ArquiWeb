@@ -2,6 +2,7 @@ package pe.edu.upc.llamapaytf.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.llamapaytf.dtos.UserDTO;
 import pe.edu.upc.llamapaytf.dtos.UsuarioInfoDTO;
@@ -19,6 +20,7 @@ public class UserController {
     private IUserService uS;
 
     @GetMapping
+   @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public List<UsuarioInfoDTO> listar() {
         return uS.list().stream().map(x->{
             ModelMapper modelMapper = new ModelMapper();
@@ -27,30 +29,33 @@ public class UserController {
     }
 
     @PostMapping
-    public void insertar(@RequestBody UserDTO dto) { //recibe al serverDTO para usar los atributos
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void insertar(@RequestBody UserDTO dto) {
         ModelMapper m = new ModelMapper();
         User u = m.map(dto, User.class);
         uS.insertar(u);
     }
 
     @GetMapping("/{id}")
-    public UsuarioInfoDTO buscarID(@PathVariable("id") int id) { //debe tener indicado que variable estara en la ruta
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
+    public UsuarioInfoDTO buscarID(@PathVariable("id") int id) {
         ModelMapper m = new ModelMapper();
         UsuarioInfoDTO dto=m.map(uS.listID(id),UsuarioInfoDTO.class);
         return dto;
     }
 
     @PutMapping
-    public void modificar(@RequestBody UserDTO dto){ //modificar los datos ingresados
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
+    public void modificar(@RequestBody UserDTO dto){
         ModelMapper m = new ModelMapper();
         User u = m.map(dto, User.class);
         uS.update(u);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") int id){ //eliminar todos los atributos que yo elija
         uS.delete(id);
     }
 
-    //test
 }
