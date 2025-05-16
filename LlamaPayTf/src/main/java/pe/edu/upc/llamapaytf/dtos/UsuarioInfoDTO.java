@@ -4,19 +4,19 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class UsuarioInfoDTO {
-    private int idUser;
+    private int userId;
     private String nameUser;
     private String lastnameUser;
     private String emailUser;
     private Date birthdayUser;
     private Timestamp registrationDateUser;
 
-    public int getIdUser() {
-        return idUser;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getNameUser() {

@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface IObjetivoAhorroRepository extends JpaRepository<ObjetivoAhorro,Integer> {
-    List<ObjetivoAhorro> findByUser_IdUser(int userId);
+    List<ObjetivoAhorro> findByUser_UserId(int userId);
 
     @Query(value = "SELECT u.name_user AS nombreUsuario, SUM(o.monto_actual) AS montoTotalAhorrado \n" +
             "FROM objetivo_ahorro o\n" +

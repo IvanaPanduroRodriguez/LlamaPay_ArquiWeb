@@ -11,7 +11,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idUser;
+    private int userId;
 
     @Column(name = "nameUser", nullable = false, length = 30)
     private String nameUser;
@@ -37,8 +37,8 @@ public class User {
     public User() {
     }
 
-    public User(int idUser, String nameUser, String lastnameUser, String emailUser, Date birthdayUser, Timestamp registrationDateUser, String username, String password, Boolean enabled, List<Rol> roles) {
-        this.idUser = idUser;
+    public User(int userId, String nameUser, String lastnameUser, String emailUser, Date birthdayUser, Timestamp registrationDateUser, String username, String password, Boolean enabled, List<Rol> roles) {
+        this.userId = userId;
         this.nameUser = nameUser;
         this.lastnameUser = lastnameUser;
         this.emailUser = emailUser;
@@ -50,12 +50,12 @@ public class User {
         this.roles = roles;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getNameUser() {

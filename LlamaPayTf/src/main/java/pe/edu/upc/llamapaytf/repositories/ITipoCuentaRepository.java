@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface ITipoCuentaRepository extends JpaRepository<TipoCuenta, Integer> {
 
-    @Query("SELECT tc FROM TipoCuenta tc WHERE tc.user.idUser = ?1")
+    @Query("SELECT tc FROM TipoCuenta tc WHERE tc.user.userId = ?1")
     List<TipoCuenta> findTipoCuentaByUserId(int userId);
 
     @Query("SELECT tc FROM TipoCuenta tc WHERE LOWER(tc.nombreTipoCuenta) LIKE LOWER(CONCAT('%', :nombre, '%'))")
