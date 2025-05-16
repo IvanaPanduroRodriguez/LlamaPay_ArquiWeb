@@ -33,9 +33,9 @@ public interface IProductoRepository extends JpaRepository<Producto,Integer> {
             "FROM \n" +
             "    Users u\n" +
             "INNER JOIN \n" +
-            "    objetivo_ahorro oa ON  oa.usuario_id = u.id_user\n" +
+            "    objetivo_ahorro oa ON  oa.usuario_id = u.user_id\n" +
             "INNER JOIN \n" +
-            "    Producto p ON u.id_user = p.usuario_id\n" +
+            "    Producto p ON u.user_id = p.usuario_id\n" +
             "GROUP BY \n" +
             "    u.name_user, oa.monto_meta\n" +
             "ORDER BY \n" +

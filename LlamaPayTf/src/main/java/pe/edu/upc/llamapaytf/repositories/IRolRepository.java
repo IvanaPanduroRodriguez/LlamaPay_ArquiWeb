@@ -16,6 +16,6 @@ public interface IRolRepository extends JpaRepository<Rol, Integer> {
     List<Rol> findRolesByTipoRol(@Param("tipoRol") String tipoRol);
 
     //Buscar rol por el id del usuario
-    @Query("SELECT r FROM Rol r WHERE r.user.idUser = :userId")
+    @Query("SELECT r FROM Rol r WHERE r.user.userId = :userId")
     List<Rol> findRolesByUserId(@Param("userId") int userId);
 }

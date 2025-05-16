@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class UserDTO {
-    private int idUser;
+    private int userId;
     private String nameUser;
     private String lastnameUser;
     private String emailUser;
@@ -15,12 +15,12 @@ public class UserDTO {
     private Boolean enabled;
 
 
-    public int getIdUser() {
-        return idUser;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getNameUser() {

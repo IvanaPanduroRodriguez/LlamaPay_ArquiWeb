@@ -1,5 +1,6 @@
 package pe.edu.upc.llamapaytf.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -14,7 +15,8 @@ public class Rol implements Serializable {
     private String TipoRol;
 
     @ManyToOne
-    @JoinColumn(name = "idUser")
+    @JoinColumn(name = "userId")
+    @JsonBackReference
     private User user;
 
     public int getRol_id() {

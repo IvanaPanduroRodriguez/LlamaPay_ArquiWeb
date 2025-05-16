@@ -34,7 +34,7 @@ public class ObjetivoAhorroServiceImplement implements IObjetivoAhorroService {
 
     @Override
     public List<ObjetivoAhorro> buscarPorUsuario(int userId) {
-        return oaR.findByUser_IdUser(userId);
+        return oaR.findByUser_UserId(userId);
     }
 
     @Override
