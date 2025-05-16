@@ -14,7 +14,7 @@ public class Rol implements Serializable {
     private String TipoRol;
 
     @ManyToOne
-    @JoinColumn(name = "idUser")
+    @JoinColumn(name = "userId")
     private User user;
 
     public int getRol_id() {
