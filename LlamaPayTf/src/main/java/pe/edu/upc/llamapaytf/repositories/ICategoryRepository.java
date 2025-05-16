@@ -16,7 +16,7 @@ public interface ICategoryRepository extends JpaRepository<Category, Integer> {
             "    FROM transaccion t" +
             "    INNER JOIN servicios s ON t.id_service = s.id_service" +
             "    INNER JOIN category c ON s.id_category = c.id_category" +
-            "    INNER JOIN tipotransaccion tt ON t.tipo_gasto_id = tt.tipo_gasto_id" +
+            "    INNER JOIN tipotransaccion tt ON t.tipo_gasto_id = tt.tipo_transaccion_id" +
             "    WHERE tt.descripcion = 'Gasto'" +
             "      AND EXTRACT(MONTH FROM t.fecha_transaccion) = :mes" +
             "      AND EXTRACT(YEAR FROM t.fecha_transaccion) = :anio" +
@@ -29,7 +29,7 @@ public interface ICategoryRepository extends JpaRepository<Category, Integer> {
             "    FROM transaccion t" +
             "    INNER JOIN servicios s ON t.id_service = s.id_service" +
             "    INNER JOIN category c ON s.id_category = c.id_category" +
-            "    INNER JOIN tipotransaccion tt ON t.tipo_gasto_id = tt.tipo_gasto_id" +
+            "    INNER JOIN tipotransaccion tt ON t.tipo_gasto_id = tt.tipo_transaccion_id" +
             "    WHERE tt.descripcion = 'Gasto'" +
             "      AND EXTRACT(YEAR FROM t.fecha_transaccion) = :anio" +
             "    GROUP BY c.name_category" +

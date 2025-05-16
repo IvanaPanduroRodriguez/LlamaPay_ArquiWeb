@@ -1,5 +1,6 @@
 package pe.edu.upc.llamapaytf.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
@@ -31,6 +32,7 @@ public class User {
     private Boolean enabled;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
+    @JsonManagedReference
     private List<Rol> roles;
 
 
