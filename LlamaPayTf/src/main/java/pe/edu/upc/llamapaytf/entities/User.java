@@ -1,6 +1,8 @@
 package pe.edu.upc.llamapaytf.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
@@ -18,6 +20,7 @@ public class User {
     private String nameUser;
     @Column(name = "lastnameUser", nullable = false, length = 30)
     private String lastnameUser;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "emailUser", nullable = false, length = 50)
     private String emailUser;
     @Column(name = "birthdayUser", nullable = false)
@@ -27,11 +30,14 @@ public class User {
 
     @Column(length = 30, unique = true)
     private String username;
-    @Column(length = 200)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Column(name ="password",nullable = false, length = 200)
     private String password;
     private Boolean enabled;
+
+    @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userId", nullable = true)
     @JsonManagedReference
     private List<Rol> roles;
 

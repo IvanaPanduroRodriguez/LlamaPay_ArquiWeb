@@ -10,7 +10,7 @@ public interface IRolService {
     public void update(Rol rol);
     public List<Rol> list();
 
-    // Agrega estas dos líneas:
+
     public List<Rol> findRolesByTipoRol(String tipoRol);
     public List<Rol> findRolesByUserId(int userId);
 }

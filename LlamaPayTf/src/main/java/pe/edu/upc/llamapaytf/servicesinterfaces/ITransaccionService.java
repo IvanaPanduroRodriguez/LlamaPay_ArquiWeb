@@ -1,6 +1,6 @@
 package pe.edu.upc.llamapaytf.servicesinterfaces;
 
-import pe.edu.upc.llamapaytf.entities.TipoTransaccion;
+
 import pe.edu.upc.llamapaytf.entities.Transaccion;
 
 import java.math.BigDecimal;
