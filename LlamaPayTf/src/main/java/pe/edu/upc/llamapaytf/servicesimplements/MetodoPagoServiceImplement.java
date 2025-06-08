@@ -37,4 +37,9 @@ public class MetodoPagoServiceImplement implements IMetodoPagoService {
     public MetodoPago listId(int id) {
         return mpR.findById(id).orElse(new MetodoPago());
     }
+
+    @Override
+    public List<String[]> obtenerMetodosPagoPorUserId(int userId) {
+        return mpR.obtenerMetodosPagoPorUserId(userId);
+    }
 }

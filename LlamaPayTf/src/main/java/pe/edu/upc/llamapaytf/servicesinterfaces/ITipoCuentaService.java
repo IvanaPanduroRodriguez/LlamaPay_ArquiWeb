@@ -1,6 +1,6 @@
 package pe.edu.upc.llamapaytf.servicesinterfaces;
 
-import pe.edu.upc.llamapaytf.entities.Rol;
+
 import pe.edu.upc.llamapaytf.entities.TipoCuenta;
 
 import java.util.List;

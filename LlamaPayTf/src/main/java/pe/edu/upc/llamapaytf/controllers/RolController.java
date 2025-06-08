@@ -46,7 +46,7 @@ public class RolController {
         roS.update(r);
     }
 
-    // Endpoint para obtener roles por TipoRol
+
     @GetMapping("/tipoRol/{tipoRol}")
     public List<RolDTO> obtenerRolesPorTipoRol(@PathVariable String tipoRol) {
         return roS.findRolesByTipoRol(tipoRol).stream().map(x -> {
@@ -55,7 +55,7 @@ public class RolController {
         }).collect(Collectors.toList());
     }
 
-    // Endpoint para obtener roles por user_id
+
     @GetMapping("/usuario/{userId}")
     public List<RolDTO> obtenerRolesPorUsuario(@PathVariable int userId) {
         return roS.findRolesByUserId(userId).stream().map(x -> {
