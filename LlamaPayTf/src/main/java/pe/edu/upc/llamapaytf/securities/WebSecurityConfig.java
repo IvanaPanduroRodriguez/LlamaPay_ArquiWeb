@@ -69,6 +69,7 @@ public class WebSecurityConfig {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/swagger-resources/**",
+                                "/users/register-user",
                                 "/webjars/**",
                                 "/login"
 

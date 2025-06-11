@@ -6,6 +6,7 @@ import pe.edu.upc.llamapaytf.entities.User;
 import pe.edu.upc.llamapaytf.repositories.IUserRepository;
 import pe.edu.upc.llamapaytf.servicesinterfaces.IUserService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -18,28 +19,33 @@ public class UserServiceImplement implements IUserService {
         return uR.findAll();
     }
 
-    //metodo insertar datos
+
     @Override
     public void insertar(User u) {
         uR.save(u);
     }
 
-    //metodo buscar id
+
     @Override
     public User listID(int id) {
-        return uR.findById(id).orElse(new User()); //busca el id y si no lo encuentra lo devuelve en blanco
+        return uR.findById(id).orElse(new User());
     }
 
-    //metodo actualizar datos
+
     @Override
     public void update(User u) {
         uR.save(u);
     }
 
-    //metodo eliminar los atributos
+
     @Override
     public void delete(int id) {
         uR.deleteById(id);
+    }
+
+    @Override
+    public List<String[]> buscarUsuariosPorFechaNacimiento(LocalDate startDate, LocalDate endDate) {
+        return uR.buscarUsuariosPorFechaNacimiento(startDate, endDate);
     }
 
 }
