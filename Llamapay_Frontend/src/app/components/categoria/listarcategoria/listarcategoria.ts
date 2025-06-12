@@ -17,6 +17,6 @@ export class Listarcategoria implements OnInit {
   ngOnInit(): void {
     this.cS.list().subscribe(data => {
         this.dataSource = new MatTableDataSource(data)
-      })
+    })
   }
 }
