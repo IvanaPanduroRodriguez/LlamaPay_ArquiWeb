@@ -21,7 +21,10 @@ export class Listarservicio implements OnInit {
 
   ngOnInit(): void {
     this.sS.list().subscribe(data =>{
-        this.dataSource = new MatTableDataSource(data);
+      this.dataSource = new MatTableDataSource(data);
+    })
+    this.sS.getList().subscribe(data => { //actualiza la lista de servidores cuando se inserta o actualiza un servidor
+      this.dataSource = new MatTableDataSource(data)
     })
   }
 
