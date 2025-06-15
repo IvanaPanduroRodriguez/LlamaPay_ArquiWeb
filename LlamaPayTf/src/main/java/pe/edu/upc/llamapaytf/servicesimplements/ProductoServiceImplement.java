@@ -24,6 +24,11 @@ public class ProductoServiceImplement implements IProductoService {
     }
 
     @Override
+    public List<Producto> buscarPorProducto(String producto) {
+        return pR.buscarPorProducto(producto);
+    }
+
+    @Override
     public void update(Producto p) {
         pR.save(p);
     }
@@ -32,4 +37,15 @@ public class ProductoServiceImplement implements IProductoService {
     public void delete(int id) {
         pR.deleteById(id);
     }
+
+    @Override
+    public List<String[]> productosandpriceandunit() {
+        return pR.productosandpriceandunit();
+    }
+
+    @Override
+    public List<String[]> montosobjetivo() {
+        return pR.montosobjetivo();
+    }
+
 }

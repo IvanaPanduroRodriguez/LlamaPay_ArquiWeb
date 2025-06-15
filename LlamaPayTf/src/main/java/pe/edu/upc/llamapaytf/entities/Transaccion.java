@@ -1,104 +1,99 @@
 package pe.edu.upc.llamapaytf.entities;
 
 import jakarta.persistence.*;
+
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.sql.Date;
 
 @Entity
-@Table(name = "Transaccion")
+@Table(name="transaccion")
 public class Transaccion {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int transaccionId;
-
-    @Column(name = "FechaTransaccion", nullable = false)
-    private LocalDateTime fechaTransaccion;
-
-    @Column(name = "Monto", nullable = false)
-    private BigDecimal monto;
-
-    @Column(name = "Descripcion", nullable = false, length = 255)
-    private String descripcion;
+    private int idTransaccion;
+    @Column(name = "fechaTransaccion",nullable = false)
+    private Date fechaTransaccion;
+    @Column(name = "montoTransaccion",nullable = false,precision = 10,scale = 2)
+    private BigDecimal montoTransaccion;
+    @Column(name = "descripcionTransaccion",nullable = false, length = 50)
+    private String descripcionTransaccion;
 
     @ManyToOne
-    @JoinColumn(name = "tipocuenta_id")
-    private TipoCuenta tipoCuenta;
+    @JoinColumn(name = "idTipoCuenta")
+    private TipoCuenta tipocuenta;
 
     @ManyToOne
-    @JoinColumn(name = "metodopago_id")
-    private MetodoPago metodoPago;
+    @JoinColumn(name = "MetodoPago_id")
+    private MetodoPago metodopago;
 
     @ManyToOne
-    @JoinColumn(name = "servicio_id")
+    @JoinColumn(name = "idService")
     private Servicio servicio;
 
     @ManyToOne
-    @JoinColumn(name = "tipotransaccion_id")
-    private TipoTransaccion tipoTransaccionObj;
+    @JoinColumn(name = "tipoGastoId")
+    private TipoTransaccion tipotransaccion;
 
     public Transaccion() {
     }
 
-    public Transaccion(int transaccionId, LocalDateTime fechaTransaccion, BigDecimal monto,
-                       String descripcion, TipoCuenta tipoCuenta, MetodoPago metodoPago,
-                       Servicio servicio, TipoTransaccion tipoTransaccionObj) {
-        this.transaccionId = transaccionId;
+    public Transaccion(int idTransaccion, Date fechaTransaccion, BigDecimal montoTransaccion, String descripcionTransaccion, TipoCuenta tipocuenta, MetodoPago metodopago, Servicio servicio, TipoTransaccion tipotransaccion) {
+        this.idTransaccion = idTransaccion;
         this.fechaTransaccion = fechaTransaccion;
-        this.monto = monto;
-        this.descripcion = descripcion;
-        this.tipoCuenta = tipoCuenta;
-        this.metodoPago = metodoPago;
+        this.montoTransaccion = montoTransaccion;
+        this.descripcionTransaccion = descripcionTransaccion;
+        this.tipocuenta = tipocuenta;
+        this.metodopago = metodopago;
         this.servicio = servicio;
-        this.tipoTransaccionObj = tipoTransaccionObj;
+        this.tipotransaccion = tipotransaccion;
     }
 
-    public int getTransaccionId() {
-        return transaccionId;
+    public int getIdTransaccion() {
+        return idTransaccion;
     }
 
-    public void setTransaccionId(int transaccionId) {
-        this.transaccionId = transaccionId;
+    public void setIdTransaccion(int idTransaccion) {
+        this.idTransaccion = idTransaccion;
     }
 
-    public LocalDateTime getFechaTransaccion() {
+    public Date getFechaTransaccion() {
         return fechaTransaccion;
     }
 
-    public void setFechaTransaccion(LocalDateTime fechaTransaccion) {
+    public void setFechaTransaccion(Date fechaTransaccion) {
         this.fechaTransaccion = fechaTransaccion;
     }
 
-    public BigDecimal getMonto() {
-        return monto;
+    public BigDecimal getMontoTransaccion() {
+        return montoTransaccion;
     }
 
-    public void setMonto(BigDecimal monto) {
-        this.monto = monto;
+    public void setMontoTransaccion(BigDecimal montoTransaccion) {
+        this.montoTransaccion = montoTransaccion;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescripcionTransaccion() {
+        return descripcionTransaccion;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescripcionTransaccion(String descripcionTransaccion) {
+        this.descripcionTransaccion = descripcionTransaccion;
     }
 
-    public TipoCuenta getTipoCuenta() {
-        return tipoCuenta;
+    public TipoCuenta getTipocuenta() {
+        return tipocuenta;
     }
 
-    public void setTipoCuenta(TipoCuenta tipoCuenta) {
-        this.tipoCuenta = tipoCuenta;
+    public void setTipocuenta(TipoCuenta tipocuenta) {
+        this.tipocuenta = tipocuenta;
     }
 
-    public MetodoPago getMetodoPago() {
-        return metodoPago;
+    public MetodoPago getMetodopago() {
+        return metodopago;
     }
 
-    public void setMetodoPago(MetodoPago metodoPago) {
-        this.metodoPago = metodoPago;
+    public void setMetodopago(MetodoPago metodopago) {
+        this.metodopago = metodopago;
     }
 
     public Servicio getServicio() {
@@ -109,11 +104,11 @@ public class Transaccion {
         this.servicio = servicio;
     }
 
-    public TipoTransaccion getTipoTransaccionObj() {
-        return tipoTransaccionObj;
+    public TipoTransaccion getTipotransaccion() {
+        return tipotransaccion;
     }
 
-    public void setTipoTransaccionObj(TipoTransaccion tipoTransaccionObj) {
-        this.tipoTransaccionObj = tipoTransaccionObj;
+    public void setTipotransaccion(TipoTransaccion tipotransaccion) {
+        this.tipotransaccion = tipotransaccion;
     }
 }

@@ -10,32 +10,31 @@ import java.util.List;
 
 @Service
 public class TipoTransaccionServiceImplement implements ITipoTransaccionService {
-
     @Autowired
-    private ITipoTransaccionRepository tipoTransaccionRepository;
+    private ITipoTransaccionRepository tR;
 
     @Override
-    public void insert(TipoTransaccion tipoTransaccion) {
-        tipoTransaccionRepository.save(tipoTransaccion);
+    public void insert(TipoTransaccion tt) {
+        tR.save(tt);
     }
 
     @Override
-    public void update(TipoTransaccion tipoTransaccion) {
-        tipoTransaccionRepository.save(tipoTransaccion);
+    public void update(TipoTransaccion tt) {
+        tR.save(tt);
     }
 
     @Override
     public void delete(int id) {
-        tipoTransaccionRepository.deleteById(id);
+        tR.deleteById(id);
     }
 
     @Override
     public List<TipoTransaccion> list() {
-        return tipoTransaccionRepository.findAll();
+        return tR.findAll();
     }
 
     @Override
     public TipoTransaccion listID(int id) {
-        return tipoTransaccionRepository.findById(id).orElse(new TipoTransaccion());
+        return tR.findById(id).orElse(new TipoTransaccion());
     }
 }

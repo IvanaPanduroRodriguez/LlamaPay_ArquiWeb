@@ -1,23 +1,30 @@
 package pe.edu.upc.llamapaytf.dtos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.sql.Timestamp;
 import java.util.Date;
 
 public class UserDTO {
-    private int idUser;
+    private int userId;
     private String nameUser;
     private String lastnameUser;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String emailUser;
-    private String passwordUser;
     private Date birthdayUser;
     private Timestamp registrationDateUser;
+    private String username;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
+    private Boolean enabled;
 
-    public int getIdUser() {
-        return idUser;
+
+    public int getUserId() {
+        return userId;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getNameUser() {
@@ -44,14 +51,6 @@ public class UserDTO {
         this.emailUser = emailUser;
     }
 
-    public String getPasswordUser() {
-        return passwordUser;
-    }
-
-    public void setPasswordUser(String passwordUser) {
-        this.passwordUser = passwordUser;
-    }
-
     public Date getBirthdayUser() {
         return birthdayUser;
     }
@@ -66,5 +65,29 @@ public class UserDTO {
 
     public void setRegistrationDateUser(Timestamp registrationDateUser) {
         this.registrationDateUser = registrationDateUser;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }

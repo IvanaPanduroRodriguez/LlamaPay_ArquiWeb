@@ -5,13 +5,12 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "Tipotransaccion")
 public class TipoTransaccion {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "TipoGasto_id")
+    @Column(name = "TipoTransaccion_id")
     private int tipoGastoId;
 
-    @Column(name = "Descripcion", nullable = false, length = 255)
+    @Column(name = "Descripcion", nullable = false, length = 105)
     private String descripcion;
 
     // Constructor vacío

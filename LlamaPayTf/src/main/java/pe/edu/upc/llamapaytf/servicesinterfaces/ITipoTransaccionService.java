@@ -5,9 +5,9 @@ import pe.edu.upc.llamapaytf.entities.TipoTransaccion;
 import java.util.List;
 
 public interface ITipoTransaccionService {
-    void insert(TipoTransaccion tipoTransaccion);
-    void update(TipoTransaccion tipoTransaccion);
-    void delete(int id);
-    List<TipoTransaccion> list();
-    TipoTransaccion listID(int id);
+    public void insert(TipoTransaccion tt);
+    public void update(TipoTransaccion tt);
+    public void delete(int id);
+    public List<TipoTransaccion> list();
+    public TipoTransaccion listID(int id);
 }

@@ -2,78 +2,116 @@ package pe.edu.upc.llamapaytf.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.llamapaytf.dtos.TransaccionDTO;
+import pe.edu.upc.llamapaytf.dtos.*;
+import pe.edu.upc.llamapaytf.entities.TipoCuenta;
 import pe.edu.upc.llamapaytf.entities.Transaccion;
 import pe.edu.upc.llamapaytf.servicesinterfaces.ITransaccionService;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/transacciones")
-public class TransaccionController {
 
+public class TransaccionController {
     @Autowired
-    private ITransaccionService transaccionService;
+    private ITransaccionService transaccionS;
 
     @GetMapping
+    //@PreAuthorize("hasAnyAuthority('CLIENTE', 'ADMIN','TESTER','FINANZAS')")
     public List<TransaccionDTO> listar() {
-        return transaccionService.list().stream().map(t -> {
+        return transaccionS.list().stream().map(x -> {
             ModelMapper modelMapper = new ModelMapper();
-            return modelMapper.map(t, TransaccionDTO.class);
+            return modelMapper.map(x, TransaccionDTO.class);
         }).collect(Collectors.toList());
     }
 
-    @PostMapping
-    public void insertar(@RequestBody TransaccionDTO dto) {
+    @PostMapping("registrar")
+    //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
+    public void registrar(@RequestBody TransaccionDTO tr) {
         ModelMapper modelMapper = new ModelMapper();
-        Transaccion t = modelMapper.map(dto, Transaccion.class);
-        transaccionService.insert(t);
+        Transaccion trs = modelMapper.map(tr, Transaccion.class);
+        transaccionS.insert(trs);
     }
 
-    @GetMapping("/{id}")
-    public TransaccionDTO buscarID(@PathVariable("id") int id) {
-        ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(transaccionService.listID(id), TransaccionDTO.class);
-    }
-
-    @PutMapping
-    public void modificar(@RequestBody TransaccionDTO dto) {
-        ModelMapper modelMapper = new ModelMapper();
-        Transaccion t = modelMapper.map(dto, Transaccion.class);
-        transaccionService.update(t);
-    }
-
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/eliminar/{id}")
+    //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
     public void eliminar(@PathVariable("id") int id) {
-        transaccionService.delete(id);
+        transaccionS.delete(id);
     }
 
-    @GetMapping("/monto/{monto}/mes/{mes}")
-    public List<TransaccionDTO> buscarPorMontoMayorYMes(@PathVariable("monto") BigDecimal monto,
-                                                        @PathVariable("mes") int mes) {
-        return transaccionService.findByMontoMayorAndMes(monto, mes).stream().map(t -> {
-            ModelMapper modelMapper = new ModelMapper();
-            return modelMapper.map(t, TransaccionDTO.class);
+    @PutMapping("/actualizar")
+    //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
+    public void actualizar(@RequestBody TransaccionDTO trd) {
+        ModelMapper modelMapper = new ModelMapper();
+        Transaccion tr = modelMapper.map(trd, Transaccion.class);
+        transaccionS.update(tr);
+    }
+
+    @GetMapping("/cantidad-por-fecha")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER','FINANZAS')")
+    public List<CantidadTransaccionesPorFechaDTO> cantidadTransaccionesPorFecha() {
+        return transaccionS.contarTransaccionesPorFecha().stream().map(fila -> {
+            CantidadTransaccionesPorFechaDTO dto = new CantidadTransaccionesPorFechaDTO();
+            dto.setFecha(LocalDate.parse(fila[0]));
+            dto.setCantidadTransacciones(Integer.parseInt((fila[1])));
+            return dto;
         }).collect(Collectors.toList());
     }
 
-    @GetMapping("/descripcion/{descripcion}/mes/{mes}")
-    public List<TransaccionDTO> buscarPorDescripcionYMes(@PathVariable("descripcion") String descripcion,
-                                                         @PathVariable("mes") int mes) {
-        return transaccionService.findByDescripcionAndMes(descripcion, mes).stream().map(t -> {
-            ModelMapper modelMapper = new ModelMapper();
-            return modelMapper.map(t, TransaccionDTO.class);
+    @GetMapping("/monto-por-fecha")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER','FINANZAS')")
+    public List<MontoTransaccionesPorFechaDTO> montoTransaccionesPorFecha() {
+        return transaccionS.sumarMontosPorFecha().stream().map(fila -> {
+            MontoTransaccionesPorFechaDTO dto = new MontoTransaccionesPorFechaDTO();
+            dto.setFecha(LocalDate.parse(fila[0]));
+            dto.setMontoTotal(Double.valueOf((fila[1])));
+            return dto;
         }).collect(Collectors.toList());
     }
-
     @GetMapping("/descripcion/{descripcion}")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER','FINANZAS')")
     public List<TransaccionDTO> buscarPorDescripcion(@PathVariable("descripcion") String descripcion) {
-        return transaccionService.findByDescripcion(descripcion).stream().map(t -> {
+        return transaccionS.findByDescripcion(descripcion).stream().map(t -> {
             ModelMapper modelMapper = new ModelMapper();
             return modelMapper.map(t, TransaccionDTO.class);
         }).collect(Collectors.toList());
+    }
+
+    @GetMapping("/transacciones-monto-mes-joao")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER','FINANZAS')")
+    public List<TransaccionInfoDTO> transaccionesPorMontoYMes(@RequestParam BigDecimal monto, @RequestParam int mes) {
+        List<TransaccionInfoDTO> dtoLista = new ArrayList<>();
+        List<String[]> lista = transaccionS.findByMontoMayorAndMes(monto, mes);
+        for (String[] columna : lista) {
+            TransaccionInfoDTO dto = new TransaccionInfoDTO();
+            dto.setDescripcion(columna[1]);
+            dto.setFechaTransaccion(LocalDate.parse(columna[2]));
+            dto.setMontoTransaccion(new BigDecimal(columna[3]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
+    }
+
+    @GetMapping("/transacciones-descripcion-mes-joao")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER','FINANZAS')")
+    public List<TransaccionInfoDTO> transaccionesPorDescripcionYMes(@RequestParam String descripcion, @RequestParam int mes) {
+        List<TransaccionInfoDTO> dtoLista = new ArrayList<>();
+        List<String[]> lista = transaccionS.findByDescripcionAndMes(descripcion, mes);
+        for (String[] columna : lista) {
+            TransaccionInfoDTO dto = new TransaccionInfoDTO();
+            dto.setDescripcion(columna[1]);
+            dto.setMontoTransaccion(new BigDecimal(columna[3]));
+            dto.setFechaTransaccion(LocalDate.parse(columna[2]));
+            dtoLista.add(dto);
+        }
+        return dtoLista;
     }
 }

@@ -11,47 +11,52 @@ import java.util.List;
 
 @Service
 public class TransaccionServiceImplement implements ITransaccionService {
-
     @Autowired
-    private ITransaccionRepository transaccionRepository;
+    private ITransaccionRepository transaccionR;
+
 
     @Override
-    public List<Transaccion> list() {
-        return transaccionRepository.findAll();
+    public void insert(Transaccion tr) {
+        transaccionR.save(tr);
     }
 
     @Override
-    public void insert(Transaccion transaccion) {
-        transaccionRepository.save(transaccion);
-    }
-
-    @Override
-    public Transaccion listID(int id) {
-        return transaccionRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    public void update(Transaccion transaccion) {
-        transaccionRepository.save(transaccion);
+    public void update(Transaccion tr) {
+        transaccionR.save(tr);
     }
 
     @Override
     public void delete(int id) {
-        transaccionRepository.deleteById(id);
+        transaccionR.deleteById(id);
     }
 
     @Override
-    public List<Transaccion> findByMontoMayorAndMes(BigDecimal monto, int mes) {
-        return transaccionRepository.findByMontoMayorAndMes(monto, mes);
+    public List<Transaccion> list() {
+        return transaccionR.findAll();
     }
 
     @Override
-    public List<Transaccion> findByDescripcionAndMes(String descripcion, int mes) {
-        return transaccionRepository.findByDescripcionAndMes(descripcion, mes);
+    public List<String[]> contarTransaccionesPorFecha() {
+        return transaccionR.contarTransaccionesPorFecha();
+    }
+
+    @Override
+    public List<String[]> sumarMontosPorFecha() {
+        return transaccionR.sumarMontosPorFecha();
+    }
+
+    @Override
+    public List<String[]> findByMontoMayorAndMes(BigDecimal monto, int mes) {
+        return transaccionR.findByMontoMayorAndMes(monto, mes);
+    }
+
+    @Override
+    public List<String[]> findByDescripcionAndMes(String descripcion, int mes) {
+        return transaccionR.findByDescripcionAndMes(descripcion, mes);
     }
 
     @Override
     public List<Transaccion> findByDescripcion(String descripcion) {
-        return transaccionRepository.findByDescripcion(descripcion);
+        return transaccionR.findByDescripcion(descripcion);
     }
 }
