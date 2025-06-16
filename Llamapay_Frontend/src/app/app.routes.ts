@@ -45,26 +45,7 @@ export const routes: Routes = [
       }
     ]
   },
- //-----------------JHON------------------------------------------
-  {
-    path:'metodopagos',component:MetodoPago,
-    children:[
-      {
-        path:'formulario',component:InsertareditarMetodoPago
-      },
-      {
-        path:'listado',component:Listarmetodopago
-      }
-
-    ]
-  },
-  {
-    path: 'servicios',
-    component: Servicio,
-    children: [
-      { path: 'insertarservicio', component: InsertareditarServicio }
-    ]
-  },
+ //-----------------JOHN------------------------------------------
   {
     path: 'metodopagos',
     component: MetodoPago,
