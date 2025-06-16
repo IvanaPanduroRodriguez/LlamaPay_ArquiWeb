@@ -9,11 +9,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { Transaccion } from '../../../models/transaccion';
+import { TipoTransaccion } from '../../../models/tipotransaccion';
+import { TipoTransaccionService } from '../../../services/tipotransaccion.service';
+import { TransaccionService } from '../../../services/transaccion.service';
 
-import { Transaccion } from '../../../../models/transaccion';
-import { TransaccionService } from '../../../../services/transaccion.service';
-import { TipoTransaccionService } from '../../../../services/tipotransaccion.service';
-import { TipoTransaccion } from '../../../../models/tipotransaccion';
+
 
 @Component({
   selector: 'app-insertareditar-transaccion',

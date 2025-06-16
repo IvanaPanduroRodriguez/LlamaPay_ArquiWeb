@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { environment } from "../../environments/environment";
+import { environment } from "../../enviroments/enviroment";
 import { Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Servicio } from '../models/servicio';
@@ -23,8 +23,16 @@ export class ServicioService {
   }
   setList(listaNueva: Servicio[]) { //3er paso
     this.listaCambio.next(listaNueva);
- }
+  }
   getList() { //4to paso
     return this.listaCambio.asObservable();
+  }
+
+  //actualizar servicio
+  listId(id: number) {
+    return this.http.get<Servicio>(`${this.url}/${id}`)
+  }
+  update(s: Servicio) {
+    return this.http.put(this.url, s);
   }
 }

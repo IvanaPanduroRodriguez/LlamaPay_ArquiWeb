@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { TipoTransaccionService } from '../../../../services/tipotransaccion.service';
-import { TipoTransaccion } from '../../../../models/tipotransaccion';
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
+import { TipoTransaccion } from '../../../models/tipotransaccion';
+import { TipoTransaccionService } from '../../../services/tipotransaccion.service';
 
 @Component({
   selector: 'app-listar-tipotransaccion',
