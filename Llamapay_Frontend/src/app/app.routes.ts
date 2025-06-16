@@ -20,6 +20,7 @@ import { InsertarTipoTransaccionComponent } from './components/tipotransaccion/i
 
 
 export const routes: Routes = [
+  //-----------------IVANA------------------------------------------
   {
     path:'categorias',component:Categoria,
     children:[

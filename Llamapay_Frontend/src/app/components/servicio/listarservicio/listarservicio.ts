@@ -23,7 +23,7 @@ export class Listarservicio implements OnInit {
     this.sS.list().subscribe(data =>{
       this.dataSource = new MatTableDataSource(data);
     })
-    this.sS.getList().subscribe(data => { //actualiza la lista de servidores cuando se inserta o actualiza un servidor
+    this.sS.getList().subscribe(data => { //actualiza la lista de servicios cuando se inserta o actualiza un servicio
       this.dataSource = new MatTableDataSource(data)
     })
   }

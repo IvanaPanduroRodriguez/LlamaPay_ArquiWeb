@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { Component, OnInit } from '@angular/core';
-import { Transaccion } from '../../../../models/transaccion';
 import { MatTableDataSource } from '@angular/material/table';
-import { TransaccionService } from '../../../../services/transaccion.service';
 import { RouterLink } from '@angular/router';
+import { Transaccion } from '../../../models/transaccion';
+import { TransaccionService } from '../../../services/transaccion.service';
 
 
 @Component({

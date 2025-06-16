@@ -60,7 +60,7 @@ export class InsertareditarServicio implements OnInit{
       this.sS.insert(this.serv).subscribe((data=>{
         this.sS.list().subscribe((data =>{
           this.sS.setList(data); 
-          this.router.navigate(['/servicios']); // Actualizamos la lista de servicios
+          this.router.navigate(['servicios']); // Actualizamos la lista de servicios
         }));
       }));
     }
