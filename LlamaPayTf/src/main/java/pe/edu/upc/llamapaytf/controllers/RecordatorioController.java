@@ -18,7 +18,7 @@ public class RecordatorioController {
     private IRecordatorioService rS;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('CLIENTE', 'ADMIN','TESTER')")
+    //@PreAuthorize("hasAnyAuthority('CLIENTE', 'ADMIN','TESTER')")
     public List<RecordatorioDTO> listar() {
         return rS.list().stream().map(x -> {
             ModelMapper modelMapper = new ModelMapper();
@@ -27,7 +27,7 @@ public class RecordatorioController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
+    //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
     public void insertar(@RequestBody RecordatorioDTO dto) {
         ModelMapper m = new ModelMapper();
         Recordatorio re = m.map(dto, Recordatorio.class);
@@ -35,7 +35,7 @@ public class RecordatorioController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
+    //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
     public void modificar (@RequestBody RecordatorioDTO dto) {
         ModelMapper m = new ModelMapper();
         Recordatorio re = m.map(dto, Recordatorio.class);
@@ -43,13 +43,13 @@ public class RecordatorioController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
+    //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
     public void eliminar(@PathVariable("id") int id) {
         rS.delete(id);
     }
 
     @GetMapping("/buscar/{recordatorio}")
-    @PreAuthorize("hasAnyAuthority('CLIENTE', 'ADMIN','TESTER')")
+    //@PreAuthorize("hasAnyAuthority('CLIENTE', 'ADMIN','TESTER')")
     public List<RecordatorioDTO> buscarPorRecordatorio(@PathVariable("recordatorio") String recordatorio) {
         return rS.buscarPorRecordatorio(recordatorio).stream().map(x -> {
             ModelMapper modelMapper = new ModelMapper();

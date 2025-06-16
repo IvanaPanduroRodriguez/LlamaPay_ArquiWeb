@@ -21,16 +21,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-// import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
+
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class WebSecurityConfig {
 
-    // Seguridad desactivada: estas dependencias ya no se usan momentáneamente
-    /*
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
@@ -43,10 +42,7 @@ public class WebSecurityConfig {
     @Autowired
     @Qualifier("handlerExceptionResolver")
     private HandlerExceptionResolver exceptionResolver;
-    */
 
-    // Seguridad desactivada: ya no es necesario configurar AuthenticationManager
-    /*
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
@@ -61,29 +57,45 @@ public class WebSecurityConfig {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
     }
-    */
 
-    // Bean necesario para controlar logins u otras dependencias como JwtAuthenticationController
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
-
-    // ✅ Bean necesario para UserController (encriptación de contraseñas)
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    // Configuración de seguridad deshabilitada para desarrollo (sin token ni login)
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+        //Desde Spring Boot 3.1+
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll() // Permitir todo durante desarrollo
-                );
+                .authorizeHttpRequests(req -> req
+                        .requestMatchers(
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/swagger-resources/**",
+                                "/users/register-user",
+                                "/users",
+                                "/metodospagos",
+                                "/webjars/**",
+                                "/login",
+                                "/servicios/**",
+                                "/categorias/**",
+                                "/metodospagos/**",
+                                "/ObjetivoAhorro/**",
+                                "/productos/**",
+                                "/recordatorios/**",
+                                "/roles/**",
+                                "/tiendas/**",
+                                "/tiposcuentas/**",
+                                "/tipotransacciones/**",
+                                "/transacciones/**",
+                                "/users/**"
 
+                        ).permitAll()
+                        .anyRequest().authenticated()
+                )
+                .httpBasic(Customizer.withDefaults())
+                .formLogin(AbstractHttpConfigurer::disable)
+                .exceptionHandling(e -> e.authenticationEntryPoint(jwtAuthenticationEntryPoint))
+                .sessionManagement(Customizer.withDefaults());
+        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
+
 }

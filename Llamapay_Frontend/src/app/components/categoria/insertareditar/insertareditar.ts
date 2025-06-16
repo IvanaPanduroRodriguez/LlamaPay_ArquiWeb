@@ -22,7 +22,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './insertareditar.html',
   styleUrl: './insertareditar.css'
 })
-export class Insertareditar implements OnInit{ //4
+export class InsertareditarCategoria implements OnInit{ //4
   form: FormGroup = new FormGroup({});//1 y del angular
   categoria: Categoria = new Categoria();//2 y tiene que ser del models
 
@@ -44,10 +44,8 @@ export class Insertareditar implements OnInit{ //4
       this.cS.insert(this.categoria).subscribe(data => {
         this.cS.list().subscribe(data => { 
           this.cS.setList(data); 
+          this.router.navigate(['categorias']);});
         });
-        this.router.navigate(['/categorias']); //9
-      }
-      )
     }
   }
 }

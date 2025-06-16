@@ -1,0 +1,39 @@
+<div>
+  <div>Registro de Metodos de Pagos</div>
+  <div>
+    <form [formGroup]="form" (submit)="aceptar()">
+
+      <mat-form-field>
+        <mat-label>Metodo Pago</mat-label>
+        <input matInput formControlName="name">
+
+        <mat-error *ngIf="form.get('name')?.hasError('required')">
+          El nombre del metodo de pago es obligatorio!
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Tipo de pago</mat-label>
+        <input matInput formControlName="type">
+
+        <mat-error *ngIf="form.get('type')?.hasError('required')">
+          El tipo de pago es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+       <br />
+      <mat-form-field>
+        <mat-label>Desripcion</mat-label>
+        <input matInput formControlName="description">
+
+        <mat-error *ngIf="form.get('description')?.hasError('required')">
+          La descripcion es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+  <button mat-raised-button color="primary">Aceptar</button>
+  <button mat-raised-button color="warn" routerLink="/metodospagos">
+   Cancelar
+  </button>
+
+    </form>
+  </div>
+</div>

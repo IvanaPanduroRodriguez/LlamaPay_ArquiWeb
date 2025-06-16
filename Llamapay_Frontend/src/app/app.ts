@@ -1,10 +1,18 @@
 import { Component } from '@angular/core';
+import { Categoria } from './components/categoria/categoria';
+import { MetodoPago } from "./components/metodopago/metodopago";
+import { User } from './components/user/user';
 import { RouterOutlet } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet], // importante
+  imports: [Categoria 
+    //MetodoPago, 
+    //User,
+    //RouterOutlet
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

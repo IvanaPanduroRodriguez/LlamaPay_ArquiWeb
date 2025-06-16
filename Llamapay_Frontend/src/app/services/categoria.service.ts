@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { environment } from "../../environments/environment";
+import { environment } from "../../enviroments/enviroment";
 import { HttpClient } from "@angular/common/http";
 import { Categoria } from "../models/categoria";
 import { Subject } from "rxjs";
@@ -26,5 +26,17 @@ export class CategoriaService {
   }
   getList() { //4to paso
     return this.listaCambio.asObservable();
+  }
+  //actualizar categoria
+  listId(id: number) {
+    return this.http.get<Categoria>(`${this.url}/${id}`)
+  }
+
+  update(c: Categoria) {
+    return this.http.put(this.url, c)
+  }
+  //eliminar categoria
+  deleteS(id:number) {
+    return this.http.delete(`${this.url}/${id}`)
   }
 }
