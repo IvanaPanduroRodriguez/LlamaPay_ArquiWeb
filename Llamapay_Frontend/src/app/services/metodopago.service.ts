@@ -25,4 +25,14 @@ export class MetodoPagoService{
       getList() { //4to paso
         return this.listaCambio.asObservable();
       }
+      listId(id:number){
+        return this.http.get<MetodoPago>(`${this.url}/${id}`)
+      }
+      update(mp: MetodoPago) {
+        return this.http.put(this.url, mp)
+      }
+
+      deleteS(id:number) {
+        return this.http.delete(`${this.url}/${id}`)
+      }
 }

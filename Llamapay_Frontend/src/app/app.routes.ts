@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { Categoria } from './components/categoria/categoria';
 import { Servicio } from './components/servicio/servicio';
-import { Insertareditar } from './components/categoria/insertareditar/insertareditar';
 import { InsertareditarCategoria } from './components/categoria/insertareditar/insertareditar';
 import { InsertareditarServicio } from './components/servicio/insertareditar/insertareditar';
 import { MetodoPago } from './components/metodopago/metodopago';
@@ -18,7 +17,6 @@ export const routes: Routes = [
     path: 'categorias',
     component: Categoria,
     children: [
-      { path: 'formulario', component: Insertareditar },
       { path: 'insertarcategoria', component: InsertareditarCategoria }
     ]
   },
@@ -34,7 +32,7 @@ export const routes: Routes = [
     component: MetodoPago,
     children: [
       { path: 'formulario', component: InsertareditarMetodoPago },
-      { path: 'listado', component: Listarmetodopago }
+      { path: 'ediciones/:id', component: InsertareditarMetodoPago }
     ]
   },
   {
@@ -42,7 +40,7 @@ export const routes: Routes = [
     component: User,
     children: [
       { path: 'formulario', component: InsertareditarUser },
-      { path: 'listado', component: Listaruser }
+      { path: 'ediciones/:id', component: InsertareditarUser }
     ]
   }
 ];

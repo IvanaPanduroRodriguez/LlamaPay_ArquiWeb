@@ -1,7 +1,18 @@
-<div>
-  <div>Registro de Usuarios nuevos en Llamapay</div>
-  <div>
+<div class="container">
+  <div style="text-align: center;margin: 5%;">
+    <h1>Registro de Usuarios</h1>
+  </div> 
+    <div style="text-align: center;margin: 5%;">
     <form [formGroup]="form" (submit)="aceptar()">
+      <mat-form-field *ngIf="edicion">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo">
+
+        <mat-error *ngIf="form.get('codigo')?.hasError('required')">
+          El codigo del usuario es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br>
 
       <mat-form-field>
         <mat-label>Usuario</mat-label>
@@ -12,6 +23,7 @@
         </mat-error>
       </mat-form-field>
       <br>
+
       <mat-form-field>
         <mat-label>Tipo de pago</mat-label>
         <input matInput formControlName="lastname">
@@ -20,7 +32,8 @@
           El apellido es obligatorio!!
         </mat-error>
       </mat-form-field>
-       <br />
+       <br>
+
       <mat-form-field>
         <mat-label>Correo Electronico</mat-label>
         <input matInput formControlName="email">
@@ -29,29 +42,32 @@
           El email es obligatorio!!
         </mat-error>
       </mat-form-field>
-    <br>
-    <mat-form-field>
-        <mat-label>Dia de Nacimiento</mat-label>
-        <input matInput formControlName="birthday">
+       <br>
 
+      <mat-form-field>
+        <mat-label>Dia de Nacimiento</mat-label>
+        <input matInput matInput [matDatepicker]="picker1" formControlName="birthday">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
         <mat-error *ngIf="form.get('birthday')?.hasError('required')">
           El dia de nacimiento es obligatorio!!
         </mat-error>
       </mat-form-field>
-    <br />
-
     <br>
+
     <mat-form-field>
         <mat-label>Registro del usuario</mat-label>
-        <input matInput formControlName="registrationDate">
-
+        <input matInput [matDatepicker]="picker2" formControlName="registrationDate">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
         <mat-error *ngIf="form.get('registrationDate')?.hasError('required')">
           El Registro del usuario es obligatorio!!
         </mat-error>
       </mat-form-field>
-    <br />
-
     <br>
+
     <mat-form-field>
         <mat-label>USERNAME</mat-label>
         <input matInput formControlName="username">
@@ -60,35 +76,47 @@
           El username es obligatorio!!
         </mat-error>
       </mat-form-field>
-    <br />
 
     <br>
-    <mat-form-field>
-        <mat-label>PASSWORD</mat-label>
-        <input matInput formControlName="password">
-
+      <mat-form-field>
+      <mat-label>PASSWORD</mat-label>
+      <input matInput type="password" formControlName="password">
         <mat-error *ngIf="form.get('password')?.hasError('required')">
-          La contraseña es obligatoria!!
+         La contraseña es obligatoria!!
         </mat-error>
       </mat-form-field>
-    <br />
+
 
     <br>
     <mat-form-field>
-        <mat-label>Estado</mat-label>
-        <input matInput formControlName="enabled">
+  <mat-label>Estado</mat-label>
+  <mat-select formControlName="enabled">
+    <mat-option [value]="true">Activo</mat-option>
+    <mat-option [value]="false">Inactivo</mat-option>
+  </mat-select>
+  <mat-error *ngIf="form.get('enabled')?.hasError('required')">
+    El estado es obligatorio!!
+  </mat-error>
+</mat-form-field>
+<!-- CAMPO NUEVO DE ROLES -->
+      <mat-form-field>
+  <mat-label>Rol del Usuario</mat-label>
+  <mat-select formControlName="roles" multiple>
+    <mat-option *ngFor="let rol of rolesDisponibles" [value]="rol">
+      {{ rol.tipoRol }}
+    </mat-option>
+  </mat-select>
+  <mat-error *ngIf="form.get('roles')?.hasError('required')">
+    Al menos un rol debe ser seleccionado!!
+  </mat-error>
+</mat-form-field>
 
-        <mat-error *ngIf="form.get('enabled')?.hasError('required')">
-          El estado es obligatorio!!
-        </mat-error>
-      </mat-form-field>
     <br />
 
-
-  <button mat-raised-button color="primary">Aceptar</button>
-  <button mat-raised-button color="warn" routerLink="/users">
-   Cancelar
-  </button>
+        <button mat-raised-button color="primary">Aceptar</button>
+        <button mat-raised-button color="warn" routerLink="/users">
+        Cancelar
+        </button>
 
     </form>
   </div>

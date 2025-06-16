@@ -18,8 +18,8 @@ private listaCambio = new Subject<User[]>(); //1er paso
         return this.http.get<User[]>(this.url);
         }
         //insertar user
-    insert(c:User){ //2do paso
-        return this.http.post(this.url,c);
+    insert(u:User){ //2do paso
+        return this.http.post(this.url,u);
         }
     setList(listaNueva: User[]) { //3er paso
         this.listaCambio.next(listaNueva);
@@ -27,4 +27,16 @@ private listaCambio = new Subject<User[]>(); //1er paso
     getList() { //4to paso
         return this.listaCambio.asObservable();
         }
+    listId(id: number) {
+      return this.http.get<User>(`${this.url}/${id}`)
+    }
+
+    update(u: User) {
+      return this.http.put(this.url, u)
+    }
+
+    deleteS(id:number) {
+      return this.http.delete(`${this.url}/${id}`)
+    }
+    
 }
