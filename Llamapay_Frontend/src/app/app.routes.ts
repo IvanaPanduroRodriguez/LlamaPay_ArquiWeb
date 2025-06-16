@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
 import { Categoria } from './components/categoria/categoria';
-import { Insertareditar } from './components/categoria/insertareditar/insertareditar';
 import { Servicio } from './components/servicio/servicio';
+import { Insertareditar } from './components/categoria/insertareditar/insertareditar';
+import { InsertareditarCategoria } from './components/categoria/insertareditar/insertareditar';
+import { InsertareditarServicio } from './components/servicio/insertareditar/insertareditar';
 import { MetodoPago } from './components/metodopago/metodopago';
 import { InsertareditarMetodoPago } from './components/metodopago/insertareditar/insertareditar';
 import { Listarmetodopago } from './components/metodopago/listarmetodopago/listarmetodopago';
@@ -13,41 +15,34 @@ import { Listaruser } from './components/user/listaruser/listaruser';
 
 export const routes: Routes = [
   {
-    path:'categorias',component:Categoria,
-    children:[
-      { 
-        path:'formulario',component:Insertareditar
-      }
-    ]
-
-  },
-
-  {
-    path:'servicios', component:Servicio
-  },
-
-  {
-    path:'metodopagos',component:MetodoPago,
-    children:[
-      {
-        path:'formulario',component:InsertareditarMetodoPago
-      },
-      {
-        path:'listado',component:Listarmetodopago
-      }
+    path: 'categorias',
+    component: Categoria,
+    children: [
+      { path: 'formulario', component: Insertareditar },
+      { path: 'insertarcategoria', component: InsertareditarCategoria }
     ]
   },
   {
-    path:'users',component:User,
-    children:[
-      {
-        path:'formulario',component:InsertareditarUser
-      },
-      {
-        path:'listado',component:Listaruser
-      }
+    path: 'servicios',
+    component: Servicio,
+    children: [
+      { path: 'insertarservicio', component: InsertareditarServicio }
+    ]
+  },
+  {
+    path: 'metodopagos',
+    component: MetodoPago,
+    children: [
+      { path: 'formulario', component: InsertareditarMetodoPago },
+      { path: 'listado', component: Listarmetodopago }
+    ]
+  },
+  {
+    path: 'users',
+    component: User,
+    children: [
+      { path: 'formulario', component: InsertareditarUser },
+      { path: 'listado', component: Listaruser }
     ]
   }
-
-
 ];

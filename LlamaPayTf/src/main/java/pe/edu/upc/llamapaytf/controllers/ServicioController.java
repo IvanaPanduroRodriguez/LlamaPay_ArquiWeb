@@ -20,7 +20,7 @@ public class ServicioController {
     private IServicioService sS;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('CLIENTE', 'ADMIN','FINANZAS','TESTER')")
+    //@PreAuthorize("hasAnyAuthority('CLIENTE', 'ADMIN','FINANZAS','TESTER')")
     public List<ServicioDTO> listar() {
         return sS.list().stream().map(x->{
             ModelMapper modelMapper = new ModelMapper();
@@ -29,7 +29,7 @@ public class ServicioController {
     }
 
     @PostMapping("/registra")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public void insertar (@RequestBody ServicioDTO dto) {
         ModelMapper m = new ModelMapper();
         Servicio s = m.map(dto, Servicio.class);
@@ -37,7 +37,7 @@ public class ServicioController {
     }
 
     @GetMapping("/busquedasPorCompania")
-    @PreAuthorize("hasAnyAuthority( 'ADMIN','FINANZAS','TESTER')")
+    //@PreAuthorize("hasAnyAuthority( 'ADMIN','FINANZAS','TESTER')")
     public List<ServicioDTO>buscarCompania(@RequestParam String nameCompany){ //buscar servicio por compañia
         return sS.buscar(nameCompany).stream().map(z->{
             ModelMapper m = new ModelMapper();
@@ -46,7 +46,7 @@ public class ServicioController {
     }
 
     @GetMapping("/servicioxcategoria")
-    @PreAuthorize("hasAnyAuthority('ADMIN','FINANZAS','TESTER')")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','FINANZAS','TESTER')")
     public List<ServicioCategoriaDTO>cantidadServicioporCategoria() {
         List<ServicioCategoriaDTO> dtoLista=new ArrayList<>();
         List<String[]>lista=sS.FindServicebyCategory();
@@ -60,7 +60,7 @@ public class ServicioController {
     }
 
     @PutMapping("/actualizar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public void modificar(@RequestBody ServicioDTO dto){ //modificar los datos ingresados
         ModelMapper m = new ModelMapper();
         Servicio s = m.map(dto, Servicio.class);
@@ -68,7 +68,7 @@ public class ServicioController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") int id){ //eliminar todos los atributos que yo elija
         sS.delete(id);
     }

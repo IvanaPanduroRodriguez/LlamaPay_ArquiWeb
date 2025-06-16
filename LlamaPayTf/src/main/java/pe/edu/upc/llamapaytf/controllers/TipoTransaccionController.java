@@ -18,7 +18,7 @@ public class TipoTransaccionController {
     private ITipoTransaccionService tS;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('CLIENTE', 'ADMIN','FINANZAS','TESTER')")
+    //@PreAuthorize("hasAnyAuthority('CLIENTE', 'ADMIN','FINANZAS','TESTER')")
     public List<TipoTransaccionDTO> listar() {
         return tS.list().stream().map(t -> {
             ModelMapper m = new ModelMapper();
@@ -27,7 +27,7 @@ public class TipoTransaccionController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public void insertar(@RequestBody TipoTransaccionDTO dto) {
         ModelMapper m = new ModelMapper();
         TipoTransaccion tt = m.map(dto, TipoTransaccion.class);
@@ -35,7 +35,7 @@ public class TipoTransaccionController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public void modificar(@RequestBody TipoTransaccionDTO dto) {
         ModelMapper m = new ModelMapper();
         TipoTransaccion t = m.map(dto, TipoTransaccion.class);
@@ -43,13 +43,13 @@ public class TipoTransaccionController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") int id) {
         tS.delete(id);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN','FINANZAS','TESTER')")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','FINANZAS','TESTER')")
     public TipoTransaccionDTO buscarPorId(@PathVariable("id") int id) {
         ModelMapper m = new ModelMapper();
         TipoTransaccionDTO dto = m.map(tS.listID(id), TipoTransaccionDTO.class);

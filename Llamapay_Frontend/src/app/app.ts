@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Categoria } from './components/categoria/categoria';
-import { MetodoPago } from "./components/metodopago/metodopago";
+import { MetodoPago } from './components/metodopago/metodopago';
 import { User } from './components/user/user';
-
 
 @Component({
   selector: 'app-root',
