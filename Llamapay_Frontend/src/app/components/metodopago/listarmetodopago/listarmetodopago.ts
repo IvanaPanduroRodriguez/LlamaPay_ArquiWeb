@@ -18,5 +18,8 @@ export class Listarmetodopago implements OnInit {
     this.mpS.list().subscribe(data => {
         this.dataSource = new MatTableDataSource(data)
     })
+    this.mpS.getList().subscribe(data => { //actualiza la lista de servidores cuando se inserta o actualiza un servidor
+      this.dataSource = new MatTableDataSource(data)
+    })
   }
 }

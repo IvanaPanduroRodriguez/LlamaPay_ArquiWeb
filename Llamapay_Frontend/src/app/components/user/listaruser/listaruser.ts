@@ -18,5 +18,8 @@ export class Listaruser implements OnInit {
     this.uS.list().subscribe(data => {
         this.dataSource = new MatTableDataSource(data)
     })
+    this.uS.getList().subscribe(data => { //actualiza la lista cuando se inserta o actualiza la data
+      this.dataSource = new MatTableDataSource(data)
+    })
   }
 }
