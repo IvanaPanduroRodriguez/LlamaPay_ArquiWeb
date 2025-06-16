@@ -24,6 +24,11 @@ public class RecordatorioServiceImplement implements IRecordatorioService {
     }
 
     @Override
+    public List<Recordatorio> buscarPorRecordatorio(String rec) {
+        return rR.buscarPorRecordatorio(rec);
+    }
+
+    @Override
     public void update(Recordatorio r) {
         rR.save(r);
     }

@@ -1,17 +1,11 @@
 package pe.edu.upc.llamapaytf.dtos;
 
-import pe.edu.upc.llamapaytf.entities.Producto;
-import pe.edu.upc.llamapaytf.entities.Tienda;
-import pe.edu.upc.llamapaytf.entities.User;
-
-
 public class ProductoInfoDTO {
     private String nombre_producto;
     private int total_Unidades;
     private int precio_Producto;
     private String nombre_tienda;
 
-    // Getters and Setters
     public String getNombre_producto() {
         return nombre_producto;
     }

@@ -10,4 +10,5 @@ public interface IServicioService {
     public List <Servicio> buscar(String n); //nombre de compañia
     public void update(Servicio s);
     public void delete(int id);
+    public List<String[]>FindServicebyCategory();
 }

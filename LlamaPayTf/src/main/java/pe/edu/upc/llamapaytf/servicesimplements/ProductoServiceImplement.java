@@ -24,6 +24,11 @@ public class ProductoServiceImplement implements IProductoService {
     }
 
     @Override
+    public List<Producto> buscarPorProducto(String producto) {
+        return pR.buscarPorProducto(producto);
+    }
+
+    @Override
     public void update(Producto p) {
         pR.save(p);
     }
@@ -37,12 +42,10 @@ public class ProductoServiceImplement implements IProductoService {
     public List<String[]> productosandpriceandunit() {
         return pR.productosandpriceandunit();
     }
+
     @Override
     public List<String[]> montosobjetivo() {
         return pR.montosobjetivo();
     }
-    @Override
-    public List<Producto> buscarPorProducto(String producto) {
-        return pR.buscarPorProducto(producto);
-    }
+
 }

@@ -6,6 +6,7 @@ import pe.edu.upc.llamapaytf.entities.Transaccion;
 import pe.edu.upc.llamapaytf.repositories.ITransaccionRepository;
 import pe.edu.upc.llamapaytf.servicesinterfaces.ITransaccionService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -32,5 +33,30 @@ public class TransaccionServiceImplement implements ITransaccionService {
     @Override
     public List<Transaccion> list() {
         return transaccionR.findAll();
+    }
+
+    @Override
+    public List<String[]> contarTransaccionesPorFecha() {
+        return transaccionR.contarTransaccionesPorFecha();
+    }
+
+    @Override
+    public List<String[]> sumarMontosPorFecha() {
+        return transaccionR.sumarMontosPorFecha();
+    }
+
+    @Override
+    public List<String[]> findByMontoMayorAndMes(BigDecimal monto, int mes) {
+        return transaccionR.findByMontoMayorAndMes(monto, mes);
+    }
+
+    @Override
+    public List<String[]> findByDescripcionAndMes(String descripcion, int mes) {
+        return transaccionR.findByDescripcionAndMes(descripcion, mes);
+    }
+
+    @Override
+    public List<Transaccion> findByDescripcion(String descripcion) {
+        return transaccionR.findByDescripcion(descripcion);
     }
 }

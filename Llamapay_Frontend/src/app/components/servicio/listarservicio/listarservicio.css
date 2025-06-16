@@ -1,0 +1,45 @@
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;           /* Permite que las cards bajen si no entran en una línea */
+  justify-content: center;   /* Centra horizontalmente */
+  gap: 20px;                 /* Espacio entre cards */
+  padding: 20px;
+}
+
+.card {
+  width: 300px;               /* Tamaño estándar de card */
+}
+
+.servicio-card {
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+mat-card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+mat-card-subtitle {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+mat-card-content p {
+  margin: 4px 0;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+button[mat-button] mat-icon {
+  color: #d32f2f;
+}
+
+button[mat-button]:hover mat-icon {
+  color: #b71c1c;
+}

@@ -38,4 +38,15 @@ public class CategoryServiceImplement implements ICategoryService {
     public void delete(int id) {
         cR.deleteById(id);
     }
+
+    @Override
+    public List<String[]> FindMontoByCategoryMesAndAnio(int mes, int anio) {
+        return cR.FindMontoByCategoryMesAndAnio(mes,anio);
+    }
+
+    @Override
+    public List<String[]> FindMontoByCategoryAnio(int anio) {
+        return cR.FindMontoByCategoryAnio(anio);
+    }
+
 }

@@ -1,0 +1,63 @@
+<div class="container">
+  <div style="text-align: center;margin: 5%;">
+    <h1>Lista de Usuarios</h1>
+  </div>
+  <div>
+   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+   <!-- Position Column -->
+    <ng-container matColumnDef="c1">
+        <th mat-header-cell *matHeaderCellDef> ID. </th>
+        <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+    </ng-container>
+
+  <!-- Name Column -->
+    <ng-container matColumnDef="c2">
+        <th mat-header-cell *matHeaderCellDef> nombre del usuario </th>
+        <td mat-cell *matCellDef="let element"> {{element.nameUser}} </td>
+    </ng-container>
+
+  <!-- Weight Column -->
+    <ng-container matColumnDef="c3">
+        <th mat-header-cell *matHeaderCellDef> Apellidos del usuario </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastnameUser}} </td>
+    </ng-container>
+
+  <!-- Weight Column -->
+    <ng-container matColumnDef="c4">
+        <th mat-header-cell *matHeaderCellDef> Correo electronico </th>
+        <td mat-cell *matCellDef="let element"> {{element.emailUser}} </td>
+    </ng-container>
+  <!-- Weight Column -->
+    <ng-container matColumnDef="c5">
+        <th mat-header-cell *matHeaderCellDef> Fecha de nacimiento </th>
+        <td mat-cell *matCellDef="let element"> {{element.birthdayUser}} </td>
+    </ng-container>
+  <!-- Weight Column -->
+    <ng-container matColumnDef="c6">
+        <th mat-header-cell *matHeaderCellDef> Registro del Usuario </th>
+        <td mat-cell *matCellDef="let element"> {{element.registrationDateUser}} </td>
+    </ng-container>
+  <!-- Weight Column -->
+    <ng-container matColumnDef="c7">
+        <th mat-header-cell *matHeaderCellDef> Username </th>
+        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+    </ng-container>
+  <!-- Weight Column -->
+    <ng-container matColumnDef="c8">
+        <th mat-header-cell *matHeaderCellDef> Contraseña </th>
+        <td mat-cell *matCellDef="let element"> {{element.password}} </td>
+    </ng-container>
+  <!-- Weight Column -->
+    <ng-container matColumnDef="c9">
+        <th mat-header-cell *matHeaderCellDef> Estado </th>
+        <td mat-cell *matCellDef="let element"> {{element.enabled}} </td>
+    </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+  </div>
+</div>

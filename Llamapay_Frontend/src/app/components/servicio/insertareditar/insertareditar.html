@@ -1,0 +1,41 @@
+<div>
+    <div>Registro de Servicios</div>
+    <div>
+    <form [formGroup]="form" (submit)="aceptar()">
+        <mat-form-field>
+            <mat-label>Compañia</mat-label>
+            <input matInput formControlName="hnameCompany">
+            <mat-error *ngIf="form.get('hnameCompany')?.hasError('required')">
+                El nombre de la compañia es obligatoria!!
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <mat-label>Servicio</mat-label>
+            <input matInput formControlName="hnameService">
+            <mat-error *ngIf="form.get('hnameService')?.hasError('required')">
+                El nombre del servicio es obligatorio!!
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <mat-label>Categoría</mat-label>
+            <mat-select formControlName="hidCategory">
+            <mat-option *ngFor="let c of listcategorias" [value]="c.idCategory">
+                {{ c.typeCategory }}
+            </mat-option>
+            <mat-error *ngIf="form.get('hidCategory')?.hasError('required')">
+                La categoria es obligatoria!!
+            </mat-error>
+            </mat-select>
+        </mat-form-field>
+        <br />
+        
+        <button mat-raised-button color="primary">Aceptar</button>
+        <button mat-raised-button color="warn" routerLink="/categorias">
+            Cancelar
+        </button>
+
+    </form>
+  </div>
+</div>

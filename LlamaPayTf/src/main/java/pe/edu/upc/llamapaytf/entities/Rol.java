@@ -1,10 +1,13 @@
 package pe.edu.upc.llamapaytf.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
-@Table(name = "Rol")
-public class Rol {
+@Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"usuario_id","rol"})})
+public class Rol implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Rol_id;
@@ -12,17 +15,9 @@ public class Rol {
     private String TipoRol;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "userId")
+    @JsonBackReference
     private User user;
-
-    public Rol() {
-    }
-
-    public Rol(int rol_id, String tipoRol, User user) {
-        Rol_id = rol_id;
-        TipoRol = tipoRol;
-        this.user = user;
-    }
 
     public int getRol_id() {
         return Rol_id;
