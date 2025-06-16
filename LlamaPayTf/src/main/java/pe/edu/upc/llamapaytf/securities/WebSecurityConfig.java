@@ -73,7 +73,17 @@ public class WebSecurityConfig {
                                 "/webjars/**",
                                 "/login",
                                 "/servicios/**",
-                                "/categorias/**"
+                                "/categorias/**",
+                                "/metodospagos/**",
+                                "/ObjetivoAhorro/**",
+                                "/productos/**",
+                                "/recordatorios/**",
+                                "/roles/**",
+                                "/tiendas/**",
+                                "/tiposcuentas/**",
+                                "/tipotransacciones/**",
+                                "/transacciones/**",
+                                "/users/**"
 
                         ).permitAll()
                         .anyRequest().authenticated()
