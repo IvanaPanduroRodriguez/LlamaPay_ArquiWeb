@@ -11,14 +11,12 @@ import { User } from './components/user/user';
 import { InsertareditarUser } from './components/user/insertareditar/insertareditar';
 import { Listaruser } from './components/user/listaruser/listaruser';
 
-import { Transaccion } from './components/finanzas/transaccion/transaccion';
-import { ListarTransaccion } from './components/finanzas/transaccion/listar/listar';
-import { InsertarEditarTransaccion } from './components/finanzas/transaccion/insertareditar/insertareditar';
-import { TipoTransaccion } from './components/finanzas/tipotransaccion/tipotransaccion';
-import { ListarTipoTransaccionComponent } from './components/finanzas/tipotransaccion/listar/listar';
-import { InsertarTipoTransaccionComponent } from './components/finanzas/tipotransaccion/insertareditar/insertareditar';
-
-
+import { Transaccion } from './components/transaccion/transaccion';
+import { ListarTransaccion } from './components/transaccion/listar/listar';
+import { InsertarEditarTransaccion } from './components/transaccion/insertareditar/insertareditar';
+import { TipoTransaccion } from './components/tipotransaccion/tipotransaccion';
+import { ListarTipoTransaccionComponent } from './components/tipotransaccion/listar/listar';
+import { InsertarTipoTransaccionComponent } from './components/tipotransaccion/insertareditar/insertareditar';
 
 
 export const routes: Routes = [
@@ -40,7 +38,7 @@ export const routes: Routes = [
       }
     ]
   },
-
+ //-----------------JHON------------------------------------------
   {
     path:'metodopagos',component:MetodoPago,
     children:[
@@ -63,23 +61,20 @@ export const routes: Routes = [
       }
     ]
   },
-
+//-----------------JOAO------------------------------------------
   {
-    path: 'finanzas',component: Transaccion,
+    path: 'transaccion',component: Transaccion,
     children: [
       { path: 'listar', component: ListarTransaccion },
       { path: 'insertar', component: InsertarEditarTransaccion }
     ]
   },
   {
-    path: 'tipotransaccion',
-    component: TipoTransaccion,
+    path: 'tipotransaccion',component: TipoTransaccion,
     children: [
       { path: 'listar', component: ListarTipoTransaccionComponent },
       { path: 'insertar', component: InsertarTipoTransaccionComponent }
     ]
-  },
-  { path: '', redirectTo: 'finanzas', pathMatch: 'full' }
-
+  }
 
 ];
