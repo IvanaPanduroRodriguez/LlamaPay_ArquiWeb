@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { TipoTransaccion } from '../../../models/tipotransaccion';
+import { TipoTransaccionService } from '../../../services/tipotransaccion.service';
 import { Router, RouterLink } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { TipoTransaccion } from '../../../models/tipotransaccion';
-import { TipoTransaccionService } from '../../../services/tipotransaccion.service';
 
 @Component({
   selector: 'app-insertar-tipotransaccion',

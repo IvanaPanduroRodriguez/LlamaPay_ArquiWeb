@@ -29,7 +29,7 @@ export class TransaccionService {
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/eliminar/${id}`);
   }
 
   getById(id: number) {

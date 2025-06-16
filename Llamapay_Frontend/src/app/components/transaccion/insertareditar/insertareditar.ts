@@ -9,12 +9,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+
 import { Transaccion } from '../../../models/transaccion';
-import { TipoTransaccion } from '../../../models/tipotransaccion';
-import { TipoTransaccionService } from '../../../services/tipotransaccion.service';
 import { TransaccionService } from '../../../services/transaccion.service';
-
-
+import { TipoTransaccionService } from '../../../services/tipotransaccion.service';
+import { TipoTransaccion } from '../../../models/tipotransaccion';
 
 @Component({
   selector: 'app-insertareditar-transaccion',
@@ -39,7 +38,6 @@ export class InsertarEditarTransaccion implements OnInit {
   idTransaccion: number = 0;
   edicion: boolean = false;
 
-
   constructor(
     private formBuilder: FormBuilder,
     private transaccionService: TransaccionService,
@@ -61,10 +59,12 @@ export class InsertarEditarTransaccion implements OnInit {
     });
 
     this.activatedRoute.params.subscribe((params: Params) => {
-      this.idTransaccion = params['id'];
-      if (this.idTransaccion) {
+      this.idTransaccion = +params['id'];
+      this.edicion = !!this.idTransaccion;
+
+      if (this.edicion) {
         this.transaccionService.list().subscribe(data => {
-          const t = data.find(x => x.idTransaccion === +this.idTransaccion);
+          const t = data.find(x => x.idTransaccion === this.idTransaccion);
           if (t) {
             this.transaccion = t;
             this.form.setValue({
@@ -91,23 +91,27 @@ export class InsertarEditarTransaccion implements OnInit {
         descripcion: ''
       };
 
-      if (this.idTransaccion) {
+      if (this.edicion) {
         this.transaccion.idTransaccion = this.idTransaccion;
-      }
-
-      this.transaccionService.insert(this.transaccion).subscribe(() => {
-        this.transaccionService.list().subscribe(data => {
-          this.transaccionService.setList(data);
+        this.transaccionService.insert(this.transaccion).subscribe(() => {
+          this.actualizarListaYVolver();
         });
-        this.router.navigate(['/finanzas/listar']);
-      });
+      } else {
+        this.transaccionService.insert(this.transaccion).subscribe(() => {
+          this.actualizarListaYVolver();
+        });
+      }
     }
   }
 
   cancelar(): void {
+    this.actualizarListaYVolver();
+  }
+
+  private actualizarListaYVolver(): void {
     this.transaccionService.list().subscribe(data => {
       this.transaccionService.setList(data);
-      this.router.navigate(['/finanzas/listar']);
+      this.router.navigate(['/transaccion/listar']);
     });
   }
 }

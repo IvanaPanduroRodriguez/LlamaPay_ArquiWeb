@@ -2,8 +2,6 @@
   <h2>{{ edicion ? 'Editar Transacción' : 'Registrar Transacción' }}</h2>
 
   <form [formGroup]="form" (ngSubmit)="aceptar()">
-
-    <!-- Fecha de transacción -->
     <mat-form-field appearance="fill">
       <mat-label>Fecha</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="fechaTransaccion" />
@@ -14,7 +12,6 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Monto -->
     <mat-form-field appearance="fill">
       <mat-label>Monto</mat-label>
       <input matInput type="number" formControlName="montoTransaccion" />
@@ -23,7 +20,6 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Descripción -->
     <mat-form-field appearance="fill">
       <mat-label>Descripción</mat-label>
       <input matInput formControlName="descripcionTransaccion" />
@@ -32,7 +28,6 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Tipo de Transacción -->
     <mat-form-field appearance="fill">
       <mat-label>Tipo de Transacción</mat-label>
       <mat-select formControlName="tipoTransaccion">
@@ -45,8 +40,7 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Botones -->
-    <div style="margin-top: 20px;">
+    <div class="botones-container">
       <button mat-raised-button color="primary" type="submit">
         {{ edicion ? 'Guardar Cambios' : 'Registrar' }}
       </button>
@@ -54,6 +48,5 @@
         Cancelar
       </button>
     </div>
-
   </form>
 </div>

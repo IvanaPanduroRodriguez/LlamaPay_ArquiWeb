@@ -70,18 +70,19 @@ export const routes: Routes = [
   },
 //-----------------JOAO------------------------------------------
   {
-    path: 'transaccion',component: Transaccion,
+    path: 'transaccion',
     children: [
       { path: 'listar', component: ListarTransaccion },
-      { path: 'insertar', component: InsertarEditarTransaccion }
+      { path: 'insertar', component: InsertarEditarTransaccion },
+      { path: 'editar/:id', component: InsertarEditarTransaccion } 
     ]
   },
   {
-    path: 'tipotransaccion',component: TipoTransaccion,
+    path: 'tipotransaccion',
     children: [
       { path: 'listar', component: ListarTipoTransaccionComponent },
       { path: 'insertar', component: InsertarTipoTransaccionComponent }
     ]
-  }
+  },
 
 ];
