@@ -81,8 +81,9 @@ export const routes: Routes = [
     path: 'tipotransaccion',
     children: [
       { path: 'listar', component: ListarTipoTransaccionComponent },
-      { path: 'insertar', component: InsertarTipoTransaccionComponent }
+      { path: 'insertar', component: InsertarTipoTransaccionComponent },
+      { path: 'editar/:id', component: InsertarTipoTransaccionComponent } 
     ]
-  },
+  }
 
 ];

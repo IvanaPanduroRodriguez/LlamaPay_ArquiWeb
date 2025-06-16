@@ -1,10 +1,17 @@
 <div>
   <h1>Lista de Transacciones</h1>
 
-  <!-- Botón para registrar nueva transacción -->
-  <button mat-raised-button color="primary" routerLink="/transaccion/insertar">
-    Registrar nueva transacción
+  <!-- Contenedor de botones alineados -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+    <button mat-raised-button color="primary" routerLink="/transaccion/insertar">
+      Registrar nueva transacción
+    </button>
+
+    <!-- Botón extra para ir a Tipos de Transacción (removible) -->
+    <button mat-raised-button color="accent" routerLink="/tipotransaccion/listar">
+      → Ver Tipos de Transacción
   </button>
+
 </div>
 
 <br />
