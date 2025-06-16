@@ -26,6 +26,9 @@ export const routes: Routes = [
     children:[
       { 
         path:'insertarcategoria',component:InsertareditarCategoria
+      },
+      {
+        path:'ediciones/:id',component:InsertareditarCategoria
       }
     ]
 
@@ -36,6 +39,9 @@ export const routes: Routes = [
     children:[
       {
         path:'insertarservicio', component: InsertareditarServicio
+      },
+      {
+        path:'ediciones/:id',component:InsertareditarServicio
       }
     ]
   },

@@ -30,7 +30,7 @@ td {
 }
 
 tr:hover {
-  background-color: #993333;
+  background-color: #f1f1f1;
   transition: background-color 0.2s ease-in-out;
 }
 
@@ -50,3 +50,20 @@ tr:last-child td:first-child {
 tr:last-child td:last-child {
   border-bottom-right-radius: 10px;
 }
+
+/* *** MODIFICACIÓN PARA EL ICONO *** */
+/* Estilos para el botón de editar - quita bordes y cambia color a rojizo */
+button[matButton] {
+  border: none !important; /* Quita todos los bordes del botón */
+  background: transparent !important; /* Fondo transparente */
+  box-shadow: none !important; /* Quita sombras si las hay */
+}
+
+button[matButton] mat-icon {
+  color: #d32f2f !important; /* Color rojizo para el icono */
+}
+
+button[matButton]:hover mat-icon {
+  color: #b71c1c !important; /* Color rojizo más oscuro al hacer hover */
+}
+/* *** FIN DE MODIFICACIÓN PARA EL ICONO *** */
