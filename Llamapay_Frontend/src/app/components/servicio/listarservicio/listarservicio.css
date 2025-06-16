@@ -1,52 +1,45 @@
-table {
-  width: 90%; /* O prueba con 80% si prefieres más compacto */
-  margin: 0 auto; /* Centra la tabla horizontalmente */
-  border-collapse: collapse;
-  background-color: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;           /* Permite que las cards bajen si no entran en una línea */
+  justify-content: center;   /* Centra horizontalmente */
+  gap: 20px;                 /* Espacio entre cards */
+  padding: 20px;
 }
 
-.container {
-  padding: 20px; /* Agrega espacio interno al contenedor */
+.card {
+  width: 300px;               /* Tamaño estándar de card */
 }
 
-th, td {
-  padding: 12px 16px;
-  text-align: center;
-  font-size: 14px;
+.servicio-card {
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  background-color: #ffffff;
 }
 
-th {
-  background-color: #f5f5f5;
-  color: #333;
-  font-weight: 600;
-  border-bottom: 2px solid #e0e0e0;
+mat-card-title {
+  font-size: 18px;
+  font-weight: bold;
 }
 
-td {
-  border-bottom: 1px solid #eaeaea;
+mat-card-subtitle {
+  color: #666;
+  margin-bottom: 10px;
 }
 
-tr:hover {
-  background-color: #f1f1f1;
-  transition: background-color 0.2s ease-in-out;
+mat-card-content p {
+  margin: 4px 0;
 }
 
-/* Opcional: bordes redondeados solo en la primera y última fila */
-tr:first-child th:first-child {
-  border-top-left-radius: 10px;
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
 }
 
-tr:first-child th:last-child {
-  border-top-right-radius: 10px;
+button[mat-button] mat-icon {
+  color: #d32f2f;
 }
 
-tr:last-child td:first-child {
-  border-bottom-left-radius: 10px;
-}
-
-tr:last-child td:last-child {
-  border-bottom-right-radius: 10px;
+button[mat-button]:hover mat-icon {
+  color: #b71c1c;
 }
