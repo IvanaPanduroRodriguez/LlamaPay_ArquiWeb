@@ -14,7 +14,8 @@ export const routes: Routes = [
     component: Transaccion,
     children: [
       { path: 'listar', component: ListarTransaccion },
-      { path: 'insertar', component: InsertarEditarTransaccion }
+      { path: 'insertar', component: InsertarEditarTransaccion },
+      { path: 'editar/:id', component: InsertarEditarTransaccion }
     ]
   },
   {
@@ -22,8 +23,19 @@ export const routes: Routes = [
     component: TipoTransaccion,
     children: [
       { path: 'listar', component: ListarTipoTransaccionComponent },
-      { path: 'insertar', component: InsertarTipoTransaccionComponent }
+      { path: 'insertar', component: InsertarTipoTransaccionComponent },
+      { path: 'editar/:id', component: InsertarTipoTransaccionComponent }
     ]
   },
-  { path: '', redirectTo: 'finanzas', pathMatch: 'full' }
+  
+  { path: '', redirectTo: 'finanzas/listar', pathMatch: 'full' },
+
+  {
+  path: 'finanzas/editar/:id',
+  loadComponent: () =>
+    import('./components/finanzas/transaccion/insertareditar/insertareditar').then(
+      (m) => m.InsertarEditarTransaccion
+    )
+}
+
 ];

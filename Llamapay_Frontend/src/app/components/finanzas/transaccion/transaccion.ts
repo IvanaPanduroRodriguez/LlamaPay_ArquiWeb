@@ -3,10 +3,8 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-transaccion',
+  standalone: true,
   imports: [RouterOutlet],
-  templateUrl: './transaccion.html',
-  styleUrls: ['./transaccion.css']
+  template: `<router-outlet></router-outlet>`
 })
-export class Transaccion {
-
-}
+export class Transaccion {}

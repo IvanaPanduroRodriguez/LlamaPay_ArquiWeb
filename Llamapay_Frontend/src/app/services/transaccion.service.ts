@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Transaccion } from '../models/transaccion';
-import { Subject } from 'rxjs'; 
+import { Subject } from 'rxjs';
 import { environment } from "../../environments/environment";
 
 const base_url = environment.base;
@@ -12,6 +12,7 @@ const base_url = environment.base;
 export class TransaccionService {
   private url = `${base_url}/transacciones`;
   private listarCambio = new Subject<Transaccion[]>();
+  private idCambio = new Subject<number>();
 
   constructor(private http: HttpClient) {}
 
@@ -20,7 +21,19 @@ export class TransaccionService {
   }
 
   insert(t: Transaccion) {
-    return this.http.post(this.url + '/registrar', t);  // Nota: segun el controller, usa /registrar
+    return this.http.post(this.url + '/registrar', t);
+  }
+
+  update(t: Transaccion) {
+    return this.http.put(this.url + '/modificar', t);
+  }
+
+  delete(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
+
+  getById(id: number) {
+    return this.http.get<Transaccion>(`${this.url}/${id}`);
   }
 
   setList(listaNueva: Transaccion[]) {
@@ -29,5 +42,13 @@ export class TransaccionService {
 
   getList() {
     return this.listarCambio.asObservable();
+  }
+
+  setId(id: number) {
+    this.idCambio.next(id);
+  }
+
+  getId() {
+    return this.idCambio.asObservable();
   }
 }
