@@ -25,7 +25,7 @@ public class TransaccionController {
     private ITransaccionService transaccionS;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('CLIENTE', 'ADMIN','TESTER','FINANZAS')")
+    //@PreAuthorize("hasAnyAuthority('CLIENTE', 'ADMIN','TESTER','FINANZAS')")
     public List<TransaccionDTO> listar() {
         return transaccionS.list().stream().map(x -> {
             ModelMapper modelMapper = new ModelMapper();
@@ -34,7 +34,7 @@ public class TransaccionController {
     }
 
     @PostMapping("registrar")
-    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
+    //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
     public void registrar(@RequestBody TransaccionDTO tr) {
         ModelMapper modelMapper = new ModelMapper();
         Transaccion trs = modelMapper.map(tr, Transaccion.class);
@@ -42,13 +42,13 @@ public class TransaccionController {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
+    //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
     public void eliminar(@PathVariable("id") int id) {
         transaccionS.delete(id);
     }
 
     @PutMapping("/actualizar")
-    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
+    //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
     public void actualizar(@RequestBody TransaccionDTO trd) {
         ModelMapper modelMapper = new ModelMapper();
         Transaccion tr = modelMapper.map(trd, Transaccion.class);
@@ -56,7 +56,7 @@ public class TransaccionController {
     }
 
     @GetMapping("/cantidad-por-fecha")
-    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER','FINANZAS')")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER','FINANZAS')")
     public List<CantidadTransaccionesPorFechaDTO> cantidadTransaccionesPorFecha() {
         return transaccionS.contarTransaccionesPorFecha().stream().map(fila -> {
             CantidadTransaccionesPorFechaDTO dto = new CantidadTransaccionesPorFechaDTO();
@@ -67,7 +67,7 @@ public class TransaccionController {
     }
 
     @GetMapping("/monto-por-fecha")
-    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER','FINANZAS')")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER','FINANZAS')")
     public List<MontoTransaccionesPorFechaDTO> montoTransaccionesPorFecha() {
         return transaccionS.sumarMontosPorFecha().stream().map(fila -> {
             MontoTransaccionesPorFechaDTO dto = new MontoTransaccionesPorFechaDTO();
@@ -77,7 +77,7 @@ public class TransaccionController {
         }).collect(Collectors.toList());
     }
     @GetMapping("/descripcion/{descripcion}")
-    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER','FINANZAS')")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER','FINANZAS')")
     public List<TransaccionDTO> buscarPorDescripcion(@PathVariable("descripcion") String descripcion) {
         return transaccionS.findByDescripcion(descripcion).stream().map(t -> {
             ModelMapper modelMapper = new ModelMapper();
@@ -86,7 +86,7 @@ public class TransaccionController {
     }
 
     @GetMapping("/transacciones-monto-mes-joao")
-    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER','FINANZAS')")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER','FINANZAS')")
     public List<TransaccionInfoDTO> transaccionesPorMontoYMes(@RequestParam BigDecimal monto, @RequestParam int mes) {
         List<TransaccionInfoDTO> dtoLista = new ArrayList<>();
         List<String[]> lista = transaccionS.findByMontoMayorAndMes(monto, mes);
@@ -101,7 +101,7 @@ public class TransaccionController {
     }
 
     @GetMapping("/transacciones-descripcion-mes-joao")
-    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER','FINANZAS')")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER','FINANZAS')")
     public List<TransaccionInfoDTO> transaccionesPorDescripcionYMes(@RequestParam String descripcion, @RequestParam int mes) {
         List<TransaccionInfoDTO> dtoLista = new ArrayList<>();
         List<String[]> lista = transaccionS.findByDescripcionAndMes(descripcion, mes);
