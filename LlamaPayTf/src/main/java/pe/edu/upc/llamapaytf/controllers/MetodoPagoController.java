@@ -2,6 +2,7 @@ package pe.edu.upc.llamapaytf.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.llamapaytf.dtos.MetodoPagoDTO;
 import pe.edu.upc.llamapaytf.dtos.ObtenerMetodosPagosPorUsersDTO;
@@ -19,6 +20,7 @@ public class MetodoPagoController {
     private IMetodoPagoService mpS;
 
     @GetMapping
+
 
     //@PreAuthorize("hasAnyAuthority('CLIENTE', 'ADMIN', 'FINANZAS', 'TESTER')")
 
@@ -52,6 +54,7 @@ public class MetodoPagoController {
     @PutMapping
 
     //@PreAuthorize("hasAuthority('ADMIN')")
+
 
     public void modificar(@RequestBody MetodoPagoDTO dto){
         ModelMapper m = new ModelMapper();

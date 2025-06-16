@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { Servicio } from '../../../models/servicio';
 import { ServicioService } from '../../../services/servicio.service';
-import { Router } from '@angular/router';
-
+import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -12,7 +11,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { CategoriaService } from '../../../services/categoria.service';
 import { Categoria } from '../../../models/categoria';
-
 
 @Component({
   selector: 'app-insertareditar',
@@ -33,14 +31,28 @@ export class InsertareditarServicio implements OnInit{
   listcategorias: Categoria[] = []; // Lista de categorías
   // Inyectamos el servicio de categorías para obtener la lista de categorías
 
+  id: number = 0
+  edicion: boolean = false 
+  // Agregamos una propiedad para manejar la edición
+
+
   constructor(
     private sS: ServicioService,
     private router: Router, 
     private formBuilder: FormBuilder,
     private cS: CategoriaService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe((data: Params) => { // Suscribimos a los parámetros de la ruta
+      this.id = data['id']
+      this.edicion = data['id'] != null
+      //actualizar
+      this.init()
+    })
+
+    // Inicializamos el formulario
       this.form = this.formBuilder.group({
         hnameCompany: ['', Validators.required], 
         hnameService: ['',Validators.required], 
@@ -57,12 +69,34 @@ export class InsertareditarServicio implements OnInit{
       this.serv.nameService = this.form.value.hameService;  
       this.serv.category.idCategory = this.form.value.hidCategory; 
       
-      this.sS.insert(this.serv).subscribe((data=>{
-        this.sS.list().subscribe((data =>{
-          this.sS.setList(data); 
-          this.router.navigate(['/servicios']); // Actualizamos la lista de servicios
-        }));
-      }));
+      if(this.edicion){ // Si estamos en modo edición
+        //actualizar
+        this.sS.update(this.serv).subscribe(data=>{
+          this.sS.list().subscribe(data =>{
+            this.sS.setList(data); 
+          });
+        });
+      }else{
+        //insertar
+        this.sS.insert(this.serv).subscribe(data=>{
+          this.sS.list().subscribe(data =>{
+            this.sS.setList(data); 
+          });
+        });
+      }
+        this.router.navigate(['servicios'])
+    }
+  }
+
+  init(){ // Método para inicializar el formulario en modo edición
+    if(this.edicion){
+      this.sS.listId(this.id).subscribe(data => {
+        this.form = new FormGroup({
+          hnamecompany: new FormControl(data.nameCompanyService),
+          hnameService: new FormControl(data.nameService),
+          hidCategory: new FormControl(data.category.idCategory)
+        })
+      });
     }
   }
 }

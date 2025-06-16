@@ -1,0 +1,15 @@
+<div>
+  <h2>Registrar Tipo de Transacción</h2>
+  <form [formGroup]="form" (ngSubmit)="aceptar()">
+    <mat-form-field appearance="fill">
+      <mat-label>Descripción</mat-label>
+      <input matInput formControlName="descripcion" />
+      <mat-error *ngIf="form.get('descripcion')?.hasError('required')">
+        La descripción es obligatoria
+      </mat-error>
+    </mat-form-field>
+    <br />
+    <button mat-raised-button color="primary" type="submit">Aceptar</button>
+    <button mat-raised-button color="warn" routerLink="/tipotransaccion/listar">Cancelar</button>
+  </form>
+</div>

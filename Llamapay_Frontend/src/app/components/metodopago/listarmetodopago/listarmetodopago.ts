@@ -38,5 +38,8 @@ ngOnInit(): void {
         this.mpS.setList(data)
       })
     })
+    this.mpS.getList().subscribe(data => { //actualiza la lista de servidores cuando se inserta o actualiza un servidor
+      this.dataSource = new MatTableDataSource(data)
+    })
   }
 }

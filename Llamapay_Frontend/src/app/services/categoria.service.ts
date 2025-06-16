@@ -27,4 +27,16 @@ export class CategoriaService {
   getList() { //4to paso
     return this.listaCambio.asObservable();
   }
+  //actualizar categoria
+  listId(id: number) {
+    return this.http.get<Categoria>(`${this.url}/${id}`)
+  }
+
+  update(c: Categoria) {
+    return this.http.put(this.url, c)
+  }
+  //eliminar categoria
+  deleteS(id:number) {
+    return this.http.delete(`${this.url}/${id}`)
+  }
 }
