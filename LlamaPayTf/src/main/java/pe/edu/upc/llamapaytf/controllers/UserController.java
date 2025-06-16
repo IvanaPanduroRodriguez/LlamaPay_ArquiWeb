@@ -18,12 +18,8 @@ import pe.edu.upc.llamapaytf.entities.User;
 import pe.edu.upc.llamapaytf.exceptions.RequestBodyException;
 import pe.edu.upc.llamapaytf.servicesinterfaces.IUserService;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,7 +36,6 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping
-   @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public List<UsuarioInfoDTO> listar() {
         return uS.list().stream().map(x->{
             ModelMapper modelMapper = new ModelMapper();
@@ -64,7 +59,6 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public UsuarioInfoDTO buscarID(@PathVariable("id") int id) {
         ModelMapper m = new ModelMapper();
         UsuarioInfoDTO dto=m.map(uS.listID(id),UsuarioInfoDTO.class);
@@ -72,7 +66,6 @@ public class UserController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
     public void modificar(@RequestBody UserDTO dto){
         ModelMapper m = new ModelMapper();
         User u = m.map(dto, User.class);
@@ -80,7 +73,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+
     public void eliminar(@PathVariable("id") int id){ //eliminar todos los atributos que yo elija
         uS.delete(id);
     }
