@@ -12,7 +12,8 @@ const base_url=environment.base;
 export class CategoriaService {
   private listaCambio = new Subject<Categoria[]>(); //1er paso
   private url=`${base_url}/categorias`;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {};
+  private idCambio = new Subject<number>();
   //listar categorias
   list(){
     return this.http.get<Categoria[]>(this.url);
@@ -38,5 +39,19 @@ export class CategoriaService {
   //eliminar categoria
   deleteS(id:number) {
     return this.http.delete(`${this.url}/${id}`)
+  }
+
+  getById(id: number) {
+    return this.http.get<Categoria>(`${this.url}/${id}`);
+  }
+
+  //para el id de la categoria que se va a editar
+  //setId y getId son para pasar el id de la categoria que se va a editar
+  setId(id: number) {
+    this.idCambio.next(id);
+  }
+
+  getId() {
+    return this.idCambio.asObservable();
   }
 }

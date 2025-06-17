@@ -25,6 +25,7 @@ import { CommonModule } from '@angular/common';
 export class InsertareditarUser implements OnInit{ //4
   form: FormGroup = new FormGroup({});//1 y del angular
   user: User = new User();//2 y tiene que ser del models
+  
 
   constructor(private uS: UserService,private router: Router,private formBuilder: FormBuilder){ //tiene que ser del angular material
   }

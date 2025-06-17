@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 
+
 @Component({
   selector: 'app-listarcategoria',
   imports: [
@@ -35,10 +36,13 @@ export class Listarcategoria implements OnInit {
   }
 
   eliminar(id: number) {
-    this.cS.deleteS(id).subscribe(data=>{
-      this.cS.list().subscribe(data=>{
+    this.cS.deleteS(id).subscribe(() =>{ 
+      this.cS.list().subscribe(data =>{ //actualiza la lista de categorias
         this.cS.setList(data)
       })
+    })
+    this.cS.getList().subscribe(data => { //actualiza la lista cuando se inserta o actualiza la data
+      this.dataSource = new MatTableDataSource(data)
     })
   }
 }
