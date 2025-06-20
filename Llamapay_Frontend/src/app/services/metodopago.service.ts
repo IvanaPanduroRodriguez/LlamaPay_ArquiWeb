@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { environment } from "../../enviroments/enviroment";
 import { HttpClient } from "@angular/common/http";
 import { MetodoPago } from "../models/metodopago";
 import { Subject } from "rxjs";
+import { environment } from "../../environments/environment";
 
 const base_url=environment.base;
 @Injectable({

@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { environment } from "../../enviroments/enviroment";
 import { Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Servicio } from '../models/servicio';
+import { environment } from "../../environments/environment";
 
 const base_url=environment.base;
 @Injectable({
@@ -11,7 +11,7 @@ const base_url=environment.base;
 
 export class ServicioService {
   private listaCambio = new Subject<Servicio[]>(); //1er paso
-  private url=`${base_url}/servicios`;
+  private url=`${base_url}/servicios`
   constructor(private http: HttpClient) {}
   //listar servicios
   list(){
@@ -32,7 +32,10 @@ export class ServicioService {
   listId(id: number) {
     return this.http.get<Servicio>(`${this.url}/${id}`)
   }
-  update(s: Servicio) {
-    return this.http.put(this.url, s);
+  update(se: Servicio) {
+    return this.http.put(this.url, se);
+  }
+  deleteS(id:number) {
+    return this.http.delete(`${this.url}/${id}`);
   }
 }

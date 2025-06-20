@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { environment } from "../../enviroments/enviroment";
 import { HttpClient } from "@angular/common/http";
 import { Categoria } from "../models/categoria";
 import { Subject } from "rxjs";
+import { environment } from "../../environments/environment";
 
 const base_url=environment.base;
 @Injectable({
@@ -12,8 +12,9 @@ const base_url=environment.base;
 export class CategoriaService {
   private listaCambio = new Subject<Categoria[]>(); //1er paso
   private url=`${base_url}/categorias`;
+
   constructor(private http: HttpClient) {};
-  private idCambio = new Subject<number>();
+  
   //listar categorias
   list(){
     return this.http.get<Categoria[]>(this.url);
@@ -33,25 +34,11 @@ export class CategoriaService {
     return this.http.get<Categoria>(`${this.url}/${id}`)
   }
 
-  update(c: Categoria) {
-    return this.http.put(this.url, c)
+  update(ca: Categoria) {
+    return this.http.put(this.url, ca)
   }
   //eliminar categoria
-  deleteS(id:number) {
+  deleteC(id:number) {
     return this.http.delete(`${this.url}/${id}`)
-  }
-
-  getById(id: number) {
-    return this.http.get<Categoria>(`${this.url}/${id}`);
-  }
-
-  //para el id de la categoria que se va a editar
-  //setId y getId son para pasar el id de la categoria que se va a editar
-  setId(id: number) {
-    this.idCambio.next(id);
-  }
-
-  getId() {
-    return this.idCambio.asObservable();
   }
 }
