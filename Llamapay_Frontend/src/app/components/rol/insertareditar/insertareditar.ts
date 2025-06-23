@@ -59,7 +59,7 @@ export class InsertareditarRol implements OnInit {
       this.listaUsuarios=data
     })
   }
-  aceptar() {
+aceptar() {
   if (this.form.valid) {
     const newRol = new Rol();
     newRol.tipoRol = this.form.value.roles;
@@ -79,5 +79,4 @@ export class InsertareditarRol implements OnInit {
     this.router.navigate(['roles']);
   }
 }
-
 }
