@@ -1,6 +1,6 @@
 <div class="container">
   <div style="text-align: center;margin: 5%;">
-    <h1>Registro de Metodos de Pago</h1>
+    <h1>{{ edicion ? 'Actualizar Metodo de Pago' : 'Registrar Nuevo Metodo de Pago' }}</h1>
   </div>
   <div>
     <div style="text-align: center;margin: 5%;"></div>
@@ -48,7 +48,7 @@
       </mat-form-field>
       <br />
 
-  <button mat-raised-button color="primary">Registrar</button>
+  <button mat-raised-button color="primary">{{ edicion ? 'Actualizar usuario' : 'Registrar usuario' }}</button>
   <button mat-raised-button color="warn" routerLink="/metodopagos">
    Volver a la Lista de Registrados!
   </button>

@@ -60,15 +60,24 @@ export class InsertareditarRol implements OnInit {
     })
   }
   aceptar() {
-    if (this.form.valid) {
-      this.rol.tipoRol = this.form.value.roles
-      this.rol.user.nameUser = this.form.value.user
-      this.oS.insert(this.rol).subscribe(() => {
-        this.oS.list().subscribe(data => {
-          this.oS.setList(data)
-        })
-      })
-      this.router.navigate(['roles'])
-    } 
+  if (this.form.valid) {
+    const newRol = new Rol();
+    newRol.tipoRol = this.form.value.roles;
+
+    // Crear objeto User con solo el ID
+    const user = new User();
+    user.userId = this.form.value.user;
+
+    newRol.user = user;
+
+    this.oS.insert(newRol).subscribe(() => {
+      this.oS.list().subscribe(data => {
+        this.oS.setList(data);
+      });
+    });
+
+    this.router.navigate(['roles']);
   }
+}
+
 }
