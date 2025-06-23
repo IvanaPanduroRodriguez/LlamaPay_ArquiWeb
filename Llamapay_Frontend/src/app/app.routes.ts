@@ -18,6 +18,10 @@ import { TipoTransaccion } from './components/tipotransaccion/tipotransaccion';
 import { ListarTipoTransaccionComponent } from './components/tipotransaccion/listar/listar';
 import { InsertarTipoTransaccionComponent } from './components/tipotransaccion/insertareditar/insertareditar';
 
+import { TipoCuenta } from './components/tipocuenta/tipocuenta'; 
+import { ListarTipoCuentaComponent } from './components/tipocuenta/listar/listar';
+import { InsertareditarTipoCuentaComponent } from './components/tipocuenta/insertareditar/insertareditar';
+
 
 export const routes: Routes = [
   //-----------------IVANA------------------------------------------
@@ -84,6 +88,16 @@ export const routes: Routes = [
       { path: 'insertar', component: InsertarTipoTransaccionComponent },
       { path: 'editar/:id', component: InsertarTipoTransaccionComponent } 
     ]
+  },
+
+  {
+  path: 'tipocuenta',
+  children: [
+    { path: 'listar', component: ListarTipoCuentaComponent },
+    { path: 'insertar', component: InsertareditarTipoCuentaComponent },
+    { path: 'editar/:id', component: InsertareditarTipoCuentaComponent }
+  ]
   }
+
 
 ];

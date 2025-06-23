@@ -1,0 +1,40 @@
+.container {
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+h1 {
+  margin: 0;
+  font-weight: 600;
+  color: #333;
+}
+
+button[mat-raised-button] {
+  background-color: #43a047;
+  color: white;
+  font-weight: bold;
+}
+
+button[mat-raised-button]:hover {
+  background-color: #2e7d32;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  background-color: #a5d6a7;
+  text-align: center;
+}
+
+td {
+  text-align: center;
+}
