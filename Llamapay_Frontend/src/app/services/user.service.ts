@@ -19,7 +19,7 @@ private listaCambio = new Subject<User[]>(); //1er paso
         }
         //insertar user
     insert(u:User){ //2do paso
-        return this.http.post(this.url,u);
+        return this.http.post(`${this.url}/register-user`,u);
         }
     setList(listaNueva: User[]) { //3er paso
         this.listaCambio.next(listaNueva);

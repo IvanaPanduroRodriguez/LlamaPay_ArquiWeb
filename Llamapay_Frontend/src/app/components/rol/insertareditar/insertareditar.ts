@@ -52,7 +52,7 @@ export class InsertareditarRol implements OnInit {
   ngOnInit(): void {
     
     this.form = this.formBuilder.group({
-      TipoRol: ['', Validators.required],
+      roles: ['', Validators.required],
       user: ['', Validators.required]
     })
     this.uS.list().subscribe(data=>{
@@ -61,7 +61,7 @@ export class InsertareditarRol implements OnInit {
   }
   aceptar() {
     if (this.form.valid) {
-      this.rol.TipoRol = this.form.value.TipoRol
+      this.rol.tipoRol = this.form.value.roles
       this.rol.user.nameUser = this.form.value.user
       this.oS.insert(this.rol).subscribe(() => {
         this.oS.list().subscribe(data => {
@@ -69,6 +69,6 @@ export class InsertareditarRol implements OnInit {
         })
       })
       this.router.navigate(['roles'])
-    }
+    } 
   }
 }

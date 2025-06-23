@@ -10,8 +10,7 @@ import { CommonModule } from '@angular/common';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
-import { Rol } from '../../../models/rol';
-import { RolService } from '../../../services/rol.service';
+
 
 
 @Component({
@@ -36,24 +35,15 @@ export class InsertareditarUser implements OnInit{
   user: User = new User();
   id: number = 0
   edicion: boolean = false
-  rol: string = '';
 
   listaUsuarios: User[]=[]
   estados: { value: boolean; viewValue: string }[] = [
     { value: true, viewValue: 'Activo' },
     { value: false, viewValue: 'Deshabilitado' },
   ];
-  constructor(private uS: UserService,private router: Router,private formBuilder: FormBuilder, private route: ActivatedRoute, private rS:RolService){ 
+  constructor(private uS: UserService,private router: Router,private formBuilder: FormBuilder, private route: ActivatedRoute ){ 
   }
 
-  isADMIN() {
-    
-    return this.rol === 'ADMIN';
-  }
-
-  isTESTER() {
-    return this.rol === 'TESTER';
-  }
 
   ngOnInit(): void {
     
@@ -79,7 +69,12 @@ export class InsertareditarUser implements OnInit{
     })
   }
 
-  aceptar(){
+  insertar():void {
+  this.form.markAllAsTouched();
+  if (this.form.invalid) {
+    console.log("Formulario inválido.");
+    return;
+  }
     if(this.form.valid){
       this.user.userId = this.form.value.codigo;
       this.user.nameUser = this.form.value.name; 
@@ -89,7 +84,7 @@ export class InsertareditarUser implements OnInit{
       this.user.registrationDateUser=this.form.value.registrationDate;
       this.user.username = this.form.value.username;
       this.user.password = this.form.value.password;
-      this.user.enabled = true;
+      this.user.enabled = this.form.value.estadoUsuario;
 
       if (this.edicion) {
         //actualizar

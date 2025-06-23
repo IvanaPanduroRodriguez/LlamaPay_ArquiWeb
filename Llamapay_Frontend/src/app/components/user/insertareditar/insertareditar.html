@@ -3,7 +3,7 @@
     <h1>Registro de Usuarios</h1>
   </div> 
     <div style="text-align: center;margin: 5%;">
-    <form [formGroup]="form" (submit)="aceptar()">
+    <form [formGroup]="form" (submit)="insertar()">
       <mat-form-field *ngIf="edicion">
         <mat-label>ID</mat-label>
         <input matInput formControlName="codigo">
@@ -25,7 +25,7 @@
       <br>
 
       <mat-form-field>
-        <mat-label>Tipo de pago</mat-label>
+        <mat-label>Apellido del Usuario</mat-label>
         <input matInput formControlName="lastname">
 
         <mat-error *ngIf="form.get('lastname')?.hasError('required')">
@@ -88,14 +88,14 @@
 
 
     <br>
-          <mat-form-field class="example-full-width" *ngIf="edicion && isADMIN()" class="example-full-width">
-        <mat-label>Estado de Cuenta</mat-label>
-        <mat-select formControlName="estadoUsuario">
-            <mat-option *ngFor="let u of estados" [value]="u.value">
-                {{ u.viewValue }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+    <mat-form-field class="example-full-width">
+  <mat-label>Estado de Cuenta</mat-label>
+  <mat-select formControlName="estadoUsuario">
+    <mat-option *ngFor="let u of estados" [value]="u.value">
+      {{ u.viewValue }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
     <br />
 
         <button mat-raised-button color="primary">Registrar nuevo usuario</button>

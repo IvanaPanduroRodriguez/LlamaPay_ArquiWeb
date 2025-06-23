@@ -1,5 +1,3 @@
-import { Rol } from "./rol";
-
 export class User {
     userId: number = 0;
     nameUser: string = "";
@@ -10,5 +8,5 @@ export class User {
     username: string = "";
     password: string = "";
     enabled: boolean = true;
-    roles: Rol[] = []    
+    
 }

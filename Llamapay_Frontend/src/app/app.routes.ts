@@ -20,6 +20,10 @@ import { InsertareditarObjetivoAhorro } from './components/objetivo-ahorro/inser
 
 
 export const routes: Routes = [
+
+  {
+    path:'',redirectTo:'users',pathMatch:'full'
+  },
   //-----------------IVANA------------------------------------------
   {
 
@@ -51,7 +55,7 @@ export const routes: Routes = [
     path: 'metodopagos',
     component: MetodoPago,
     children: [
-      { path: 'formulario', component: InsertareditarMetodoPago },
+      { path: 'formularioM', component: InsertareditarMetodoPago },
       { path: 'ediciones/:id', component: InsertareditarMetodoPago }
     ]
   },
@@ -59,7 +63,7 @@ export const routes: Routes = [
     path: 'users',
     component: User,
     children: [
-      { path: 'formulario', component: InsertareditarUser },
+      { path: 'formularioU', component: InsertareditarUser },
       { path: 'ediciones/:id', component: InsertareditarUser }
     ]
   },
@@ -68,7 +72,7 @@ export const routes: Routes = [
     component: Rol,
     children: [ 
       {
-        path: 'formulario', component: InsertareditarRol
+        path: 'formularioR', component: InsertareditarRol
       },
     ]
 
@@ -78,7 +82,7 @@ export const routes: Routes = [
     component: ObjetivoAhorro,
     children:[
       {
-        path:'formulario',component: InsertareditarObjetivoAhorro
+        path:'formularioOA',component: InsertareditarObjetivoAhorro
       }
     ]
   },

@@ -34,7 +34,7 @@ export class InsertareditarObjetivoAhorro implements OnInit {
 
   ObjtivoAhorro: ObjetivoAhorro = new ObjetivoAhorro()
 
-  estadoObjetivo:{value:string;viewValue:string}[]=[
+  estadoObjetivos:{value:string;viewValue:string}[]=[
     {value:'En espera de Aceptación',viewValue:'En espera de Aceptación'},
     {value:'En progreso',viewValue:'En progreso'},
     {value:'Dado de Baja',viewValue:'Dado de Baja'}
