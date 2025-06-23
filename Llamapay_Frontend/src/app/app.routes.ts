@@ -112,4 +112,6 @@ export const routes: Routes = [
       { path: 'insertar', component: InsertarTipoTransaccionComponent }
     ]
   }
+//----------------Carlos ------------------------------------
+
 ];
