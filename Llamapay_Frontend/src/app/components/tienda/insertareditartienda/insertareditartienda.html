@@ -1,0 +1,31 @@
+<div>
+  <div>Registro de tiendas</div>
+  <div>
+    <form [formGroup]="form" (submit)="aceptar()">
+
+      <mat-form-field>
+        <mat-label>Tienda</mat-label>
+        <input matInput formControlName="nameTienda">
+
+        <mat-error *ngIf="form.get('nameTienda')?.hasError('required')">
+          El nombre de la tienda es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Direccion</mat-label>
+        <input matInput formControlName="direccionTienda">
+
+        <mat-error *ngIf="form.get('direccionTienda')?.hasError('required')">
+          La direccion de la tienda es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+       <br />
+  <button mat-raised-button color="primary">Aceptar</button>
+  <button mat-raised-button color="warn" routerLink="/categorias">
+   Cancelar
+  </button>
+
+    </form>
+  </div>
+</div>
