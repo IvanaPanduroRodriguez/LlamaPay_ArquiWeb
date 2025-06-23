@@ -19,7 +19,7 @@ export class ServicioService {
   }
   //insertar servicio
   insert(s:Servicio){ //2do paso
-    return this.http.post(this.url,s);
+    return this.http.post(`${this.url}/registra`,s);
   }
   setList(listaNueva: Servicio[]) { //3er paso
     this.listaCambio.next(listaNueva);

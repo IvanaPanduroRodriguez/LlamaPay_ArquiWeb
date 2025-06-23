@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-tipo-transaccion',
   standalone: true,
-  imports: [RouterOutlet],
-  template: `<router-outlet></router-outlet>`
+  imports: [],
+  templateUrl: './tipotransaccion.html',
+  styleUrls: ['./tipotransaccion.css']
 })
-export class TipoTransaccion {}
+export class TipoTransaccion {
+  constructor(public route:ActivatedRoute) { 
+  }
+}
