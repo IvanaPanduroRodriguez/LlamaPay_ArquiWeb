@@ -26,6 +26,20 @@
       Métodos de Pago
     </button>
   </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuServicios" class="btn-rojo">
+      <mat-icon>business</mat-icon>
+      Servicios
+    </button>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuCategorias" class="btn-rojo">
+      <mat-icon>category</mat-icon>
+      Categorias de servicios
+    </button>
+  </div>
 </mat-toolbar>
 
 <!-- Menú Usuarios -->
@@ -50,4 +64,16 @@
 <mat-menu #menuMetodoPagos="matMenu">
   <button mat-menu-item routerLink="/metodopagos">Listar</button>
   <button mat-menu-item routerLink="/metodopagos/formularioM">Registrar</button>
+</mat-menu>
+
+<!-- Menú Servicios -->
+<mat-menu #menuServicios="matMenu">
+  <button mat-menu-item routerLink="/servicio">Listar</button>
+  <button mat-menu-item routerLink="/servicio/insertarservicio">Registrar</button>
+</mat-menu>
+
+<!-- Menú Categorias de servicios -->
+<mat-menu #menuCategorias="matMenu">
+  <button mat-menu-item routerLink="/categoria">Listar</button>
+  <button mat-menu-item routerLink="/categoria/insertarcategoria">Registrar</button>
 </mat-menu>
