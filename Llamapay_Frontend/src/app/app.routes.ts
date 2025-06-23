@@ -23,6 +23,13 @@ import { InsertarEditarTransaccion } from './components/transaccion/insertaredit
 import { TipoTransaccion } from './components/tipotransaccion/tipotransaccion';
 import { ListarTipoTransaccionComponent } from './components/tipotransaccion/listar/listar';
 import { InsertarTipoTransaccionComponent } from './components/tipotransaccion/insertareditar/insertareditar';
+import { Tienda } from './components/tienda/tienda';
+import { Listartienda } from './components/tienda/listartienda/listartienda';
+import { Insertareditartienda } from './components/tienda/insertareditartienda/insertareditartienda';
+import { Producto } from './components/producto/producto';
+import { BuscarTiendaComponent } from './components/tienda/buscar/buscar';
+import { Listarproducto } from './components/producto/listarproducto/listarproducto';
+import { Insertareditarproducto } from './components/producto/insertareditarproducto/insertareditarproducto';
 
 
 export const routes: Routes = [
@@ -111,7 +118,21 @@ export const routes: Routes = [
       { path: 'listar', component: ListarTipoTransaccionComponent },
       { path: 'insertar', component: InsertarTipoTransaccionComponent }
     ]
-  }
+  },
 //----------------Carlos ------------------------------------
-
+  {
+    path: 'tiendas',component: Tienda,
+    children: [
+      { path: 'listartienda', component: Listartienda },
+      { path: 'insertareditartienda', component: Insertareditartienda },
+      { path: 'buscar', component: BuscarTiendaComponent },
+    ]
+  },
+  {
+    path: 'producto',component: Producto,
+    children: [
+      { path: 'listarproducto', component: Listarproducto },
+      { path: 'insertareditarproducto', component: Insertareditarproducto }
+    ]
+  }
 ];

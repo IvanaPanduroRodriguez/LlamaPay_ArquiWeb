@@ -38,4 +38,8 @@ public class TiendaServiceImplement implements ITiendaService {
     public void delete(int id) {
         tR.deleteById(id);
     }
+    @Override
+    public List<Tienda> buscartiendanombre(String tienda) {
+        return tR.buscartiendanombre(tienda);
+    }
 }

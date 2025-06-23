@@ -37,4 +37,9 @@ public class RecordatorioServiceImplement implements IRecordatorioService {
     public void delete(int id) {
         rR.deleteById(id);
     }
+
+    @Override
+    public List<Recordatorio> buscarPorRecordatorio(String rec) {
+        return rR.buscarPorRecordatorio(rec);
+    }
 }
