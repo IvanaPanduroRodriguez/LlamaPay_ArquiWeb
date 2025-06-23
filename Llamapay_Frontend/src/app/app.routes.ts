@@ -17,6 +17,9 @@ import { InsertarEditarTransaccion } from './components/transaccion/insertaredit
 import { TipoTransaccion } from './components/tipotransaccion/tipotransaccion';
 import { ListarTipoTransaccionComponent } from './components/tipotransaccion/listar/listar';
 import { InsertarTipoTransaccionComponent } from './components/tipotransaccion/insertareditar/insertareditar';
+import { Tienda } from './components/tienda/tienda';
+import { Listartienda } from './components/tienda/listartienda/listartienda';
+import { Insertareditartienda } from './components/tienda/insertareditartienda/insertareditartienda';
 
 
 export const routes: Routes = [
@@ -74,6 +77,22 @@ export const routes: Routes = [
     children: [
       { path: 'listar', component: ListarTransaccion },
       { path: 'insertar', component: InsertarEditarTransaccion }
+    ]
+  },
+  {
+    path: 'tipotransaccion',component: TipoTransaccion,
+    children: [
+      { path: 'listar', component: ListarTipoTransaccionComponent },
+      { path: 'insertar', component: InsertarTipoTransaccionComponent }
+    ]
+  }
+  //-----------------CARLOS------------------------------------------
+
+    ,{
+    path: 'tiendas',component: Tienda,
+    children: [
+      { path: 'listartienda', component: Listartienda },
+      { path: 'insertareditartienda', component: Insertareditartienda }
     ]
   },
   {

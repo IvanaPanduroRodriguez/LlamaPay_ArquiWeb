@@ -1,0 +1,25 @@
+<mat-toolbar class="custom-toolbar">
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuServer" class="btn-rojo">
+      <mat-icon>store</mat-icon>
+      Tiendas
+    </button>
+  </div>
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuAplicacion" class="btn-rojo">
+      <mat-icon>inventory_2</mat-icon>
+      Productos
+    </button>
+  </div>
+</mat-toolbar>
+
+<mat-menu #menuServer="matMenu">
+  <button mat-menu-item routerLink="/tiendas/listartienda">Listar</button>
+  <button mat-menu-item routerLink="/tiendas/insertareditartienda">Registrar</button>
+  <button mat-menu-item routerLink="/tiendas/busquedatiendas">Buscar por nombre</button>
+</mat-menu>
+<mat-menu #menuAplicacion="matMenu">
+  <button mat-menu-item routerLink="/aplicaciones">Listar</button>
+  <button mat-menu-item routerLink="/aplicaciones/insercion">Registrar</button>
+
+</mat-menu>
