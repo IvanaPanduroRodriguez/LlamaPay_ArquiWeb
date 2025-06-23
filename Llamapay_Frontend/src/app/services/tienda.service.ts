@@ -34,4 +34,8 @@ export class TiendaService {
   deleteS(id:number) {
     return this.http.delete(`${this.url}/${id}`)
   }
+  searchTienda(t:string){
+    const params={nombre:t}
+    return this.http.get<Tienda[]>(`${this.url}/busquedas`,{params})
+  }
 }
