@@ -10,6 +10,12 @@ import { Listarmetodopago } from './components/metodopago/listarmetodopago/lista
 import { User } from './components/user/user';
 import { InsertareditarUser } from './components/user/insertareditar/insertareditar';
 import { Listaruser } from './components/user/listaruser/listaruser';
+import { Rol } from './components/rol/rol';
+import { InsertareditarRol } from './components/rol/insertareditar/insertareditar';
+import { Listarrol } from './components/rol/listarrol/listarrol';
+import { ObjetivoAhorro } from './components/objetivo-ahorro/objetivo-ahorro';
+import { InsertareditarObjetivoAhorro } from './components/objetivo-ahorro/insertareditar/insertareditar';
+import { Listarobjetivoahorro } from './components/objetivo-ahorro/listarobjetivoahorro/listarobjetivoahorro';
 
 import { Transaccion } from './components/transaccion/transaccion';
 import { ListarTransaccion } from './components/transaccion/listar/listar';
@@ -51,7 +57,7 @@ export const routes: Routes = [
     path:'metodopagos',component:MetodoPago,
     children:[
       {
-        path:'formulario',component:InsertareditarMetodoPago
+        path:'formularioM',component:InsertareditarMetodoPago
       },
       {
         path:'listado',component:Listarmetodopago
@@ -62,10 +68,32 @@ export const routes: Routes = [
     path:'users',component:User,
     children:[
       {
-        path:'formulario',component:InsertareditarUser
+        path:'formularioU',component:InsertareditarUser
       },
       {
         path:'listado',component:Listaruser
+      }
+    ]
+  },
+  {
+    path:'roles',component:Rol,
+    children:[
+      {
+        path:'formularioR',component:InsertareditarRol
+      },
+      {
+        path:'listado',component:Listarrol
+      }
+    ]
+  },
+  {
+    path:'objetivoahorros',component:ObjetivoAhorro,
+    children:[
+      {
+        path:'formularioOA',component:InsertareditarObjetivoAhorro
+      },
+      {
+        path:'listado',component:Listarobjetivoahorro
       }
     ]
   },
