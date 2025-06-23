@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
 
+import { RouterOutlet } from '@angular/router';
+
+import { Menu } from './components/menu/menu';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MatToolbarModule, MatMenuModule, MatButtonModule, RouterLink],
+
+  imports: [RouterOutlet, Menu],
+
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  title = 'Grupo1_Frontend';
+  protected title = 'Grupo1_Frontend';
 }

@@ -1,23 +1,2 @@
-<div>
-    <button matButton [matMenuTriggerFor]="CATEGORIAS" class="duolingo-menu-button">
-        Categorias 
-    </button>
-</div>
-
-<div>
-    <button matButton [matMenuTriggerFor]="SERVICIOS" class="duolingo-menu-button">
-        Servicios 
-    </button>
-</div>
-
-
-<mat-menu #CATEGORIAS="matMenu" class="duolingo-menu">
-  <button mat-menu-item routerLink="/categoria" class="custom-menu-item">Listar</button>
-  <button mat-menu-item routerLink="/categoria/insertarcategoria" class="custom-menu-item">Registrar</button>
-</mat-menu>
-
-<mat-menu #SERVICIOS="matMenu" class="duolingo-menu">
-  <button mat-menu-item routerLink="/servicio" class="custom-menu-item">Listar</button>
-  <button mat-menu-item routerLink="/servicio/insertarservicio" class="custom-menu-item">Registrar</button>
-</mat-menu>
+<app-menu></app-menu>
 <router-outlet></router-outlet>

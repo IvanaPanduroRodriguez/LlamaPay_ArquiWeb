@@ -40,7 +40,10 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping
+
+
     //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
+
     public List<UsuarioInfoDTO> listar() {
         return uS.list().stream().map(x->{
             ModelMapper modelMapper = new ModelMapper();
@@ -64,7 +67,10 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+
+
     //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
+
     public UsuarioInfoDTO buscarID(@PathVariable("id") int id) {
         ModelMapper m = new ModelMapper();
         UsuarioInfoDTO dto=m.map(uS.listID(id),UsuarioInfoDTO.class);
@@ -72,7 +78,10 @@ public class UserController {
     }
 
     @PutMapping
+
+
     //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
+
     public void modificar(@RequestBody UserDTO dto){
         ModelMapper m = new ModelMapper();
         User u = m.map(dto, User.class);
@@ -80,7 +89,10 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+
     //@PreAuthorize("hasAuthority('ADMIN')")
+
+
     public void eliminar(@PathVariable("id") int id){ //eliminar todos los atributos que yo elija
         uS.delete(id);
     }
