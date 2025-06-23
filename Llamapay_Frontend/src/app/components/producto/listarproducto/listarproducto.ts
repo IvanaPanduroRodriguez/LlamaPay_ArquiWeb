@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-listarproducto',
-  imports: [    MatTableModule,
+  imports: [MatTableModule,
     CommonModule,
     MatButtonModule,
     RouterLink,

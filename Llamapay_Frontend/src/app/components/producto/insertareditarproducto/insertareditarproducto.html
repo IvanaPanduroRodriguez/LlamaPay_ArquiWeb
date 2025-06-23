@@ -1,1 +1,64 @@
-<p>insertareditarproducto works!</p>
+<div class="container-form">
+    <mat-card class="mat-elevation-z4">
+        <h2 class="form-title">Registro de Tiendas</h2>
+        <form [formGroup]="form" (submit)="aceptar()">
+            <div class="form-fields">
+                <mat-form-field appearance="outline">
+                    <mat-label>Id</mat-label>
+                    <input matInput formControlName="idProducto" type="number">
+                    <mat-error *ngIf="form.get('idProducto')?.hasError('required')">
+                        El id del producto es obligatorio!!
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Nombre del Producto</mat-label>
+                    <input matInput formControlName="nombreProducto">
+                    <mat-error *ngIf="form.get('nombreProducto')?.hasError('required')">
+                        El nombre del producto es obligatorio!!
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Descripcion</mat-label>
+                    <input matInput formControlName="descripcionProducto">
+                    <mat-error *ngIf="form.get('descripcionProducto')?.hasError('required')">
+                        La descripcion del producto es obligatoria!!
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Unidad de Medida</mat-label>
+                    <input matInput formControlName="UnidadmedidaProducto">
+                    <mat-error *ngIf="form.get('UnidadmedidaProducto')?.hasError('required')">
+                        La unidad de medida es obligatoria!!
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Precio</mat-label>
+                    <input matInput formControlName="precioProducto">
+                    <mat-error *ngIf="form.get('precioProducto')?.hasError('required')">
+                        El precio es obligatoria!!
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Usuario</mat-label>
+                    <input matInput formControlName="usuarioProducto">
+                    <mat-error *ngIf="form.get('usuarioProducto')?.hasError('required')">
+                        El usuario es obligatoria!!
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Tienda del producto</mat-label>
+                    <input matInput formControlName="tiendaProducto">
+                    <mat-error *ngIf="form.get('tiendaProducto')?.hasError('required')">
+                        La tienda es obligatoria!!
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-actions">
+                <button mat-raised-button color="primary">Aceptar</button>
+                <button mat-raised-button color="warn" routerLink="/productos" type="button">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </mat-card>
+    </div>

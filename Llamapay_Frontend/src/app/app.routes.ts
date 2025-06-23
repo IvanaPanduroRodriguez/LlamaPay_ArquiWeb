@@ -20,8 +20,10 @@ import { InsertarTipoTransaccionComponent } from './components/tipotransaccion/i
 import { Tienda } from './components/tienda/tienda';
 import { Listartienda } from './components/tienda/listartienda/listartienda';
 import { Insertareditartienda } from './components/tienda/insertareditartienda/insertareditartienda';
-import { Producto } from './models/productos';
+import { Producto } from './components/producto/producto';
 import { BuscarTiendaComponent } from './components/tienda/buscar/buscar';
+import { Listarproducto } from './components/producto/listarproducto/listarproducto';
+import { Insertareditarproducto } from './components/producto/insertareditarproducto/insertareditarproducto';
 
 
 export const routes: Routes = [
@@ -99,10 +101,10 @@ export const routes: Routes = [
     ]
   },
   {
-    path: 'productos',component: Producto,
+    path: 'producto',component: Producto,
     children: [
-      { path: 'listarproducto', component: ListarTipoTransaccionComponent },
-      { path: 'insertareditarproducto', component: InsertarTipoTransaccionComponent }
+      { path: 'listarproducto', component: Listarproducto },
+      { path: 'insertareditarproducto', component: Insertareditarproducto }
     ]
   }
 

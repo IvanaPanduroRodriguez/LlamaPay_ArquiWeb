@@ -10,7 +10,7 @@ import { TiendaService } from '../../../services/tienda.service';
 
 @Component({
   selector: 'app-listartienda',
-  imports: [    MatTableModule,
+  imports: [MatTableModule,
     MatIconModule,
     CommonModule,
     MatButtonModule,
