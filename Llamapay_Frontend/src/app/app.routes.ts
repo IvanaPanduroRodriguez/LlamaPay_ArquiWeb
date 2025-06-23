@@ -101,8 +101,8 @@ export const routes: Routes = [
   {
     path: 'productos',component: Producto,
     children: [
-      { path: 'listar', component: ListarTipoTransaccionComponent },
-      { path: 'insertar', component: InsertarTipoTransaccionComponent }
+      { path: 'listarproducto', component: ListarTipoTransaccionComponent },
+      { path: 'insertareditarproducto', component: InsertarTipoTransaccionComponent }
     ]
   }
 
