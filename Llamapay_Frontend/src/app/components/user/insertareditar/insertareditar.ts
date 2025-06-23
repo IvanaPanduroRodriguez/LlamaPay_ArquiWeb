@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
+import { Rol } from '../../../models/rol';
+import { RolService } from '../../../services/rol.service';
 
 
 @Component({
@@ -32,16 +34,27 @@ import { MatSelectModule } from '@angular/material/select';
 export class InsertareditarUser implements OnInit{ 
   form: FormGroup = new FormGroup({});
   user: User = new User();
-  rolesDisponibles = [
-  { tipoRol: 'ROLE_USER' },
-  { tipoRol: 'ROLE_ADMIN' },
-  { tipoRol: 'ROLE_TESTER' },
-  ];
   id: number = 0
   edicion: boolean = false
+  rol: string = '';
 
-  constructor(private uS: UserService,private router: Router,private formBuilder: FormBuilder, private route: ActivatedRoute){ 
+  listaUsuarios: User[]=[]
+  estados: { value: boolean; viewValue: string }[] = [
+    { value: true, viewValue: 'Activo' },
+    { value: false, viewValue: 'Deshabilitado' },
+  ];
+  constructor(private uS: UserService,private router: Router,private formBuilder: FormBuilder, private route: ActivatedRoute, private rS:RolService){ 
   }
+
+  isADMIN() {
+    
+    return this.rol === 'ADMIN';
+  }
+
+  isTESTER() {
+    return this.rol === 'TESTER';
+  }
+
   ngOnInit(): void {
     
     this.route.params.subscribe((data: Params) => {
@@ -62,8 +75,7 @@ export class InsertareditarUser implements OnInit{
         registrationDate:['', Validators.required],
         username:['', Validators.required],
         password:['', Validators.required],
-        enabled:['', Validators.required],
-        roles: [[], Validators.required], 
+        estadoUsuario:['', Validators.required],
     })
   }
 
@@ -77,8 +89,7 @@ export class InsertareditarUser implements OnInit{
       this.user.registrationDateUser=this.form.value.registrationDate;
       this.user.username = this.form.value.username;
       this.user.password = this.form.value.password;
-      this.user.enabled = this.form.value.enabled;
-      this.user.roles = this.form.value.roles.map((r: any) => ({ tipoRol: r.tipoRol }));
+      this.user.enabled = true;
 
       if (this.edicion) {
         //actualizar
@@ -110,8 +121,7 @@ export class InsertareditarUser implements OnInit{
           registrationDate: new FormControl(data.registrationDateUser),
           username: new FormControl(data.username),
           password: new FormControl(data.password),
-          enabled: new FormControl(data.enabled),
-          roles: new FormControl(data.roles.map(r => r.TipoRol)),
+          estadoUsuario: new FormControl(data.enabled),
           })
       })
     }

@@ -10,6 +10,5 @@ export class User {
     username: string = "";
     password: string = "";
     enabled: boolean = true;
-
-    roles: Rol[] = [] // Relación con la clase Categoria
+    roles: Rol[] = []    
 }

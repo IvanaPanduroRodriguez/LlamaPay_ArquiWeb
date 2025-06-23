@@ -1,0 +1,49 @@
+<mat-toolbar class="custom-toolbar">
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuServer" class="btn-rojo">
+      <mat-icon>computer</mat-icon>
+      Usuarios
+    </button>
+  </div>
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuAplicacion" class="btn-rojo">
+      <mat-icon>settings_cell</mat-icon>
+      Roles
+    </button>
+  </div>
+
+    <div>
+    <button mat-button [matMenuTriggerFor]="menuAplicacion" class="btn-rojo">
+      <mat-icon>settings_cell</mat-icon>
+      Objetivos de Ahorro
+    </button>
+  </div>
+
+    <div>
+    <button mat-button [matMenuTriggerFor]="menuAplicacion" class="btn-rojo">
+      <mat-icon>settings_cell</mat-icon>
+      Metodos de Pago
+    </button>
+  </div>
+</mat-toolbar>
+
+<mat-menu #menuServer="matMenu">
+  <button mat-menu-item routerLink="/servidores">Listar</button>
+  <button mat-menu-item routerLink="/servidores/formulario">Registrar</button>
+  <button mat-menu-item routerLink="/servidores/busquedasproveedor">Buscar por proveedor</button>
+</mat-menu>
+<mat-menu #menuAplicacion="matMenu">
+  <button mat-menu-item routerLink="/aplicaciones">Listar</button>
+  <button mat-menu-item routerLink="/aplicaciones/insercion">Registrar</button>
+
+</mat-menu>
+<mat-menu #menuAplicacion="matMenu">
+  <button mat-menu-item routerLink="/aplicaciones">Listar</button>
+  <button mat-menu-item routerLink="/aplicaciones/insercion">Registrar</button>
+
+</mat-menu>
+<mat-menu #menuAplicacion="matMenu">
+  <button mat-menu-item routerLink="/aplicaciones">Listar</button>
+  <button mat-menu-item routerLink="/aplicaciones/insercion">Registrar</button>
+
+</mat-menu>

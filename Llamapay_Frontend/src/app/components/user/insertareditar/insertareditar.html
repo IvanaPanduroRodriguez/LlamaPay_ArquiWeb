@@ -88,29 +88,14 @@
 
 
     <br>
-    <mat-form-field>
-  <mat-label>Estado</mat-label>
-  <mat-select formControlName="enabled">
-    <mat-option [value]="true">Activo</mat-option>
-    <mat-option [value]="false">Inactivo</mat-option>
-  </mat-select>
-  <mat-error *ngIf="form.get('enabled')?.hasError('required')">
-    El estado es obligatorio!!
-  </mat-error>
-</mat-form-field>
-<!-- CAMPO NUEVO DE ROLES -->
-      <mat-form-field>
-  <mat-label>Rol del Usuario</mat-label>
-  <mat-select formControlName="roles" multiple>
-    <mat-option *ngFor="let rol of rolesDisponibles" [value]="rol">
-      {{ rol.tipoRol }}
-    </mat-option>
-  </mat-select>
-  <mat-error *ngIf="form.get('roles')?.hasError('required')">
-    Al menos un rol debe ser seleccionado!!
-  </mat-error>
-</mat-form-field>
-
+          <mat-form-field class="example-full-width" *ngIf="edicion && isADMIN()" class="example-full-width">
+        <mat-label>Estado de Cuenta</mat-label>
+        <mat-select formControlName="estadoUsuario">
+            <mat-option *ngFor="let u of estados" [value]="u.value">
+                {{ u.viewValue }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
     <br />
 
         <button mat-raised-button color="primary">Registrar nuevo usuario</button>

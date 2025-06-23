@@ -13,47 +13,26 @@
 
   <!-- Name Column -->
     <ng-container matColumnDef="c2">
-        <th mat-header-cell *matHeaderCellDef> nombre del usuario </th>
+        <th mat-header-cell *matHeaderCellDef> Nombre del usuario </th>
         <td mat-cell *matCellDef="let element"> {{element.nameUser}} </td>
     </ng-container>
 
   <!-- Weight Column -->
     <ng-container matColumnDef="c3">
-        <th mat-header-cell *matHeaderCellDef> Apellidos del usuario </th>
-        <td mat-cell *matCellDef="let element"> {{element.lastnameUser}} </td>
-    </ng-container>
-
-  <!-- Weight Column -->
-    <ng-container matColumnDef="c4">
-        <th mat-header-cell *matHeaderCellDef> Correo electronico </th>
-        <td mat-cell *matCellDef="let element"> *********** </td>
-    </ng-container>
-  <!-- Weight Column -->
-    <ng-container matColumnDef="c5">
-        <th mat-header-cell *matHeaderCellDef> Fecha de nacimiento </th>
-        <td mat-cell *matCellDef="let element"> {{element.birthdayUser|date:'dd/MM/yyyy'}} </td>
-    </ng-container>
-  <!-- Weight Column -->
-    <ng-container matColumnDef="c6">
         <th mat-header-cell *matHeaderCellDef> Registro del Usuario </th>
         <td mat-cell *matCellDef="let element"> {{element.registrationDateUser|date:'dd/MM/yyyy'}} </td>
     </ng-container>
   <!-- Weight Column -->
-    <ng-container matColumnDef="c7">
+    <ng-container matColumnDef="c4">
         <th mat-header-cell *matHeaderCellDef> Username </th>
         <td mat-cell *matCellDef="let element"> {{element.username}} </td>
     </ng-container>
   <!-- Weight Column -->
-    <ng-container matColumnDef="c8">
-        <th mat-header-cell *matHeaderCellDef> Contraseña </th>
-        <td mat-cell *matCellDef="let element"> ********* </td>
-    </ng-container>
-  <!-- Weight Column -->
-    <ng-container matColumnDef="c9">
+    <ng-container matColumnDef="c5">
         <th mat-header-cell *matHeaderCellDef> Estado </th>
         <td mat-cell *matCellDef="let element"> {{element.enabled}} </td>
     </ng-container>
-<ng-container matColumnDef="c10">
+<ng-container matColumnDef="c6">
   <th mat-header-cell *matHeaderCellDef> Actualizar </th>
   <td mat-cell *matCellDef="let element">
     <button mat-button [routerLink]="['/ediciones', element.userId]">
@@ -62,7 +41,7 @@
   </td>
 </ng-container>
 
-<ng-container matColumnDef="c11">
+<ng-container matColumnDef="c7">
   <th mat-header-cell *matHeaderCellDef> Eliminar </th>
   <td mat-cell *matCellDef="let element">
     <button mat-button (click)="eliminar(element.userId)">

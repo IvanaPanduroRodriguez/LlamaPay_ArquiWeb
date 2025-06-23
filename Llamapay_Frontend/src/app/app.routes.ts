@@ -5,17 +5,18 @@ import { InsertareditarCategoria } from './components/categoria/insertareditar/i
 import { InsertareditarServicio } from './components/servicio/insertareditar/insertareditar';
 import { MetodoPago } from './components/metodopago/metodopago';
 import { InsertareditarMetodoPago } from './components/metodopago/insertareditar/insertareditar';
-import { Listarmetodopago } from './components/metodopago/listarmetodopago/listarmetodopago';
 import { User } from './components/user/user';
 import { InsertareditarUser } from './components/user/insertareditar/insertareditar';
-import { Listaruser } from './components/user/listaruser/listaruser';
-
 import { Transaccion } from './components/transaccion/transaccion';
 import { ListarTransaccion } from './components/transaccion/listar/listar';
 import { InsertarEditarTransaccion } from './components/transaccion/insertareditar/insertareditar';
 import { TipoTransaccion } from './components/tipotransaccion/tipotransaccion';
 import { ListarTipoTransaccionComponent } from './components/tipotransaccion/listar/listar';
 import { InsertarTipoTransaccionComponent } from './components/tipotransaccion/insertareditar/insertareditar';
+import { Rol } from './components/rol/rol';
+import { InsertareditarRol } from './components/rol/insertareditar/insertareditar';
+import { ObjetivoAhorro } from './components/objetivo-ahorro/objetivo-ahorro';
+import { InsertareditarObjetivoAhorro } from './components/objetivo-ahorro/insertareditar/insertareditar';
 
 
 export const routes: Routes = [
@@ -60,6 +61,25 @@ export const routes: Routes = [
     children: [
       { path: 'formulario', component: InsertareditarUser },
       { path: 'ediciones/:id', component: InsertareditarUser }
+    ]
+  },
+  {
+    path: 'roles',
+    component: Rol,
+    children: [ 
+      {
+        path: 'formulario', component: InsertareditarRol
+      },
+    ]
+
+  },
+  {
+    path:'objetivoahorros',
+    component: ObjetivoAhorro,
+    children:[
+      {
+        path:'formulario',component: InsertareditarObjetivoAhorro
+      }
     ]
   },
 //-----------------JOAO------------------------------------------
