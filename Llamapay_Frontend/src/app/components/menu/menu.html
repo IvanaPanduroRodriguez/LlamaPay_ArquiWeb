@@ -40,6 +40,20 @@
       Categorias de servicios
     </button>
   </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuTiendas" class="btn-rojo">
+      <mat-icon>store</mat-icon>
+      Tiendas
+    </button>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuProductos" class="btn-rojo">
+      <mat-icon>inventory_2</mat-icon>
+      Productos
+    </button>
+  </div>
 </mat-toolbar>
 
 <!-- Menú Usuarios -->
@@ -76,4 +90,17 @@
 <mat-menu #menuCategorias="matMenu">
   <button mat-menu-item routerLink="/categoria">Listar</button>
   <button mat-menu-item routerLink="/categoria/insertarcategoria">Registrar</button>
+</mat-menu>
+
+<!-- Menú Tiendas -->
+<mat-menu #menuTiendas="matMenu">
+  <button mat-menu-item routerLink="/tiendas/listartienda">Listar</button>
+  <button mat-menu-item routerLink="/tiendas/insertareditartienda">Registrar</button>
+  <button mat-menu-item routerLink="/tiendas/buscar">Buscar por nombre</button>
+</mat-menu>
+
+<!-- Menú Productos -->
+<mat-menu #menuProductos="matMenu">
+  <button mat-menu-item routerLink="/producto/listarproducto">Listar</button>
+  <button mat-menu-item routerLink="/producto/insertareditarproducto">Registrar</button>
 </mat-menu>

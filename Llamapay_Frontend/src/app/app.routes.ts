@@ -23,6 +23,7 @@ import { InsertarEditarTransaccion } from './components/transaccion/insertaredit
 import { TipoTransaccion } from './components/tipotransaccion/tipotransaccion';
 import { ListarTipoTransaccionComponent } from './components/tipotransaccion/listar/listar';
 import { InsertarTipoTransaccionComponent } from './components/tipotransaccion/insertareditar/insertareditar';
+
 import { Tienda } from './components/tienda/tienda';
 import { Listartienda } from './components/tienda/listartienda/listartienda';
 import { Insertareditartienda } from './components/tienda/insertareditartienda/insertareditartienda';
