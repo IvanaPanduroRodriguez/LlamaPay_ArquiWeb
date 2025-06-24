@@ -23,6 +23,9 @@ import { InsertarEditarTransaccion } from './components/transaccion/insertaredit
 import { TipoTransaccion } from './components/tipotransaccion/tipotransaccion';
 import { ListarTipoTransaccionComponent } from './components/tipotransaccion/listar/listar';
 import { InsertarTipoTransaccionComponent } from './components/tipotransaccion/insertareditar/insertareditar';
+import { ListarTipoCuentaComponent } from './components/tipocuenta/listar/listar';
+import { InsertareditarTipoCuentaComponent } from './components/tipocuenta/insertareditar/insertareditar';
+import { TipoCuenta } from './components/tipocuenta/tipocuenta';
 
 import { Tienda } from './components/tienda/tienda';
 import { Listartienda } from './components/tienda/listartienda/listartienda';
@@ -119,6 +122,14 @@ export const routes: Routes = [
       { path: 'listar', component: ListarTipoTransaccionComponent },
       { path: 'insertar', component: InsertarTipoTransaccionComponent }
     ]
+  },
+  {
+  path: 'tipocuenta', component:TipoCuenta,
+  children: [
+    { path: 'listar', component: ListarTipoCuentaComponent },
+    { path: 'insertar', component: InsertareditarTipoCuentaComponent },
+    { path: 'editar/:id', component: InsertareditarTipoCuentaComponent }
+  ]
   },
 //----------------Carlos ------------------------------------
   {
