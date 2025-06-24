@@ -37,6 +37,7 @@ import { Insertareditarproducto } from './components/producto/insertareditarprod
 
 
 export const routes: Routes = [
+
   //-----------------IVANA------------------------------------------
 
   {
