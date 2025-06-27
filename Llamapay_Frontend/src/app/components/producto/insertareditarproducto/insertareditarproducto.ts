@@ -43,6 +43,12 @@ export class Insertareditarproducto implements OnInit {
     
   ) { }
   ngOnInit(): void {
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = data['id'] != null;
+      this.init();
+    });
+
     this.form = this.formBuilder.group({
       idProducto: [''],
       nombreProducto: ['', Validators.required],
@@ -51,23 +57,35 @@ export class Insertareditarproducto implements OnInit {
       precioProducto: ['', [Validators.required, Validators.min(0)]],
       usuarioProducto: ['', Validators.required],
       tiendaProducto: ['', Validators.required],
+      
     });
-    this.sS.list().subscribe(data=>{
-      this.listausuarios=data
-    })
+    // Cargar listas de usuarios y tiendas
+    this.sS.list().subscribe(data => {
+      this.listausuarios = data;
+    });
     this.tS.list().subscribe(data => {
       this.listatiendas = data;
     });
   }
   aceptar() {
     if (this.form.valid) {
-      this.producto.Producto_id = this.form.value.idProducto;
-      this.producto.Nombre_producto = this.form.value.nombreProducto;
-      this.producto.Descripcion = this.form.value.descripcionProducto;
-      this.producto.Unidad_medida = this.form.value.UnidadmedidaProducto;
-      this.producto.Precio_Producto = this.form.value.precioProducto;
-      this.producto.us.username = this.form.value.usuarioProducto;
-      this.producto.td.Nombre_tienda = this.form.value.tiendaProducto;
+      this.producto.idproducto = this.form.value.idProducto;
+      this.producto.nombreproducto = this.form.value.nombreProducto;
+      this.producto.descripcion = this.form.value.descripcionProducto;
+      this.producto.unidadmedida = this.form.value.UnidadmedidaProducto;
+      this.producto.precioproducto = this.form.value.precioProducto;
+      
+      // Asignar usuario y tienda de forma simple
+      this.producto.us = new User();
+      this.producto.us.userId = this.form.value.usuarioProducto;
+      
+      this.producto.td = new Tienda();
+      this.producto.td.idtienda = this.form.value.tiendaProducto;
+
+      // Debug: ver qué se está enviando
+      console.log('Producto a enviar:', this.producto);
+      console.log('Usuario ID:', this.producto.us.userId);
+      console.log('Tienda ID:', this.producto.td.idtienda);
 
       if (this.edicion) {
         this.pS.update(this.producto).subscribe(data => {
@@ -76,23 +94,26 @@ export class Insertareditarproducto implements OnInit {
           });
         });
       } else {
-        this.pS.update(this.producto).subscribe(data => {
-          this.router.navigate(['/producto/listarproducto']);
+        this.pS.insert(this.producto).subscribe(data => {
+          this.pS.list().subscribe(data => {
+            this.pS.setList(data);
+          });
         });
       }
+      this.router.navigate(['/producto']);
     }
   }
   init() {
     if (this.edicion) {
       this.pS.listId(this.id).subscribe(data => {
         this.form = new FormGroup({
-          idProducto: new FormControl(data.Producto_id),
-          nombreProducto: new FormControl(data.Nombre_producto),
-          descripcionProducto: new FormControl(data.Descripcion),
-          UnidadmedidaProducto: new FormControl(data.Unidad_medida),
-          precioProducto : new FormControl(data.Precio_Producto),
-          usuarioProducto: new FormControl(data.us.username),
-          tiendaProducto: new FormControl(data.td.Nombre_tienda),
+          idProducto: new FormControl(data.idproducto),
+          nombreProducto: new FormControl(data.nombreproducto),
+          descripcionProducto: new FormControl(data.descripcion),
+          UnidadmedidaProducto: new FormControl(data.unidadmedida),
+          precioProducto : new FormControl(data.precioproducto),
+          usuarioProducto: new FormControl(data.us.userId),
+          tiendaProducto: new FormControl(data.td.idtienda),
         });
       });
     }
