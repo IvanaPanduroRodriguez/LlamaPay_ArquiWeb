@@ -26,6 +26,13 @@
       Métodos de Pago
     </button>
   </div>
+    <div>
+    <button mat-button [matMenuTriggerFor]="menuReportes" class="btn-rojo">
+      <mat-icon>payment</mat-icon>
+      Reportes
+    </button>
+  </div>
+  
 </mat-toolbar>
 
 <!-- Menú Usuarios -->
@@ -50,4 +57,15 @@
 <mat-menu #menuMetodoPagos="matMenu">
   <button mat-menu-item routerLink="/metodopagos">Listar</button>
   <button mat-menu-item routerLink="/metodopagos/formularioM">Registrar</button>
+</mat-menu>
+
+<mat-menu #menuReportes="matMenu">
+  <button mat-menu-item routerLink="/reportes/metodospagosgrafica">
+    <mat-icon>bar_chart</mat-icon>
+    Métodos de Pago
+  </button>
+  <button mat-menu-item routerLink="/reportes/graficUser">
+    <mat-icon>insert_chart</mat-icon>
+    Cumpleaños por Mes
+  </button>
 </mat-menu>

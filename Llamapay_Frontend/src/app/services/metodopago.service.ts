@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import { environment } from "../../enviroments/enviroment";
 import { HttpClient } from "@angular/common/http";
 import { MetodoPago } from "../models/metodopago";
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
+import { ObtenerMetodosPagosPorUsersDTO } from "../models/obtenermetodospagosporusersDTO";
 
 const base_url=environment.base;
 @Injectable({
@@ -34,5 +35,9 @@ export class MetodoPagoService{
 
       deleteS(id:number) {
         return this.http.delete(`${this.url}/${id}`)
+      }
+
+      getQuantitymetodspayforusers():Observable<ObtenerMetodosPagosPorUsersDTO[]>{
+        return this.http.get<ObtenerMetodosPagosPorUsersDTO[]>(`${this.url}/buscar-metodos-pagos-users`)
       }
 }

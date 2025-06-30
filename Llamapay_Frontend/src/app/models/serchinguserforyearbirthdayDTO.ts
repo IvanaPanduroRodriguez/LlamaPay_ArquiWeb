@@ -1,5 +1,5 @@
 export class SerchingUserForYearBirthdayDTO{
-      Id: Number=0
-      Nombre: string=""
-      DiaNacimiento:Date=new Date()
+      id: Number=0
+      nombre: string=""
+      diaNacimiento:Date=new Date()
 }
