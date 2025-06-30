@@ -1,35 +1,24 @@
-/* Fuente Roboto y estilos modernos para la barra y botones en verde */
 .custom-toolbar {
-  background-color: #2e7d32;
-  font-family: 'Roboto', Arial, sans-serif;
-  box-shadow: 0 2px 8px rgba(46,125,50,0.08);
-  padding: 0.5rem 1.5rem;
+ background-color: #98BE93;
 }
+
 
 .btn-rojo {
-  background-color: #a5d6a7;
-  border-radius: 4px;
-  margin: 4px;
-  border: none;
-  color: #fff;
-  font-family: 'Roboto', Arial, sans-serif;
-  font-weight: 500;
-  font-size: 1rem;
-  padding: 0.4rem 1.2rem;
-  transition: background 0.2s;
-  box-shadow: 0 2px 8px rgba(46,125,50,0.08);
-}
-
-.btn-rojo:hover {
-  background-color: #81c784;
+ background-color: #506C4D;
+ border-radius: 4px;
+ margin: 4px;
+ border: none;
 }
 
 .btn-rojo mat-icon {
-  color: #2e7d32;
+ color: white;
 }
+
+
+
+
 
 .custom-toolbar button,
 .custom-toolbar mat-icon {
-  color: #fff;
-  font-family: 'Roboto', Arial, sans-serif;
+ color: white;
 }

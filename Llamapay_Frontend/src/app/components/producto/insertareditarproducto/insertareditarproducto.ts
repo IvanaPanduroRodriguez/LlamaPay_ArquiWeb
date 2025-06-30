@@ -12,7 +12,7 @@ import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
 import { Producto } from '../../../models/productos';
 import { ProductosService } from '../../../services/productos.service';
-
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-insertareditarproducto',
@@ -21,7 +21,9 @@ import { ProductosService } from '../../../services/productos.service';
     MatButtonModule,
     MatCardModule,
     ReactiveFormsModule,
-    CommonModule],
+    CommonModule,
+    MatSelectModule
+  ],
   templateUrl: './insertareditarproducto.html',
   styleUrl: './insertareditarproducto.css'
 })
@@ -32,6 +34,7 @@ export class Insertareditarproducto implements OnInit {
   edicion: boolean = false;
   listatiendas: Tienda[] = [];
   listausuarios: User[] = [];
+tiendaProducto: any;
   
   constructor(
     private pS:ProductosService,
@@ -75,17 +78,15 @@ export class Insertareditarproducto implements OnInit {
       this.producto.unidadmedida = this.form.value.UnidadmedidaProducto;
       this.producto.precioproducto = this.form.value.precioProducto;
       
-      // Asignar usuario y tienda de forma simple
+      // Asegurar que los objetos están inicializados
       this.producto.us = new User();
       this.producto.us.userId = this.form.value.usuarioProducto;
       
       this.producto.td = new Tienda();
       this.producto.td.idtienda = this.form.value.tiendaProducto;
-
-      // Debug: ver qué se está enviando
-      console.log('Producto a enviar:', this.producto);
-      console.log('Usuario ID:', this.producto.us.userId);
-      console.log('Tienda ID:', this.producto.td.idtienda);
+      
+      console.log('Producto completo antes de enviar:', this.producto);
+      console.log('Valores del formulario:', this.form.value);
 
       if (this.edicion) {
         this.pS.update(this.producto).subscribe(data => {

@@ -1,25 +1,75 @@
 <mat-toolbar class="custom-toolbar">
   <div>
-    <button mat-button [matMenuTriggerFor]="menuServer" class="btn-rojo">
+    <button mat-button [matMenuTriggerFor]="menuUser" class="btn-rojo">
+      <mat-icon>computer</mat-icon>
+      Usuarios
+    </button>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuRoles" class="btn-rojo">
+      <mat-icon>settings</mat-icon>
+      Roles
+    </button>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuObjetivoAhorros" class="btn-rojo">
+      <mat-icon>savings</mat-icon>
+      Objetivos de Ahorro
+    </button>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuMetodoPagos" class="btn-rojo">
+      <mat-icon>payment</mat-icon>
+      Métodos de Pago
+    </button>
+  </div>
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuTiendas" class="btn-rojo">
       <mat-icon>store</mat-icon>
       Tiendas
     </button>
   </div>
   <div>
-    <button mat-button [matMenuTriggerFor]="menuAplicacion" class="btn-rojo">
+    <button mat-button [matMenuTriggerFor]="menuProductos" class="btn-rojo">
       <mat-icon>inventory_2</mat-icon>
       Productos
     </button>
   </div>
 </mat-toolbar>
 
-<mat-menu #menuServer="matMenu">
-  <button mat-menu-item routerLink="/tiendas/listartienda">Listar</button>
-  <button mat-menu-item routerLink="/tiendas/insertareditartienda">Registrar</button>
-  <button mat-menu-item routerLink="/tiendas/buscar">Buscar por nombre</button>
+<!-- Menú Usuarios -->
+<mat-menu #menuUser="matMenu">
+  <button mat-menu-item routerLink="/users">Listar</button>
+  <button mat-menu-item routerLink="/users/formularioU">Registrar</button>
 </mat-menu>
-<mat-menu #menuAplicacion="matMenu">
-  <button mat-menu-item routerLink="/producto/listarproducto">Listar</button>
-  <button mat-menu-item routerLink="/producto/insertareditarproducto">Registrar</button>
 
+<!-- Menú Roles -->
+<mat-menu #menuRoles="matMenu">
+  <button mat-menu-item routerLink="/roles">Listar</button>
+  <button mat-menu-item routerLink="/roles/formularioR">Registrar</button>
+</mat-menu>
+
+<!-- Menú Objetivos de Ahorro -->
+<mat-menu #menuObjetivoAhorros="matMenu">
+  <button mat-menu-item routerLink="/objetivoahorros">Listar</button>
+  <button mat-menu-item routerLink="/objetivoahorros/formularioOA">Registrar</button>
+</mat-menu>
+
+<!-- Menú Métodos de Pago -->
+<mat-menu #menuMetodoPagos="matMenu">
+  <button mat-menu-item routerLink="/metodopagos">Listar</button>
+  <button mat-menu-item routerLink="/metodopagos/formularioM">Registrar</button>
+</mat-menu>
+<!-- Menú Tiendas -->
+<mat-menu #menuTiendas="matMenu">
+  <button mat-menu-item routerLink="/tiendas">Listar</button>
+  <button mat-menu-item routerLink="/tiendas/formulario">Registrar</button>
+</mat-menu>
+<!-- Menú Productos -->
+<mat-menu #menuProductos="matMenu">
+  <button mat-menu-item routerLink="/productos">Listar</button>
+  <button mat-menu-item routerLink="/productos/formulario">Registrar</button>
 </mat-menu>
