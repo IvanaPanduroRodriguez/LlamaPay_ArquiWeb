@@ -38,26 +38,26 @@
                         El precio es obligatoria!!
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Usuario</mat-label>
+                <mat-form-field>
+                    <mat-label>Usuarios</mat-label>
                     <mat-select formControlName="usuarioProducto">
-                        @for (usuario of listausuarios; track usuario.userId) {
-                        <mat-option [value]="usuario.userId">{{usuario.userId}}</mat-option>
+                        @for (food of listausuarios; track food) {
+                        <mat-option [value]="food.userId">{{food.nameUser}}</mat-option>
                         }
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Tienda</mat-label>
+                <mat-form-field>
+                    <mat-label>Tiendas</mat-label>
                     <mat-select formControlName="tiendaProducto">
-                        @for (tienda of listatiendas; track tienda.idtienda) {
-                        <mat-option [value]="tienda.idtienda">{{tienda.idtienda}}</mat-option>
+                        @for (food of listatiendas; track food) {
+                        <mat-option [value]="food.idtienda">{{food.idtienda}}</mat-option>
                         }
                     </mat-select>
                 </mat-form-field>
             </div>
             <div class="form-actions">
-                <button mat-raised-button color="primary">Aceptar</button>
-                <button mat-raised-button color="warn" routerLink="/productos" type="button">
+                <button mat-raised-button color="primary" type="submit">Aceptar</button>
+                <button mat-raised-button color="warn" type="button" (click)="cancelar()">
                     Cancelar
                 </button>
             </div>

@@ -34,7 +34,6 @@ export class Insertareditarproducto implements OnInit {
   edicion: boolean = false;
   listatiendas: Tienda[] = [];
   listausuarios: User[] = [];
-tiendaProducto: any;
   
   constructor(
     private pS:ProductosService,
@@ -71,29 +70,32 @@ tiendaProducto: any;
     });
   }
   aceptar() {
-    if (this.form.valid) {
-      this.producto.idproducto = this.form.value.idProducto;
-      this.producto.nombreproducto = this.form.value.nombreProducto;
-      this.producto.descripcion = this.form.value.descripcionProducto;
-      this.producto.unidadmedida = this.form.value.UnidadmedidaProducto;
-      this.producto.precioproducto = this.form.value.precioProducto;
+    if (this.form.valid) {      
+      const usuarioId = this.form.value.usuarioProducto;
+      const tiendaId = this.form.value.tiendaProducto;
       
-      // Asegurar que los objetos están inicializados
-      this.producto.us = new User();
-      this.producto.us.userId = this.form.value.usuarioProducto;
+      const productoData: any = {
+        idproducto: this.form.value.idProducto || 0,
+        nombreproducto: this.form.value.nombreProducto,
+        descripcion: this.form.value.descripcionProducto,
+        unidadmedida: this.form.value.UnidadmedidaProducto,
+        precioproducto: Number(this.form.value.precioProducto),
+        tienda: {
+          idtienda: Number(tiendaId)
+        },
+        user: {
+          userId: Number(usuarioId)
+        }
+      };
       
-      this.producto.td = new Tienda();
-      this.producto.td.idtienda = this.form.value.tiendaProducto;
-      
-
       if (this.edicion) {
-        this.pS.update(this.producto).subscribe(data => {
+        this.pS.update(productoData).subscribe(data => {
           this.pS.list().subscribe(data => {
             this.pS.setList(data);
           });
         });
       } else {
-        this.pS.insert(this.producto).subscribe(data => {
+        this.pS.insert(productoData).subscribe(data => {
           this.pS.list().subscribe(data => {
             this.pS.setList(data);
           });
@@ -118,5 +120,8 @@ tiendaProducto: any;
     }
   }
 
+  cancelar() {
+    this.router.navigate(['producto', 'listarproducto']);
+  }
 
 }
