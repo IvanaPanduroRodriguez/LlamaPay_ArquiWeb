@@ -1,5 +1,5 @@
-<div>
-  <h2>{{ edicion ? 'Editar Tipo de Transacción' : 'Registrar Tipo de Transacción' }}</h2>
+<div class="container-tipotransaccion">
+  <h1>{{ edicion ? 'Editar Tipo de Transacción' : 'Registrar Tipo de Transacción' }}</h1>
 
   <form [formGroup]="form" (ngSubmit)="aceptar()">
     <mat-form-field appearance="fill">
@@ -10,7 +10,7 @@
       </mat-error>
     </mat-form-field>
 
-    <div class="botones-container">
+    <div class="btn-container">
       <button mat-raised-button color="primary" type="submit">
         {{ edicion ? 'Guardar Cambios' : 'Registrar' }}
       </button>

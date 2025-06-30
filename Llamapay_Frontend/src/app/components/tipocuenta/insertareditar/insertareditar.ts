@@ -37,9 +37,20 @@ export class InsertareditarTipoCuentaComponent implements OnInit {
     this.form = this.fb.group({
       idTipoCuenta: [0],
       nombreTipoCuenta: ['', Validators.required],
-      numeroTipoCuenta: ['', Validators.required],
+      numeroTipoCuenta: ['',
+    [
+      Validators.required,
+      Validators.pattern(/^\d{8,20}$/) // solo números, entre 8 y 20 dígitos
+    ]
+  ],
       tipodeCuenta: ['', Validators.required],
-      saldoTipoCuenta: [0, Validators.required],
+      saldoTipoCuenta: [0,
+    [
+      Validators.required,
+      Validators.min(0),
+      Validators.max(1000000)
+    ]
+  ],
       monedaTipoCuenta: ['', Validators.required],
       user: this.fb.group({
         userId: [1, Validators.required] // puedes reemplazar el 1 por un valor dinámico más adelante
