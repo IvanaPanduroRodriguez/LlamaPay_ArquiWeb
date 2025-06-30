@@ -101,7 +101,7 @@ tiendaProducto: any;
           });
         });
       }
-      this.router.navigate(['/producto']);
+      this.router.navigate(['/productos']);
     }
   }
   init() {
