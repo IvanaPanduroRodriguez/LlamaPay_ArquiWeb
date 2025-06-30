@@ -38,5 +38,5 @@ private listaCambio = new Subject<User[]>(); //1er paso
     deleteS(id:number) {
       return this.http.delete(`${this.url}/${id}`)
     }
-    
+    serchingUserForYearBirthday()
 }
