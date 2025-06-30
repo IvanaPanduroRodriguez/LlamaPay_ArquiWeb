@@ -19,6 +19,7 @@ import { ObjetivoAhorro } from './components/objetivo-ahorro/objetivo-ahorro';
 import { InsertareditarObjetivoAhorro } from './components/objetivo-ahorro/insertareditar/insertareditar';
 import { Landing } from './components/landing/landing';
 import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 export const routes: Routes = [
@@ -29,6 +30,7 @@ export const routes: Routes = [
   {
     path: 'registro', component:RegisterComponent
   },
+  { path: 'login', component: LoginComponent },
   //-----------------IVANA------------------------------------------
   {
 
