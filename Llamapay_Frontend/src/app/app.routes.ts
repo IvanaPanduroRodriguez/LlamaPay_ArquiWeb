@@ -18,12 +18,16 @@ import { InsertareditarRol } from './components/rol/insertareditar/insertaredita
 import { ObjetivoAhorro } from './components/objetivo-ahorro/objetivo-ahorro';
 import { InsertareditarObjetivoAhorro } from './components/objetivo-ahorro/insertareditar/insertareditar';
 import { Landing } from './components/landing/landing';
+import { RegisterComponent } from './components/register/register.component';
 
 
 export const routes: Routes = [
 
   {
     path: '', component: Landing // ← Landing page por defecto
+  },
+  {
+    path: 'registro', component:RegisterComponent
   },
   //-----------------IVANA------------------------------------------
   {
