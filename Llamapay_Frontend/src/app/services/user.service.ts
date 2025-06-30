@@ -13,7 +13,7 @@ export class UserService {
 private listaCambio = new Subject<User[]>(); //1er paso
   private url=`${base_url}/users`;
   constructor(private http: HttpClient) {}
-  //listar categorias
+  
   list(){
         return this.http.get<User[]>(this.url);
         }
