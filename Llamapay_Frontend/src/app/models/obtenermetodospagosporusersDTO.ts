@@ -1,5 +1,5 @@
 export class ObtenerMetodosPagosPorUsersDTO{
-    Id: number=0
+    id: number=0
     nombre:string=""
     tipo:string=""
     descripcion:string=""

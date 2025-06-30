@@ -37,7 +37,10 @@ export class MetodoPagoService{
         return this.http.delete(`${this.url}/${id}`)
       }
 
-      getQuantitymetodspayforusers():Observable<ObtenerMetodosPagosPorUsersDTO[]>{
-        return this.http.get<ObtenerMetodosPagosPorUsersDTO[]>(`${this.url}/buscar-metodos-pagos-users`)
-      }
+getQuantitymetodspayforusers(userId: number): Observable<ObtenerMetodosPagosPorUsersDTO[]> {
+  return this.http.get<ObtenerMetodosPagosPorUsersDTO[]>(
+    `${this.url}/buscar-metodos-pagos-users`,
+    { params: { userId: userId.toString() } }
+  );
+}
 }
