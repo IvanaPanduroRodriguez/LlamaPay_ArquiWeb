@@ -1,5 +1,6 @@
 package pe.edu.upc.llamapaytf.servicesinterfaces;
 
+import pe.edu.upc.llamapaytf.entities.Producto;
 import pe.edu.upc.llamapaytf.entities.Tienda;
 
 import java.util.List;
@@ -10,4 +11,6 @@ public interface ITiendaService {
     public Tienda listarId(int Tienda_id);
     public void update(Tienda t);
     public void delete(int id);
+    public List<Tienda> buscarPorTienda(String tienda);
+
 }

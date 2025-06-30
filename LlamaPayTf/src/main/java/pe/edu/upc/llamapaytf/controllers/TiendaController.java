@@ -3,6 +3,7 @@ package pe.edu.upc.llamapaytf.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.llamapaytf.dtos.ProductoDTO;
 import pe.edu.upc.llamapaytf.dtos.TiendaDTO;
 import pe.edu.upc.llamapaytf.entities.Tienda;
 import pe.edu.upc.llamapaytf.servicesinterfaces.ITiendaService;
@@ -47,6 +48,14 @@ public class TiendaController {
         tS.delete(id);
     }
 
+    @GetMapping("/buscar/{tienda}")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
+    public List<TiendaDTO> buscarPorTienda(@PathVariable("tienda") String tienda) {
+        return tS.buscarPorTienda(tienda).stream().map(x->{
+            ModelMapper m = new ModelMapper();
+            return m.map(x, TiendaDTO.class);
+        }).collect(Collectors.toList());
+    }
     @GetMapping("/{id}")
     //@PreAuthorize("hasAnyAuthority('ADMIN','FINANZAS','TESTER')")
     public TiendaDTO buscarID(@PathVariable("id") int id) { //debe tener indicado que variable estara en la ruta
@@ -54,4 +63,5 @@ public class TiendaController {
         TiendaDTO dto=m.map(tS.listarId(id),TiendaDTO.class);
         return dto;
     }
+
 }
