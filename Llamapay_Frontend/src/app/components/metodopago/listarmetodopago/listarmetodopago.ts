@@ -32,9 +32,13 @@ ngOnInit(): void {
 
   }
 simularPago(element: MetodoPago) {
-  alert(`Pago simulado exitosamente con el método: ${element.nombreMetodoPago}`);
+  this.metodoSeleccionado = element;
 }
+metodoSeleccionado: MetodoPago | null = null;
 
+cerrarDetalle() {
+  this.metodoSeleccionado = null;
+}
 agregarACalendario(element: MetodoPago) {
   const fecha = new Date().toISOString();
   const titulo = `Recordatorio - Pago con ${element.nombreMetodoPago}`;
