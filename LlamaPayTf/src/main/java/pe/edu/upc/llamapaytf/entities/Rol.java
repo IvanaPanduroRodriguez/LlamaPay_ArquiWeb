@@ -15,7 +15,7 @@ public class Rol implements Serializable {
     private String TipoRol;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userId", nullable = false)
     @JsonBackReference
     private User user;
 

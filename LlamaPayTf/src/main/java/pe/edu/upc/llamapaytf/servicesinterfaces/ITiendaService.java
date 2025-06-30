@@ -10,5 +10,4 @@ public interface ITiendaService {
     public Tienda listarId(int Tienda_id);
     public void update(Tienda t);
     public void delete(int id);
-    public List<Tienda> buscartiendanombre(String tienda);
 }

@@ -3,13 +3,14 @@
     <h2 class="form-title">Registro de Tiendas</h2>
     <form [formGroup]="form" (submit)="aceptar()">
       <div class="form-fields">
-        <mat-form-field appearance="outline">
-          <mat-label>Id</mat-label>
-          <input matInput formControlName="idTienda" type="number">
+        <mat-form-field *ngIf="edicion">
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="idTienda">
+        
           <mat-error *ngIf="form.get('idTienda')?.hasError('required')">
-            El id de la tienda es obligatorio!!
+            El ID de la tienda es obligatorio!!
           </mat-error>
-        </mat-form-field>
+          </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Tienda</mat-label>
           <input matInput formControlName="nameTienda">
@@ -27,9 +28,9 @@
       </div>
       <div class="form-actions">
         <button mat-raised-button color="primary">Aceptar</button>
-        <button mat-raised-button color="warn" routerLink="/tiendas" type="button">
+        <button mat-raised-button color="warn" routerLink="/tiendas">
           Cancelar
-        </button>
+          </button>
       </div>
     </form>
   </mat-card>

@@ -85,8 +85,6 @@ tiendaProducto: any;
       this.producto.td = new Tienda();
       this.producto.td.idtienda = this.form.value.tiendaProducto;
       
-      console.log('Producto completo antes de enviar:', this.producto);
-      console.log('Valores del formulario:', this.form.value);
 
       if (this.edicion) {
         this.pS.update(this.producto).subscribe(data => {

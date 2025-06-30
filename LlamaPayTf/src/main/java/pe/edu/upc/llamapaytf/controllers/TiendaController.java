@@ -2,7 +2,6 @@ package pe.edu.upc.llamapaytf.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.llamapaytf.dtos.TiendaDTO;
 import pe.edu.upc.llamapaytf.entities.Tienda;
@@ -29,6 +28,7 @@ public class TiendaController {
     @PostMapping
     //@PreAuthorize("hasAuthority('ADMIN')")
     public void insertar(@RequestBody TiendaDTO dto) {
+        dto.setIdtienda(0);
         ModelMapper m = new ModelMapper();
         Tienda t = m.map(dto, Tienda.class);
         tS.insertar(t);
