@@ -17,12 +17,13 @@ import { Rol } from './components/rol/rol';
 import { InsertareditarRol } from './components/rol/insertareditar/insertareditar';
 import { ObjetivoAhorro } from './components/objetivo-ahorro/objetivo-ahorro';
 import { InsertareditarObjetivoAhorro } from './components/objetivo-ahorro/insertareditar/insertareditar';
+import { Landing } from './components/landing/landing';
 
 
 export const routes: Routes = [
 
   {
-    path:'',redirectTo:'users',pathMatch:'full'
+    path: '', component: Landing // ← Landing page por defecto
   },
   //-----------------IVANA------------------------------------------
   {
