@@ -18,11 +18,11 @@ public class Producto {
     private int precioproducto;
 
     @ManyToOne
-    @JoinColumn(name = "Usuario_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "Tienda_id", nullable = false)
+    @JoinColumn(name = "idtienda", nullable = false)
     private Tienda tienda;
 
     public Producto() {
