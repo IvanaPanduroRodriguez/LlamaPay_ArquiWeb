@@ -22,7 +22,8 @@ import { Producto } from './components/producto/producto';
 import { Insertareditarproducto } from './components/producto/insertareditarproducto/insertareditarproducto';
 import { Tienda } from './components/tienda/tienda';
 import { Insertareditartienda } from './components/tienda/insertareditartienda/insertareditartienda';
-
+import { Buscartienda } from './components/tienda/buscartienda/buscartienda';
+import { Buscarproducto } from './components/producto/buscarproducto/buscarproducto';
 
 export const routes: Routes = [
 
@@ -112,7 +113,8 @@ export const routes: Routes = [
     component: Producto,
     children: [
       { path: 'formulario', component: Insertareditarproducto },
-      { path: 'ediciones/:id', component: Insertareditarproducto }
+      { path: 'ediciones/:id', component: Insertareditarproducto },
+      { path: 'buscarproducto', component: Buscarproducto }
     ]
   },
   {
@@ -120,7 +122,8 @@ export const routes: Routes = [
     component: Tienda,
     children: [
       { path: 'formulario', component: Insertareditartienda },
-      { path: 'ediciones/:id', component: Insertareditartienda }
+      { path: 'ediciones/:id', component: Insertareditartienda },
+      { path: 'buscartienda', component: Buscartienda }
     ]
   },
 ];
