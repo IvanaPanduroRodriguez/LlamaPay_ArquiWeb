@@ -3,13 +3,13 @@
         <h2 class="form-title">Registro de Productos</h2>
         <form [formGroup]="form" (submit)="aceptar()">
             <div class="form-fields">
-                <mat-form-field appearance="outline">
-                    <mat-label>Id</mat-label>
-                    <input matInput formControlName="idProducto" type="number">
+                <mat-form-field *ngIf="edicion">
+                    <mat-label>ID</mat-label>
+                    <input matInput formControlName="idProducto">
                     <mat-error *ngIf="form.get('idProducto')?.hasError('required')">
-                        El id del producto es obligatorio!!
+                        El ID del producto es obligatorio!!
                     </mat-error>
-                </mat-form-field>
+                    </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Nombre del Producto</mat-label>
                     <input matInput formControlName="nombreProducto">
