@@ -2,7 +2,6 @@ package pe.edu.upc.llamapaytf.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.llamapaytf.dtos.RolDTO;
 import pe.edu.upc.llamapaytf.entities.Rol;
@@ -38,6 +37,7 @@ public class RolController {
     public void eliminar(@PathVariable("id") int id) {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         roS.deleteById(id);
 =======
 
@@ -45,6 +45,9 @@ public class RolController {
 =======
 
 >>>>>>> parent of 7e6e1fc (Ajustes finales en el backend, rol, user. objetivo ahorro y metodo pago)
+=======
+        roS.delete(id);
+>>>>>>> parent of 7ec60d4 (Merge branch 'Jhon_Backend' into Ivana)
     }
 
     @PutMapping("/actualizar")
