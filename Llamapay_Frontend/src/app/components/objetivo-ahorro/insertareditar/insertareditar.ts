@@ -13,6 +13,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
 import { MatButtonModule } from '@angular/material/button';
+
 @Component({
   selector: 'app-insertareditar',
   providers: [provideNativeDateAdapter()],
@@ -41,7 +42,9 @@ estadoObjetivos: { value: string; viewValue: string; isActivo: boolean }[] = [
   { value: 'En progreso', viewValue: 'En progreso', isActivo: true },
   { value: 'Dado de Baja', viewValue: 'Dado de Baja', isActivo: false }
 ];
+
   listaUsuarios:User[]=[]
+
   constructor(
     private formBuilder: FormBuilder,
     private oS: ObjetivoAhorroService,
