@@ -2,6 +2,7 @@ package pe.edu.upc.llamapaytf.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.llamapaytf.dtos.RolDTO;
 import pe.edu.upc.llamapaytf.entities.Rol;
@@ -33,9 +34,9 @@ public class RolController {
         roS.insert(ros);
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") int id) {
-        roS.delete(id);
+        roS.deleteById(id);
     }
 
     @PutMapping("/actualizar")
