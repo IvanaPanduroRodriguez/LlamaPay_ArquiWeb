@@ -38,8 +38,6 @@ export class InsertarEditarTransaccion implements OnInit {
   idTransaccion: number = 0;
   edicion: boolean = false;
 
-  today: Date = new Date();
-
   constructor(
     private formBuilder: FormBuilder,
     private transaccionService: TransaccionService,
@@ -49,14 +47,7 @@ export class InsertarEditarTransaccion implements OnInit {
   ) {
     this.form = this.formBuilder.group({
       fechaTransaccion: ['', Validators.required],
-      montoTransaccion: [
-    '',
-    [
-      Validators.required,
-      Validators.min(0),
-      Validators.max(1000000)
-    ]
-  ],
+      montoTransaccion: ['', Validators.required],
       descripcionTransaccion: ['', Validators.required],
       tipoTransaccion: ['', Validators.required]
     });

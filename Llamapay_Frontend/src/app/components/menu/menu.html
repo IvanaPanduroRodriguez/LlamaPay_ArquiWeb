@@ -60,27 +60,6 @@
       Reportes
     </button>
   </div>
-
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuTransaccion" class="btn-rojo">
-      <mat-icon>compare_arrows</mat-icon>
-      Transacciones
-    </button>
-  </div>
-
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuTipoTransaccion" class="btn-rojo">
-      <mat-icon>category</mat-icon>
-      Tipos de Transacción
-    </button>
-  </div>
-
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuTipoCuenta" class="btn-rojo">
-      <mat-icon>account_balance</mat-icon>
-      Tipos de Cuenta
-    </button>
-  </div>
 </mat-toolbar>
 
 <!-- Menú Usuarios -->
@@ -132,23 +111,6 @@
   <button mat-menu-item routerLink="/producto/insertareditarproducto">Registrar</button>
 </mat-menu>
 
-<!-- Menú Transacciones -->
-<mat-menu #menuTransaccion="matMenu">
-  <button mat-menu-item routerLink="/transaccion/listar">Listar</button>
-  <button mat-menu-item routerLink="/transaccion/insertar">Registrar</button>
-</mat-menu>
-
-<!-- Menú Tipos de Transacción -->
-<mat-menu #menuTipoTransaccion="matMenu">
-  <button mat-menu-item routerLink="/tipotransaccion/listar">Listar</button>
-  <button mat-menu-item routerLink="/tipotransaccion/insertar">Registrar</button>
-</mat-menu>
-
-<!-- Menú Tipos de Cuenta -->
-<mat-menu #menuTipoCuenta="matMenu">
-  <button mat-menu-item routerLink="/tipocuenta/listar">Listar</button>
-  <button mat-menu-item routerLink="/tipocuenta/insertar">Registrar</button>
-</mat-menu>
 <mat-menu #menuReportes="matMenu">
   <button mat-menu-item routerLink="/reportes/metodospagosgrafica">
     <mat-icon>bar_chart</mat-icon>
