@@ -1,5 +1,7 @@
-<div class="form-container">
-  <h1>{{ edicion ? 'Editar Tipo de Cuenta' : 'Registrar Tipo de Cuenta' }}</h1>
+<div class="container-tipocuenta">
+  <div>
+    <h1>{{ edicion ? 'Actualizar Tipo de Cuenta' : 'Registrar Tipo de Cuenta' }}</h1>
+  </div>
 
   <form [formGroup]="form" (ngSubmit)="aceptar()">
 
@@ -17,6 +19,9 @@
       <mat-error *ngIf="form.get('numeroTipoCuenta')?.hasError('required')">
         Este campo es obligatorio
       </mat-error>
+      <mat-error *ngIf="form.get('numeroTipoCuenta')?.hasError('pattern')">
+        Debe tener entre 8 y 20 dígitos numéricos
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
@@ -33,24 +38,32 @@
       <mat-error *ngIf="form.get('saldoTipoCuenta')?.hasError('required')">
         Este campo es obligatorio
       </mat-error>
+      <mat-error *ngIf="form.get('saldoTipoCuenta')?.hasError('min')">
+        El saldo no puede ser negativo
+      </mat-error>
+      <mat-error *ngIf="form.get('saldoTipoCuenta')?.hasError('max')">
+        El saldo no puede superar 1,000,000
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Moneda</mat-label>
-      <input matInput formControlName="monedaTipoCuenta" />
+      <mat-select formControlName="monedaTipoCuenta">
+        <mat-option value="PEN">Soles (PEN)</mat-option>
+        <mat-option value="USD">Dólares (USD)</mat-option>
+      </mat-select>
       <mat-error *ngIf="form.get('monedaTipoCuenta')?.hasError('required')">
         Este campo es obligatorio
       </mat-error>
     </mat-form-field>
 
-    <!-- Campo oculto para userId -->
+    <!-- Campo oculto -->
     <input type="hidden" [formControl]="userIdControl" />
 
-    <div class="form-buttons">
+    <div class="btn-container">
       <button mat-raised-button color="primary" type="submit">
         {{ edicion ? 'Actualizar' : 'Registrar' }}
       </button>
-
       <button mat-raised-button color="warn" type="button" (click)="cancelar()">
         Cancelar
       </button>

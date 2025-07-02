@@ -1,7 +1,11 @@
+/* Contenedor general del listado */
 .container {
   padding: 24px;
+  background: linear-gradient(to right, #e3f2fd, #ffffff); /* Fondo suave */
+  min-height: 100vh;
 }
 
+/* Encabezado: título + botón */
 .header {
   display: flex;
   flex-direction: column;
@@ -10,31 +14,54 @@
   margin-bottom: 24px;
 }
 
+/* Título principal */
 h1 {
   margin: 0;
+  font-size: 28px;
   font-weight: 600;
-  color: #333;
+  color: #506C4D;
 }
 
+/* Botón para registrar */
 button[mat-raised-button] {
-  background-color: #43a047;
+  background-color: #4caf50;
   color: white;
   font-weight: bold;
+  border-radius: 8px;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease;
 }
 
 button[mat-raised-button]:hover {
-  background-color: #2e7d32;
+  background-color: #388e3c;
 }
 
+/* Tabla */
 table {
   width: 100%;
 }
 
+/* Encabezados */
 th {
   background-color: #a5d6a7;
   text-align: center;
+  font-weight: bold;
+  color: #333;
+  font-size: 14px;
 }
 
+/* Celdas */
 td {
   text-align: center;
+  font-size: 14px;
+  padding: 10px 5px;
+}
+
+/* Íconos de editar y eliminar */
+button[mat-icon-button] {
+  transition: transform 0.2s ease;
+}
+
+button[mat-icon-button]:hover {
+  transform: scale(1.1); /* Efecto zoom suave */
 }
