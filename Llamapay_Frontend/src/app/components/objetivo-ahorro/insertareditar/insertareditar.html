@@ -1,0 +1,98 @@
+<div class="container">
+  <div style="text-align: center;margin: 5%;">
+    <div>
+      <h1>{{ actualizar ? "Actualizar ObjetivoAhorro" : "Registro de Objetivo de ahorro"}}</h1>
+    </div>
+  </div>
+  <div style="text-align: center;margin: 5%;">
+
+    <form [formGroup]="form" (submit)=" aceptar()">
+      <mat-form-field *ngIf="actualizar">
+          <mat-label>ID</mat-label>
+            <input matInput formControlName="codigo" />
+          <mat-error *ngIf="form.get('codigo')?.hasError('required')">
+            El código es obligatorio!!
+          </mat-error>
+      </mat-form-field>
+       <br />
+      
+      <mat-form-field class="example-full-width">
+        <mat-label>Objetivo Ahorro</mat-label>
+        <input matInput placeholder="Ex. title1" formControlName="meta">
+        <mat-error *ngIf="form.get('meta')?.hasError('required')">
+          El Objetivo de Ahorro es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+
+      <br>
+      <mat-form-field class="example-full-width">
+        <mat-label>Monto Meta</mat-label>
+        <input matInput placeholder="120000" formControlName="montoMeta">
+        <mat-error *ngIf="form.get('montoMeta')?.hasError('required')">
+          Se debe ingresar el moto esperado, yaque es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field>
+        <mat-label>Fecha Inicial del Objetivo</mat-label>
+        <input matInput [matDatepicker]="picker1" formControlName="fechaInicial">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+        <mat-error *ngIf="form.get('fechaInicial')?.hasError('required')">
+          La fecha inicial es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Fecha Final del Objetivo</mat-label>
+        <input matInput [matDatepicker]="picker2" formControlName="fechaFinal">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+        <mat-error *ngIf="form.get('fechaFinal')?.hasError('required')">
+          La fecha inicial es obligatoria!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="example-full-width">
+        <mat-label>Monto Actual del Objetivo</mat-label>
+        <input matInput placeholder="120000" formControlName="montoActual">
+        <mat-error *ngIf="form.get('montoActual')?.hasError('required')">
+          El monto actual es obligatorio!!
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+<mat-form-field>
+  <mat-label>Estados del objetivo</mat-label>
+  <mat-select formControlName="estadoObjetivo">
+    @for (food of estadoObjetivos; track food) {
+      <mat-option [value]="food.value" [disabled]="!food.isActivo">
+        {{ food.viewValue }} 
+        <span *ngIf="!food.isActivo" style="color: red; font-style: italic;">
+          (Inactivo)
+        </span>
+      </mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+
+
+      <br>
+      <mat-form-field>
+        <mat-label>Nombre del usuario</mat-label>
+        <mat-select formControlName="user">
+          @for (food of listaUsuarios; track food) {
+          <mat-option [value]="food.userId">{{food.nameUser}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <button mat-raised-button>{{ actualizar ? "Actualizar Objetivo Ahorro" : "Registro de Objetuvo Ahorro"}}</button>
+
+    </form>
+  </div>
+</div>
