@@ -20,6 +20,7 @@ public class User {
     private String nameUser;
     @Column(name = "lastnameUser", nullable = false, length = 30)
     private String lastnameUser;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "emailUser", nullable = false, length = 50)
     private String emailUser;
     @Column(name = "birthdayUser", nullable = false)
@@ -36,7 +37,7 @@ public class User {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userId", nullable = true)
     @JsonManagedReference
     private List<Rol> roles;
 
