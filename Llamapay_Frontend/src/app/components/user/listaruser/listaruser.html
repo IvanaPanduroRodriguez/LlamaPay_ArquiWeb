@@ -32,7 +32,17 @@
         <th mat-header-cell *matHeaderCellDef> Estado </th>
         <td mat-cell *matCellDef="let element"> {{element.enabled}} </td>
     </ng-container>
-<ng-container matColumnDef="c6">
+
+    <ng-container matColumnDef="c6">
+              <th mat-header-cell *matHeaderCellDef> Ver Detalle </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-button color="primary" (click)="verDetalle(element)">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+<ng-container matColumnDef="c7">
   <th mat-header-cell *matHeaderCellDef> Actualizar </th>
   <td mat-cell *matCellDef="let element">
 <button mat-button [routerLink]="['/users/ediciones', element.userId]">
@@ -41,7 +51,7 @@
   </td>
 </ng-container>
 
-<ng-container matColumnDef="c7">
+<ng-container matColumnDef="c8">
   <th mat-header-cell *matHeaderCellDef> Eliminar </th>
   <td mat-cell *matCellDef="let element">
     <button mat-button (click)="eliminar(element.userId)">
@@ -54,6 +64,30 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
+<div *ngIf="detalleSeleccionado" class="detalle-container" style="margin-top: 30px;">
+  <mat-card style="padding: 20px; border-radius: 12px; background-color: #f3f9f4;">
+    <mat-card-header>
+      <mat-card-title>Detalle del Usuario</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p><strong>ID:</strong> {{ detalleSeleccionado?.userId }}</p>
+      <p><strong>Nombre:</strong> {{ detalleSeleccionado?.nameUser }}</p>
+      <p><strong>Apellidos:</strong> {{ detalleSeleccionado?.lastnameUser }}</p>
+      <p><strong>Correo electrónico:</strong> {{ detalleSeleccionado?.emailUser }}</p>
+      <p><strong>Fecha de nacimiento:</strong> {{ detalleSeleccionado?.birthdayUser | date: 'dd/MM/yyyy' }}</p>
+      <p><strong>Fecha de registro:</strong> {{ detalleSeleccionado?.registrationDateUser | date: 'dd/MM/yyyy' }}</p>
+      <p><strong>Username:</strong> {{ detalleSeleccionado?.username }}</p>
+      <p><strong>Estado de Cuenta:</strong> 
+        <span [ngStyle]="{'color': detalleSeleccionado?.enabled ? 'green' : 'red'}">
+          {{ detalleSeleccionado?.enabled ? 'Activo' : 'Inactivo' }}
+        </span>
+      </p>
+    </mat-card-content>
+    <mat-card-actions style="text-align: right;">
+      <button mat-button color="warn" (click)="cerrarDetalle()">Cerrar</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
 
   </div>
 </div>

@@ -10,11 +10,7 @@ import { Listarmetodopago } from './components/metodopago/listarmetodopago/lista
 import { User } from './components/user/user';
 import { InsertareditarUser } from './components/user/insertareditar/insertareditar';
 import { Listaruser } from './components/user/listaruser/listaruser';
-import { Rol } from './components/rol/rol';
-import { InsertareditarRol } from './components/rol/insertareditar/insertareditar';
 import { Listarrol } from './components/rol/listarrol/listarrol';
-import { ObjetivoAhorro } from './components/objetivo-ahorro/objetivo-ahorro';
-import { InsertareditarObjetivoAhorro } from './components/objetivo-ahorro/insertareditar/insertareditar';
 import { Listarobjetivoahorro } from './components/objetivo-ahorro/listarobjetivoahorro/listarobjetivoahorro';
 
 import { Transaccion } from './components/transaccion/transaccion';
@@ -23,21 +19,30 @@ import { InsertarEditarTransaccion } from './components/transaccion/insertaredit
 import { TipoTransaccion } from './components/tipotransaccion/tipotransaccion';
 import { ListarTipoTransaccionComponent } from './components/tipotransaccion/listar/listar';
 import { InsertarTipoTransaccionComponent } from './components/tipotransaccion/insertareditar/insertareditar';
+import { Rol } from './components/rol/rol';
+import { InsertareditarRol } from './components/rol/insertareditar/insertareditar';
+import { ObjetivoAhorro } from './components/objetivo-ahorro/objetivo-ahorro';
+import { InsertareditarObjetivoAhorro } from './components/objetivo-ahorro/insertareditar/insertareditar';
+import { Reportes } from './components/reportes/reportes';
+import { Reportesmetodopago } from './components/reportes/reportesmetodopago/reportesmetodopago';
+import { ReportesuserComponent } from './components/reportes/reportesuser/reportesuser';
+import { TipoCuenta } from './components/tipocuenta/tipocuenta';
 import { ListarTipoCuentaComponent } from './components/tipocuenta/listar/listar';
 import { InsertareditarTipoCuentaComponent } from './components/tipocuenta/insertareditar/insertareditar';
-import { TipoCuenta } from './components/tipocuenta/tipocuenta';
-
 import { Tienda } from './components/tienda/tienda';
 import { Listartienda } from './components/tienda/listartienda/listartienda';
 import { Insertareditartienda } from './components/tienda/insertareditartienda/insertareditartienda';
-import { Producto } from './components/producto/producto';
 import { BuscarTiendaComponent } from './components/tienda/buscar/buscar';
+import { Producto } from './components/producto/producto';
 import { Listarproducto } from './components/producto/listarproducto/listarproducto';
 import { Insertareditarproducto } from './components/producto/insertareditarproducto/insertareditarproducto';
 
 
 export const routes: Routes = [
 
+  {
+    path:'',redirectTo:'users',pathMatch:'full'
+  },
   //-----------------IVANA------------------------------------------
 
   {
@@ -106,6 +111,17 @@ export const routes: Routes = [
       },
       {
         path:'listado',component:Listarobjetivoahorro
+      }
+    ]
+  },
+  {
+    path:'reportes',component:Reportes,
+    children:[
+      {
+        path:'metodospagosgrafica',component:Reportesmetodopago
+      },
+      {
+        path:'graficUser',component:ReportesuserComponent
       }
     ]
   },

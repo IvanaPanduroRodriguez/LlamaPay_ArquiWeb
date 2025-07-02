@@ -29,8 +29,8 @@ export class Listarrol implements OnInit {
       this.dataSource = new MatTableDataSource(data)
     })
   }
-  eliminar(Rol_id: number) {
-    this.rS.deleteS(Rol_id).subscribe(data=>{
+  eliminar(id: number) {
+    this.rS.deleteS(id).subscribe(data=>{
       this.rS.list().subscribe(data=>{
         this.rS.setList(data)
       })
