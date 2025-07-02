@@ -1,6 +1,15 @@
 <div class="container">
     <div style="text-align: center;margin: 5%;">
         <h1>Lista de Productos</h1>
+
+    </div>
+    <div>
+        <form [formGroup]="form">
+            <mat-form-field>
+                <mat-label>Producto</mat-label>
+                <input matInput formControlName="producto">
+            </mat-form-field>
+        </form>
     </div>
     <div>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -43,29 +52,10 @@
                 <th mat-header-cell *matHeaderCellDef> Tienda</th>
                 <td mat-cell *matCellDef="let element"> {{element.tienda.idtienda}} </td>
             </ng-container>
-            
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="c8">
-                <th mat-header-cell *matHeaderCellDef> Actualizar </th>
-                <td mat-cell *matCellDef="let element">
-                    <button matButton [routerLink]="['ediciones',element.idproducto]">
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                </td>
-            </ng-container>
 
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="c9">
-                <th mat-header-cell *matHeaderCellDef> Eliminar </th>
-                <td mat-cell *matCellDef="let element">
-                    <button matButton (click)="eliminar(element.idproducto)">
-                        <mat-icon>delete_forever</mat-icon>
-                    </button>
-                </td>
-            </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
     </div>
-    </div>
+</div>

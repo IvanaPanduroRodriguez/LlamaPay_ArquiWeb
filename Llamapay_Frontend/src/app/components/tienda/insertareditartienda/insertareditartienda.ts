@@ -48,9 +48,9 @@ export class Insertareditartienda implements OnInit {
 
   aceptar() {
     if (this.form.valid) {
-      this.tienda.Tienda_id = this.form.value.idTienda;
-      this.tienda.Nombre_tienda = this.form.value.nameTienda;
-      this.tienda.Direccion = this.form.value.direccionTienda;
+      this.tienda.idtienda = this.form.value.idTienda;
+      this.tienda.nombretienda = this.form.value.nameTienda;
+      this.tienda.direccion = this.form.value.direccionTienda;
 
       if (this.edicion) {
         this.tS.update(this.tienda).subscribe(data => {
@@ -65,7 +65,7 @@ export class Insertareditartienda implements OnInit {
           });
         });
       }
-      this.router.navigate(['tiendas', 'listartienda']);
+      this.router.navigate(['tiendas']);
     }
   }
 
@@ -73,9 +73,9 @@ export class Insertareditartienda implements OnInit {
     if (this.edicion) {
       this.tS.listId(this.id).subscribe(data => {
         this.form = new FormGroup({
-          idTienda: new FormControl(data.Tienda_id),
-          nameTienda: new FormControl(data.Nombre_tienda, Validators.required),
-          direccionTienda: new FormControl(data.Direccion, Validators.required),
+          idTienda: new FormControl(data.idtienda),
+          nameTienda: new FormControl(data.nombretienda, [Validators.required]),
+          direccionTienda: new FormControl(data.direccion, [Validators.required]),
         });
       });
     }

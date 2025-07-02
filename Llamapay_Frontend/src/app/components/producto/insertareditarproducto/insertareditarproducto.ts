@@ -12,7 +12,7 @@ import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
 import { Producto } from '../../../models/productos';
 import { ProductosService } from '../../../services/productos.service';
-
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-insertareditarproducto',
@@ -21,7 +21,9 @@ import { ProductosService } from '../../../services/productos.service';
     MatButtonModule,
     MatCardModule,
     ReactiveFormsModule,
-    CommonModule],
+    CommonModule,
+    MatSelectModule
+  ],
   templateUrl: './insertareditarproducto.html',
   styleUrl: './insertareditarproducto.css'
 })
@@ -43,6 +45,12 @@ export class Insertareditarproducto implements OnInit {
     
   ) { }
   ngOnInit(): void {
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = data['id'] != null;
+      this.init();
+    });
+
     this.form = this.formBuilder.group({
       idProducto: [''],
       nombreProducto: ['', Validators.required],
@@ -51,52 +59,69 @@ export class Insertareditarproducto implements OnInit {
       precioProducto: ['', [Validators.required, Validators.min(0)]],
       usuarioProducto: ['', Validators.required],
       tiendaProducto: ['', Validators.required],
+      
     });
-    this.sS.list().subscribe(data=>{
-      this.listausuarios=data
-    })
+    // Cargar listas de usuarios y tiendas
+    this.sS.list().subscribe(data => {
+      this.listausuarios = data;
+    });
     this.tS.list().subscribe(data => {
       this.listatiendas = data;
     });
   }
   aceptar() {
-    if (this.form.valid) {
-      this.producto.Producto_id = this.form.value.idProducto;
-      this.producto.Nombre_producto = this.form.value.nombreProducto;
-      this.producto.Descripcion = this.form.value.descripcionProducto;
-      this.producto.Unidad_medida = this.form.value.UnidadmedidaProducto;
-      this.producto.Precio_Producto = this.form.value.precioProducto;
-      this.producto.us.username = this.form.value.usuarioProducto;
-      this.producto.td.Nombre_tienda = this.form.value.tiendaProducto;
-
+    if (this.form.valid) {      
+      const usuarioId = this.form.value.usuarioProducto;
+      const tiendaId = this.form.value.tiendaProducto;
+      
+      const productoData: any = {
+        idproducto: this.form.value.idProducto || 0,
+        nombreproducto: this.form.value.nombreProducto,
+        descripcion: this.form.value.descripcionProducto,
+        unidadmedida: this.form.value.UnidadmedidaProducto,
+        precioproducto: Number(this.form.value.precioProducto),
+        tienda: {
+          idtienda: Number(tiendaId)
+        },
+        user: {
+          userId: Number(usuarioId)
+        }
+      };
+      
       if (this.edicion) {
-        this.pS.update(this.producto).subscribe(data => {
+        this.pS.update(productoData).subscribe(data => {
           this.pS.list().subscribe(data => {
             this.pS.setList(data);
           });
         });
       } else {
-        this.pS.update(this.producto).subscribe(data => {
-          this.router.navigate(['/producto/listarproducto']);
+        this.pS.insert(productoData).subscribe(data => {
+          this.pS.list().subscribe(data => {
+            this.pS.setList(data);
+          });
         });
       }
+      this.router.navigate(['/productos']);
     }
   }
   init() {
     if (this.edicion) {
       this.pS.listId(this.id).subscribe(data => {
         this.form = new FormGroup({
-          idProducto: new FormControl(data.Producto_id),
-          nombreProducto: new FormControl(data.Nombre_producto),
-          descripcionProducto: new FormControl(data.Descripcion),
-          UnidadmedidaProducto: new FormControl(data.Unidad_medida),
-          precioProducto : new FormControl(data.Precio_Producto),
-          usuarioProducto: new FormControl(data.us.username),
-          tiendaProducto: new FormControl(data.td.Nombre_tienda),
+          idProducto: new FormControl(data.idproducto),
+          nombreProducto: new FormControl(data.nombreproducto),
+          descripcionProducto: new FormControl(data.descripcion),
+          UnidadmedidaProducto: new FormControl(data.unidadmedida),
+          precioProducto : new FormControl(data.precioproducto),
+          usuarioProducto: new FormControl(data.us.userId),
+          tiendaProducto: new FormControl(data.td.idtienda),
         });
       });
     }
   }
 
+  cancelar() {
+    this.router.navigate(['producto', 'listarproducto']);
+  }
 
 }
