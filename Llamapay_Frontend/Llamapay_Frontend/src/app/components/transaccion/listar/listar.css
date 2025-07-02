@@ -1,8 +1,91 @@
-.contenedor-listado {
+/* Contenedor principal del listado */
+.container-transaccion-listar {
   padding: 24px;
+  background: linear-gradient(to right, #e3f2fd, #ffffff);
+  min-height: 100vh;
 }
 
-.tabla-transacciones {
+/* Título */
+.container-transaccion-listar h1 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #506C4D;
+  font-weight: 600;
+  font-size: 30px;
+}
+
+/* Botones superiores (registrar y extra) */
+.acciones {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+/* Botones de acción */
+button[mat-raised-button] {
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+button[color="primary"] {
+  background-color: #4caf50;
+}
+
+button[color="primary"]:hover {
+  background-color: #43a047;
+}
+
+button[color="accent"] {
+  background-color: #2196f3;
+}
+
+button[color="accent"]:hover {
+  background-color: #1976d2;
+}
+
+/* Tabla estilizada */
+.tabla-estilizada {
   width: 100%;
-  margin-top: 16px;
+  border-collapse: collapse;
+}
+
+/* Encabezados */
+th {
+  background-color: #a5d6a7;
+  text-align: center;
+  font-weight: 600;
+  padding: 12px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Celdas */
+td {
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* Alternar color de filas */
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #ffe0b2;
+  transition: background-color 0.3s ease;
+}
+
+/* Botones de icono (editar, eliminar, detalle) */
+button[mat-icon-button] {
+  color: #444;
+  transition: transform 0.2s ease;
+}
+
+button[mat-icon-button]:hover {
+  transform: scale(1.1);
 }

@@ -1,4 +1,4 @@
-import { Categoria } from "./categoria";
+import { Categoria } from "../models/categoria";
 
 export class Servicio {
     idService: number = 0;

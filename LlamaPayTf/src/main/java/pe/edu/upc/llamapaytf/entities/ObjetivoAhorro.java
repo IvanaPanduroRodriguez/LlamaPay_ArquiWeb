@@ -25,7 +25,7 @@ public class ObjetivoAhorro {
     private String estadoObjetivo;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     public ObjetivoAhorro() {

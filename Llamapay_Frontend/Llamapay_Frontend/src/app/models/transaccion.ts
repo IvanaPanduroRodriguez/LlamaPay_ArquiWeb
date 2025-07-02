@@ -1,4 +1,4 @@
-import { TipoTransaccion } from './tipotransaccion';
+import { TipoTransaccion } from '../models/tipotransaccion';
 
 export class Transaccion {
     idTransaccion: number=0;
