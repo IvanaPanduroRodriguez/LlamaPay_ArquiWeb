@@ -29,8 +29,8 @@ export class Listarobjetivoahorro implements OnInit {
       this.dataSource = new MatTableDataSource(data)
     })
   }
-  eliminar(Objetivo_id: number) {
-    this.oS.deleteS(Objetivo_id).subscribe(data=>{
+  eliminar(id: number) {
+    this.oS.deleteS(id).subscribe(data=>{
       this.oS.list().subscribe(data=>{
         this.oS.setList(data)
       })

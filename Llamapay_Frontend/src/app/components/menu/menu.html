@@ -7,32 +7,6 @@
   </div>
 
   <div>
-    <button mat-button [matMenuTriggerFor]="menuUser" class="btn-rojo">
-      <mat-icon>computer</mat-icon>
-      Usuarios
-    </button>
-  </div>
-
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuRoles" class="btn-rojo">
-      <mat-icon>settings</mat-icon>
-      Roles
-    </button>
-  </div>
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuObjetivoAhorros" class="btn-rojo">
-      <mat-icon>savings</mat-icon>
-      Objetivos de Ahorro
-    </button>
-  </div>
-
-  <div>
-    <button mat-button [matMenuTriggerFor]="menuMetodoPagos" class="btn-rojo">
-      <mat-icon>payment</mat-icon>
-      Métodos de Pago
-    </button>
-  </div>
-  <div>
     <button mat-button [matMenuTriggerFor]="menuServicios" class="btn-rojo">
       <mat-icon>business</mat-icon>
       Servicios
@@ -87,35 +61,50 @@
       Tipos de Cuenta
     </button>
   </div>
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuUser" class="btn-rojo">
+      <mat-icon>computer</mat-icon>
+      Usuarios
+    </button>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuRoles" class="btn-rojo">
+      <mat-icon>settings</mat-icon>
+      Roles
+    </button>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuObjetivoAhorros" class="btn-rojo">
+      <mat-icon>savings</mat-icon>
+      Objetivos de Ahorro
+    </button>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuMetodoPagos" class="btn-rojo">
+      <mat-icon>payment</mat-icon>
+      Métodos de Pago
+    </button>
+  </div>
+    <div>
+    <button mat-button [matMenuTriggerFor]="menuReportes" class="btn-rojo">
+      <mat-icon>payment</mat-icon>
+      Reportes
+    </button>
+  </div>
+
+
+
 </mat-toolbar>
+
 
 <mat-menu #menuLanding="matMenu">
   <button mat-menu-item routerLink="/">Home</button>
 </mat-menu>
 
-<!-- Menú Usuarios -->
-<mat-menu #menuUser="matMenu">
-  <button mat-menu-item routerLink="/users">Listar</button>
-  <button mat-menu-item routerLink="/users/formularioU">Registrar</button>
-</mat-menu>
 
-<!-- Menú Roles -->
-<mat-menu #menuRoles="matMenu">
-  <button mat-menu-item routerLink="/roles">Listar</button>
-  <button mat-menu-item routerLink="/roles/formularioR">Registrar</button>
-</mat-menu>
-
-<!-- Menú Objetivos de Ahorro -->
-<mat-menu #menuObjetivoAhorros="matMenu">
-  <button mat-menu-item routerLink="/objetivoahorros">Listar</button>
-  <button mat-menu-item routerLink="/objetivoahorros/formularioOA">Registrar</button>
-</mat-menu>
-
-<!-- Menú Métodos de Pago -->
-<mat-menu #menuMetodoPagos="matMenu">
-  <button mat-menu-item routerLink="/metodopagos">Listar</button>
-  <button mat-menu-item routerLink="/metodopagos/formularioM">Registrar</button>
-</mat-menu>
 
 <!-- Menú Servicios -->
 <mat-menu #menuServicios="matMenu">
@@ -158,6 +147,30 @@
 <mat-menu #menuTipoCuenta="matMenu">
   <button mat-menu-item routerLink="/tipocuenta/listar">Listar</button>
   <button mat-menu-item routerLink="/tipocuenta/insertar">Registrar</button>
+</mat-menu>
+
+<!-- Menú Usuarios -->
+<mat-menu #menuUser="matMenu">
+  <button mat-menu-item routerLink="/users">Listar</button>
+  <button mat-menu-item routerLink="/users/formularioU">Registrar</button>
+</mat-menu>
+
+<!-- Menú Roles -->
+<mat-menu #menuRoles="matMenu">
+  <button mat-menu-item routerLink="/roles">Listar</button>
+  <button mat-menu-item routerLink="/roles/formularioR">Registrar</button>
+</mat-menu>
+
+<!-- Menú Objetivos de Ahorro -->
+<mat-menu #menuObjetivoAhorros="matMenu">
+  <button mat-menu-item routerLink="/objetivoahorros">Listar</button>
+  <button mat-menu-item routerLink="/objetivoahorros/formularioOA">Registrar</button>
+</mat-menu>
+
+<!-- Menú Métodos de Pago -->
+<mat-menu #menuMetodoPagos="matMenu">
+  <button mat-menu-item routerLink="/metodopagos">Listar</button>
+  <button mat-menu-item routerLink="/metodopagos/formularioM">Registrar</button>
 </mat-menu>
 
 <mat-menu #menuReportes="matMenu">

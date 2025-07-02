@@ -1,23 +1,33 @@
-import { Routes } from '@angular/router';
+
 import { Categoria } from './components/categoria/categoria';
 import { Servicio } from './components/servicio/servicio';
 import { InsertareditarCategoria } from './components/categoria/insertareditar/insertareditar';
 import { InsertareditarServicio } from './components/servicio/insertareditar/insertareditar';
 
-import { MetodoPago } from './components/metodopago/metodopago';
-import { InsertareditarMetodoPago } from './components/metodopago/insertareditar/insertareditar';
-import { Listarmetodopago } from './components/metodopago/listarmetodopago/listarmetodopago';
-import { User } from './components/user/user';
-import { InsertareditarUser } from './components/user/insertareditar/insertareditar';
-import { Listaruser } from './components/user/listaruser/listaruser';
-import { Listarrol } from './components/rol/listarrol/listarrol';
-import { Listarobjetivoahorro } from './components/objetivo-ahorro/listarobjetivoahorro/listarobjetivoahorro';
 import { Transaccion } from './components/transaccion/transaccion';
 import { ListarTransaccion } from './components/transaccion/listar/listar';
 import { InsertarEditarTransaccion } from './components/transaccion/insertareditar/insertareditar';
 import { TipoTransaccion } from './components/tipotransaccion/tipotransaccion';
 import { ListarTipoTransaccionComponent } from './components/tipotransaccion/listar/listar';
 import { InsertarTipoTransaccionComponent } from './components/tipotransaccion/insertareditar/insertareditar';
+
+import { TipoCuenta } from './components/tipocuenta/tipocuenta';
+import { ListarTipoCuentaComponent } from './components/tipocuenta/listar/listar';
+import { InsertareditarTipoCuentaComponent } from './components/tipocuenta/insertareditar/insertareditar';
+import { Tienda } from './components/tienda/tienda';
+import { Producto } from './components/producto/producto';
+import { Insertareditarproducto } from './components/producto/insertareditarproducto/insertareditarproducto';
+import { Insertareditartienda } from './components/tienda/insertareditartienda/insertareditartienda';
+import { Buscartienda } from './components/tienda/buscartienda/buscartienda';
+import { Buscarproducto } from './components/producto/buscarproducto/buscarproducto';
+import { Routes } from '@angular/router';
+import { Landing } from './components/landing/landing';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { MetodoPago } from './components/metodopago/metodopago';
+import { InsertareditarMetodoPago } from './components/metodopago/insertareditar/insertareditar';
+import { InsertareditarUser } from './components/user/insertareditar/insertareditar';
+import { User } from './components/user/user';
 import { Rol } from './components/rol/rol';
 import { InsertareditarRol } from './components/rol/insertareditar/insertareditar';
 import { ObjetivoAhorro } from './components/objetivo-ahorro/objetivo-ahorro';
@@ -25,25 +35,16 @@ import { InsertareditarObjetivoAhorro } from './components/objetivo-ahorro/inser
 import { Reportes } from './components/reportes/reportes';
 import { Reportesmetodopago } from './components/reportes/reportesmetodopago/reportesmetodopago';
 import { ReportesuserComponent } from './components/reportes/reportesuser/reportesuser';
-import { TipoCuenta } from './components/tipocuenta/tipocuenta';
-import { ListarTipoCuentaComponent } from './components/tipocuenta/listar/listar';
-import { InsertareditarTipoCuentaComponent } from './components/tipocuenta/insertareditar/insertareditar';
-import { Landing } from './components/landing/landing';
 
-import { Tienda } from './components/tienda/tienda';
-import { Listartienda } from './components/tienda/listartienda/listartienda';
-import { Producto } from './components/producto/producto';
-import { BuscarTiendaComponent } from './components/tienda/buscar/buscar';
-import { Listarproducto } from './components/producto/listarproducto/listarproducto';
-import { Insertareditarproducto } from './components/producto/insertareditarproducto/insertareditarproducto';
-import { Insertareditartienda } from './components/tienda/insertareditartienda/insertareditartienda';
-import { Buscartienda } from './components/tienda/buscartienda/buscartienda';
-import { Buscarproducto } from './components/producto/buscarproducto/buscarproducto';
 
 export const routes: Routes = [
   {
-    path:'',redirectTo:'users',pathMatch:'full'
+    path: '', component: Landing // ← Landing page por defecto
   },
+  {
+    path: 'registro', component:RegisterComponent
+  },
+  { path: 'login', component: LoginComponent },
   //-----------------IVANA------------------------------------------
 
   {
@@ -72,46 +73,37 @@ export const routes: Routes = [
   },
  //-----------------JOHN------------------------------------------
   {
-    path:'metodopagos',component:MetodoPago,
-    children:[
-      {
-        path:'formularioM',component:InsertareditarMetodoPago
-      },
-      {
-        path:'listado',component:Listarmetodopago
-      }
+    path: 'metodopagos',
+    component: MetodoPago,
+    children: [
+      { path: 'formularioM', component: InsertareditarMetodoPago },
+      { path: 'ediciones/:id', component: InsertareditarMetodoPago }
     ]
   },
   {
-    path:'users',component:User,
-    children:[
-      {
-        path:'formularioU',component:InsertareditarUser
-      },
-      {
-        path:'listado',component:Listaruser
-      }
+    path: 'users',
+    component: User,
+    children: [
+      { path: 'formularioU', component: InsertareditarUser },
+      { path: 'ediciones/:id', component: InsertareditarUser }
     ]
   },
   {
-    path:'roles',component:Rol,
-    children:[
+    path: 'roles',
+    component: Rol,
+    children: [ 
       {
-        path:'formularioR',component:InsertareditarRol
+        path: 'formularioR', component: InsertareditarRol
       },
-      {
-        path:'listado',component:Listarrol
-      }
     ]
+
   },
   {
-    path:'objetivoahorros',component:ObjetivoAhorro,
+    path:'objetivoahorros',
+    component: ObjetivoAhorro,
     children:[
       {
-        path:'formularioOA',component:InsertareditarObjetivoAhorro
-      },
-      {
-        path:'listado',component:Listarobjetivoahorro
+        path:'formularioOA',component: InsertareditarObjetivoAhorro
       }
     ]
   },

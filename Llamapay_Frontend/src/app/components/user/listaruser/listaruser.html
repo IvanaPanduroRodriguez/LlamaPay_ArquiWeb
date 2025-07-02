@@ -32,23 +32,6 @@
         <th mat-header-cell *matHeaderCellDef> Estado </th>
         <td mat-cell *matCellDef="let element"> {{element.enabled}} </td>
     </ng-container>
-<ng-container matColumnDef="c6">
-  <th mat-header-cell *matHeaderCellDef> Actualizar </th>
-  <td mat-cell *matCellDef="let element">
-<button mat-button [routerLink]="['/users/ediciones', element.userId]">
-  <mat-icon>edit</mat-icon>
-</button>
-  </td>
-</ng-container>
-
-<ng-container matColumnDef="c7">
-  <th mat-header-cell *matHeaderCellDef> Eliminar </th>
-  <td mat-cell *matCellDef="let element">
-    <button mat-button (click)="eliminar(element.userId)">
-      <mat-icon>delete_forever</mat-icon>
-    </button>
-  </td>
-</ng-container>
 
     <ng-container matColumnDef="c6">
               <th mat-header-cell *matHeaderCellDef> Ver Detalle </th>

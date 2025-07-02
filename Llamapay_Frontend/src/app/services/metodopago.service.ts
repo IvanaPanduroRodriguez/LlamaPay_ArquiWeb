@@ -1,10 +1,9 @@
 import { Injectable } from "@angular/core";
+import { environment } from "../../environments/environment"; 
 import { HttpClient } from "@angular/common/http";
 import { MetodoPago } from "../models/metodopago";
 import { Observable, Subject } from "rxjs";
-import { environment } from "../../environments/environment";
 import { ObtenerMetodosPagosPorUsersDTO } from "../models/obtenermetodospagosporusersDTO";
-
 
 const base_url=environment.base;
 @Injectable({

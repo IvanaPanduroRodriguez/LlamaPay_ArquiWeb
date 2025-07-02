@@ -1,10 +1,9 @@
 import { Injectable } from "@angular/core";
-import { environment } from "../../environments/environment";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { environment } from "../../environments/environment"; 
+import { HttpClient } from "@angular/common/http";
 import { User } from "../models/user";
 import { Subject } from "rxjs";
 import { SerchingUserForYearBirthdayDTO } from "../models/serchinguserforyearbirthdayDTO";
-
 
 const base_url=environment.base;
 @Injectable({
@@ -40,14 +39,8 @@ private listaCambio = new Subject<User[]>(); //1er paso
     deleteS(id:number) {
       return this.http.delete(`${this.url}/${id}`)
     }
-getBirthdaysByRange(inicio: string, fin: string) {
-  const params = new HttpParams()
-    .set('inicio', inicio)
-    .set('fin', fin);
-
-  return this.http.get<SerchingUserForYearBirthdayDTO[]>(
-    `${this.url}/Searching-Date-years-users`,
-    { params }
-  );
+    getBirthdaysByRange(inicio: string, fin: string) {
+  const params = { inicio, fin };
+  return this.http.get<SerchingUserForYearBirthdayDTO[]>(`${this.url}/searching-Date-years-users`, { params });
 }
 }
