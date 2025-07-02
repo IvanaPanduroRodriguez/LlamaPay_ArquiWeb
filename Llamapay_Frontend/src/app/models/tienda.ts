@@ -1,5 +1,5 @@
 export class Tienda {
-  idtienda: number = 0
-  nombretienda: String = ""
-  direccion: String = ""
+  Tienda_id: number = 0
+  Nombre_tienda: string = ""
+  Direccion: string = ""
 }

@@ -36,7 +36,7 @@ public class User {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userId", nullable = true)
     @JsonManagedReference
     private List<Rol> roles;
 

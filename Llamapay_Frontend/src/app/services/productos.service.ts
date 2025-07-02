@@ -35,7 +35,8 @@ export class ProductosService {
       deleteS(id:number) {
         return this.http.delete(`${this.url}/${id}`)
     }
-    searchProducto(p:string){
-    return this.http.get<Producto[]>(`${this.url}/buscar/${p}`)
-    }
+      searchProducto(p:string){
+        const params={nombre:p}
+        return this.http.get<Producto[]>(`${this.url}/busquedas`,{params})
+      }
 }

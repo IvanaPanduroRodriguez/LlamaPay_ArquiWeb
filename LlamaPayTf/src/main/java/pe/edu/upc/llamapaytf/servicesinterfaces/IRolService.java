@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IRolService {
     public void insert(Rol rol);
-    public void delete(int id);
+    public void deleteById(int id);
     public void update(Rol rol);
     public List<Rol> list();
 

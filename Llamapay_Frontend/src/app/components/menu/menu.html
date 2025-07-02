@@ -1,12 +1,5 @@
 <mat-toolbar class="custom-toolbar">
   <div>
-    <button mat-button [matMenuTriggerFor]="menuLanding" class="btn-rojo">
-      <mat-icon>home</mat-icon>
-      Home
-    </button>
-  </div>
-
-  <div>
     <button mat-button [matMenuTriggerFor]="menuUser" class="btn-rojo">
       <mat-icon>computer</mat-icon>
       Usuarios
@@ -19,6 +12,7 @@
       Roles
     </button>
   </div>
+
   <div>
     <button mat-button [matMenuTriggerFor]="menuObjetivoAhorros" class="btn-rojo">
       <mat-icon>savings</mat-icon>
@@ -89,10 +83,6 @@
   </div>
 </mat-toolbar>
 
-<mat-menu #menuLanding="matMenu">
-  <button mat-menu-item routerLink="/">Home</button>
-</mat-menu>
-
 <!-- Menú Usuarios -->
 <mat-menu #menuUser="matMenu">
   <button mat-menu-item routerLink="/users">Listar</button>
@@ -159,7 +149,6 @@
   <button mat-menu-item routerLink="/tipocuenta/listar">Listar</button>
   <button mat-menu-item routerLink="/tipocuenta/insertar">Registrar</button>
 </mat-menu>
-
 <mat-menu #menuReportes="matMenu">
   <button mat-menu-item routerLink="/reportes/metodospagosgrafica">
     <mat-icon>bar_chart</mat-icon>

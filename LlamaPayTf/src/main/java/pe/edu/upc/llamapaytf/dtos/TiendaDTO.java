@@ -1,33 +1,31 @@
 package pe.edu.upc.llamapaytf.dtos;
 
-import jakarta.persistence.Column;
-
 public class TiendaDTO {
-    private int idtienda;
-    private String nombretienda;
-    private String direccion;
+    private int Tienda_id;
+    private String Nombre_tienda;
+    private String Direccion;
 
-    public int getIdtienda() {
-        return idtienda;
+    public int getTienda_id() {
+        return Tienda_id;
     }
 
-    public void setIdtienda(int idtienda) {
-        this.idtienda = idtienda;
+    public void setTienda_id(int tienda_id) {
+        Tienda_id = tienda_id;
     }
 
-    public String getNombretienda() {
-        return nombretienda;
+    public String getNombre_tienda() {
+        return Nombre_tienda;
     }
 
-    public void setNombretienda(String nombretienda) {
-        this.nombretienda = nombretienda;
+    public void setNombre_tienda(String nombre_tienda) {
+        Nombre_tienda = nombre_tienda;
     }
 
     public String getDireccion() {
-        return direccion;
+        return Direccion;
     }
 
     public void setDireccion(String direccion) {
-        this.direccion = direccion;
+        Direccion = direccion;
     }
 }

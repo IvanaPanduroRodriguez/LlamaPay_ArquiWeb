@@ -6,7 +6,11 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
+<<<<<<< HEAD
 @Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"userId","TipoRol"})})
+=======
+@Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"usuario_id","rol"})})
+>>>>>>> parent of f1f6c44 (Merge branch 'Carlos' into Ivana)
 public class Rol implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
