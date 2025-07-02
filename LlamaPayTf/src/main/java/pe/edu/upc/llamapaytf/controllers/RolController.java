@@ -38,6 +38,7 @@ public class RolController {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         roS.deleteById(id);
 =======
 
@@ -48,6 +49,9 @@ public class RolController {
 =======
         roS.delete(id);
 >>>>>>> parent of 7ec60d4 (Merge branch 'Jhon_Backend' into Ivana)
+=======
+
+>>>>>>> parent of 7e6e1fc (Ajustes finales en el backend, rol, user. objetivo ahorro y metodo pago)
     }
 
     @PutMapping("/actualizar")
