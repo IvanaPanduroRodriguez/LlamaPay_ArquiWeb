@@ -43,8 +43,8 @@ export class Listaruser implements OnInit {
     })
   }
 
-  eliminar(id: number) {
-    this.uS.deleteS(id).subscribe(data=>{
+  eliminar(userId: number) {
+    this.uS.deleteS(userId).subscribe(data=>{
       this.uS.list().subscribe(data=>{
         this.uS.setList(data)
       })
@@ -52,5 +52,5 @@ export class Listaruser implements OnInit {
     this.uS.getList().subscribe(data => { //actualiza la lista cuando se inserta o actualiza la data
       this.dataSource = new MatTableDataSource(data)
     })
-  }
+  } 
 }

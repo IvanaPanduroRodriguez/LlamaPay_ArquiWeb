@@ -20,6 +20,9 @@ import { InsertareditarObjetivoAhorro } from './components/objetivo-ahorro/inser
 import { Landing } from './components/landing/landing';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { Reportesmetodopago } from './components/reportes/reportesmetodopago/reportesmetodopago';
+import { Reportes } from './components/reportes/reportes';
+import { ReportesuserComponent } from './components/reportes/reportesuser/reportesuser';
 
 import { TipoCuenta } from './components/tipocuenta/tipocuenta'; 
 import { ListarTipoCuentaComponent } from './components/tipocuenta/listar/listar';
@@ -94,6 +97,17 @@ export const routes: Routes = [
     children:[
       {
         path:'formularioOA',component: InsertareditarObjetivoAhorro
+      }
+    ]
+  },
+  {
+    path:'reportes',component:Reportes,
+    children:[
+      {
+        path:'metodospagosgrafica',component:Reportesmetodopago
+      },
+      {
+        path:'graficUser',component:ReportesuserComponent
       }
     ]
   },
