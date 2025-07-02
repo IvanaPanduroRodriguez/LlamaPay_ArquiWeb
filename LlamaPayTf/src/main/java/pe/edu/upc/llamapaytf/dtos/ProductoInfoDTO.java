@@ -1,40 +1,40 @@
 package pe.edu.upc.llamapaytf.dtos;
 
 public class ProductoInfoDTO {
-    private String nombre_producto;
-    private int total_Unidades;
-    private int precio_Producto;
-    private String nombre_tienda;
+    private String nombreproducto;
+    private int totalunidades;
+    private int precioproducto;
+    private String nombretienda;
 
-    public String getNombre_producto() {
-        return nombre_producto;
+    public String getNombreproducto() {
+        return nombreproducto;
     }
 
-    public void setNombre_producto(String nombre_producto) {
-        this.nombre_producto = nombre_producto;
+    public void setNombreproducto(String nombreproducto) {
+        this.nombreproducto = nombreproducto;
     }
 
-    public int getTotal_Unidades() {
-        return total_Unidades;
+    public int getTotalUnidades() {
+        return totalunidades;
     }
 
-    public void setTotal_Unidades(int total_Unidades) {
-        this.total_Unidades = total_Unidades;
+    public void setTotalUnidades(int totalunidades) {
+        this.totalunidades = totalunidades;
     }
 
-    public int getPrecio_Producto() {
-        return precio_Producto;
+    public int getPrecioproducto() {
+        return precioproducto;
     }
 
-    public void setPrecio_Producto(int precio_Producto) {
-        this.precio_Producto = precio_Producto;
+    public void setPrecioproducto(int precioproducto) {
+        this.precioproducto = precioproducto;
     }
 
-    public String getNombre_tienda() {
-        return nombre_tienda;
+    public String getNombretienda() {
+        return nombretienda;
     }
 
-    public void setNombre_tienda(String nombre_tienda) {
-        this.nombre_tienda = nombre_tienda;
+    public void setNombretienda(String nombretienda) {
+        this.nombretienda = nombretienda;
     }
 }

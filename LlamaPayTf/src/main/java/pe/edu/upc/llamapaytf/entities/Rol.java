@@ -6,23 +6,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 @Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"userId","TipoRol"})})
-=======
-@Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"usuario_id","rol"})})
->>>>>>> parent of f1f6c44 (Merge branch 'Carlos' into Ivana)
-=======
-@Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"usuario_id","rol"})})
->>>>>>> parent of 7e6e1fc (Ajustes finales en el backend, rol, user. objetivo ahorro y metodo pago)
-=======
-@Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"userId","rol"})})
->>>>>>> parent of 7ec60d4 (Merge branch 'Jhon_Backend' into Ivana)
-=======
-@Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"usuario_id","rol"})})
->>>>>>> parent of 7e6e1fc (Ajustes finales en el backend, rol, user. objetivo ahorro y metodo pago)
 public class Rol implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +15,19 @@ public class Rol implements Serializable {
     private String TipoRol;
 
     @ManyToOne
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "userId")
     @JsonBackReference
     private User user;
+
+    public Rol() {
+
+    }
+
+    public Rol(int rol_id, String tipoRol, User user) {
+        Rol_id = rol_id;
+        TipoRol = tipoRol;
+        this.user = user;
+    }
 
     public int getRol_id() {
         return Rol_id;

@@ -7,75 +7,75 @@ import jakarta.persistence.*;
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Producto_id;
-    @Column(name = "Nombre_producto", nullable = false, length = 30)
-    private String Nombre_producto;
-    @Column(name = "Descripcion", nullable = false, length = 50)
-    private String Descripcion;
-    @Column(name = "Unidad_medida", nullable = false, length = 20)
-    private String Unidad_medida;
-    @Column(name = "Precio_Producto", nullable = false, length = 10)
-    private int Precio_Producto;
+    private int idproducto;
+    @Column(name = "nombreproducto", nullable = false, length = 30)
+    private String nombreproducto;
+    @Column(name = "descripcion", nullable = false, length = 50)
+    private String descripcion;
+    @Column(name = "unidadmedida", nullable = false, length = 20)
+    private String unidadmedida;
+    @Column(name = "precioproducto", nullable = false, length = 10)
+    private int precioproducto;
 
     @ManyToOne
-    @JoinColumn(name = "Usuario_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "Tienda_id", nullable = false)
+    @JoinColumn(name = "idtienda", nullable = false)
     private Tienda tienda;
 
     public Producto() {
     }
 
-    public Producto(int producto_id, String nombre_producto, String descripcion, String unidad_medida, int precio_Producto, User user, Tienda tienda) {
-        Producto_id = producto_id;
-        Nombre_producto = nombre_producto;
-        Descripcion = descripcion;
-        Unidad_medida = unidad_medida;
-        Precio_Producto = precio_Producto;
+    public Producto(int idproducto, String nombreproducto, String descripcion, String unidadmedida, int precioproducto, User user, Tienda tienda) {
+        this.idproducto = idproducto;
+        this.nombreproducto = nombreproducto;
+        this.descripcion = descripcion;
+        this.unidadmedida = unidadmedida;
+        this.precioproducto = precioproducto;
         this.user = user;
         this.tienda = tienda;
     }
 
-    public int getProducto_id() {
-        return Producto_id;
+    public int getIdproducto() {
+        return idproducto;
     }
 
-    public void setProducto_id(int producto_id) {
-        Producto_id = producto_id;
+    public void setIdproducto(int idproducto) {
+        this.idproducto = idproducto;
     }
 
-    public String getNombre_producto() {
-        return Nombre_producto;
+    public String getNombreproducto() {
+        return nombreproducto;
     }
 
-    public void setNombre_producto(String nombre_producto) {
-        Nombre_producto = nombre_producto;
+    public void setNombreproducto(String nombreproducto) {
+        this.nombreproducto = nombreproducto;
     }
 
     public String getDescripcion() {
-        return Descripcion;
+        return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
-        Descripcion = descripcion;
+        this.descripcion = descripcion;
     }
 
-    public String getUnidad_medida() {
-        return Unidad_medida;
+    public String getUnidadmedida() {
+        return unidadmedida;
     }
 
-    public void setUnidad_medida(String unidad_medida) {
-        Unidad_medida = unidad_medida;
+    public void setUnidadmedida(String unidadmedida) {
+        this.unidadmedida = unidadmedida;
     }
 
-    public int getPrecio_Producto() {
-        return Precio_Producto;
+    public int getPrecioproducto() {
+        return precioproducto;
     }
 
-    public void setPrecio_Producto(int precio_Producto) {
-        Precio_Producto = precio_Producto;
+    public void setPrecioproducto(int precioproducto) {
+        this.precioproducto = precioproducto;
     }
 
     public User getUser() {
