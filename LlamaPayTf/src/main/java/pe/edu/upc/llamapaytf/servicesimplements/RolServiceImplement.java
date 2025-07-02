@@ -18,7 +18,7 @@ public class RolServiceImplement implements IRolService {
     }
 
     @Override
-    public void deleteById(int id) {
+    public void delete(int id) {
         roR.deleteById(id);
     }
 

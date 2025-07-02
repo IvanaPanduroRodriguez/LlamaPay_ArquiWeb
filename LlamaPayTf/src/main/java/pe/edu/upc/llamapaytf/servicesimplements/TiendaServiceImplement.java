@@ -2,6 +2,7 @@ package pe.edu.upc.llamapaytf.servicesimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upc.llamapaytf.entities.Producto;
 import pe.edu.upc.llamapaytf.entities.Tienda;
 import pe.edu.upc.llamapaytf.entities.User;
 import pe.edu.upc.llamapaytf.repositories.ITiendaRepository;
@@ -37,5 +38,9 @@ public class TiendaServiceImplement implements ITiendaService {
     @Override
     public void delete(int id) {
         tR.deleteById(id);
+    }
+    @Override
+    public List<Tienda> buscarPorTienda(String tienda) {
+        return tR.buscarPorTienda(tienda);
     }
 }

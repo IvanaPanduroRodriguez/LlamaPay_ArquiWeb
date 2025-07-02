@@ -1,14 +1,12 @@
 <div class="container">
   <div style="text-align: center;margin: 5%;">
     <div>
-      <h1>{{ actualizar ? "Actualizar ObjetivoAhorro" : "Registro de Objetivo"}}</h1>
+      <h1>{{ actualizar ? "Actualizar ObjetivoAhorro" : "Registro de Objetivo de ahorro"}}</h1>
     </div>
   </div>
   <div style="text-align: center;margin: 5%;">
 
     <form [formGroup]="form" (submit)=" aceptar()">
-
-
       <mat-form-field *ngIf="actualizar">
           <mat-label>ID</mat-label>
             <input matInput formControlName="codigo" />
