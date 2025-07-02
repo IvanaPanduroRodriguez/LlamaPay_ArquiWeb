@@ -7,10 +7,14 @@ import java.io.Serializable;
 
 @Entity
 <<<<<<< HEAD
+<<<<<<< HEAD
 @Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"userId","TipoRol"})})
 =======
 @Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"usuario_id","rol"})})
 >>>>>>> parent of f1f6c44 (Merge branch 'Carlos' into Ivana)
+=======
+@Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"usuario_id","rol"})})
+>>>>>>> parent of 7e6e1fc (Ajustes finales en el backend, rol, user. objetivo ahorro y metodo pago)
 public class Rol implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,16 +26,6 @@ public class Rol implements Serializable {
     @JoinColumn(name = "userId")
     @JsonBackReference
     private User user;
-
-    public Rol() {
-
-    }
-
-    public Rol(int rol_id, String tipoRol, User user) {
-        Rol_id = rol_id;
-        TipoRol = tipoRol;
-        this.user = user;
-    }
 
     public int getRol_id() {
         return Rol_id;

@@ -9,6 +9,7 @@ public class UserDTO {
     private int userId;
     private String nameUser;
     private String lastnameUser;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String emailUser;
     private Date birthdayUser;
     private Timestamp registrationDateUser;

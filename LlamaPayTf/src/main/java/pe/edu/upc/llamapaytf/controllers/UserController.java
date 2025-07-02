@@ -71,9 +71,9 @@ public class UserController {
 
     //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
 
-    public UserDTO buscarID(@PathVariable("id") int id) {
+    public UsuarioInfoDTO buscarID(@PathVariable("id") int id) {
         ModelMapper m = new ModelMapper();
-        UserDTO dto=m.map(uS.listID(id),UserDTO.class);
+        UsuarioInfoDTO dto=m.map(uS.listID(id),UsuarioInfoDTO.class);
         return dto;
     }
 

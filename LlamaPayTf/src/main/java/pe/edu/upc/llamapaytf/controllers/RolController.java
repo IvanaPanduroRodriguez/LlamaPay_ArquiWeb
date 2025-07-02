@@ -34,13 +34,17 @@ public class RolController {
         roS.insert(ros);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/eliminar/{id}")
     public void eliminar(@PathVariable("id") int id) {
+<<<<<<< HEAD
 <<<<<<< HEAD
         roS.deleteById(id);
 =======
 
 >>>>>>> parent of f1f6c44 (Merge branch 'Carlos' into Ivana)
+=======
+
+>>>>>>> parent of 7e6e1fc (Ajustes finales en el backend, rol, user. objetivo ahorro y metodo pago)
     }
 
     @PutMapping("/actualizar")
