@@ -21,8 +21,8 @@ export class ReportesuserComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    const inicio = '2025-01-01';
-    const fin = '2025-12-31';
+    const inicio = '2000-01-01';
+    const fin = '2026-01-01';
 
     this.userService.getBirthdaysByRange(inicio, fin).subscribe(data => {
       const meses = new Array(12).fill(0);
