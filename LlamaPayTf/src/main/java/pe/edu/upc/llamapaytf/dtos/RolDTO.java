@@ -3,24 +3,24 @@ package pe.edu.upc.llamapaytf.dtos;
 import pe.edu.upc.llamapaytf.entities.User;
 
 public class RolDTO {
-    private int Rol_id;
-    private String TipoRol;
+    private int rolId;
+    private String tipoRol;
     private User user;
 
-    public int getRol_id() {
-        return Rol_id;
+    public int getRolId() {
+        return rolId;
     }
 
-    public void setRol_id(int rol_id) {
-        Rol_id = rol_id;
+    public void setRolId(int rolId) {
+        this.rolId = rolId;
     }
 
     public String getTipoRol() {
-        return TipoRol;
+        return tipoRol;
     }
 
     public void setTipoRol(String tipoRol) {
-        TipoRol = tipoRol;
+        this.tipoRol = tipoRol;
     }
 
     public User getUser() {

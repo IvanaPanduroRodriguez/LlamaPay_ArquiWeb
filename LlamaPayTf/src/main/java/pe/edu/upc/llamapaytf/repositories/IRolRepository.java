@@ -12,7 +12,7 @@ import java.util.List;
 public interface IRolRepository extends JpaRepository<Rol, Integer> {
 
     //Buscar rol por tipo de rol
-    @Query("SELECT r FROM Rol r WHERE r.TipoRol = :tipoRol")
+    @Query("SELECT r FROM Rol r WHERE r.tipoRol = :tipoRol")
     List<Rol> findRolesByTipoRol(@Param("tipoRol") String tipoRol);
 
     //Buscar rol por el id del usuario

@@ -45,4 +45,5 @@ public interface IProductoRepository extends JpaRepository<Producto,Integer> {
     @Query("SELECT p FROM Producto p WHERE p.nombreproducto LIKE %:nproducto%")
     List<Producto> buscarPorProducto(@Param("nproducto") String nproducto);
 
+    List<Producto> findByUserUserId(int id);
 }

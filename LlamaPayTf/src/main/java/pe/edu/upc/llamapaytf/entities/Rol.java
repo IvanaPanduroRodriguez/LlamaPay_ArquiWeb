@@ -6,43 +6,33 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"userId","TipoRol"})})
+@Table(name = "Rol")
 public class Rol implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Rol_id;
-    @Column(name = "TipoRol",nullable = false,length = 35)
-    private String TipoRol;
+    private int rolId;
+    @Column(name = "tipoRol",nullable = false,length = 35)
+    private String tipoRol;
 
     @ManyToOne
     @JoinColumn(name = "userId")
     @JsonBackReference
     private User user;
 
-    public Rol() {
-
+    public int getRolId() {
+        return rolId;
     }
 
-    public Rol(int rol_id, String tipoRol, User user) {
-        Rol_id = rol_id;
-        TipoRol = tipoRol;
-        this.user = user;
-    }
-
-    public int getRol_id() {
-        return Rol_id;
-    }
-
-    public void setRol_id(int rol_id) {
-        Rol_id = rol_id;
+    public void setRolId(int rolId) {
+        this.rolId = rolId;
     }
 
     public String getTipoRol() {
-        return TipoRol;
+        return tipoRol;
     }
 
     public void setTipoRol(String tipoRol) {
-        TipoRol = tipoRol;
+        this.tipoRol = tipoRol;
     }
 
     public User getUser() {

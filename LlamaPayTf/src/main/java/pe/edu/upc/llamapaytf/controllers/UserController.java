@@ -14,9 +14,14 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.llamapaytf.dtos.SerchingUserForYearBirthdayDTO;
 import pe.edu.upc.llamapaytf.dtos.UserDTO;
 import pe.edu.upc.llamapaytf.dtos.UsuarioInfoDTO;
-import pe.edu.upc.llamapaytf.entities.User;
+import pe.edu.upc.llamapaytf.entities.*;
 import pe.edu.upc.llamapaytf.exceptions.RequestBodyException;
-import pe.edu.upc.llamapaytf.servicesinterfaces.IUserService;
+import pe.edu.upc.llamapaytf.exceptions.ResourceNotFoundException;
+import pe.edu.upc.llamapaytf.repositories.IObjetivoAhorroRepository;
+import pe.edu.upc.llamapaytf.repositories.IProductoRepository;
+import pe.edu.upc.llamapaytf.repositories.IRecordatorioRepository;
+import pe.edu.upc.llamapaytf.repositories.ITipoCuentaRepository;
+import pe.edu.upc.llamapaytf.servicesinterfaces.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,6 +30,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -35,6 +41,7 @@ public class UserController {
 
     @Autowired
     private IUserService uS;
+
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -78,14 +85,31 @@ public class UserController {
     }
 
     @PutMapping
+    public void modificar(@RequestBody UserDTO dto) {
+        // Paso 1: Buscar el usuario actual por ID
+        User existingUser = uS.listID(dto.getUserId());
+        if (existingUser == null) {
+            throw new RuntimeException("Usuario no encontrado.");
+        }
 
+        // Paso 2: Actualizar los campos que desees
+        existingUser.setNameUser(dto.getNameUser());
+        existingUser.setLastnameUser(dto.getLastnameUser());
+        existingUser.setEmailUser(dto.getEmailUser());
+        existingUser.setBirthdayUser(dto.getBirthdayUser());
+        existingUser.setUsername(dto.getUsername());
+        existingUser.setEnabled(dto.getEnabled());
 
-    //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
+        // Paso 3: Solo si viene un nuevo password, se actualiza y se encripta
+        if (dto.getPassword() != null && !dto.getPassword().isEmpty()) {
+            String encodedPassword = passwordEncoder.encode(dto.getPassword());
+            existingUser.setPassword(encodedPassword);
+        }
 
-    public void modificar(@RequestBody UserDTO dto){
-        ModelMapper m = new ModelMapper();
-        User u = m.map(dto, User.class);
-        uS.update(u);
+        // NO ACTUALIZAMOS LOS ROLES, para evitar conflicto
+
+        // Paso 4: Guardar cambios
+        uS.update(existingUser);
     }
 
     @DeleteMapping("/{id}")
@@ -93,7 +117,7 @@ public class UserController {
     //@PreAuthorize("hasAuthority('ADMIN')")
 
 
-    public void eliminar(@PathVariable("id") int id){ //eliminar todos los atributos que yo elija
+    public void eliminar(@PathVariable("id") int id) {
         uS.delete(id);
     }
 

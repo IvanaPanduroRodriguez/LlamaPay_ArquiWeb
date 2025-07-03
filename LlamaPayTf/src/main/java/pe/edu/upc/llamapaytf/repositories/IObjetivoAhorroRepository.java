@@ -23,4 +23,5 @@ public interface IObjetivoAhorroRepository extends JpaRepository<ObjetivoAhorro,
             "ORDER BY MIN(o.fecha_inicio)", nativeQuery = true)
     List<String[]> contarObjetivosPorMes();
 
+    List<ObjetivoAhorro> findByUserUserId(int id);
 }

@@ -35,11 +35,10 @@ public class User {
     private Boolean enabled;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, orphanRemoval = true)
     @JoinColumn(name = "userId")
     @JsonManagedReference
     private List<Rol> roles;
-
 
     public User() {
     }
@@ -135,6 +134,11 @@ public class User {
 
     public void setRoles(List<Rol> roles) {
         this.roles = roles;
+    }
+
+    @PrePersist
+    protected void asignarFechaDeRegistro() {
+        this.registrationDateUser = new Timestamp(System.currentTimeMillis());
     }
 }
 

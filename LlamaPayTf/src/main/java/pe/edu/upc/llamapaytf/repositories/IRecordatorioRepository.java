@@ -12,4 +12,6 @@ import java.util.List;
 public interface IRecordatorioRepository extends JpaRepository<Recordatorio,Integer> {
     @Query(value="SELECT * FROM Recordatorio r WHERE r.nombre_recordatorio LIKE %:rec%",nativeQuery = true)
     List<Recordatorio> buscarPorRecordatorio(@Param("rec") String rec);
+
+    List<Recordatorio> findByUserUserId(int id);
 }

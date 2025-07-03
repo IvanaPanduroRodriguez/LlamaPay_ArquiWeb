@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class ObjetivoAhorro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Objetivo_id;
+    private int objetivoId;
     @Column(name = "NombreMeta", nullable = false,length = 35)
     private String nombreMeta;
     @Column(name = "MontoMeta",nullable = false,length = 35)
@@ -31,8 +31,8 @@ public class ObjetivoAhorro {
     public ObjetivoAhorro() {
     }
 
-    public ObjetivoAhorro(int objetivo_id, String nombreMeta, BigDecimal montoMeta, LocalDate fechaInicio, LocalDate fechaFin, BigDecimal montoActual, String estadoObjetivo, User user) {
-        Objetivo_id = objetivo_id;
+    public ObjetivoAhorro(int objetivoId, String nombreMeta, BigDecimal montoMeta, LocalDate fechaInicio, LocalDate fechaFin, BigDecimal montoActual, String estadoObjetivo, User user) {
+        this.objetivoId = objetivoId;
         this.nombreMeta = nombreMeta;
         this.montoMeta = montoMeta;
         this.fechaInicio = fechaInicio;
@@ -42,12 +42,12 @@ public class ObjetivoAhorro {
         this.user = user;
     }
 
-    public int getObjetivo_id() {
-        return Objetivo_id;
+    public int getObjetivoId() {
+        return objetivoId;
     }
 
-    public void setObjetivo_id(int objetivo_id) {
-        Objetivo_id = objetivo_id;
+    public void setObjetivoId(int objetivoId) {
+        this.objetivoId = objetivoId;
     }
 
     public String getNombreMeta() {
