@@ -2,7 +2,6 @@
  background-color: #98BE93;
 }
 
-
 .btn-rojo {
  background-color: #506C4D;
  border-radius: 4px;
@@ -13,7 +12,6 @@
 .btn-rojo mat-icon {
  color: white;
 }
-
 
 .custom-toolbar button,
 .custom-toolbar mat-icon {
