@@ -1,0 +1,78 @@
+<div class="container-metodopago">
+  <form [formGroup]="form" (ngSubmit)="insertar()">
+    <h1 style="text-align: center; color: #506C4D; margin-bottom: 25px;">
+      {{ modoPerfil ? 'Actualizar Perfil' : (edicion ? 'Actualizar Usuario' : 'Registrar Usuario') }}
+    </h1>
+
+    <!-- ID solo visible si no es perfil -->
+    <mat-form-field *ngIf="edicion && !modoPerfil">
+      <mat-label>ID</mat-label>
+      <input matInput formControlName="codigo" readonly>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name">
+      <mat-error *ngIf="form.get('name')?.hasError('required')">El nombre es obligatorio</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Apellidos</mat-label>
+      <input matInput formControlName="lastname">
+      <mat-error *ngIf="form.get('lastname')?.hasError('required')">El apellido es obligatorio</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Correo Electrónico</mat-label>
+      <input matInput formControlName="email" type="email">
+      <mat-error *ngIf="form.get('email')?.hasError('required')">El email es obligatorio</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Fecha de Nacimiento</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="birthday">
+      <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+      <mat-error *ngIf="form.get('birthday')?.hasError('required')">Campo obligatorio</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Fecha de Registro</mat-label>
+      <input matInput [matDatepicker]="picker2" formControlName="registrationDate">
+      <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+      <mat-error *ngIf="form.get('registrationDate')?.hasError('required')">Campo obligatorio</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username">
+      <mat-error *ngIf="form.get('username')?.hasError('required')">El username es obligatorio</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" formControlName="password">
+      <mat-error *ngIf="form.get('password')?.hasError('required')">Campo obligatorio</mat-error>
+    </mat-form-field>
+
+    <!-- Estado solo si NO es perfil -->
+    <mat-form-field *ngIf="!modoPerfil">
+      <mat-label>Estado de Cuenta</mat-label>
+      <mat-select formControlName="estadoUsuario">
+        <mat-option *ngFor="let u of estados" [value]="u.value">{{ u.viewValue }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="btn-container">
+      <button mat-raised-button color="primary">
+        {{ edicion ? 'Guardar Cambios' : 'Registrar Usuario' }}
+      </button>
+
+      <!-- Botón de volver según contexto -->
+      <button mat-raised-button color="warn" [routerLink]="modoPerfil ? '/home' : '/users'">
+        {{ modoPerfil ? 'Cancelar' : 'Volver a la lista' }}
+      </button>
+    </div>
+  </form>
+</div>

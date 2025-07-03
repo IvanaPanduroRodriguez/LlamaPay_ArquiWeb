@@ -27,8 +27,20 @@ export class LoginService {
     return token != null && !this.helper.isTokenExpired(token);
   }
 
-  getUserRole(): string | null {
-    return sessionStorage.getItem('role');
+  getUserRole(): string {
+    return sessionStorage.getItem('role') || '';
+  }
+
+  esAdmin(): boolean {
+    return this.getUserRole() === 'ROLE_ADMIN';
+  }
+
+  esCliente(): boolean {
+    return this.getUserRole() === 'ROLE_USER';
+  }
+
+  esTester(): boolean {
+    return this.getUserRole() === 'ROLE_TESTER';
   }
 
   getUsername(): string | null {
@@ -38,4 +50,9 @@ export class LoginService {
   cerrarSesion(): void {
     sessionStorage.clear();
   }
+
+  getUserId(): number {
+    return Number(sessionStorage.getItem('userId'));
+  }
+
 }

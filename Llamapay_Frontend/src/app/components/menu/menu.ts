@@ -29,7 +29,19 @@ export class Menu {
     return this.loginService.verificar();
   }
 
-  getRole(): string | null {
+  esAdmin(): boolean {
+    return this.loginService.esAdmin();
+  }
+
+  esCliente(): boolean {
+    return this.loginService.esCliente();
+  }
+
+  esTester(): boolean {
+    return this.loginService.esTester();
+  }
+
+  getRole(): string {
     return this.loginService.getUserRole();
   }
 
