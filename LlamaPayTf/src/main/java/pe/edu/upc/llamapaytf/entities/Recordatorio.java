@@ -22,7 +22,7 @@ public class Recordatorio {
     private String Estado_Recordatorio;
 
     @ManyToOne
-    @JoinColumn(name = "Usuario_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Recordatorio() {

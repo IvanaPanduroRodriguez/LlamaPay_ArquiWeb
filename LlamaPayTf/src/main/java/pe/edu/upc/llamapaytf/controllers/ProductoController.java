@@ -2,7 +2,6 @@ package pe.edu.upc.llamapaytf.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.llamapaytf.dtos.PrMetaCestaDTO;
 import pe.edu.upc.llamapaytf.dtos.ProductoDTO;
@@ -32,6 +31,7 @@ public class ProductoController {
     @PostMapping
     //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
     public void insertar(@RequestBody ProductoDTO productoDTO) {
+        productoDTO.setIdproducto(0);
         ModelMapper m = new ModelMapper();
         Producto p = m.map(productoDTO, Producto.class);
         pS.insertar(p);
@@ -80,10 +80,10 @@ public class ProductoController {
         List<ProductoInfoDTO> dtoLista=new ArrayList<>();
         for(String[] columna: fila){
             ProductoInfoDTO dto=new ProductoInfoDTO();
-            dto.setNombre_producto(columna[0]);
-            dto.setTotal_Unidades(Integer.parseInt(columna[1]));
-            dto.setPrecio_Producto((int) Double.parseDouble(columna[2]));
-            dto.setNombre_tienda(columna[3]);
+            dto.setNombreproducto(columna[0]);
+            dto.setTotalUnidades(Integer.parseInt(columna[1]));
+            dto.setPrecioproducto((int) Double.parseDouble(columna[2]));
+            dto.setNombretienda(columna[3]);
             dtoLista.add(dto);
         }
         return dtoLista;

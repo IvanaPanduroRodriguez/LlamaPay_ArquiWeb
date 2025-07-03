@@ -13,7 +13,7 @@ public interface IObjetivoAhorroRepository extends JpaRepository<ObjetivoAhorro,
 
     @Query(value = "SELECT u.name_user AS nombreUsuario, SUM(o.monto_actual) AS montoTotalAhorrado \n" +
             "FROM objetivo_ahorro o\n" +
-            "INNER JOIN Users u ON o.usuario_id = u.user_id \n" +
+            "INNER JOIN Users u ON o.user_id = u.user_id \n" +
             "GROUP BY u.name_user", nativeQuery = true)
     List<String[]> amountTotalByUser();
 

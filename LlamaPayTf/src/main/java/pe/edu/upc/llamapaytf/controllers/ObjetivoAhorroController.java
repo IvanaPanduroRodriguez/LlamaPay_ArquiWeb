@@ -39,7 +39,7 @@ public class ObjetivoAhorroController {
     public void eliminar(@PathVariable int id) {
         oS.deleteById(id);
     }
-    
+
     @GetMapping
     //@PreAuthorize("hasAnyAuthority('CLIENTE', 'ADMIN','FINANZAS','TESTER')")
     public List<ObjetivoAhorro> listar() {
