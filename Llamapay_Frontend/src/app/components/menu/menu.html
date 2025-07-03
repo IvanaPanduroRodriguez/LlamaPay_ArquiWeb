@@ -1,10 +1,11 @@
 <mat-toolbar class="custom-toolbar">
-  <div>
+    <div>
     <button mat-button [matMenuTriggerFor]="menuLanding" class="btn-rojo">
       <mat-icon>home</mat-icon>
       Home
     </button>
   </div>
+
   <div>
     <button mat-button [matMenuTriggerFor]="menuUser" class="btn-rojo">
       <mat-icon>computer</mat-icon>
@@ -32,23 +33,65 @@
       Métodos de Pago
     </button>
   </div>
+   <div>
+    <button mat-button [matMenuTriggerFor]="menuServicios" class="btn-rojo">
+      <mat-icon>business</mat-icon>
+      Servicios
+    </button>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuCategorias" class="btn-rojo">
+      <mat-icon>category</mat-icon>
+      Categorias de servicios
+    </button>
+  </div>
+
   <div>
     <button mat-button [matMenuTriggerFor]="menuTiendas" class="btn-rojo">
       <mat-icon>store</mat-icon>
       Tiendas
     </button>
   </div>
+
   <div>
     <button mat-button [matMenuTriggerFor]="menuProductos" class="btn-rojo">
       <mat-icon>inventory_2</mat-icon>
       Productos
     </button>
   </div>
+    <div>
+    <button mat-button [matMenuTriggerFor]="menuReportes" class="btn-rojo">
+      <mat-icon>payment</mat-icon>
+      Reportes
+    </button>
+  </div>
+   <div>
+    <button mat-button [matMenuTriggerFor]="menuTransaccion" class="btn-rojo">
+      <mat-icon>compare_arrows</mat-icon>
+      Transacciones
+    </button>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuTipoTransaccion" class="btn-rojo">
+      <mat-icon>category</mat-icon>
+      Tipos de Transacción
+    </button>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuTipoCuenta" class="btn-rojo">
+      <mat-icon>account_balance</mat-icon>
+      Tipos de Cuenta
+    </button>
+  </div>
 </mat-toolbar>
-<!-- Menú Usuarios -->
+
 <mat-menu #menuLanding="matMenu">
   <button mat-menu-item routerLink="/">Home</button>
 </mat-menu>
+
 <!-- Menú Usuarios -->
 <mat-menu #menuUser="matMenu">
   <button mat-menu-item routerLink="/users">Listar</button>
@@ -72,15 +115,57 @@
   <button mat-menu-item routerLink="/metodopagos">Listar</button>
   <button mat-menu-item routerLink="/metodopagos/formularioM">Registrar</button>
 </mat-menu>
+<!-- Menú Servicios -->
+<mat-menu #menuServicios="matMenu">
+  <button mat-menu-item routerLink="/servicios">Listar</button>
+  <button mat-menu-item routerLink="/servicios/insertarservicio">Registrar</button>
+</mat-menu>
+
+<!-- Menú Categorias de servicios -->
+<mat-menu #menuCategorias="matMenu">
+  <button mat-menu-item routerLink="/categorias">Listar</button>
+  <button mat-menu-item routerLink="/categorias/insertarcategoria">Registrar</button>
+</mat-menu>
+
 <!-- Menú Tiendas -->
 <mat-menu #menuTiendas="matMenu">
   <button mat-menu-item routerLink="/tiendas">Listar</button>
-  <button mat-menu-item routerLink="/tiendas/formulario">Registrar</button>
-  <button mat-menu-item routerLink="/tiendas/buscartienda">Buscar</button>
+  <button mat-menu-item routerLink="/tiendas/formularioT">Registrar</button>
+  <button mat-menu-item routerLink="/tiendas/buscartienda">Buscar por nombre</button>
 </mat-menu>
+
 <!-- Menú Productos -->
 <mat-menu #menuProductos="matMenu">
   <button mat-menu-item routerLink="/productos">Listar</button>
-  <button mat-menu-item routerLink="/productos/formulario">Registrar</button>
-  <button mat-menu-item routerLink="/productos/buscarproducto">Buscar</button>
+  <button mat-menu-item routerLink="/productos/formularioP">Registrar</button>
+  <button mat-menu-item routerLink="/productos/buscarproducto">Buscar por nombre</button>
+</mat-menu>
+
+<!-- Menú Transacciones -->
+<mat-menu #menuTransaccion="matMenu">
+  <button mat-menu-item routerLink="/transaccion/listar">Listar</button>
+  <button mat-menu-item routerLink="/transaccion/insertar">Registrar</button>
+</mat-menu>
+
+<!-- Menú Tipos de Transacción -->
+<mat-menu #menuTipoTransaccion="matMenu">
+  <button mat-menu-item routerLink="/tipotransaccion/listar">Listar</button>
+  <button mat-menu-item routerLink="/tipotransaccion/insertar">Registrar</button>
+</mat-menu>
+
+<!-- Menú Tipos de Cuenta -->
+<mat-menu #menuTipoCuenta="matMenu">
+  <button mat-menu-item routerLink="/tipocuenta/listar">Listar</button>
+  <button mat-menu-item routerLink="/tipocuenta/insertar">Registrar</button>
+</mat-menu>
+
+<mat-menu #menuReportes="matMenu">
+  <button mat-menu-item routerLink="/reportes/metodospagosgrafica">
+    <mat-icon>bar_chart</mat-icon>
+    Métodos de Pago
+  </button>
+  <button mat-menu-item routerLink="/reportes/graficUser">
+    <mat-icon>insert_chart</mat-icon>
+    Cumpleaños por Mes
+  </button>
 </mat-menu>

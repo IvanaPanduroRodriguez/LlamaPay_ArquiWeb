@@ -1,5 +1,6 @@
-<div>
-  <h2>Registrar Tipo de Transacción</h2>
+<div class="container-tipotransaccion">
+  <h1>{{ edicion ? 'Editar Tipo de Transacción' : 'Registrar Tipo de Transacción' }}</h1>
+
   <form [formGroup]="form" (ngSubmit)="aceptar()">
     <mat-form-field appearance="fill">
       <mat-label>Descripción</mat-label>
@@ -8,8 +9,14 @@
         La descripción es obligatoria
       </mat-error>
     </mat-form-field>
-    <br />
-    <button mat-raised-button color="primary" type="submit">Aceptar</button>
-    <button mat-raised-button color="warn" routerLink="/tipotransaccion/listar">Cancelar</button>
+
+    <div class="btn-container">
+      <button mat-raised-button color="primary" type="submit">
+        {{ edicion ? 'Guardar Cambios' : 'Registrar' }}
+      </button>
+      <button mat-raised-button color="warn" type="button" (click)="cancelar()">
+        Cancelar
+      </button>
+    </div>
   </form>
 </div>

@@ -1,0 +1,23 @@
+<div class="title-container">
+  <div style="text-align: center" class="title">
+    <h1>Usuarios por mes de cumpleaños (2025)</h1>
+  </div>
+
+  <div style="text-align: center" class="chart-container">
+    <div *ngIf="isBrowser; else serverFallback">
+      <canvas
+        baseChart
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [legend]="barChartLegend"
+        [type]="barChartType">
+      </canvas>
+    </div>
+    <ng-template #serverFallback>
+      <div class="chart-placeholder">
+        <p>El gráfico se cargará cuando se ejecute en el navegador</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

@@ -18,18 +18,31 @@ import { InsertareditarRol } from './components/rol/insertareditar/insertaredita
 import { ObjetivoAhorro } from './components/objetivo-ahorro/objetivo-ahorro';
 import { InsertareditarObjetivoAhorro } from './components/objetivo-ahorro/insertareditar/insertareditar';
 import { Landing } from './components/landing/landing';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { Reportesmetodopago } from './components/reportes/reportesmetodopago/reportesmetodopago';
+import { Reportes } from './components/reportes/reportes';
+import { ReportesuserComponent } from './components/reportes/reportesuser/reportesuser';
+import { Tipocuenta } from './components/tipocuenta/tipocuenta';
+import { Listar } from './components/tipocuenta/listar/listar';
+import { Insertareditar } from './components/tipocuenta/insertareditar/insertareditar';
 import { Producto } from './components/producto/producto';
 import { Insertareditarproducto } from './components/producto/insertareditarproducto/insertareditarproducto';
-import { Tienda } from './components/tienda/tienda';
-import { Insertareditartienda } from './components/tienda/insertareditartienda/insertareditartienda';
-import { Buscartienda } from './components/tienda/buscartienda/buscartienda';
 import { Buscarproducto } from './components/producto/buscarproducto/buscarproducto';
+import { Buscartienda } from './components/tienda/buscartienda/buscartienda';
+import { Insertareditartienda } from './components/tienda/insertareditartienda/insertareditartienda';
+import { Tienda } from './components/tienda/tienda';
+
 
 export const routes: Routes = [
 
   {
     path: '', component: Landing // ← Landing page por defecto
   },
+  {
+    path: 'registro', component:RegisterComponent
+  },
+  { path: 'login', component: LoginComponent },
   //-----------------IVANA------------------------------------------
   {
 
@@ -92,6 +105,17 @@ export const routes: Routes = [
       }
     ]
   },
+  {
+    path:'reportes',component:Reportes,
+    children:[
+      {
+        path:'metodospagosgrafica',component:Reportesmetodopago
+      },
+      {
+        path:'graficUser',component:ReportesuserComponent
+      }
+    ]
+  },
 //-----------------JOAO------------------------------------------
   {
     path: 'transaccion',component: Transaccion,
@@ -107,13 +131,21 @@ export const routes: Routes = [
       { path: 'insertar', component: InsertarTipoTransaccionComponent }
     ]
   },
-  //-----------------Carlos------------------------------------------
   {
-    path: 'productos',
-    component: Producto,
+  path: 'tipocuenta', component:Tipocuenta,
+  children: [
+    { path: 'listar', component: Listar },
+    { path: 'insertar', component: Insertareditar },
+    { path: 'editar/:id', component: Insertareditar }
+  ]
+  },
+
+ // -----------------------------------------CARLOS-------------------------------
+  {
+    path: 'productos',component: Producto,
     children: [
-      { path: 'formulario', component: Insertareditarproducto },
-      { path: 'ediciones/:id', component: Insertareditarproducto },
+      { path: 'formularioP', component: Insertareditarproducto },
+      { path: 'editar/:id', component: Insertareditarproducto },
       { path: 'buscarproducto', component: Buscarproducto }
     ]
   },
@@ -121,9 +153,10 @@ export const routes: Routes = [
     path: 'tiendas',
     component: Tienda,
     children: [
-      { path: 'formulario', component: Insertareditartienda },
-      { path: 'ediciones/:id', component: Insertareditartienda },
+      { path: 'formularioT', component: Insertareditartienda },
+      { path: 'editar/:id', component: Insertareditartienda },
       { path: 'buscartienda', component: Buscartienda }
     ]
-  },
+  }
+
 ];

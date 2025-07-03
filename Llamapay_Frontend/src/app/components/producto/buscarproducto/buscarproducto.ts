@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Producto } from '../../../models/productos';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ProductosService } from '../../../services/productos.service';
-import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Producto } from '../../../models/productos';
+import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+
 @Component({
   selector: 'app-buscarproducto',
   imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatTableModule],

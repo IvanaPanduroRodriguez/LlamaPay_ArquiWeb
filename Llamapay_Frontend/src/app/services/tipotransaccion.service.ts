@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TipoTransaccion } from '../models/tipotransaccion';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 export class TipoTransaccionService {
   private url: string = `${environment.base}/tipotransacciones`;
 
-  private listaCambio: TipoTransaccion[] = [];
+  private listaCambio = new Subject<TipoTransaccion[]>();
 
   constructor(private http: HttpClient) {}
 
@@ -18,15 +18,27 @@ export class TipoTransaccionService {
     return this.http.get<TipoTransaccion[]>(this.url);
   }
 
+  listId(id: number): Observable<TipoTransaccion> {
+    return this.http.get<TipoTransaccion>(`${this.url}/${id}`);
+  }
+
   insert(tipo: TipoTransaccion): Observable<void> {
     return this.http.post<void>(this.url, tipo);
   }
 
-  setList(lista: TipoTransaccion[]) {
-    this.listaCambio = lista;
+  update(tipo: TipoTransaccion): Observable<void> {
+    return this.http.put<void>(this.url, tipo);
   }
 
-  getList() {
-    return this.listaCambio;
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.url}/${id}`);
+  }
+
+  setList(lista: TipoTransaccion[]): void {
+    this.listaCambio.next(lista);
+  }
+
+  getList(): Observable<TipoTransaccion[]> {
+    return this.listaCambio.asObservable();
   }
 }

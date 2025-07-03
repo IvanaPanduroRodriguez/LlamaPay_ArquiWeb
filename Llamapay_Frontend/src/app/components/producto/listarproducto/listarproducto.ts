@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductosService } from '../../../services/productos.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Producto } from '../../../models/productos';
+import { ProductosService } from '../../../services/productos.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';

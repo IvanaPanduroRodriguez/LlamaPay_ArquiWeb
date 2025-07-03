@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { Tienda } from '../../../models/tienda';
 import { TiendaService } from '../../../services/tienda.service';
-import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Tienda } from '../../../models/tienda';
+import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-buscar',
-  imports: [    MatTableModule,
+  imports: [MatTableModule,
     CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -17,7 +17,7 @@ import { MatInputModule } from '@angular/material/input';
   templateUrl: './buscar.html',
   styleUrl: './buscar.css'
 })
-export class BuscarTiendaComponent implements OnInit {
+export class Buscar implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'direccion'];
   dataSource: MatTableDataSource<Tienda> = new MatTableDataSource();
   form: FormGroup;

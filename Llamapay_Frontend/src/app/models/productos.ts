@@ -1,5 +1,5 @@
-import { User } from './user';
-import { Tienda } from './tienda';
+import { User} from "../models/user"
+import { Tienda } from '../models/tienda';
 
 export class Producto {
   idproducto: number=0;;

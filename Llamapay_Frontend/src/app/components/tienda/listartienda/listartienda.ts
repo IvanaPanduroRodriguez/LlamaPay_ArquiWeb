@@ -1,20 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { TiendaService } from '../../../services/tienda.service';
+import { Tienda } from '../../../models/tienda';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 
-import { Tienda } from '../../../models/tienda';
-import { TiendaService } from '../../../services/tienda.service';
-
 @Component({
   selector: 'app-listartienda',
-  imports: [MatTableModule,
+  imports: [
+
+    MatTableModule,
     MatIconModule,
     CommonModule,
     MatButtonModule,
-    RouterLink,],
+    RouterLink,
+  ],
   templateUrl: './listartienda.html',
   styleUrl: './listartienda.css'
 })

@@ -5,7 +5,7 @@
 
 /* Título */
 .container h1 {
-  color: #506C4D; /* Azul turquesa */
+  color: #506C4D; /* Verde turquesa */
   text-align: center;
   font-size: 28px;
   margin-bottom: 25px;
@@ -14,7 +14,7 @@
 
 /* Tabla principal */
 table {
-  width: 90%;
+  width: 95%; /* Aumentar ancho para acomodar nueva columna */
   margin: 0 auto;
   border-collapse: collapse;
   background-color: #e0f7fa; /* Fondo azul turquesa claro */
@@ -109,4 +109,32 @@ button[mat-button].delete_forever:hover .mat-icon {
 
 .delete_forever:hover {
     color: rgb(0, 255, 34); /* Cambia el color del lápiz a rojo */
+}
+
+/* Botón de Google Calendar */
+.mat-raised-button[color="primary"] {
+  background-color: #4CAF50 !important; /* Verde Google Calendar */
+  color: white !important;
+  font-size: 12px !important;
+  padding: 8px 12px !important;
+  min-width: 120px !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3) !important;
+  transition: all 0.2s ease !important;
+}
+
+.mat-raised-button[color="primary"]:hover {
+  background-color: #45a049 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.4) !important;
+}
+
+.mat-raised-button[color="primary"] .mat-icon {
+  margin-right: 6px !important;
+  font-size: 16px !important;
+}
+
+/* Ajustar ancho de columnas */
+.mat-column-c10 {
+  min-width: 140px;
 }

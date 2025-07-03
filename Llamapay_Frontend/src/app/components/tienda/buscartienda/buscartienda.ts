@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Tienda } from '../../../models/tienda';
-import { TiendaService } from '../../../services/tienda.service';
-import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { TiendaService } from '../../../services/tienda.service';
+import { Tienda } from '../../../models/tienda';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-buscartienda',
   imports: [MatTableModule,

@@ -1,0 +1,31 @@
+<div class="title-container">
+  <div style="text-align: center" class="title">
+    <h1>Cantidad de user por método de pago</h1>
+  </div>
+
+  <div *ngIf="isBrowser && users.length > 0" style="text-align: center" class="select-user">
+    <label>Selecciona Usuario:</label>
+    <select [(ngModel)]="selectedUserId" (change)="onUserChange($event)">
+      <option *ngFor="let user of users" [value]="user.userId">
+        {{ user.nameUser }}
+      </option>
+    </select>
+  </div>
+
+  <div style="text-align: center" class="chart-container">
+    <div *ngIf="isBrowser; else serverFallback">
+      <canvas baseChart
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [legend]="barChartLegend"
+        [type]="barChartType">
+      </canvas>
+    </div>
+    <ng-template #serverFallback>
+      <div class="chart-placeholder">
+        <p>El gráfico se cargará cuando se ejecute en el navegador</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

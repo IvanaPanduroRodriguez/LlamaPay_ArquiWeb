@@ -43,6 +43,8 @@ export class InsertareditarUser implements OnInit{
   ];
   constructor(private uS: UserService,private router: Router,private formBuilder: FormBuilder, private route: ActivatedRoute ){ 
   }
+  
+
 
 
   ngOnInit(): void {

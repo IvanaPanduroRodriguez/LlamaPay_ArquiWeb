@@ -4,12 +4,14 @@ import { Listartienda } from './listartienda/listartienda';
 
 @Component({
   selector: 'app-tienda',
-  imports: [    RouterOutlet,
+  imports: [RouterOutlet,
     Listartienda],
   templateUrl: './tienda.html',
   styleUrl: './tienda.css'
 })
 export class Tienda {
-  constructor(public route:ActivatedRoute) { 
+  constructor(public route:ActivatedRoute) {
+
   }
+
 }

@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl } from '@angular/forms';
-import { Tienda } from '../../../models/tienda';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { UserService } from '../../../services/user.service';
 import { TiendaService } from '../../../services/tienda.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ProductosService } from '../../../services/productos.service';
+import { User } from '../../../models/user';
+import { Tienda } from '../../../models/tienda';
+import { Producto } from '../../../models/productos';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
-import { User } from '../../../models/user';
-import { UserService } from '../../../services/user.service';
-import { Producto } from '../../../models/productos';
-import { ProductosService } from '../../../services/productos.service';
 import { MatSelectModule } from '@angular/material/select';
 
 @Component({
@@ -22,8 +22,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatCardModule,
     ReactiveFormsModule,
     CommonModule,
-    MatSelectModule
-  ],
+    MatSelectModule],
   templateUrl: './insertareditarproducto.html',
   styleUrl: './insertareditarproducto.css'
 })
