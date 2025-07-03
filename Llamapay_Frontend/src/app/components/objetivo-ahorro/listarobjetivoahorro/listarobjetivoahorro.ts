@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-listarobjetivoahorro',
   imports: [
-     MatTableModule,
+    MatTableModule,
     CommonModule,
     MatIconModule,
     MatButtonModule
@@ -26,13 +26,13 @@ export class Listarobjetivoahorro implements OnInit {
     this.oS.list().subscribe(data => {
       this.dataSource = new MatTableDataSource(data)
     })
-      this.oS.getList().subscribe(data => {
+    this.oS.getList().subscribe(data => {
       this.dataSource = new MatTableDataSource(data)
     })
   }
   eliminar(id: number) {
-    this.oS.deleteS(id).subscribe(data=>{
-      this.oS.list().subscribe(data=>{
+    this.oS.deleteS(id).subscribe(data => {
+      this.oS.list().subscribe(data => {
         this.oS.setList(data)
       })
     })
@@ -41,7 +41,6 @@ export class Listarobjetivoahorro implements OnInit {
     })
   }
 
-<<<<<<< HEAD
   agregarACalendario(objetivo: ObjetivoAhorro) {
     try {
       const fechaEvento = new Date(objetivo.fechaFin);
@@ -50,17 +49,17 @@ export class Listarobjetivoahorro implements OnInit {
       const titulo = `Meta de Ahorro: ${objetivo.nombreMeta}`;
       
       const descripcion = `Meta: ${objetivo.nombreMeta}%0A` +
-                         `Monto objetivo: S/ ${objetivo.montoMeta}%0A` +
-                         `Monto actual: S/ ${objetivo.montoActual}%0A` +
-                         `Estado: ${objetivo.estadoObjetivo}%0A` +
-                         `Fecha inicio: ${this.formatearfechaGoogle(objetivo.fechaInicio)}%0A` +
-                         `Fecha límite: ${this.formatearfechaGoogle(objetivo.fechaFin)}`;
+        `Monto objetivo: S/ ${objetivo.montoMeta}%0A` +
+        `Monto actual: S/ ${objetivo.montoActual}%0A` +
+        `Estado: ${objetivo.estadoObjetivo}%0A` +
+        `Fecha inicio: ${this.formatearfechaGoogle(objetivo.fechaInicio)}%0A` +
+        `Fecha límite: ${this.formatearfechaGoogle(objetivo.fechaFin)}`;
 
       const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE` +
-                               `&text=${encodeURIComponent(titulo)}` +
-                               `&dates=${fechaFormateada}/${fechaFormateada}` +
-                               `&details=${descripcion}` +
-                               `&ctz=America/Lima`;
+        `&text=${encodeURIComponent(titulo)}` +
+        `&dates=${fechaFormateada}/${fechaFormateada}` +
+        `&details=${descripcion}` +
+        `&ctz=America/Lima`;
 
       window.open(googleCalendarUrl, '_blank');
       
@@ -85,7 +84,4 @@ export class Listarobjetivoahorro implements OnInit {
     const year = fechaObj.getFullYear();
     return `${day}/${month}/${year}`;
   }
-=======
-
->>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98
 }
