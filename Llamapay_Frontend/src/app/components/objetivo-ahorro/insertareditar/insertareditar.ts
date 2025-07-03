@@ -13,7 +13,6 @@ import {MatSelectModule} from '@angular/material/select';
 import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
 import { MatButtonModule } from '@angular/material/button';
-
 @Component({
   selector: 'app-insertareditar',
   providers: [provideNativeDateAdapter()],
@@ -36,15 +35,22 @@ export class InsertareditarObjetivoAhorro implements OnInit {
 
   id:number=0;
   actualizar: boolean = false;
+<<<<<<< HEAD
 
 estadoObjetivos: { value: string; viewValue: string; isActivo: boolean }[] = [
   { value: 'En espera de Aceptación', viewValue: 'En espera de Aceptación', isActivo: true },
   { value: 'En progreso', viewValue: 'En progreso', isActivo: true },
   { value: 'Dado de Baja', viewValue: 'Dado de Baja', isActivo: false }
 ];
+=======
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98
 
+estadoObjetivos: { value: string; viewValue: string; isActivo: boolean }[] = [
+  { value: 'En espera de Aceptación', viewValue: 'En espera de Aceptación', isActivo: true },
+  { value: 'En progreso', viewValue: 'En progreso', isActivo: true },
+  { value: 'Dado de Baja', viewValue: 'Dado de Baja', isActivo: false }
+];
   listaUsuarios:User[]=[]
-
   constructor(
     private formBuilder: FormBuilder,
     private oS: ObjetivoAhorroService,

@@ -1,6 +1,10 @@
 import {Subject} from 'rxjs';
 import { Injectable } from '@angular/core';
+<<<<<<< HEAD
 import { Producto } from '../models/productos'; 
+=======
+import { Producto } from '../models/productos';
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 

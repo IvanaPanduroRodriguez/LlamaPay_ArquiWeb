@@ -32,6 +32,17 @@ export class TipoTransaccionService {
 
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.url}/${id}`);
+<<<<<<< HEAD
+=======
+  }
+
+  setList(lista: TipoTransaccion[]): void {
+    this.listaCambio.next(lista);
+  }
+
+  getList(): Observable<TipoTransaccion[]> {
+    return this.listaCambio.asObservable();
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98
   }
 
   setList(lista: TipoTransaccion[]): void {

@@ -11,6 +11,10 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes), 
     provideClientHydration(withEventReplay()),
+<<<<<<< HEAD
     provideHttpClient(withFetch()), provideCharts(withDefaultRegisterables()), provideCharts(withDefaultRegisterables()),
+=======
+    provideHttpClient(withFetch()), provideCharts(withDefaultRegisterables()),
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98
   ],
 };

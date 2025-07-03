@@ -19,7 +19,6 @@
       Roles
     </button>
   </div>
-
   <div>
     <button mat-button [matMenuTriggerFor]="menuObjetivoAhorros" class="btn-rojo">
       <mat-icon>savings</mat-icon>
@@ -48,6 +47,20 @@
   </div>
 
   <div>
+    <button mat-button [matMenuTriggerFor]="menuServicios" class="btn-rojo">
+      <mat-icon>business</mat-icon>
+      Servicios
+    </button>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuCategorias" class="btn-rojo">
+      <mat-icon>category</mat-icon>
+      Categorias de servicios
+    </button>
+  </div>
+
+  <div>
     <button mat-button [matMenuTriggerFor]="menuTiendas" class="btn-rojo">
       <mat-icon>store</mat-icon>
       Tiendas
@@ -60,13 +73,23 @@
       Productos
     </button>
   </div>
+<<<<<<< HEAD
     <div>
+=======
+
+  <div>
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98
     <button mat-button [matMenuTriggerFor]="menuReportes" class="btn-rojo">
       <mat-icon>payment</mat-icon>
       Reportes
     </button>
   </div>
+<<<<<<< HEAD
    <div>
+=======
+
+  <div>
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98
     <button mat-button [matMenuTriggerFor]="menuTransaccion" class="btn-rojo">
       <mat-icon>compare_arrows</mat-icon>
       Transacciones
@@ -115,30 +138,54 @@
   <button mat-menu-item routerLink="/metodopagos">Listar</button>
   <button mat-menu-item routerLink="/metodopagos/formularioM">Registrar</button>
 </mat-menu>
+<<<<<<< HEAD
 <!-- Menú Servicios -->
 <mat-menu #menuServicios="matMenu">
   <button mat-menu-item routerLink="/servicios">Listar</button>
   <button mat-menu-item routerLink="/servicios/insertarservicio">Registrar</button>
+=======
+
+<!-- Menú Servicios -->
+<mat-menu #menuServicios="matMenu">
+  <button mat-menu-item routerLink="/servicio">Listar</button>
+  <button mat-menu-item routerLink="/servicio/insertarservicio">Registrar</button>
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98
 </mat-menu>
 
 <!-- Menú Categorias de servicios -->
 <mat-menu #menuCategorias="matMenu">
+<<<<<<< HEAD
   <button mat-menu-item routerLink="/categorias">Listar</button>
   <button mat-menu-item routerLink="/categorias/insertarcategoria">Registrar</button>
+=======
+  <button mat-menu-item routerLink="/categoria">Listar</button>
+  <button mat-menu-item routerLink="/categoria/insertarcategoria">Registrar</button>
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98
 </mat-menu>
 
 <!-- Menú Tiendas -->
 <mat-menu #menuTiendas="matMenu">
+<<<<<<< HEAD
   <button mat-menu-item routerLink="/tiendas">Listar</button>
   <button mat-menu-item routerLink="/tiendas/formularioT">Registrar</button>
   <button mat-menu-item routerLink="/tiendas/buscartienda">Buscar por nombre</button>
+=======
+  <button mat-menu-item routerLink="/tiendas/listartienda">Listar</button>
+  <button mat-menu-item routerLink="/tiendas/insertareditartienda">Registrar</button>
+  <button mat-menu-item routerLink="/tiendas/buscar">Buscar por nombre</button>
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98
 </mat-menu>
 
 <!-- Menú Productos -->
 <mat-menu #menuProductos="matMenu">
+<<<<<<< HEAD
   <button mat-menu-item routerLink="/productos">Listar</button>
   <button mat-menu-item routerLink="/productos/formularioP">Registrar</button>
   <button mat-menu-item routerLink="/productos/buscarproducto">Buscar por nombre</button>
+=======
+  <button mat-menu-item routerLink="/producto/listarproducto">Listar</button>
+  <button mat-menu-item routerLink="/producto/insertareditarproducto">Registrar</button>
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98
 </mat-menu>
 
 <!-- Menú Transacciones -->

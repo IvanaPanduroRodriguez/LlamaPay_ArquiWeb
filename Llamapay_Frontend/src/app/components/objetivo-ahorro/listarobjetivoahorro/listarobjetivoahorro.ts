@@ -41,6 +41,7 @@ export class Listarobjetivoahorro implements OnInit {
     })
   }
 
+<<<<<<< HEAD
   agregarACalendario(objetivo: ObjetivoAhorro) {
     try {
       const fechaEvento = new Date(objetivo.fechaFin);
@@ -84,4 +85,7 @@ export class Listarobjetivoahorro implements OnInit {
     const year = fechaObj.getFullYear();
     return `${day}/${month}/${year}`;
   }
+=======
+
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98
 }

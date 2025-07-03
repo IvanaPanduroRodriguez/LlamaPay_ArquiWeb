@@ -19,7 +19,10 @@ public class MetodoPagoController {
     private IMetodoPagoService mpS;
 
     @GetMapping
+
+
     //@PreAuthorize("hasAnyAuthority('CLIENTE', 'ADMIN', 'FINANZAS', 'TESTER')")
+
     public List<MetodoPagoDTO> listar() {
         return mpS.list().stream().map(x->{
             ModelMapper modelMapper = new ModelMapper();
@@ -28,7 +31,9 @@ public class MetodoPagoController {
     }
 
     @PostMapping
+
     //@PreAuthorize("hasAuthority('ADMIN')")
+
     public void insertar(@RequestBody MetodoPagoDTO dto) {
         ModelMapper m = new ModelMapper();
         MetodoPago mp = m.map(dto, MetodoPago.class);
@@ -36,7 +41,9 @@ public class MetodoPagoController {
     }
 
     @GetMapping("/{id}")
+
     //@PreAuthorize("hasAnyAuthority( 'ADMIN','FINANZAS','TESTER')")
+
     public MetodoPagoDTO buscarID(@PathVariable("id") int id) {
         ModelMapper m = new ModelMapper();
         MetodoPagoDTO dto=m.map(mpS.listId(id),MetodoPagoDTO.class);
@@ -44,7 +51,10 @@ public class MetodoPagoController {
     }
 
     @PutMapping
+
     //@PreAuthorize("hasAuthority('ADMIN')")
+
+
     public void modificar(@RequestBody MetodoPagoDTO dto){
         ModelMapper m = new ModelMapper();
         MetodoPago mp = m.map(dto, MetodoPago.class);
@@ -52,13 +62,17 @@ public class MetodoPagoController {
     }
 
     @DeleteMapping("/{id}")
+
     //@PreAuthorize("hasAuthority('ADMIN')")
+
     public void eliminar(@PathVariable("id") int id){
         mpS.delete(id);
     }
 
     @GetMapping("/buscar-metodos-pagos-users")
+
     //@PreAuthorize("hasAuthority('ADMIN')")
+
     public List<ObtenerMetodosPagosPorUsersDTO> obtenerMetodosPagosPorUsers(@RequestParam int userId){
         List<String[]> fila = mpS.obtenerMetodosPagoPorUserId(userId);
         List<ObtenerMetodosPagosPorUsersDTO> dtoList = new ArrayList<>();

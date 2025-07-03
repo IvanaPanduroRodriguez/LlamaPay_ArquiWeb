@@ -23,11 +23,14 @@ public class UserController {
     private IUserService uS;
 
     @GetMapping
+
+
     //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
-    public List<UsuarioInfoDTO> listar() {
+
+    public List<UserDTO> listar() {
         return uS.list().stream().map(x->{
             ModelMapper modelMapper = new ModelMapper();
-            return modelMapper.map(x,UsuarioInfoDTO.class);
+            return modelMapper.map(x,UserDTO.class);
         }).collect(Collectors.toList());
     }
 
@@ -39,15 +42,21 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+
+
     //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
-    public UsuarioInfoDTO buscarID(@PathVariable("id") int id) {
+
+    public UserDTO buscarID(@PathVariable("id") int id) {
         ModelMapper m = new ModelMapper();
-        UsuarioInfoDTO dto=m.map(uS.listID(id),UsuarioInfoDTO.class);
+        UserDTO dto=m.map(uS.listID(id),UserDTO.class);
         return dto;
     }
 
     @PutMapping
+
+
     //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
+
     public void modificar(@RequestBody UserDTO dto){
         ModelMapper m = new ModelMapper();
         User u = m.map(dto, User.class);
@@ -55,7 +64,10 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+
     //@PreAuthorize("hasAuthority('ADMIN')")
+
+
     public void eliminar(@PathVariable("id") int id){ //eliminar todos los atributos que yo elija
         uS.delete(id);
     }

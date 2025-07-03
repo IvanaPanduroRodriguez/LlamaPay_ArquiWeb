@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { TipoCuenta } from '../../../models/tipocuenta';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TipoCuentaService } from '../../../services/tipocuenta.service';
+=======
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { ActivatedRoute, Router, Params } from '@angular/router';
+import { TipoCuentaService } from '../../../services/tipocuenta.service';
+import { TipoCuenta } from '../../../models/tipocuenta';
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -10,8 +17,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
+<<<<<<< HEAD
   selector: 'app-insertareditar',
   standalone: true,
+=======
+  selector: 'app-insertareditar-tipocuenta',
+  standalone: true,
+  templateUrl: './insertareditar.html',
+  styleUrl: './insertareditar.css',
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -19,11 +33,17 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatSelectModule,
     MatButtonModule
+<<<<<<< HEAD
   ],
   templateUrl: './insertareditar.html',
   styleUrl: './insertareditar.css'
 })
 export class Insertareditar implements OnInit {
+=======
+  ]
+})
+export class InsertareditarTipoCuentaComponent implements OnInit {
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98
   form: FormGroup;
   edicion: boolean = false;
   id: number = 0;

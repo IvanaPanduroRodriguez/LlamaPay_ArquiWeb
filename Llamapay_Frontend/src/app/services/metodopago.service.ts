@@ -1,9 +1,18 @@
 import { Injectable } from "@angular/core";
+<<<<<<< HEAD
 import { environment } from "../../environments/environment"; 
 import { HttpClient } from "@angular/common/http";
 import { MetodoPago } from "../models/metodopago";
 import { Observable, Subject } from "rxjs";
 import { ObtenerMetodosPagosPorUsersDTO } from "../models/obtenermetodospagosporusersDTO";
+=======
+import { HttpClient } from "@angular/common/http";
+import { MetodoPago } from "../models/metodopago";
+import { Observable, Subject } from "rxjs";
+import { environment } from "../../environments/environment";
+import { ObtenerMetodosPagosPorUsersDTO } from "../models/obtenermetodospagosporusersDTO";
+
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98
 
 const base_url=environment.base;
 @Injectable({

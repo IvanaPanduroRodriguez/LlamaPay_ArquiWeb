@@ -46,4 +46,8 @@ export class ListarTipoTransaccionComponent implements OnInit {
       });
     }
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98

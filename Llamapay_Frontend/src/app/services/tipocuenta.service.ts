@@ -37,4 +37,8 @@ export class TipoCuentaService {
   getList(): Observable<TipoCuenta[]> {
     return this.listaCambio.asObservable();
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98

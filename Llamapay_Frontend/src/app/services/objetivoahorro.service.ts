@@ -1,10 +1,14 @@
 import { Injectable } from "@angular/core";
+<<<<<<< HEAD
 import { environment } from "../../environments/environment"; 
+=======
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98
 import { HttpClient } from "@angular/common/http";
 import { ObjetivoAhorro} from '../models/objetivoahorro'
 import { Subject } from "rxjs";
+import { environment } from "../../environments/environment";
 
-const base_url=environment.base;
+const base_url= environment.base;
 
 @Injectable({
   providedIn: "root",  

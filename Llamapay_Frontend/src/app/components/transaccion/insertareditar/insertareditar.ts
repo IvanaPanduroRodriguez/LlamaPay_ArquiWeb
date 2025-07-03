@@ -123,4 +123,8 @@ export class InsertarEditarTransaccion implements OnInit {
       this.router.navigate(['/transaccion/listar']);
     });
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98

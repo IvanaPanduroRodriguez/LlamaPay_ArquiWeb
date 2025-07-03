@@ -80,6 +80,7 @@ export class InsertareditarCategoria implements OnInit {
         });
       }
       this.router.navigate(['categoria']); //9
+<<<<<<< HEAD
     }
   }
 
@@ -95,3 +96,20 @@ export class InsertareditarCategoria implements OnInit {
     }
   }
 }
+=======
+    }
+  }
+
+  init() {
+    if (this.edicion) {
+      this.cS.listId(this.id).subscribe((data) => {
+        this.form = new FormGroup({
+          codigo: new FormControl(data.idCategory),
+          name: new FormControl(data.nameCategory),
+          type: new FormControl(data.typeCategory),
+        });
+      });
+    }
+  }
+}
+>>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98

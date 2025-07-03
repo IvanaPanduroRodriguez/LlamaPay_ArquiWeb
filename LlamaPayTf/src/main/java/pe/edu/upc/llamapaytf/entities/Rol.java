@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"userId","rol"})})
+@Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"userId","TipoRol"})})
 public class Rol implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,9 +15,19 @@ public class Rol implements Serializable {
     private String TipoRol;
 
     @ManyToOne
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "userId")
     @JsonBackReference
     private User user;
+
+    public Rol() {
+
+    }
+
+    public Rol(int rol_id, String tipoRol, User user) {
+        Rol_id = rol_id;
+        TipoRol = tipoRol;
+        this.user = user;
+    }
 
     public int getRol_id() {
         return Rol_id;
