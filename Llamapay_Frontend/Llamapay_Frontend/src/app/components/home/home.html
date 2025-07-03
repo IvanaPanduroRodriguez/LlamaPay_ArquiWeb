@@ -25,9 +25,6 @@
       <a class="btn-register-body" routerLink="/registro">
         <button class="btn-1">Regístrate y sé parte de nosotros</button>
       </a>
-      <button class="btn-1 btn-pago-simulacion" (click)="pagar()">
-        Simular pago con Stripe 💳
-      </button>
       <p>Encuéntranos en</p>
 
       <div>
@@ -102,36 +99,6 @@
     </div>
   </div>
 </main>
-
-<!-- Botón flotante -->
-<button class="chat-toggle" (click)="toggleChat()">💬</button>
-
-<!-- Ventana de chat -->
-<div class="chat-window" [class.open]="chatOpen">
-  <div class="chat-header">
-    <p>LLAMA P.A.I 🦙</p>
-    <button class="close-btn" (click)="toggleChat()">✖</button>
-  </div>
-
-  <div class="chat-messages">
-    <div
-      *ngFor="let msg of messages"
-      [class.user]="msg.from === 'user'"
-      [class.bot]="msg.from === 'bot'"
-    >
-      <p [innerHTML]="msg.text"></p>
-    </div>
-  </div>
-
-  <div class="chat-input">
-    <input
-      [(ngModel)]="userInput"
-      (keydown.enter)="sendMessage()"
-      placeholder="Haz una pregunta..."
-    />
-    <button (click)="sendMessage()">Enviar</button>
-  </div>
-</div>
 
 <footer>
   <div class="social-media">

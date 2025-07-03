@@ -32,6 +32,10 @@ import { Buscarproducto } from './components/producto/buscarproducto/buscarprodu
 import { Buscartienda } from './components/tienda/buscartienda/buscartienda';
 import { Insertareditartienda } from './components/tienda/insertareditartienda/insertareditartienda';
 import { Tienda } from './components/tienda/tienda';
+import { Success } from './components/success/success';
+import { Cancel } from './components/cancel/cancel';
+import { Home } from './components/home/home';
+import { seguridadGuard } from './guard/seguridad.guard';
 
 
 export const routes: Routes = [
@@ -121,14 +125,16 @@ export const routes: Routes = [
     path: 'transaccion',component: Transaccion,
     children: [
       { path: 'listar', component: ListarTransaccion },
-      { path: 'insertar', component: InsertarEditarTransaccion }
+      { path: 'insertar', component: InsertarEditarTransaccion },
+      { path: 'editar/:id', component: InsertarEditarTransaccion } 
     ]
   },
   {
     path: 'tipotransaccion',component: TipoTransaccion,
     children: [
       { path: 'listar', component: ListarTipoTransaccionComponent },
-      { path: 'insertar', component: InsertarTipoTransaccionComponent }
+      { path: 'insertar', component: InsertarTipoTransaccionComponent },
+      { path: 'editar/:id', component: InsertarTipoTransaccionComponent } 
     ]
   },
   {
@@ -139,7 +145,12 @@ export const routes: Routes = [
     { path: 'editar/:id', component: Insertareditar }
   ]
   },
-
+  {
+   path: 'succes', component: Success 
+  },
+  {
+    path: 'cancel', component: Cancel
+  },
  // -----------------------------------------CARLOS-------------------------------
   {
     path: 'productos',component: Producto,
@@ -157,6 +168,11 @@ export const routes: Routes = [
       { path: 'editar/:id', component: Insertareditartienda },
       { path: 'buscartienda', component: Buscartienda }
     ]
+  },
+  {
+    path: 'home',
+    component: Home,
+  canActivate: [seguridadGuard]
   }
 
 ];
