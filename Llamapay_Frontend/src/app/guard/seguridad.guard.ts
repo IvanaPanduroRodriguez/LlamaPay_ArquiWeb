@@ -1,4 +1,4 @@
-/*import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
 import { LoginService } from '../services/login.service';
 import { inject } from '@angular/core';
 
@@ -14,4 +14,4 @@ export const seguridadGuard= (
       return false;
     }
     return rpta;
-};*/
+};

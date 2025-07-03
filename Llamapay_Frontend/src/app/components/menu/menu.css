@@ -15,10 +15,19 @@
 }
 
 
-
-
-
 .custom-toolbar button,
 .custom-toolbar mat-icon {
  color: white;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-weight: 500;
 }

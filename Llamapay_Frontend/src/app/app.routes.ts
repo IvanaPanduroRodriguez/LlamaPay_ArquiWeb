@@ -28,6 +28,9 @@ import { TipoCuenta } from './components/tipocuenta/tipocuenta';
 import { ListarTipoCuentaComponent } from './components/tipocuenta/listar/listar';
 import { InsertareditarTipoCuentaComponent } from './components/tipocuenta/insertareditar/insertareditar';
 
+import { Home } from './components/home/home';
+import { seguridadGuard } from './guard/seguridad.guard';
+
 
 export const routes: Routes = [
 
@@ -136,6 +139,12 @@ export const routes: Routes = [
     { path: 'insertar', component: InsertareditarTipoCuentaComponent },
     { path: 'editar/:id', component: InsertareditarTipoCuentaComponent }
   ]
-  }
+  },
+
+  {
+  path: 'home',
+  component: Home,
+  canActivate: [seguridadGuard]
+}
 
 ];

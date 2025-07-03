@@ -1,60 +1,72 @@
-<mat-toolbar class="custom-toolbar">
+<mat-toolbar class="custom-toolbar" *ngIf="verificar()">
+
+  <!-- Botones principales -->
+  <div>
+    <button mat-button routerLink="/home" class="btn-rojo">
+      <mat-icon>home</mat-icon> Home
+    </button>
+  </div>
+
   <div>
     <button mat-button [matMenuTriggerFor]="menuUser" class="btn-rojo">
-      <mat-icon>computer</mat-icon>
-      Usuarios
+      <mat-icon>computer</mat-icon> Usuarios
     </button>
   </div>
 
   <div>
     <button mat-button [matMenuTriggerFor]="menuRoles" class="btn-rojo">
-      <mat-icon>settings</mat-icon>
-      Roles
+      <mat-icon>settings</mat-icon> Roles
     </button>
   </div>
 
   <div>
     <button mat-button [matMenuTriggerFor]="menuObjetivoAhorros" class="btn-rojo">
-      <mat-icon>savings</mat-icon>
-      Objetivos de Ahorro
+      <mat-icon>savings</mat-icon> Objetivos de Ahorro
     </button>
   </div>
 
   <div>
     <button mat-button [matMenuTriggerFor]="menuMetodoPagos" class="btn-rojo">
-      <mat-icon>payment</mat-icon>
-      Métodos de Pago
+      <mat-icon>payment</mat-icon> Métodos de Pago
     </button>
   </div>
 
   <div>
     <button mat-button [matMenuTriggerFor]="menuTransaccion" class="btn-rojo">
-      <mat-icon>compare_arrows</mat-icon>
-      Transacciones
+      <mat-icon>compare_arrows</mat-icon> Transacciones
     </button>
   </div>
 
   <div>
     <button mat-button [matMenuTriggerFor]="menuTipoTransaccion" class="btn-rojo">
-      <mat-icon>category</mat-icon>
-      Tipos de Transacción
+      <mat-icon>category</mat-icon> Tipos de Transacción
     </button>
   </div>
 
   <div>
     <button mat-button [matMenuTriggerFor]="menuTipoCuenta" class="btn-rojo">
-      <mat-icon>account_balance</mat-icon>
-      Tipos de Cuenta
+      <mat-icon>account_balance</mat-icon> Tipos de Cuenta
     </button>
   </div>
-    <div>
+
+  <div>
     <button mat-button [matMenuTriggerFor]="menuReportes" class="btn-rojo">
-      <mat-icon>payment</mat-icon>
-      Reportes
+      <mat-icon>bar_chart</mat-icon> Reportes
     </button>
   </div>
-  
+
+  <!-- Espaciador -->
+  <span class="toolbar-spacer"></span>
+
+  <!-- Botón Usuario con menú -->
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuCuenta" class="btn-rojo">
+      <mat-icon>person</mat-icon> Usuario
+    </button>
+  </div>
 </mat-toolbar>
+
+<!-- Menús secundarios -->
 
 <!-- Menú Usuarios -->
 <mat-menu #menuUser="matMenu">
@@ -96,15 +108,30 @@
 <mat-menu #menuTipoCuenta="matMenu">
   <button mat-menu-item routerLink="/tipocuenta/listar">Listar</button>
   <button mat-menu-item routerLink="/tipocuenta/insertar">Registrar</button>
+</mat-menu>
+
 <!-- Menú Reportes -->
 <mat-menu #menuReportes="matMenu">
   <button mat-menu-item routerLink="/reportes/metodospagosgrafica">
-    <mat-icon>bar_chart</mat-icon>
-    Métodos de Pago
+    <mat-icon>bar_chart</mat-icon> Métodos de Pago
   </button>
   <button mat-menu-item routerLink="/reportes/graficUser">
-    <mat-icon>insert_chart</mat-icon>
-    Cumpleaños por Mes
+    <mat-icon>insert_chart</mat-icon> Cumpleaños por Mes
   </button>
 </mat-menu>
 
+<!-- Menú Cuenta de Usuario -->
+<mat-menu #menuCuenta="matMenu">
+  <button mat-menu-item disabled>
+    <mat-icon>person</mat-icon>
+    {{ getUsername() }}
+  </button>
+  <button mat-menu-item disabled>
+    <mat-icon>verified_user</mat-icon>
+    {{ getRole() }}
+  </button>
+  <button mat-menu-item (click)="cerrar()">
+    <mat-icon>logout</mat-icon>
+    Cerrar sesión
+  </button>
+</mat-menu>

@@ -1,85 +1,41 @@
-//import { HttpClient, HttpHeaders } from '@angular/common/http';
-/*import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { JwtRequest } from '../models/jwtRequest';
-import { isPlatformBrowser } from '@angular/common';
+import { JwtResponse } from '../models/jwtResponse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
+  private helper = new JwtHelperService();
 
-  constructor(private http: HttpClient,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  constructor(private http: HttpClient) {}
+
   login(request: JwtRequest) {
-    return this.http.post('http://localhost:8080/login', request);
+    return this.http.post<JwtResponse>('http://localhost:8085/login', request);
   }
-  verificar() {
-    let token = sessionStorage.getItem('token');
-    return token != null;
+
+  guardarSesion(response: JwtResponse, username: string): void {
+    sessionStorage.setItem('token', response.jwttoken);
+    sessionStorage.setItem('role', response.role);
+    sessionStorage.setItem('username', username);
   }
+
+  verificar(): boolean {
+    const token = sessionStorage.getItem('token');
+    return token != null && !this.helper.isTokenExpired(token);
+  }
+
   getUserRole(): string | null {
-    if (isPlatformBrowser(this.platformId)) {
-      let token = sessionStorage.getItem('token');
-      if (!token) {
-        return null;  // Si no hay token, devuelve null
-      }
-      
-      const helper = new JwtHelperService();
-      const decodedToken = helper.decodeToken(token);  // Decodificar el token
-
-      return decodedToken?.role ?? null;  // Devuelve el rol si está presente, sino null
-    }
-    return null;  // Si no es plataforma de navegador, devuelve null
-  }
-  showRole() {
-    if (isPlatformBrowser(this.platformId)) {
-      let token = sessionStorage.getItem('token');
-      if (!token) {
-        // Manejar el caso en el que el token es nulo.
-        return null; // O cualquier otro valor predeterminado dependiendo del contexto.
-      }
-      const helper = new JwtHelperService();
-      const decodedToken = helper.decodeToken(token);
-      return decodedToken?.role;
-    }
-    return null;
+    return sessionStorage.getItem('role');
   }
 
-  showUser() {
-    if (isPlatformBrowser(this.platformId)) {
-      let token = sessionStorage.getItem('token');
-      if (!token) {
-        return null;
-      }
-      const helper = new JwtHelperService();
-      const decodedToken = helper.decodeToken(token);
-      console.log(decodedToken);
-      return decodedToken?.username;
-    }
-    return null;
+  getUsername(): string | null {
+    return sessionStorage.getItem('username');
   }
 
-  getId() {
-    if (isPlatformBrowser(this.platformId)) {
-      let token = sessionStorage.getItem('token');
-      if (!token) {
-        return null;
-      }
-      const helper = new JwtHelperService();
-      const decodedToken = helper.decodeToken(token);
-      console.log(decodedToken);
-  
-      let id = decodedToken?.id;
-      if (id) {
-        id = parseInt(id, 10);
-        if (isNaN(id)) {
-          return null;
-        }
-      }
-      return id;
-    }
-    return null;
+  cerrarSesion(): void {
+    sessionStorage.clear();
   }
-}*/
+}
