@@ -46,4 +46,14 @@ private listaCambio = new Subject<User[]>(); //1er paso
   findByUsername(username: string) {
     return this.http.get<User>(`${this.url}/username/${username}`);
   }
+
+  getUserRole(): string {
+  const stored = sessionStorage.getItem('rol');
+  return stored ? stored.replace(/"/g, '') : '';
+}
+
+getUsername(): string {
+  const stored = sessionStorage.getItem('username');
+  return stored ? stored.replace(/"/g, '') : '';
+}
 }

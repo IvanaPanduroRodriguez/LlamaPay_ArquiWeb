@@ -37,17 +37,24 @@ import { Cancel } from './components/cancel/cancel';
 import { Home } from './components/home/home';
 import { seguridadGuard } from './guard/seguridad.guard';
 import { Perfil } from './components/user/perfil/perfil';
+import { PublicGuard } from './guard/public.guard';
 
 
 export const routes: Routes = [
 
   {
-    path: '', component: Landing // ← Landing page por defecto
+    path: '',
+    component: Home,
+  },
+  {
+    path: 'home', component: Landing,
+    canActivate: [seguridadGuard] // ← Landing page por defecto
   },
   {
     path: 'registro', component:RegisterComponent
   },
   { path: 'login', component: LoginComponent },
+  { path: '**', redirectTo: '' }, 
   //-----------------IVANA------------------------------------------
   {
     path: 'categorias',
@@ -193,11 +200,6 @@ export const routes: Routes = [
       { path: 'editar/:id', component: Insertareditartienda },
       { path: 'buscartienda', component: Buscartienda }
     ]
-  },
-  {
-    path: 'home',
-    component: Home,
-  canActivate: [seguridadGuard]
   },
     {
     path: 'perfil',
