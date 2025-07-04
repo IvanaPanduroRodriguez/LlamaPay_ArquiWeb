@@ -8,12 +8,12 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-listar',
+  selector: 'app-listartipocuenta',
   imports: [MatTableModule, MatButtonModule, RouterLink, CommonModule, MatIconModule],
   templateUrl: './listar.html',
   styleUrl: './listar.css'
 })
-export class Listar implements OnInit {
+export class ListarTipoCuentaComponent implements OnInit {
   dataSource: MatTableDataSource<TipoCuenta> = new MatTableDataSource();
   displayedColumns: string[] = ['id', 'nombre', 'numero', 'tipo', 'saldo', 'moneda', 'usuario', 'editar', 'eliminar'];
 

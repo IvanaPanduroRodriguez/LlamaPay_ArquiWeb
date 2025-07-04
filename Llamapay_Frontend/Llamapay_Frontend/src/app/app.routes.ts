@@ -24,8 +24,8 @@ import { Reportesmetodopago } from './components/reportes/reportesmetodopago/rep
 import { Reportes } from './components/reportes/reportes';
 import { ReportesuserComponent } from './components/reportes/reportesuser/reportesuser';
 import { Tipocuenta } from './components/tipocuenta/tipocuenta';
-import { Listar } from './components/tipocuenta/listar/listar';
-import { Insertareditar } from './components/tipocuenta/insertareditar/insertareditar';
+import { ListarTipoCuentaComponent } from './components/tipocuenta/listar/listar';
+import { InsertareditarTipoCuenta } from './components/tipocuenta/insertareditar/insertareditar';
 import { Producto } from './components/producto/producto';
 import { Insertareditarproducto } from './components/producto/insertareditarproducto/insertareditarproducto';
 import { Buscarproducto } from './components/producto/buscarproducto/buscarproducto';
@@ -36,6 +36,7 @@ import { Success } from './components/success/success';
 import { Cancel } from './components/cancel/cancel';
 import { Home } from './components/home/home';
 import { seguridadGuard } from './guard/seguridad.guard';
+import { Perfil } from './components/user/perfil/perfil';
 
 
 export const routes: Routes = [
@@ -49,34 +50,35 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   //-----------------IVANA------------------------------------------
   {
-
-    path:'categorias',component:Categoria,
-    children:[
-      { 
-        path:'insertarcategoria',component:InsertareditarCategoria
-      },
-      {
-        path:'ediciones/:id',component:InsertareditarCategoria
-      }
+    path: 'categorias',
+    component: Categoria,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    data: { roles: ['CLIENTE'] },
+    children: [
+      { path: 'insertarcategoria', component: InsertareditarCategoria },
+      { path: 'ediciones/:id', component: InsertareditarCategoria }
     ]
-
   },
 
-  {
-    path:'servicios', component:Servicio,
-    children:[
-      {
-        path:'insertarservicio', component: InsertareditarServicio
-      },
-      {
-        path:'ediciones/:id',component:InsertareditarServicio
-      }
+{
+    path: 'servicios',
+    component: Servicio,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    data: { roles: ['CLIENTE'] },
+    children: [
+      { path: 'insertarservicio', component: InsertareditarServicio },
+      { path: 'ediciones/:id', component: InsertareditarServicio }
     ]
   },
  //-----------------JOHN------------------------------------------
   {
     path: 'metodopagos',
     component: MetodoPago,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    data: { roles: ['CLIENTE'] },
     children: [
       { path: 'formularioM', component: InsertareditarMetodoPago },
       { path: 'ediciones/:id', component: InsertareditarMetodoPago }
@@ -85,6 +87,9 @@ export const routes: Routes = [
   {
     path: 'users',
     component: User,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    data: { roles: ['ADMIN'] },
     children: [
       { path: 'formularioU', component: InsertareditarUser },
       { path: 'ediciones/:id', component: InsertareditarUser }
@@ -93,57 +98,70 @@ export const routes: Routes = [
   {
     path: 'roles',
     component: Rol,
-    children: [ 
-      {
-        path: 'formularioR', component: InsertareditarRol
-      },
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    data: { roles: ['ADMIN'] },
+    children: [
+      { path: 'formularioR', component: InsertareditarRol }
     ]
-
   },
-  {
-    path:'objetivoahorros',
+   {
+    path: 'objetivoahorros',
     component: ObjetivoAhorro,
-    children:[
-      {
-        path:'formularioOA',component: InsertareditarObjetivoAhorro
-      }
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    data: { roles: ['CLIENTE'] },
+    children: [
+      { path: 'formularioOA', component: InsertareditarObjetivoAhorro }
     ]
   },
-  {
-    path:'reportes',component:Reportes,
-    children:[
-      {
-        path:'metodospagosgrafica',component:Reportesmetodopago
-      },
-      {
-        path:'graficUser',component:ReportesuserComponent
-      }
+{
+    path: 'reportes',
+    component: Reportes,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    data: { roles: ['ADMIN', 'CLIENTE', 'TESTER'] },
+    children: [
+      { path: 'metodospagosgrafica', component: Reportesmetodopago },
+      { path: 'graficUser', component: ReportesuserComponent, data: { roles: ['ADMIN', 'TESTER'] } }
     ]
   },
 //-----------------JOAO------------------------------------------
-  {
-    path: 'transaccion',component: Transaccion,
+{
+    path: 'transaccion',
+    component: Transaccion,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    data: { roles: ['CLIENTE'] },
     children: [
       { path: 'listar', component: ListarTransaccion },
       { path: 'insertar', component: InsertarEditarTransaccion },
-      { path: 'editar/:id', component: InsertarEditarTransaccion } 
+      { path: 'editar/:id', component: InsertarEditarTransaccion }
     ]
   },
-  {
-    path: 'tipotransaccion',component: TipoTransaccion,
+ {
+    path: 'tipotransaccion',
+    component: TipoTransaccion,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    data: { roles: ['CLIENTE'] },
     children: [
       { path: 'listar', component: ListarTipoTransaccionComponent },
       { path: 'insertar', component: InsertarTipoTransaccionComponent },
-      { path: 'editar/:id', component: InsertarTipoTransaccionComponent } 
+      { path: 'editar/:id', component: InsertarTipoTransaccionComponent }
     ]
   },
   {
-  path: 'tipocuenta', component:Tipocuenta,
-  children: [
-    { path: 'listar', component: Listar },
-    { path: 'insertar', component: Insertareditar },
-    { path: 'editar/:id', component: Insertareditar }
-  ]
+    path: 'tipocuenta',
+    component: Tipocuenta,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    data: { roles: ['CLIENTE'] },
+    children: [
+      { path: 'listar', component: ListarTipoCuentaComponent },
+      { path: 'insertar', component: InsertareditarTipoCuenta },
+      { path: 'editar/:id', component: InsertareditarTipoCuenta }
+    ]
   },
   {
    path: 'succes', component: Success 
@@ -153,7 +171,11 @@ export const routes: Routes = [
   },
  // -----------------------------------------CARLOS-------------------------------
   {
-    path: 'productos',component: Producto,
+    path: 'productos',
+    component: Producto,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    data: { roles: ['CLIENTE'] },
     children: [
       { path: 'formularioP', component: Insertareditarproducto },
       { path: 'editar/:id', component: Insertareditarproducto },
@@ -163,6 +185,9 @@ export const routes: Routes = [
   {
     path: 'tiendas',
     component: Tienda,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    data: { roles: ['CLIENTE'] },
     children: [
       { path: 'formularioT', component: Insertareditartienda },
       { path: 'editar/:id', component: Insertareditartienda },
@@ -173,6 +198,10 @@ export const routes: Routes = [
     path: 'home',
     component: Home,
   canActivate: [seguridadGuard]
+  },
+    {
+    path: 'perfil',
+    component: Perfil,
+    canActivate: [seguridadGuard]
   }
-
 ];

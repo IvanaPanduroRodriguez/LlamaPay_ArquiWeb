@@ -1,51 +1,32 @@
 import { inject } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterStateSnapshot
+} from '@angular/router';
 import { LoginService } from '../services/login.service';
 
 export const seguridadGuard = (
-  route: ActivatedRoute,
+  route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot
 ) => {
   const lService = inject(LoginService);
   const router = inject(Router);
-  const snackBar = inject(MatSnackBar);
 
-  const rpta = lService.verificar();
-  if (!rpta) {
+  // 1. Verifica que el usuario esté autenticado
+  const autenticado = lService.verificar();
+  if (!autenticado) {
     router.navigate(['/login']);
     return false;
   }
 
-  const role = lService.showRole();
+  // 2. Obtiene roles permitidos de la ruta
+  const rolesPermitidos = route.data['roles'] as string[];
+  const rolUsuario = lService.getUserRole(); // Ya lo tienes implementado
 
-  const rutasPorRol: { [key: string]: string[] } = {
-    ADMIN: [''], // Acceso a todo
-    FINANZAS: ['/metodopagos', '/transaccion', '/tipotransaccion'],
-    TESTER: [
-      '/reportes',
-      '/tipocuenta',
-      '/productos/buscarproducto',
-      '/tiendas/buscartienda'
-    ],
-    CLIENTE: ['/objetivoahorros', '/home', '/succes', '/cancel']
-  };
-
-  // Si es ADMIN, permitir todo
-  if (role === 'ADMIN') return true;
-
-  const rutasPermitidas = rutasPorRol[role] || [];
-
-  const tieneAcceso = rutasPermitidas.some((ruta) =>
-    state.url.startsWith(ruta)
-  );
-
-  if (!tieneAcceso) {
-    snackBar.open('No tienes permiso para acceder a esta ruta', 'Cerrar', {
-      duration: 3000,
-      panelClass: ['snackbar-error']
-    });
-    router.navigate(['/landing']);
+  if (rolesPermitidos && !rolesPermitidos.includes(rolUsuario)) {
+    alert('🚫 No tienes permisos para acceder a esta página');
+    router.navigate(['']); // redirige al landing
     return false;
   }
 

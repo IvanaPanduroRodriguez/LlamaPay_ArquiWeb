@@ -23,7 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './insertareditar.html',
   styleUrl: './insertareditar.css'
 })
-export class Insertareditar implements OnInit {
+export class InsertareditarTipoCuenta implements OnInit {
   form: FormGroup;
   edicion: boolean = false;
   id: number = 0;

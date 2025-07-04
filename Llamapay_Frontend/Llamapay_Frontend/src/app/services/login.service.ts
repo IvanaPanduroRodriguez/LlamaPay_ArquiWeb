@@ -12,27 +12,53 @@ export class LoginService {
 
   constructor(private http: HttpClient) {}
 
+  private isBrowser(): boolean {
+    return typeof window !== 'undefined';
+  }
+
   login(request: JwtRequest) {
     return this.http.post<JwtResponse>('http://localhost:8085/login', request);
   }
 
-  verificar() {
-    if (typeof window !== 'undefined' && sessionStorage) {
-      let token = sessionStorage.getItem('token');
-      return token != null;
+ guardarSesion(response: JwtResponse, username: string): void {
+    if (this.isBrowser()) {
+      sessionStorage.setItem('token', response.jwttoken);
+      sessionStorage.setItem('role', response.role);
+      sessionStorage.setItem('username', username);
     }
-    return false;
   }
-  showRole() {
-    if (typeof window !== 'undefined' && sessionStorage) {
-      let token = sessionStorage.getItem('token');
-      if (!token) {
-        return null; // O un valor por defecto, por ejemplo 'ESTUDIANTE'
-      }
-      const helper = new JwtHelperService();
-      const decodedToken = helper.decodeToken(token);
-      return decodedToken?.tipousuario || null;
+
+  verificar(): boolean {
+    return this.isBrowser() && sessionStorage.getItem('token') !== null;
+  }
+
+  getUserRole(): string {
+    return this.isBrowser() ? sessionStorage.getItem('role') || '' : '';
+  }
+
+  esAdmin(): boolean {
+    return this.getUserRole() === 'ADMIN';
+  }
+
+  esCliente(): boolean {
+    return this.getUserRole() === 'CLIENTE';
+  }
+
+  esTester(): boolean {
+    return this.getUserRole() === 'TESTER';
+  }
+
+  getUsername(): string | null {
+    return this.isBrowser() ? sessionStorage.getItem('username') : null;
+  }
+
+  cerrarSesion(): void {
+    if (this.isBrowser()) {
+      sessionStorage.clear();
     }
-    return null;
+  }
+
+  getUserId(): number {
+    return this.isBrowser() ? Number(sessionStorage.getItem('userId')) : 0;
   }
 }

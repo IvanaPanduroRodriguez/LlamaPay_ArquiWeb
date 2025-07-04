@@ -24,50 +24,37 @@ import { MatPaginatorModule } from '@angular/material/paginator';
   templateUrl: './menu.html',
   styleUrl: './menu.css'
 })
-export class Menu implements OnInit {
+export class Menu {
   role: string = '';
 
   constructor(private loginService: LoginService, private router: Router) {}
 
-  ngOnInit() {
-    this.role = this.loginService.showRole(); // lo cargamos una vez
-  }
-
-  cerrar() {
-    sessionStorage.clear();
-  }
-
-  verificar() {
+verificar(): boolean {
     return this.loginService.verificar();
   }
 
-  // Permisos por rol
-  isAdmin(): boolean {
-    return this.role === 'ADMIN';
+  esAdmin(): boolean {
+    return this.loginService.esAdmin();
   }
 
-  isFinanzas(): boolean {
-    return this.role === 'FINANZAS';
+  esCliente(): boolean {
+    return this.loginService.esCliente();
   }
 
-  isTester(): boolean {
-    return this.role === 'TESTER';
+  esTester(): boolean {
+    return this.loginService.esTester();
   }
 
-  isCliente(): boolean {
-    return this.role === 'CLIENTE';
+  getRole(): string {
+    return this.loginService.getUserRole();
   }
 
-  // Para mostrar opciones compartidas
-  puedeVerReportes(): boolean {
-    return this.isAdmin() || this.isTester();
+  getUsername(): string | null {
+    return this.loginService.getUsername();
   }
 
-  puedeVerTransacciones(): boolean {
-    return this.isAdmin() || this.isFinanzas();
-  }
-
-  puedeVerObjetivos(): boolean {
-    return this.isAdmin() || this.isCliente();
+  cerrar(): void {
+    this.loginService.cerrarSesion();
+    this.router.navigate(['/login']);
   }
 }
