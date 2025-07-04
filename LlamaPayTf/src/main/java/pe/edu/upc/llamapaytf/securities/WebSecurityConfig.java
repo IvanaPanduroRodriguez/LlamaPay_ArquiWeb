@@ -71,7 +71,6 @@ public class WebSecurityConfig {
                                 "/swagger-resources/**",
                                 "/users/register-user",
                                 "/users",
-                                "/metodospagos",
                                 "/webjars/**",
                                 "/login",
                                 "/servicios/**",

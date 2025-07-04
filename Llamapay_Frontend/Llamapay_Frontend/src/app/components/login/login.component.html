@@ -26,7 +26,10 @@
       </div>
 
       <div class="input-container">
-        <button type="submit" class="btn-login">Ingresar</button>
+        <!-- Botón deshabilitado si username o password están vacíos -->
+        <button type="submit" class="btn-login" [disabled]="!username || !password">
+          Ingresar
+        </button>
       </div>
 
       <div class="input-container" id="separation-login">
