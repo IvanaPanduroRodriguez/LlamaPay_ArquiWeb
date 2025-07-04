@@ -2,7 +2,7 @@ import { Categoria } from "../models/categoria";
 
 export class Servicio {
     idService: number = 0;
-    nameCompanyService: string = "";
     nameService: string = "";
+    nameCompanyService: string = "";
     category: Categoria = new Categoria(); // Relación con la clase Categoria
 }

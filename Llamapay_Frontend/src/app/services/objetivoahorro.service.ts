@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { ObjetivoAhorro} from '../models/objetivoahorro'
 import { Subject } from "rxjs";
 
-const base_url= environment.base;
+const base_url=environment.base;
 
 @Injectable({
   providedIn: "root",  

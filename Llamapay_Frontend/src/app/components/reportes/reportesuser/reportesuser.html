@@ -4,23 +4,6 @@
   </div>
 
   <div style="text-align: center" class="chart-container">
-<<<<<<< HEAD
-    <div *ngIf="isBrowser; else serverFallback">
-      <canvas
-        baseChart
-        [datasets]="barChartData"
-        [labels]="barChartLabels"
-        [options]="barChartOptions"
-        [legend]="barChartLegend"
-        [type]="barChartType">
-      </canvas>
-    </div>
-    <ng-template #serverFallback>
-      <div class="chart-placeholder">
-        <p>El gráfico se cargará cuando se ejecute en el navegador</p>
-      </div>
-    </ng-template>
-=======
     <canvas
       baseChart
       [datasets]="barChartData"
@@ -29,6 +12,5 @@
       [legend]="barChartLegend"
       [type]="barChartType">
     </canvas>
->>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98
   </div>
 </div>

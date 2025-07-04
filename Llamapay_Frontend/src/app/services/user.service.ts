@@ -43,4 +43,7 @@ private listaCambio = new Subject<User[]>(); //1er paso
   const params = { inicio, fin };
   return this.http.get<SerchingUserForYearBirthdayDTO[]>(`${this.url}/Searching-Date-years-users`, { params });
 }
+  findByUsername(username: string) {
+    return this.http.get<User>(`${this.url}/username/${username}`);
+  }
 }

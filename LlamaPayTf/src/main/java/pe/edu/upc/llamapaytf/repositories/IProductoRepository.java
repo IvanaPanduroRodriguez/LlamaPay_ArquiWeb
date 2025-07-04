@@ -12,18 +12,18 @@ import java.util.List;
 public interface IProductoRepository extends JpaRepository<Producto,Integer> {
 
     @Query(value="SELECT \n" +
-            "  p.nombre_producto, \n" +
+            "  p.nombreproducto, \n" +
             "  COUNT(*) AS Total_Unidades, \n" +
-            "  p.precio_producto, \n" +
-            "  t.Nombre_tienda\n" +
+            "  p.precioproducto, \n" +
+            "  t.nombretienda\n" +
             "FROM Producto p\n" +
-            "INNER JOIN Tienda t ON p.tienda_id = t.tienda_id\n" +
+            "INNER JOIN Tienda t ON p.idtienda = t.idtienda\n" +
             "GROUP BY \n" +
-            "  p.nombre_producto, \n" +
-            "  p.precio_producto, \n" +
-            "  t.nombre_tienda\n" +
+            "  p.nombreproducto, \n" +
+            "  p.precioproducto, \n" +
+            "  t.nombretienda\n" +
             "ORDER BY \n" +
-            "  p.nombre_producto;",nativeQuery = true)
+            "  p.nombreproducto;",nativeQuery = true)
     public List<String[]>productosandpriceandunit();
 
     @Query(value="SELECT \n" +
@@ -45,4 +45,5 @@ public interface IProductoRepository extends JpaRepository<Producto,Integer> {
     @Query("SELECT p FROM Producto p WHERE p.nombreproducto LIKE %:nproducto%")
     List<Producto> buscarPorProducto(@Param("nproducto") String nproducto);
 
+    List<Producto> findByUserUserId(int id);
 }

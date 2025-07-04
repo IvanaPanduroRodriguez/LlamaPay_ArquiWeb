@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-transaccion',
-  imports: [],
+  imports: [RouterOutlet],
   templateUrl: './transaccion.html',
   styleUrls: ['./transaccion.css']
 })
 export class Transaccion {
-
-  constructor(public route:ActivatedRoute) { 
-  }
 
 }

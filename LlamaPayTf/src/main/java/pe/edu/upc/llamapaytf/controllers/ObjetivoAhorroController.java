@@ -2,6 +2,7 @@ package pe.edu.upc.llamapaytf.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.llamapaytf.dtos.MontoAhorradoxUsuarioDTO;
 import pe.edu.upc.llamapaytf.dtos.ObjetivoAhorroDTO;
@@ -38,7 +39,7 @@ public class ObjetivoAhorroController {
     public void eliminar(@PathVariable int id) {
         oS.deleteById(id);
     }
-    
+
     @GetMapping
     //@PreAuthorize("hasAnyAuthority('CLIENTE', 'ADMIN','FINANZAS','TESTER')")
     public List<ObjetivoAhorro> listar() {

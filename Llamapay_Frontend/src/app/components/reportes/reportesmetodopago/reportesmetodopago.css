@@ -49,33 +49,3 @@
   }
 
  }
-
-
-
- .chart-placeholder {
-
-  padding: 40px;
-
-  background-color: #f5f5f5;
-
-  border: 2px dashed #cccccc;
-
-  border-radius: 8px;
-
-  color: #666666;
-
-  font-family: 'Roboto', sans-serif;
-
-  font-size: 1.1em;
-
-  margin: 20px 0;
-
- }
-
-
-
- .chart-placeholder p {
-
-  margin: 0;
-
- }

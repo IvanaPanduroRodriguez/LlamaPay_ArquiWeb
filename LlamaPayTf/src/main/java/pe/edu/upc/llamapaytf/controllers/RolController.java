@@ -34,7 +34,7 @@ public class RolController {
         roS.insert(ros);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/eliminar/{id}")
     public void eliminar(@PathVariable("id") int id) {
         roS.deleteById(id);
     }

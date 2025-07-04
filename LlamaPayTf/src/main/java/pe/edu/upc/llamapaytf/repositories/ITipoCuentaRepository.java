@@ -17,5 +17,5 @@ public interface ITipoCuentaRepository extends JpaRepository<TipoCuenta, Integer
     @Query("SELECT tc FROM TipoCuenta tc WHERE LOWER(tc.nombreTipoCuenta) LIKE LOWER(CONCAT('%', :nombre, '%'))")
     List<TipoCuenta> buscarPorNombre(@Param("nombre") String nombre);
 
-
+    List<TipoCuenta> findByUserUserId(int id);
 }

@@ -34,7 +34,8 @@ public class JwtAuthenticationController {
         authenticate(req.getUsername(), req.getPassword());
         final UserDetails userDetails = userDetailsService.loadUserByUsername(req.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponse(token));
+        final String role = userDetails.getAuthorities().iterator().next().getAuthority();
+        return ResponseEntity.ok(new JwtResponse(token, role));
     }
 
     private void authenticate(String username, String password) throws Exception {

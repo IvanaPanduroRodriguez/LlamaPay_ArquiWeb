@@ -10,8 +10,6 @@ import { Listarcategoria } from './listarcategoria/listarcategoria';
   ],
   templateUrl: './categoria.html',
   styleUrl: './categoria.css'
-
-  
 })
 export class Categoria {
   constructor(public route:ActivatedRoute) { 

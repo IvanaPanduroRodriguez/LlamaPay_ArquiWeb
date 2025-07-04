@@ -1,6 +1,6 @@
 package pe.edu.upc.llamapaytf.servicesinterfaces;
 
-import pe.edu.upc.llamapaytf.entities.User;
+import pe.edu.upc.llamapaytf.entities.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,4 +12,5 @@ public interface IUserService {
     public void update(User u);
     public void delete(int id);
     public List<String[]> buscarUsuariosPorFechaNacimiento(LocalDate startDate, LocalDate endDate);
+
 }

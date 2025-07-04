@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { Producto } from '../models/productos'; 
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-
+import { Productosandpriceandunit } from '../components/reportes/productosandpriceandunit/productosandpriceandunit';
+import { ProduccionInfoDTO } from '../models/productoinfodto';
+import { Observable } from 'rxjs';
 const base_url = environment.base;
 @Injectable({   
     providedIn: 'root'
@@ -37,5 +39,8 @@ export class ProductosService {
     }
     searchProducto(p:string){
     return this.http.get<Producto[]>(`${this.url}/buscar/${p}`)
+    }
+    productosandpriceandunit():Observable<ProduccionInfoDTO[]> {
+        return this.http.get<ProduccionInfoDTO[]>(`${this.url}/producto_precio_unidad`);
     }
 }

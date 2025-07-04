@@ -40,7 +40,6 @@ export class Listarservicio implements OnInit {
       //actualiza la lista de servicios cuando se inserta o actualiza un servicio
       this.dataSource = new MatTableDataSource(data);
     });
-<<<<<<< HEAD
   }
   eliminar(id: number) {
     this.sS.deleteS(id).subscribe(() => {
@@ -51,15 +50,3 @@ export class Listarservicio implements OnInit {
     });
   }
 }
-=======
-  }
-  eliminar(id: number) {
-    this.sS.deleteS(id).subscribe(() => {
-      this.sS.list().subscribe((data) => {
-        //actualiza la lista de servicios
-        this.sS.setList(data);
-      });
-    });
-  }
-}
->>>>>>> 7ec60d4f728858597ad20454dc865819f16e9d98

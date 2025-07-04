@@ -1,5 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts'
 import { MetodoPagoService } from '../../../services/metodopago.service';
@@ -18,44 +17,36 @@ export class Reportesmetodopago implements OnInit{
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartData: ChartDataset[] = [];
-  isBrowser: boolean = false;
 
   users: any[] = [];
   selectedUserId: number = 0;
 
   constructor(
     private mpS: MetodoPagoService,
-    private userService: UserService, // <-- Inyecta correctamente
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {
-    this.isBrowser = isPlatformBrowser(this.platformId);
-  }
+    private userService: UserService // <-- Inyecta correctamente
+  ) {}
 
   ngOnInit(): void {
-    if (this.isBrowser) {
-      this.userService.list().subscribe(users => {
-        this.users = users;
-        if (this.users.length > 0) {
-          this.selectedUserId = this.users[0].userId;
-          this.loadChartData(this.selectedUserId);
-        }
-      });
-    }
+    this.userService.list().subscribe(users => {
+      this.users = users;
+      if (this.users.length > 0) {
+        this.selectedUserId = this.users[0].userId;
+        this.loadChartData(this.selectedUserId);
+      }
+    });
   }
 
   loadChartData(userId: number): void {
-    if (this.isBrowser) {
-      this.mpS.getQuantitymetodspayforusers(userId).subscribe(data => {
-        this.barChartLabels = data.map(item => item.nombre);
-        this.barChartData = [{
-          data: data.map(item => item.id),
-          label: 'Cantidad método pagos por usuarios',
-          backgroundColor: ['#CC0000', '#FF0000'],
-          borderColor: '#CC0000',
-          borderWidth: 1
-        }];
-      });
-    }
+    this.mpS.getQuantitymetodspayforusers(userId).subscribe(data => {
+      this.barChartLabels = data.map(item => item.nombre);
+      this.barChartData = [{
+        data: data.map(item => item.id),
+        label: 'Cantidad método pagos por usuarios',
+        backgroundColor: ['#CC0000', '#FF0000'],
+        borderColor: '#CC0000',
+        borderWidth: 1
+      }];
+    });
   }
 
   onUserChange(event: any): void {
