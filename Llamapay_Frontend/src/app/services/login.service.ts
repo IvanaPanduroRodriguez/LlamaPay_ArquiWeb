@@ -12,23 +12,28 @@ export class LoginService {
 
   constructor(private http: HttpClient) {}
 
+  private isBrowser(): boolean {
+    return typeof window !== 'undefined';
+  }
+
   login(request: JwtRequest) {
     return this.http.post<JwtResponse>('http://localhost:8085/login', request);
   }
 
   guardarSesion(response: JwtResponse, username: string): void {
-    sessionStorage.setItem('token', response.jwttoken);
-    sessionStorage.setItem('role', response.role);
-    sessionStorage.setItem('username', username);
+    if (this.isBrowser()) {
+      sessionStorage.setItem('token', response.jwttoken);
+      sessionStorage.setItem('role', response.role);
+      sessionStorage.setItem('username', username);
+    }
   }
 
   verificar(): boolean {
-    const token = sessionStorage.getItem('token');
-    return token != null && !this.helper.isTokenExpired(token);
+    return this.isBrowser() && sessionStorage.getItem('token') !== null;
   }
 
   getUserRole(): string {
-    return sessionStorage.getItem('role') || '';
+    return this.isBrowser() ? sessionStorage.getItem('role') || '' : '';
   }
 
   esAdmin(): boolean {
@@ -44,15 +49,16 @@ export class LoginService {
   }
 
   getUsername(): string | null {
-    return sessionStorage.getItem('username');
+    return this.isBrowser() ? sessionStorage.getItem('username') : null;
   }
 
   cerrarSesion(): void {
-    sessionStorage.clear();
+    if (this.isBrowser()) {
+      sessionStorage.clear();
+    }
   }
 
   getUserId(): number {
-    return Number(sessionStorage.getItem('userId'));
+    return this.isBrowser() ? Number(sessionStorage.getItem('userId')) : 0;
   }
-
 }

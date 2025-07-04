@@ -11,5 +11,11 @@ import { LoginService } from '../../services/login.service';
   styleUrl: './landing.css'
 })
 export class Landing {
+  esNavegador: boolean = typeof window !== 'undefined';
+
   constructor(public loginService: LoginService) {}
+
+  mostrarRegistro(): boolean {
+    return this.esNavegador && !this.loginService.verificar();
+  }
 }

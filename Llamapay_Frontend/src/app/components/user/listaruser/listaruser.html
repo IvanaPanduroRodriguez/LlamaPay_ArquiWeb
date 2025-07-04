@@ -79,7 +79,7 @@
       <p><strong>Username:</strong> {{ detalleSeleccionado?.username }}</p>
       <p><strong>Estado de Cuenta:</strong> 
         <span [ngStyle]="{'color': detalleSeleccionado?.enabled ? 'green' : 'red'}">
-          {{ detalleSeleccionado?.enabled ? 'Activo' : 'Inactivo' }}
+          {{ detalleSeleccionado.enabled ? 'Activo' : 'Inactivo' }}
         </span>
       </p>
     </mat-card-content>
