@@ -70,15 +70,15 @@
       <mat-card-title>Detalle del Usuario</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p><strong>ID:</strong> {{ detalleSeleccionado?.userId }}</p>
-      <p><strong>Nombre:</strong> {{ detalleSeleccionado?.nameUser }}</p>
-      <p><strong>Apellidos:</strong> {{ detalleSeleccionado?.lastnameUser }}</p>
-      <p><strong>Correo electrónico:</strong> {{ detalleSeleccionado?.emailUser }}</p>
-      <p><strong>Fecha de nacimiento:</strong> {{ detalleSeleccionado?.birthdayUser | date: 'dd/MM/yyyy' }}</p>
-      <p><strong>Fecha de registro:</strong> {{ detalleSeleccionado?.registrationDateUser | date: 'dd/MM/yyyy' }}</p>
-      <p><strong>Username:</strong> {{ detalleSeleccionado?.username }}</p>
+      <p><strong>ID:</strong> {{ detalleSeleccionado.userId }}</p>
+      <p><strong>Nombre:</strong> {{ detalleSeleccionado.nameUser }}</p>
+      <p><strong>Apellidos:</strong> {{ detalleSeleccionado.lastnameUser }}</p>
+      <p><strong>Correo electrónico:</strong> {{ detalleSeleccionado.emailUser }}</p>
+      <p><strong>Fecha de nacimiento:</strong> {{ detalleSeleccionado.birthdayUser | date: 'dd/MM/yyyy' }}</p>
+      <p><strong>Fecha de registro:</strong> {{ detalleSeleccionado.registrationDateUser | date: 'dd/MM/yyyy' }}</p>
+      <p><strong>Username:</strong> {{ detalleSeleccionado.username }}</p>
       <p><strong>Estado de Cuenta:</strong> 
-        <span [ngStyle]="{'color': detalleSeleccionado?.enabled ? 'green' : 'red'}">
+        <span [ngStyle]="{'color': detalleSeleccionado.enabled ? 'green' : 'red'}">
           {{ detalleSeleccionado.enabled ? 'Activo' : 'Inactivo' }}
         </span>
       </p>
