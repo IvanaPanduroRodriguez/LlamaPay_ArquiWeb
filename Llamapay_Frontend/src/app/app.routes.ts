@@ -182,6 +182,7 @@ export const routes: Routes = [
     children: [
       { path: 'formularioP', component: Insertareditarproducto },
       { path: 'editar/:id', component: Insertareditarproducto },
+      { path: 'ediciones/:id', component: Insertareditarproducto },
       { path: 'buscarproducto', component: Buscarproducto }
     ]
   },
