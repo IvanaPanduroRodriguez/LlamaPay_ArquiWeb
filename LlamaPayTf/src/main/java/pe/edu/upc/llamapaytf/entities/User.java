@@ -35,7 +35,7 @@ public class User {
     private Boolean enabled;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "userId")
     @JsonManagedReference
     private List<Rol> roles;

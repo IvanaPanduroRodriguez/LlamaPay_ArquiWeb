@@ -69,6 +69,12 @@ public class UserController {
         String encodedPassword = passwordEncoder.encode(u.getPassword());
         u.setPassword(encodedPassword);
 
+        // Asignar automáticamente el rol CLIENTE
+        Rol rolCliente = new Rol();
+        rolCliente.setTipoRol("CLIENTE");
+        rolCliente.setUser(u);  // relación bidireccional
+        u.setRoles(List.of(rolCliente));  // asociar rol
+
         uS.insertar(u);
         return new ResponseEntity<>("Usuario registrado correctamente.", HttpStatus.CREATED);
     }
