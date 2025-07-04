@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Productosandpriceandunit } from '../components/reportes/productosandpriceandunit/productosandpriceandunit';
 import { ProduccionInfoDTO } from '../models/productoinfodto';
 import { Observable } from 'rxjs';
+import { MetaCestaPrdDTO } from '../models/metacestaprdto';
 const base_url = environment.base;
 @Injectable({   
     providedIn: 'root'
@@ -41,6 +42,10 @@ export class ProductosService {
     return this.http.get<Producto[]>(`${this.url}/buscar/${p}`)
     }
     productosandpriceandunit():Observable<ProduccionInfoDTO[]> {
-        return this.http.get<ProduccionInfoDTO[]>(`${this.url}/producto_precio_unidad`);
+        const fullUrl = `${this.url}/producto_precio_unidad`;
+        return this.http.get<ProduccionInfoDTO[]>(fullUrl);
+    }
+    metacesta(): Observable<MetaCestaPrdDTO[]> {
+        return this.http.get<MetaCestaPrdDTO[]>(`${this.url}/objetivo_cesta`);
     }
 }
