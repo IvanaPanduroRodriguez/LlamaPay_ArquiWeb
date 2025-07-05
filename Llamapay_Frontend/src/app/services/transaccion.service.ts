@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Transaccion } from '../models/transaccion';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from "../../environments/environment";
 
 const base_url = environment.base;
@@ -11,8 +11,10 @@ const base_url = environment.base;
 })
 export class TransaccionService {
   private url = `${base_url}/transacciones`;
-  private listarCambio = new Subject<Transaccion[]>();
-  private idCambio = new Subject<number>();
+
+  // ✅ BehaviorSubject retiene el último valor emitido
+  private listarCambio = new BehaviorSubject<Transaccion[]>([]);
+  private idCambio = new BehaviorSubject<number>(0);
 
   constructor(private http: HttpClient) {}
 
@@ -36,6 +38,7 @@ export class TransaccionService {
     return this.http.get<Transaccion>(`${this.url}/${id}`);
   }
 
+  // ✅ Métodos para emitir y obtener la lista compartida
   setList(listaNueva: Transaccion[]) {
     this.listarCambio.next(listaNueva);
   }
@@ -44,6 +47,7 @@ export class TransaccionService {
     return this.listarCambio.asObservable();
   }
 
+  // ✅ Métodos opcionales si estás usando ID compartido
   setId(id: number) {
     this.idCambio.next(id);
   }

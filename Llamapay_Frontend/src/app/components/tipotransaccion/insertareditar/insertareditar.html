@@ -1,8 +1,8 @@
-<div class="container-tipotransaccion">
+<div class="container-form">
   <h1>{{ edicion ? 'Editar Tipo de Transacción' : 'Registrar Tipo de Transacción' }}</h1>
 
   <form [formGroup]="form" (ngSubmit)="aceptar()">
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label>Descripción</mat-label>
       <input matInput formControlName="descripcion" />
       <mat-error *ngIf="form.get('descripcion')?.hasError('required')">

@@ -37,4 +37,9 @@ export class TipoCuentaService {
   getList(): Observable<TipoCuenta[]> {
     return this.listaCambio.asObservable();
   }
+
+  getById(id: number): Observable<TipoCuenta> {
+    return this.http.get<TipoCuenta>(`${this.url}/${id}`);
+  }
+
 }

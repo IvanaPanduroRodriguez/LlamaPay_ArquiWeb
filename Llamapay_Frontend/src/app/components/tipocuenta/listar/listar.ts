@@ -1,43 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { TipoCuenta } from '../../../models/tipocuenta';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { TipoCuentaService } from '../../../services/tipocuenta.service';
-import { MatButtonModule } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-listar-tipocuenta',
-  standalone: true,
-  imports: [MatTableModule, MatButtonModule, RouterLink, CommonModule, MatIconModule],
   templateUrl: './listar.html',
-  styleUrl: './listar.css'
+  styleUrls: ['./listar.css'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    RouterModule,
+  ]
 })
 export class ListarTipoCuentaComponent implements OnInit {
-  dataSource: MatTableDataSource<TipoCuenta> = new MatTableDataSource();
-  displayedColumns: string[] = ['id', 'nombre', 'numero', 'tipo', 'saldo', 'moneda', 'usuario', 'editar', 'eliminar'];
+  lista: TipoCuenta[] = [];
 
-  constructor(private tipoCuentaService: TipoCuentaService) {}
+  private tipoCuentaService = inject(TipoCuentaService);
+  private router = inject(Router);
 
   ngOnInit(): void {
-  this.tipoCuentaService.list().subscribe((data: TipoCuenta[]) => {
-    this.dataSource.data = data;
-  });
+    this.tipoCuentaService.getList().subscribe((data: TipoCuenta[]) => {
+      this.lista = data;
+    });
+  }
 
-  this.tipoCuentaService.getList().subscribe((data: TipoCuenta[]) => {
-    this.dataSource.data = data;
-  });
-}
+  editar(id: number) {
+    this.router.navigate(['/tipocuenta/insertar', id]);
+  }
 
   eliminar(id: number) {
-    if (confirm('¿Deseas eliminar esta cuenta?')) {
+    if (confirm('¿Estás seguro de eliminar este tipo de cuenta?')) {
       this.tipoCuentaService.delete(id).subscribe(() => {
-        this.tipoCuentaService.list().subscribe(data => {
+        this.tipoCuentaService.list().subscribe((data: TipoCuenta[]) => {
           this.tipoCuentaService.setList(data);
-          this.dataSource.data = data;
         });
       });
     }
+  }
+
+  verDetalle(tipoCuenta: TipoCuenta) {
+    alert(`Detalle:\nNombre: ${tipoCuenta.nombreTipoCuenta}\nNúmero: ${tipoCuenta.numeroTipoCuenta}\nTipo: ${tipoCuenta.tipodeCuenta}`);
   }
 }

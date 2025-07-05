@@ -12,7 +12,7 @@ import { ListarTransaccion } from './components/transaccion/listar/listar';
 import { InsertarEditarTransaccion } from './components/transaccion/insertareditar/insertareditar';
 import { TipoTransaccion } from './components/tipotransaccion/tipotransaccion';
 import { ListarTipoTransaccionComponent } from './components/tipotransaccion/listar/listar';
-import { InsertarTipoTransaccionComponent } from './components/tipotransaccion/insertareditar/insertareditar';
+import { InsertarEditarTipoTransaccionComponent } from './components/tipotransaccion/insertareditar/insertareditar';
 import { Rol } from './components/rol/rol';
 import { InsertareditarRol } from './components/rol/insertareditar/insertareditar';
 import { ObjetivoAhorro } from './components/objetivo-ahorro/objetivo-ahorro';
@@ -107,8 +107,8 @@ export const routes: Routes = [
     path: 'tipotransaccion',
     children: [
       { path: 'listar', component: ListarTipoTransaccionComponent },
-      { path: 'insertar', component: InsertarTipoTransaccionComponent },
-      { path: 'editar/:id', component: InsertarTipoTransaccionComponent }
+      { path: 'insertar', component: InsertarEditarTipoTransaccionComponent },
+      { path: 'editar/:id', component: InsertarEditarTipoTransaccionComponent }
     ]
   },
   {

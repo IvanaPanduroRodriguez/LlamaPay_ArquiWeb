@@ -1,52 +1,51 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { TipoTransaccion } from '../../../models/tipotransaccion';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TipoTransaccionService } from '../../../services/tipotransaccion.service';
-import { Router, ActivatedRoute, Params, RouterLink } from '@angular/router';
+import { TipoTransaccion } from '../../../models/tipotransaccion';
+import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-insertar-tipotransaccion',
+  selector: 'app-insertar-editar-tipotransaccion',
   standalone: true,
   imports: [
+    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
-    CommonModule,
+    MatButtonModule
   ],
   templateUrl: './insertareditar.html',
   styleUrls: ['./insertareditar.css']
 })
-export class InsertarTipoTransaccionComponent implements OnInit {
-  form: FormGroup = new FormGroup({});
-  tipo: TipoTransaccion = new TipoTransaccion();
-  idTipo: number = 0;
+export class InsertarEditarTipoTransaccionComponent implements OnInit {
+  form: FormGroup;
   edicion: boolean = false;
+  id: number = 0;
 
   constructor(
+    private fb: FormBuilder,
     private tipoService: TipoTransaccionService,
-    private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
-
-  ngOnInit(): void {
-    this.form = this.formBuilder.group({
+  ) {
+    this.form = this.fb.group({
+      tipoGastoId: [0],
       descripcion: ['', Validators.required]
     });
+  }
 
-    this.route.params.subscribe((params: Params) => {
-      this.idTipo = +params['id'];
-      this.edicion = !!this.idTipo;
-
+  ngOnInit(): void {
+    this.route.params.subscribe(data => {
+      this.id = data['id'];
+      this.edicion = this.id != null;
       if (this.edicion) {
-        this.tipoService.listId(this.idTipo).subscribe((data: TipoTransaccion) => {
-          this.tipo = data;
-          this.form.patchValue({
+        this.tipoService.listId(this.id).subscribe(data => {
+          this.form.setValue({
+            tipoGastoId: data.tipoGastoId,
             descripcion: data.descripcion
           });
         });
@@ -55,28 +54,29 @@ export class InsertarTipoTransaccionComponent implements OnInit {
   }
 
   aceptar(): void {
+    const tipo: TipoTransaccion = this.form.value;
     if (this.form.valid) {
-      this.tipo.descripcion = this.form.value['descripcion'];
-
       if (this.edicion) {
-        this.tipo.tipoGastoId = this.idTipo;
-        this.tipoService.update(this.tipo).subscribe(() => {
-          this.actualizarYVolver();
+        this.tipoService.update(tipo).subscribe(() => {
+          this.operar();
         });
       } else {
-        this.tipoService.insert(this.tipo).subscribe(() => {
-          this.actualizarYVolver();
+        this.tipoService.insert(tipo).subscribe(() => {
+          this.operar();
         });
       }
     }
   }
 
-  cancelar(): void {
-    this.router.navigate(['/tipotransaccion/listar']);
+  operar(): void {
+    this.tipoService.list().subscribe(data => {
+      this.tipoService.setList(data);
+      this.router.navigate(['/tipotransaccion/listar']);
+    });
   }
 
-  private actualizarYVolver(): void {
-    this.tipoService.list().subscribe((data: TipoTransaccion[]) => {
+  cancelar(): void {
+    this.tipoService.list().subscribe(data => {
       this.tipoService.setList(data);
       this.router.navigate(['/tipotransaccion/listar']);
     });
