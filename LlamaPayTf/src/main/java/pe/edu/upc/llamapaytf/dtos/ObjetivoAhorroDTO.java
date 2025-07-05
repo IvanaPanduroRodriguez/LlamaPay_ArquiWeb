@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class ObjetivoAhorroDTO {
-    private int Objetivo_id;
+    private int objetivoId;
     private String nombreMeta;
     private BigDecimal montoMeta;
     private LocalDate fechaInicio;
@@ -15,12 +15,12 @@ public class ObjetivoAhorroDTO {
     private String estadoObjetivo;
     private User user;
 
-    public int getObjetivo_id() {
-        return Objetivo_id;
+    public int getObjetivoId() {
+        return objetivoId;
     }
 
-    public void setObjetivo_id(int objetivo_id) {
-        Objetivo_id = objetivo_id;
+    public void setObjetivoId(int objetivoId) {
+        this.objetivoId = objetivoId;
     }
 
     public String getNombreMeta() {
