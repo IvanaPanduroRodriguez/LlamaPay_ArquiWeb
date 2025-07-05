@@ -54,7 +54,6 @@ export const routes: Routes = [
     path: 'registro', component:RegisterComponent
   },
   { path: 'login', component: LoginComponent },
-  { path: '**', redirectTo: '' }, 
   //-----------------IVANA------------------------------------------
   {
     path: 'categorias',
@@ -85,7 +84,7 @@ export const routes: Routes = [
     component: MetodoPago,
     canActivate: [seguridadGuard],
     canActivateChild: [seguridadGuard],
-    data: { roles: ['CLIENTE'] },
+    
     children: [
       { path: 'formularioM', component: InsertareditarMetodoPago },
       { path: 'ediciones/:id', component: InsertareditarMetodoPago }

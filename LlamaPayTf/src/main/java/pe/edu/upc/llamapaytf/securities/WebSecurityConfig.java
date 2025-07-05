@@ -75,7 +75,6 @@ public class WebSecurityConfig {
                                 "/login",
                                 "/servicios/**",
                                 "/categorias/**",
-                                "/metodospagos/**",
                                 "/ObjetivoAhorro/**",
                                 "/productos/**",
                                 "/recordatorios/**",
