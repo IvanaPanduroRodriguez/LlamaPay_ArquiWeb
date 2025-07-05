@@ -13,13 +13,13 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/roles")
-//@PreAuthorize("hasAuthority('ADMIN')")
 
 public class RolController {
     @Autowired
     private IRolService roS;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<RolDTO> listar() {
         return roS.list().stream().map(x -> {
             ModelMapper modelMapper = new ModelMapper();
@@ -28,6 +28,7 @@ public class RolController {
     }
 
     @PostMapping("registrar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody RolDTO rol) {
         ModelMapper modelMapper = new ModelMapper();
         Rol ros = modelMapper.map(rol, Rol.class);
@@ -35,11 +36,13 @@ public class RolController {
     }
 
     @DeleteMapping("/eliminar/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") int id) {
         roS.deleteById(id);
     }
 
     @PutMapping("/actualizar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void actualizar(@RequestBody RolDTO rol) {
         ModelMapper modelMapper = new ModelMapper();
         Rol r = modelMapper.map(rol, Rol.class);
@@ -48,6 +51,7 @@ public class RolController {
 
 
     @GetMapping("/tipoRol/{tipoRol}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<RolDTO> obtenerRolesPorTipoRol(@PathVariable String tipoRol) {
         return roS.findRolesByTipoRol(tipoRol).stream().map(x -> {
             ModelMapper modelMapper = new ModelMapper();
@@ -57,6 +61,7 @@ public class RolController {
 
 
     @GetMapping("/usuario/{userId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<RolDTO> obtenerRolesPorUsuario(@PathVariable int userId) {
         return roS.findRolesByUserId(userId).stream().map(x -> {
             ModelMapper modelMapper = new ModelMapper();

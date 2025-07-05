@@ -21,7 +21,7 @@ public class MetodoPagoController {
 
     @GetMapping
 
-    @PreAuthorize("hasAuthority('CLIENTE')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<MetodoPagoDTO> listar() {
         return mpS.list().stream().map(x->{
             ModelMapper modelMapper = new ModelMapper();
@@ -31,7 +31,7 @@ public class MetodoPagoController {
 
     @PostMapping
 
-    @PreAuthorize("hasAuthority('CLIENTE')")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void insertar(@RequestBody MetodoPagoDTO dto) {
         ModelMapper m = new ModelMapper();
         MetodoPago mp = m.map(dto, MetodoPago.class);
@@ -39,8 +39,7 @@ public class MetodoPagoController {
     }
 
     @GetMapping("/{id}")
-
-    @PreAuthorize("hasAuthority('CLIENTE')")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAnyAuthority('TESTER')")
     public MetodoPagoDTO buscarID(@PathVariable("id") int id) {
         ModelMapper m = new ModelMapper();
         MetodoPagoDTO dto=m.map(mpS.listId(id),MetodoPagoDTO.class);
@@ -48,8 +47,7 @@ public class MetodoPagoController {
     }
 
     @PutMapping
-
-    @PreAuthorize("hasAuthority('CLIENTE')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void modificar(@RequestBody MetodoPagoDTO dto){
         ModelMapper m = new ModelMapper();
         MetodoPago mp = m.map(dto, MetodoPago.class);
@@ -57,16 +55,13 @@ public class MetodoPagoController {
     }
 
     @DeleteMapping("/{id}")
-
-    @PreAuthorize("hasAuthority('CLIENTE')")
-
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") int id){
         mpS.delete(id);
     }
 
     @GetMapping("/buscar-metodos-pagos-users")
-
-    @PreAuthorize("hasAuthority('CLIENTE')")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAnyAuthority('TESTER')")
     public List<ObtenerMetodosPagosPorUsersDTO> obtenerMetodosPagosPorUsers(@RequestParam int userId){
         List<String[]> fila = mpS.obtenerMetodosPagoPorUserId(userId);
         List<ObtenerMetodosPagosPorUsersDTO> dtoList = new ArrayList<>();

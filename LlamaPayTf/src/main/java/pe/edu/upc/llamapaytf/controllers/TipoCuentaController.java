@@ -2,6 +2,7 @@ package pe.edu.upc.llamapaytf.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.llamapaytf.dtos.TipoCuentaDTO;
 import pe.edu.upc.llamapaytf.entities.TipoCuenta;
@@ -17,7 +18,7 @@ public class TipoCuentaController {
     private ITipoCuentaService tcS;
 
     @GetMapping
-    //@PreAuthorize("hasAnyAuthority('CLIENTE', 'ADMIN','FINANZAS','TESTER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public List<TipoCuentaDTO> listar() {
         return tcS.list().stream().map(x -> {
             ModelMapper modelMapper = new ModelMapper();
@@ -26,7 +27,7 @@ public class TipoCuentaController {
     }
 
     @PostMapping("registrar")
-    //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
+    @PreAuthorize("hasAnyAuthority('CLIENTE')")
     public void registrar(@RequestBody TipoCuentaDTO tc) {
         ModelMapper modelMapper = new ModelMapper();
         TipoCuenta tcs = modelMapper.map(tc, TipoCuenta.class);
@@ -34,13 +35,13 @@ public class TipoCuentaController {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
+    @PreAuthorize("hasAnyAuthority('CLIENTE')")
     public void eliminar(@PathVariable("id") int id) {
         tcS.delete(id);
     }
 
     @PutMapping("/actualizar")
-    //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
+    @PreAuthorize("hasAnyAuthority('CLIENTE')")
     public void actualizar(@RequestBody TipoCuentaDTO tcd) {
         ModelMapper modelMapper = new ModelMapper();
         TipoCuenta tc = modelMapper.map(tcd, TipoCuenta.class);
@@ -48,7 +49,7 @@ public class TipoCuentaController {
     }
 
     @GetMapping("/usuario/{userId}")
-    //@PreAuthorize("hasAnyAuthority('ADMIN','FINANZAS','TESTER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public List<TipoCuentaDTO> obtenerTiposCuentasPorUsuario(@PathVariable int userId) {
         return tcS.findTipoCuentaByUserId(userId).stream().map(x -> {
             ModelMapper modelMapper = new ModelMapper();
@@ -57,7 +58,7 @@ public class TipoCuentaController {
     }
 
     @GetMapping("/buscar")
-    //@PreAuthorize("hasAnyAuthority('ADMIN','FINANZAS','TESTER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public List<TipoCuentaDTO> buscarPorNombre(@RequestParam("nombre") String nombre) {
         List<TipoCuenta> lista = tcS.buscarPorNombre(nombre);
         return lista.stream().map(tc -> {
