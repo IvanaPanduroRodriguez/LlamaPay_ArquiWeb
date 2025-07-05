@@ -69,7 +69,22 @@ public class WebSecurityConfig {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/swagger-resources/**",
-                                "/users/register-user"
+                                "/users/register-user",
+                                "/users",
+                                "/webjars/**",
+                                "/login",
+                                "/servicios/**",
+                                "/categorias/**",
+                                "/metodospagos/**",
+                                "/ObjetivoAhorro/**",
+                                "/productos/**",
+                                "/recordatorios/**",
+                                "/roles/**",
+                                "/tiendas/**",
+                                "/tiposcuentas/**",
+                                "/tipotransacciones/**",
+                                "/transacciones/**",
+                                "/users/**"
 
                         ).permitAll()
                         .anyRequest().authenticated()

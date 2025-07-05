@@ -12,34 +12,34 @@ import java.util.List;
 public interface IProductoRepository extends JpaRepository<Producto,Integer> {
 
     @Query(value="SELECT \n" +
-            "  p.nombreproducto, \n" +
+            "  p.nombre_producto, \n" +
             "  COUNT(*) AS Total_Unidades, \n" +
-            "  p.precioproducto, \n" +
-            "  t.nombretienda\n" +
+            "  p.precio_producto, \n" +
+            "  t.Nombre_tienda\n" +
             "FROM Producto p\n" +
-            "INNER JOIN Tienda t ON p.idtienda = t.idtienda\n" +
+            "INNER JOIN Tienda t ON p.tienda_id = t.tienda_id\n" +
             "GROUP BY \n" +
-            "  p.nombreproducto, \n" +
-            "  p.precioproducto, \n" +
-            "  t.nombretienda\n" +
+            "  p.nombre_producto, \n" +
+            "  p.precio_producto, \n" +
+            "  t.nombre_tienda\n" +
             "ORDER BY \n" +
-            "  p.nombreproducto;",nativeQuery = true)
+            "  p.nombre_producto;",nativeQuery = true)
     public List<String[]>productosandpriceandunit();
 
     @Query(value="SELECT \n" +
-            "    u.username AS Nombre_del_Usuario, \n" +
-            "    SUM(p.precioproducto) AS MontoProductos, \n" +
-            "    oa.montometa AS MontoMeta\n" +
+            "    u.name_user AS Nombre_del_Usuario, \n" +
+            "    SUM(p.precio_producto) AS MontoProductos, \n" +
+            "    oa.monto_meta AS MontoMeta\n" +
             "FROM \n" +
             "    Users u\n" +
             "INNER JOIN \n" +
-            "    objetivo_ahorro oa ON  oa.user_id = u.userid\n" +
+            "    objetivo_ahorro oa ON  oa.usuario_id = u.id_user\n" +
             "INNER JOIN \n" +
-            "    Producto p ON u.user_id = p.user_id\n" +
+            "    Producto p ON u.id_user = p.usuario_id\n" +
             "GROUP BY \n" +
-            "    u.username, oa.monto_meta\n" +
+            "    u.name_user, oa.monto_meta\n" +
             "ORDER BY \n" +
-            "    u.username;",nativeQuery = true)
+            "    u.name_user;",nativeQuery = true)
     public List<String[]> montosobjetivo();
 
     @Query("SELECT p FROM Producto p WHERE p.nombreproducto LIKE %:nproducto%")

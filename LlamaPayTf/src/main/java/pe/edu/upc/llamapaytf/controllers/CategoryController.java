@@ -3,7 +3,6 @@ package pe.edu.upc.llamapaytf.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import pe.edu.upc.llamapaytf.dtos.CategoriaMontoDTO;
@@ -23,7 +22,7 @@ public class CategoryController {
     private ICategoryService cS;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    //@PreAuthorize("hasAnyAuthority('CLIENTE', 'ADMIN','FINANZAS','TESTER')")
     public List<CategoryDTO> listar() {
         return cS.list().stream().map(x->{
             ModelMapper modelMapper = new ModelMapper();
@@ -32,7 +31,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public void insertar(@RequestBody CategoryDTO dto) {
         ModelMapper m = new ModelMapper();
         Category c = m.map(dto, Category.class);
@@ -40,7 +39,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') || hasAnyAuthority('TESTER')")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','FINANZAS','TESTER')")
     public CategoryDTO buscarID(@PathVariable("id") int id) {
         ModelMapper m = new ModelMapper();
         CategoryDTO dto=m.map(cS.listID(id),CategoryDTO.class);
@@ -48,7 +47,7 @@ public class CategoryController {
     }
 
     @GetMapping("/montoxcategoria")
-    @PreAuthorize("hasAuthority('ADMIN') || hasAnyAuthority('TESTER')")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','FINANZAS','TESTER')")
     public List<CategoriaMontoDTO>buscarMontoCategoria(@RequestParam(required = false) Integer mes, @RequestParam(required = false) Integer anio) {
         List<CategoriaMontoDTO> dtoLista=new ArrayList<>();
         List<String[]> lista = new ArrayList<>();
@@ -75,7 +74,7 @@ public class CategoryController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public void modificar(@RequestBody CategoryDTO dto){
         ModelMapper m = new ModelMapper();
         Category c = m.map(dto, Category.class);
@@ -83,7 +82,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") int id){
         cS.delete(id);
     }

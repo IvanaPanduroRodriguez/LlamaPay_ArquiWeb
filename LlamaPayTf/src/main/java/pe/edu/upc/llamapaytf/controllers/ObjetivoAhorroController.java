@@ -20,7 +20,7 @@ public class ObjetivoAhorroController {
     private IObjetivoAhorroService oS;
 
     @PostMapping
-    @PreAuthorize("hasAuthority('CLIENTE')")
+    //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
     public void registrar(@RequestBody ObjetivoAhorroDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         ObjetivoAhorro oa = modelMapper.map(dto, ObjetivoAhorro.class);
@@ -28,20 +28,20 @@ public class ObjetivoAhorroController {
     }
 
     @PutMapping("/actualizar")
-    @PreAuthorize("hasAuthority('CLIENTE')")
+    //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
     public void actualizar(@RequestBody ObjetivoAhorroDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         ObjetivoAhorro oa = modelMapper.map(dto, ObjetivoAhorro.class);
         oS.update(oa);
     }
     @DeleteMapping("/Eliminar/{id}")
-    @PreAuthorize ("hasAuthority('CLIENTE')")
+    //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
     public void eliminar(@PathVariable int id) {
         oS.deleteById(id);
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN')|| hasAnyAuthority('TESTER')")
+    //@PreAuthorize("hasAnyAuthority('CLIENTE', 'ADMIN','FINANZAS','TESTER')")
     public List<ObjetivoAhorro> listar() {
         return oS.listar().stream().map(x->{
             ModelMapper modelMapper = new ModelMapper();
@@ -50,7 +50,7 @@ public class ObjetivoAhorroController {
     }
 
     @GetMapping("/usuario/{userId}")
-    @PreAuthorize("hasAnyAuthority('ADMIN')|| hasAnyAuthority('CLIENTE')")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','FINANZAS','TESTER')")
     public List<ObjetivoAhorroDTO> buscarPorUsuario(@PathVariable int userId) {
         return oS.buscarPorUsuario(userId).stream().map(x->{
             ModelMapper modelMapper = new ModelMapper();
@@ -59,7 +59,7 @@ public class ObjetivoAhorroController {
     }
 
     @GetMapping("/total-ahorrado-por-usuario")
-    @PreAuthorize("hasAuthority('TESTER')")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','FINANZAS','TESTER')")
     public List<MontoAhorradoxUsuarioDTO> obtenerTotales() {
         List<String[]> datos = oS.obtenerMontoAhorradoXUsuario();
         return datos.stream().map(registro -> {
@@ -71,7 +71,7 @@ public class ObjetivoAhorroController {
     }
 
     @GetMapping("/objetivos-por-mes")
-    @PreAuthorize("hasAuthority('TESTER')")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','FINANZAS','TESTER')")
     public List<ObjetivosPorMesDTO> obtenerObjetivosPorMes() {
         List<String[]> datos = oS.contarObjetivosPorMes();
         return datos.stream().map(registro -> {
