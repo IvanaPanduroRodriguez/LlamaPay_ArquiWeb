@@ -41,7 +41,7 @@ export class ListarTipoTransaccionComponent implements OnInit {
   }
 
   editar(id: number): void {
-    this.router.navigate(['/tipotransaccion/editar', id]);
+    this.router.navigate(['/tipotransaccion/insertar', id]); 
   }
 
   eliminar(id: number): void {

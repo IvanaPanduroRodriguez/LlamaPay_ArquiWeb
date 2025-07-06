@@ -49,7 +49,7 @@ public class UserController {
     @GetMapping
 
 
-    //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
 
     public List<UserDTO> listar() {
         return uS.list().stream().map(x->{
@@ -82,7 +82,7 @@ public class UserController {
     @GetMapping("/{id}")
 
 
-    //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
 
     public UserDTO buscarID(@PathVariable("id") int id) {
         ModelMapper m = new ModelMapper();
@@ -91,6 +91,7 @@ public class UserController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('CLIENTE')")
     public void modificar(@RequestBody UserDTO dto) {
         // Paso 1: Buscar el usuario actual por ID
         User existingUser = uS.listID(dto.getUserId());
@@ -120,7 +121,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
 
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('CLIENTE'))")
 
 
     public void eliminar(@PathVariable("id") int id) {
@@ -128,7 +129,7 @@ public class UserController {
     }
 
     @GetMapping("/Searching-Date-years-users")
-    //@PreAuthorize("hasAnyAuthority('TESTER') and hasAnyAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
     public List<SerchingUserForYearBirthdayDTO> buscarUsuariosPorFechaNacimiento(
             @RequestParam("inicio") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate inicio,
             @RequestParam("fin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fin){

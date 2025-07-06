@@ -1,11 +1,10 @@
-
 .form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(to right, #e3fdf6, #ffffff);
+  background: linear-gradient(to right, #e3f2fd, #ffffff);
   padding: 20px;
 }
 
