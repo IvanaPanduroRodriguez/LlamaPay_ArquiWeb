@@ -1,31 +1,55 @@
 package pe.edu.upc.llamapaytf.controllers;
 
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.llamapaytf.dtos.SerchingUserForYearBirthdayDTO;
 import pe.edu.upc.llamapaytf.dtos.UserDTO;
 import pe.edu.upc.llamapaytf.dtos.UsuarioInfoDTO;
-import pe.edu.upc.llamapaytf.entities.User;
-import pe.edu.upc.llamapaytf.servicesinterfaces.IUserService;
+import pe.edu.upc.llamapaytf.entities.*;
+import pe.edu.upc.llamapaytf.exceptions.RequestBodyException;
+import pe.edu.upc.llamapaytf.exceptions.ResourceNotFoundException;
+import pe.edu.upc.llamapaytf.repositories.IObjetivoAhorroRepository;
+import pe.edu.upc.llamapaytf.repositories.IProductoRepository;
+import pe.edu.upc.llamapaytf.repositories.IRecordatorioRepository;
+import pe.edu.upc.llamapaytf.repositories.ITipoCuentaRepository;
+import pe.edu.upc.llamapaytf.servicesinterfaces.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private IUserService uS;
+
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping
 
 
-    //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
 
     public List<UserDTO> listar() {
         return uS.list().stream().map(x->{
@@ -35,16 +59,30 @@ public class UserController {
     }
 
     @PostMapping("/register-user")
-    public void registrar(@RequestBody UserDTO us) {
+    public ResponseEntity<String> insertar(@Valid @RequestBody UserDTO dto) {
+        logger.info("Registrando nuevo usuario");
+        if (dto.getUsername() == null || dto.getPassword() == null) {
+            throw new RequestBodyException("El nombre de usuario y la contraseña son obligatorios.");
+        }
         ModelMapper m = new ModelMapper();
-        User u = m.map(us, User.class);
+        User u = m.map(dto, User.class);
+        String encodedPassword = passwordEncoder.encode(u.getPassword());
+        u.setPassword(encodedPassword);
+
+        // Asignar automáticamente el rol CLIENTE
+        Rol rolCliente = new Rol();
+        rolCliente.setTipoRol("CLIENTE");
+        rolCliente.setUser(u);  // relación bidireccional
+        u.setRoles(List.of(rolCliente));  // asociar rol
+
         uS.insertar(u);
+        return new ResponseEntity<>("Usuario registrado correctamente.", HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
 
 
-    //@PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
 
     public UserDTO buscarID(@PathVariable("id") int id) {
         ModelMapper m = new ModelMapper();
@@ -53,27 +91,45 @@ public class UserController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('CLIENTE')")
+    public void modificar(@RequestBody UserDTO dto) {
+        // Paso 1: Buscar el usuario actual por ID
+        User existingUser = uS.listID(dto.getUserId());
+        if (existingUser == null) {
+            throw new RuntimeException("Usuario no encontrado.");
+        }
 
+        // Paso 2: Actualizar los campos que desees
+        existingUser.setNameUser(dto.getNameUser());
+        existingUser.setLastnameUser(dto.getLastnameUser());
+        existingUser.setEmailUser(dto.getEmailUser());
+        existingUser.setBirthdayUser(dto.getBirthdayUser());
+        existingUser.setUsername(dto.getUsername());
+        existingUser.setEnabled(dto.getEnabled());
 
-    //@PreAuthorize("hasAuthority('ADMIN') || hasAuthority('CLIENTE')")
+        // Paso 3: Solo si viene un nuevo password, se actualiza y se encripta
+        if (dto.getPassword() != null && !dto.getPassword().isEmpty()) {
+            String encodedPassword = passwordEncoder.encode(dto.getPassword());
+            existingUser.setPassword(encodedPassword);
+        }
 
-    public void modificar(@RequestBody UserDTO dto){
-        ModelMapper m = new ModelMapper();
-        User u = m.map(dto, User.class);
-        uS.update(u);
+        // NO ACTUALIZAMOS LOS ROLES, para evitar conflicto
+
+        // Paso 4: Guardar cambios
+        uS.update(existingUser);
     }
 
     @DeleteMapping("/{id}")
 
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('CLIENTE'))")
 
 
-    public void eliminar(@PathVariable("id") int id){ //eliminar todos los atributos que yo elija
+    public void eliminar(@PathVariable("id") int id) {
         uS.delete(id);
     }
 
     @GetMapping("/Searching-Date-years-users")
-    //@PreAuthorize("hasAnyAuthority('TESTER') and hasAnyAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
     public List<SerchingUserForYearBirthdayDTO> buscarUsuariosPorFechaNacimiento(
             @RequestParam("inicio") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate inicio,
             @RequestParam("fin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fin){

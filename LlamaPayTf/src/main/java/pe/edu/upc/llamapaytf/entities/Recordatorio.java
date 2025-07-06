@@ -9,41 +9,41 @@ import java.util.Date;
 public class Recordatorio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Recordatorio_id;
+    private int recordatorioId;
     @Column(name = "nombreRecordatorio", nullable = false, length = 30)
     private String nombreRecordatorio;
     @Column(name = "Descripcion", nullable = false, length = 50)
-    private String Descripcion;
+    private String descripcion;
     @Column(name = "Fecha_Vencimiento", nullable = false)
-    private Date Fecha_Vencimiento;
+    private Date fechaVencimiento;
     @Column(name = "Monto_recordatorio", nullable = false)
-    private String Monto_recordatorio;
+    private String montoRecordatorio;
     @Column(name = "Estado_Recordatorio", nullable = false)
-    private String Estado_Recordatorio;
+    private String estadoRecordatorio;
 
     @ManyToOne
-    @JoinColumn(name = "Usuario_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Recordatorio() {
     }
 
-    public Recordatorio(int recordatorio_id, String nombreRecordatorio, String descripcion, Date fecha_Vencimiento, String monto_recordatorio, String estado_Recordatorio, User user) {
-        Recordatorio_id = recordatorio_id;
+    public Recordatorio(int recordatorioId, String nombreRecordatorio, String descripcion, Date fechaVencimiento, String montoRecordatorio, String estadoRecordatorio, User user) {
+        this.recordatorioId = recordatorioId;
         this.nombreRecordatorio = nombreRecordatorio;
-        Descripcion = descripcion;
-        Fecha_Vencimiento = fecha_Vencimiento;
-        Monto_recordatorio = monto_recordatorio;
-        Estado_Recordatorio = estado_Recordatorio;
+        this.descripcion = descripcion;
+        this.fechaVencimiento = fechaVencimiento;
+        this.montoRecordatorio = montoRecordatorio;
+        this.estadoRecordatorio = estadoRecordatorio;
         this.user = user;
     }
 
-    public int getRecordatorio_id() {
-        return Recordatorio_id;
+    public int getRecordatorioId() {
+        return recordatorioId;
     }
 
-    public void setRecordatorio_id(int recordatorio_id) {
-        Recordatorio_id = recordatorio_id;
+    public void setRecordatorioId(int recordatorioId) {
+        this.recordatorioId = recordatorioId;
     }
 
     public String getNombreRecordatorio() {
@@ -55,35 +55,35 @@ public class Recordatorio {
     }
 
     public String getDescripcion() {
-        return Descripcion;
+        return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
-        Descripcion = descripcion;
+        this.descripcion = descripcion;
     }
 
-    public Date getFecha_Vencimiento() {
-        return Fecha_Vencimiento;
+    public Date getFechaVencimiento() {
+        return fechaVencimiento;
     }
 
-    public void setFecha_Vencimiento(Date fecha_Vencimiento) {
-        Fecha_Vencimiento = fecha_Vencimiento;
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
     }
 
-    public String getMonto_recordatorio() {
-        return Monto_recordatorio;
+    public String getMontoRecordatorio() {
+        return montoRecordatorio;
     }
 
-    public void setMonto_recordatorio(String monto_recordatorio) {
-        Monto_recordatorio = monto_recordatorio;
+    public void setMontoRecordatorio(String montoRecordatorio) {
+        this.montoRecordatorio = montoRecordatorio;
     }
 
-    public String getEstado_Recordatorio() {
-        return Estado_Recordatorio;
+    public String getEstadoRecordatorio() {
+        return estadoRecordatorio;
     }
 
-    public void setEstado_Recordatorio(String estado_Recordatorio) {
-        Estado_Recordatorio = estado_Recordatorio;
+    public void setEstadoRecordatorio(String estadoRecordatorio) {
+        this.estadoRecordatorio = estadoRecordatorio;
     }
 
     public User getUser() {

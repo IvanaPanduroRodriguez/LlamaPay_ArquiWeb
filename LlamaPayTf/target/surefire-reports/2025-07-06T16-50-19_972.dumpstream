@@ -1,0 +1,5 @@
+# Created at 2025-07-06T16:50:20.181
+Boot Manifest-JAR contains absolute paths in classpath 'Z:\JohnWillMachaca\LlamaPay_ArquiWeb\LlamaPayTf\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+
