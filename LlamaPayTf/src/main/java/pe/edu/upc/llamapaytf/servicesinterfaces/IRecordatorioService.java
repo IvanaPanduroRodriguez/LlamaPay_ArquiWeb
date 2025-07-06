@@ -10,4 +10,5 @@ public interface IRecordatorioService {
     List<Recordatorio> buscarPorRecordatorio(String rec);
     public void update(Recordatorio r);
     public void delete(int id);
+
 }

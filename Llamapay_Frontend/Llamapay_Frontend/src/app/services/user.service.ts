@@ -41,6 +41,19 @@ private listaCambio = new Subject<User[]>(); //1er paso
     }
     getBirthdaysByRange(inicio: string, fin: string) {
   const params = { inicio, fin };
-  return this.http.get<SerchingUserForYearBirthdayDTO[]>(`${this.url}/searching-Date-years-users`, { params });
+  return this.http.get<SerchingUserForYearBirthdayDTO[]>(`${this.url}/Searching-Date-years-users`, { params });
+}
+  findByUsername(username: string) {
+    return this.http.get<User>(`${this.url}/username/${username}`);
+  }
+
+  getUserRole(): string {
+  const stored = sessionStorage.getItem('rol');
+  return stored ? stored.replace(/"/g, '') : '';
+}
+
+getUsername(): string {
+  const stored = sessionStorage.getItem('username');
+  return stored ? stored.replace(/"/g, '') : '';
 }
 }

@@ -4,9 +4,10 @@ import { BaseChartDirective } from 'ng2-charts'
 import { MetodoPagoService } from '../../../services/metodopago.service';
 import { UserService } from '../../../services/user.service';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-reportesmetodopago',
-  imports: [BaseChartDirective, FormsModule],
+  imports: [BaseChartDirective, FormsModule, CommonModule],
   templateUrl: './reportesmetodopago.html',
   styleUrl: './reportesmetodopago.css'
 })

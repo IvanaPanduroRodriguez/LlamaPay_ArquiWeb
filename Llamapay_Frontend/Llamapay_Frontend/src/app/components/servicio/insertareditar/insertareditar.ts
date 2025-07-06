@@ -54,8 +54,9 @@ export class InsertareditarServicio implements OnInit{
 
     // Inicializamos el formulario
       this.form = this.formBuilder.group({
-        hnameCompany: ['', Validators.required], 
-        hnameService: ['',Validators.required], 
+        hcodigo: [''], // Este campo puede ser opcional o no necesario
+        hnamecompany: ['', Validators.required], 
+        hnameservice: ['',Validators.required], 
         hidCategory: ['',Validators.required], 
     }) 
     this.cS.list().subscribe(data => {
@@ -65,8 +66,9 @@ export class InsertareditarServicio implements OnInit{
 
   aceptar(): void{
     if(this.form.valid){
-      this.serv.nameCompanyService = this.form.value.hnameCompany;
-      this.serv.nameService = this.form.value.hameService;  
+      this.serv.idService =this.form.value.hcodigo; // Asignamos el código del servicio
+      this.serv.nameCompanyService = this.form.value.hnamecompany;
+      this.serv.nameService = this.form.value.hnameservice;  
       this.serv.category.idCategory = this.form.value.hidCategory; 
       
       if(this.edicion){ // Si estamos en modo edición
@@ -84,7 +86,7 @@ export class InsertareditarServicio implements OnInit{
           });
         });
       }
-        this.router.navigate(['servicios'])
+        this.router.navigate(['servicio'])
     }
   }
 
@@ -92,8 +94,9 @@ export class InsertareditarServicio implements OnInit{
     if(this.edicion){
       this.sS.listId(this.id).subscribe(data => {
         this.form = new FormGroup({
+          hcodigo: new FormControl(data.idService),
           hnamecompany: new FormControl(data.nameCompanyService),
-          hnameService: new FormControl(data.nameService),
+          hnameservice: new FormControl(data.nameService),
           hidCategory: new FormControl(data.category.idCategory)
         })
       });

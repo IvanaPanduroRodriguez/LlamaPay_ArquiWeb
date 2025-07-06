@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pe.edu.upc.llamapaytf.entities.User;
+import pe.edu.upc.llamapaytf.entities.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -35,4 +35,5 @@ public interface IUserRepository extends JpaRepository<User, Integer> {
             nativeQuery = true)
     public List<String[]> buscarUsuariosPorFechaNacimiento(@Param("startDate") LocalDate startDate,
                                                     @Param("endDate") LocalDate endDate);
+
 }

@@ -25,8 +25,8 @@ export class RolService{
     setList(listaNueva: Rol[]) {
         this.listaCambio.next(listaNueva);
     }
-    deleteS(id: number) {
-        return this.http.delete(`${this.url}/${id}`);
+    eliminarRol(id: number) {
+    return this.http.delete(`${this.url}/eliminar/${id}`);
     }
     listaId(id: number) {
         return this.http.get<Rol>(`${this.url}/${id}`);

@@ -10,33 +10,36 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
      MatTableModule,
     CommonModule,
-    MatIconModule
-
+    MatIconModule, 
   ],
   templateUrl: './listarrol.html',
   styleUrl: './listarrol.css'
 })
 export class Listarrol implements OnInit {
-  dataSource: MatTableDataSource<Rol> = new MatTableDataSource()
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4']
+  dataSource: MatTableDataSource<Rol> = new MatTableDataSource();
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4'];
+
   constructor(private rS: RolService) { }
 
   ngOnInit(): void {
     this.rS.list().subscribe(data => {
-      this.dataSource = new MatTableDataSource(data)
-    })
-      this.rS.getList().subscribe(data => {
-      this.dataSource = new MatTableDataSource(data)
-    })
+      this.dataSource = new MatTableDataSource(data);
+      this.rS.setList(data); // alimenta el observable
+    });
+
+    this.rS.getList().subscribe(data => {
+      this.dataSource = new MatTableDataSource(data);
+    });
   }
+
   eliminar(id: number) {
-    this.rS.deleteS(id).subscribe(data=>{
-      this.rS.list().subscribe(data=>{
-        this.rS.setList(data)
-      })
-    })
-    this.rS.getList().subscribe(data => { //actualiza la lista cuando se inserta o actualiza la data
-      this.dataSource = new MatTableDataSource(data)
-    })
+  const confirmacion = confirm("¿Estás seguro de eliminar este rol?");
+  if (confirmacion) {
+    this.rS.eliminarRol(id).subscribe(() => {
+      this.rS.list().subscribe(data => {
+        this.rS.setList(data);
+      });
+    });
   }
+}
 }

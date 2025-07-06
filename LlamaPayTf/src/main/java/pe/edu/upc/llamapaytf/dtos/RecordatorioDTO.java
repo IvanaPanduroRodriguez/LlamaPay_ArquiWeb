@@ -1,24 +1,23 @@
 package pe.edu.upc.llamapaytf.dtos;
-
 import pe.edu.upc.llamapaytf.entities.User;
 
 import java.util.Date;
 
 public class RecordatorioDTO {
-    private int Recordatorio_id;
+    private int recordatorioId;
     private String nombreRecordatorio;
-    private String Descripcion;
-    private Date Fecha_Vencimiento;
-    private String Monto_recordatorio;
-    private String Estado_Recordatorio;
+    private String descripcion;
+    private Date fechaVencimiento;
+    private String montoRecordatorio;
+    private String estadoRecordatorio;
     private User user;
 
-    public int getRecordatorio_id() {
-        return Recordatorio_id;
+    public int getRecordatorioId() {
+        return recordatorioId;
     }
 
-    public void setRecordatorio_id(int recordatorio_id) {
-        Recordatorio_id = recordatorio_id;
+    public void setRecordatorioId(int recordatorioId) {
+        this.recordatorioId = recordatorioId;
     }
 
     public String getNombreRecordatorio() {
@@ -30,35 +29,35 @@ public class RecordatorioDTO {
     }
 
     public String getDescripcion() {
-        return Descripcion;
+        return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
-        Descripcion = descripcion;
+        this.descripcion = descripcion;
     }
 
-    public Date getFecha_Vencimiento() {
-        return Fecha_Vencimiento;
+    public Date getFechaVencimiento() {
+        return fechaVencimiento;
     }
 
-    public void setFecha_Vencimiento(Date fecha_Vencimiento) {
-        Fecha_Vencimiento = fecha_Vencimiento;
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
     }
 
-    public String getMonto_recordatorio() {
-        return Monto_recordatorio;
+    public String getMontoRecordatorio() {
+        return montoRecordatorio;
     }
 
-    public void setMonto_recordatorio(String monto_recordatorio) {
-        Monto_recordatorio = monto_recordatorio;
+    public void setMontoRecordatorio(String montoRecordatorio) {
+        this.montoRecordatorio = montoRecordatorio;
     }
 
-    public String getEstado_Recordatorio() {
-        return Estado_Recordatorio;
+    public String getEstadoRecordatorio() {
+        return estadoRecordatorio;
     }
 
-    public void setEstado_Recordatorio(String estado_Recordatorio) {
-        Estado_Recordatorio = estado_Recordatorio;
+    public void setEstadoRecordatorio(String estadoRecordatorio) {
+        this.estadoRecordatorio = estadoRecordatorio;
     }
 
     public User getUser() {
