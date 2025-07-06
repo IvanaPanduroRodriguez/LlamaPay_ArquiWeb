@@ -48,7 +48,7 @@ export class InsertareditarTipoCuentaComponent implements OnInit {
       ],
       monedaTipoCuenta: ['', Validators.required],
       user: this.fb.group({
-        userId: [1, Validators.required] // Se puede reemplazar dinámicamente con el ID del usuario logueado
+        userId: [1, Validators.required]
       })
     });
   }
@@ -81,6 +81,7 @@ export class InsertareditarTipoCuentaComponent implements OnInit {
         });
       } else {
         this.form.reset();
+        this.userIdControl.setValue(1);
       }
     });
   }
@@ -89,33 +90,25 @@ export class InsertareditarTipoCuentaComponent implements OnInit {
     if (this.form.valid) {
       const tipoCuenta: TipoCuenta = this.form.value;
 
-      const recargarYRedirigir = () => {
-        this.tipoCuentaService.list().subscribe(data => {
-          this.tipoCuentaService.setList(data);
-          setTimeout(() => {
-            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-              this.router.navigate(['/tipocuenta/listar']);
-            });
-          }, 0);
-        });
-      };
-
       if (this.edicion) {
-        this.tipoCuentaService.update(tipoCuenta).subscribe(() => recargarYRedirigir());
+        this.tipoCuentaService.update(tipoCuenta).subscribe(() => {
+          this.tipoCuentaService.list().subscribe(data => {
+            this.tipoCuentaService.setList(data);
+            this.router.navigate(['/tipocuenta/listar']);
+          });
+        });
       } else {
-        this.tipoCuentaService.insert(tipoCuenta).subscribe(() => recargarYRedirigir());
+        this.tipoCuentaService.insert(tipoCuenta).subscribe(() => {
+          this.tipoCuentaService.list().subscribe(data => {
+            this.tipoCuentaService.setList(data);
+            this.router.navigate(['/tipocuenta/listar']);
+          });
+        });
       }
     }
   }
 
   cancelar(): void {
-    this.tipoCuentaService.list().subscribe((data: TipoCuenta[]) => {
-      this.tipoCuentaService.setList(data);
-      setTimeout(() => {
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['/tipocuenta/listar']);
-        });
-      }, 0);
-    });
+    this.router.navigate(['/tipocuenta/listar']);
   }
 }

@@ -30,16 +30,14 @@ export class ListarTipoCuentaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.tipoCuentaService.getList().subscribe(data => {
-      this.lista = data;
-    });
-
-    this.actualizarLista(); // fuerza la recarga al iniciar
-  }
-
-  actualizarLista(): void {
+    // Carga inicial
     this.tipoCuentaService.list().subscribe(data => {
       this.tipoCuentaService.setList(data);
+    });
+
+    // Escucha los cambios en la lista (se actualiza tras eliminar)
+    this.tipoCuentaService.getList().subscribe(data => {
+      this.lista = data;
     });
   }
 
@@ -48,7 +46,7 @@ export class ListarTipoCuentaComponent implements OnInit {
   }
 
   eliminar(id: number) {
-    if (confirm('¿Estás seguro de eliminar este tipo de cuenta?')) {
+    if (confirm('¿Estás seguro de que deseas eliminar este tipo de cuenta?')) {
       this.tipoCuentaService.delete(id).subscribe(() => {
         this.tipoCuentaService.list().subscribe(data => {
           this.tipoCuentaService.setList(data);
