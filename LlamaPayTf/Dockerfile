@@ -15,7 +15,6 @@
 FROM openjdk:24 AS build
 WORKDIR /app
 COPY . .
-RUN mvn clean package -DskipTests
 
 FROM openjdk:24
 WORKDIR /app
