@@ -52,4 +52,9 @@ export class Reportesmetodopago implements OnInit{
   onUserChange(event: any): void {
     this.loadChartData(this.selectedUserId);
   }
+
+  totalMetodos(): number {
+  return this.barChartData[0]?.data?.reduce((a: any, b: any) => a + b, 0) || 0;
+}
+
 }

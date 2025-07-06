@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { Landing } from '../../landing/landing';
+import { PpgsApiService } from '../../../services/ppgsapi.service';
 
 @Component({
   selector: 'app-listarproducto',
@@ -18,9 +20,12 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './listarproducto.css'
 })
 export class Listarproducto implements OnInit {
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10'];
   dataSource: MatTableDataSource<Producto> = new MatTableDataSource();
-  constructor(private ps: ProductosService) { }
+  constructor(private ps: ProductosService,
+        private ppgsApi:PpgsApiService,
+    
+  ) { }
 
   ngOnInit(): void {
     this.ps.list().subscribe(data => {
@@ -37,4 +42,8 @@ export class Listarproducto implements OnInit {
       });
     });
   }
+  pagar(){
+    this.ppgsApi.redirectToCheckout();
+  }
+
 }

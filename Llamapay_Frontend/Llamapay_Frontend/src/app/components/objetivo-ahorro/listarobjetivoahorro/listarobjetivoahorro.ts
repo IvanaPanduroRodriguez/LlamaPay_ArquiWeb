@@ -4,54 +4,57 @@ import { CommonModule } from '@angular/common';
 import { ObjetivoAhorro } from '../../../models/objetivoahorro';
 import { ObjetivoAhorroService } from '../../../services/objetivoahorro.service';
 import { MatIconModule } from '@angular/material/icon';
-
+import { Router, RouterModule } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-listarobjetivoahorro',
   imports: [
      MatTableModule,
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    RouterModule
   ],
   templateUrl: './listarobjetivoahorro.html',
   styleUrl: './listarobjetivoahorro.css'
 })
 export class Listarobjetivoahorro implements OnInit {
-  dataSource: MatTableDataSource<ObjetivoAhorro> = new MatTableDataSource()
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10']
-  eventosCreados = false;
-  eventos: any[] = [];
-  constructor(private oS: ObjetivoAhorroService) { }
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
+  dataSource: MatTableDataSource<ObjetivoAhorro> = new MatTableDataSource();
+
+  constructor(
+    private oS: ObjetivoAhorroService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.oS.list().subscribe(data => {
-      this.dataSource = new MatTableDataSource(data)
-    })
-      this.oS.getList().subscribe(data => {
-      this.dataSource = new MatTableDataSource(data)
-    })
+      this.dataSource = new MatTableDataSource(data);
+    });
+
+    this.oS.getList().subscribe(data => {
+      this.dataSource = new MatTableDataSource(data);
+    });
   }
 
-  
-
-  eliminar(id: number) {
-    this.oS.deleteS(id).subscribe(data=>{
-      this.oS.list().subscribe(data=>{
-        this.oS.setList(data)
-      })
-    })
-    this.oS.getList().subscribe(data => { //actualiza la lista cuando se inserta o actualiza la data
-      this.dataSource = new MatTableDataSource(data)
-    })
+  eliminar(id: number): void {
+    this.oS.deleteS(id).subscribe(() => {
+      this.oS.list().subscribe(data => {
+        this.oS.setList(data);
+        this.snackBar.open('Objetivo eliminado correctamente', 'Cerrar', {
+          duration: 2500
+        });
+      });
+    });
   }
 
-  agregarACalendario(objetivo: ObjetivoAhorro) {
+  agregarACalendario(objetivo: ObjetivoAhorro): void {
     try {
       const fechaEvento = new Date(objetivo.fechaFin);
       const fechaFormateada = this.formatearfecha(fechaEvento);
-      
+
       const titulo = `Meta de Ahorro: ${objetivo.nombreMeta}`;
-      
       const descripcion = `Meta: ${objetivo.nombreMeta}%0A` +
         `Monto objetivo: S/ ${objetivo.montoMeta}%0A` +
         `Monto actual: S/ ${objetivo.montoActual}%0A` +
@@ -66,7 +69,6 @@ export class Listarobjetivoahorro implements OnInit {
         `&ctz=America/Lima`;
 
       window.open(googleCalendarUrl, '_blank');
-      
     } catch (error) {
       console.error('Error al crear evento de calendario:', error);
       alert('Error al crear el evento en Google Calendar. Intenta nuevamente.');

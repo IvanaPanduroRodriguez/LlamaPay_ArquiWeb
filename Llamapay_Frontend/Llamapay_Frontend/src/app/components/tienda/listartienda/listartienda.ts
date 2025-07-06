@@ -5,16 +5,17 @@ import { Tienda } from '../../../models/tienda';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-listartienda',
   imports: [
-
     MatTableModule,
     MatIconModule,
     CommonModule,
     MatButtonModule,
+    MatCardModule,
     RouterLink,
   ],
   templateUrl: './listartienda.html',
@@ -22,16 +23,20 @@ import { RouterLink } from '@angular/router';
 })
 export class Listartienda implements OnInit {
   dataSource: MatTableDataSource<Tienda> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5'];
+  tiendas: Tienda[] = [];
   constructor(private tS: TiendaService) { }
+  
   ngOnInit(): void {
     this.tS.list().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
+      this.tiendas = data;
     });
     this.tS.getList().subscribe(data => { 
       this.dataSource = new MatTableDataSource(data);
+      this.tiendas = data;
     });
   }
+  
   eliminar(id: number) {
     this.tS.deleteS(id).subscribe(data => {
       this.tS.list().subscribe(data => {

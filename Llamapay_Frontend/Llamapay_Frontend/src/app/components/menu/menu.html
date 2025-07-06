@@ -131,11 +131,23 @@
 
 <!-- Menú Reportes -->
 <mat-menu #menuReportes="matMenu">
-  <button mat-menu-item routerLink="/reportes/metodospagosgrafica">
+    <button mat-menu-item routerLink="/reportes/metodospagosgrafica">
     <mat-icon>bar_chart</mat-icon> Métodos de Pago
+  </button>
+  <button mat-menu-item routerLink="/reportes/productospriceandunit">
+    <mat-icon>bar_chart</mat-icon> Productos y Precios
   </button>
   <button mat-menu-item routerLink="/reportes/graficUser" *ngIf="esAdmin() || esTester()">
     <mat-icon>insert_chart</mat-icon> Cumpleaños por Mes
+  </button>
+  <button mat-menu-item routerLink="/reportes/metacestaobjetivo">
+    <mat-icon>insert_chart</mat-icon> Meta Cesta Objetivo
+  </button>
+  <button mat-menu-item routerLink="/reportes/montocategorias">
+    <mat-icon>insert_chart</mat-icon> Monto por Categoría
+  </button>
+  <button mat-menu-item routerLink="/reportes/categoriaservicio">
+    <mat-icon>insert_chart</mat-icon> Categoria Servicios
   </button>
 </mat-menu>
 

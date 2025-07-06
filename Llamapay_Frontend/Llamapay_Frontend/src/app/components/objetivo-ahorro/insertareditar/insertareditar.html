@@ -1,99 +1,105 @@
 <div class="container">
-  <div style="text-align: center;margin: 5%;">
-    <div>
-      <h1>{{ actualizar ? "Actualizar ObjetivoAhorro" : "Registro de Objetivo"}}</h1>
-    </div>
+  <div style="text-align: center; margin: 5%;">
+    <h1>{{ actualizar ? 'Actualizar Objetivo de Ahorro' : 'Registrar Objetivo de Ahorro' }}</h1>
   </div>
-  <div style="text-align: center;margin: 5%;">
 
-    <form [formGroup]="form" (submit)=" aceptar()">
+  <div style="margin: 0 auto; max-width: 600px;">
+    <form [formGroup]="form" (ngSubmit)="aceptar()">
 
-
-      <mat-form-field *ngIf="actualizar">
-          <mat-label>ID</mat-label>
-            <input matInput formControlName="codigo" />
-          <mat-error *ngIf="form.get('codigo')?.hasError('required')">
-            El código es obligatorio!!
-          </mat-error>
+      <!-- ID solo si es edición -->
+      <mat-form-field *ngIf="actualizar" appearance="outline" style="width: 100%;">
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" readonly />
       </mat-form-field>
-       <br />
-      
-      <mat-form-field class="example-full-width">
-        <mat-label>Objetivo Ahorro</mat-label>
-        <input matInput placeholder="Ex. title1" formControlName="meta">
+
+      <!-- Meta -->
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Meta del Objetivo</mat-label>
+        <input matInput placeholder="Ej. Comprar Laptop" formControlName="meta" />
         <mat-error *ngIf="form.get('meta')?.hasError('required')">
-          El Objetivo de Ahorro es obligatoria!!
+          La meta es obligatoria.
         </mat-error>
       </mat-form-field>
 
-      <br>
-      <mat-form-field class="example-full-width">
+      <!-- Monto Meta -->
+      <mat-form-field appearance="outline" style="width: 100%;">
         <mat-label>Monto Meta</mat-label>
-        <input matInput placeholder="120000" formControlName="montoMeta">
+        <input matInput placeholder="1200.00" formControlName="montoMeta" type="number" />
         <mat-error *ngIf="form.get('montoMeta')?.hasError('required')">
-          Se debe ingresar el moto esperado, yaque es obligatorio!!
+          El monto meta es obligatorio.
         </mat-error>
       </mat-form-field>
 
-      <br>
-
-      <mat-form-field>
-        <mat-label>Fecha Inicial del Objetivo</mat-label>
-        <input matInput [matDatepicker]="picker1" formControlName="fechaInicial">
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+      <!-- Fecha Inicial -->
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Fecha Inicial</mat-label>
+        <input matInput [matDatepicker]="picker1"
+               formControlName="fechaInicial"
+               [matDatepickerFilter]="deshabilitarFechasFuturas" />
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
         <mat-error *ngIf="form.get('fechaInicial')?.hasError('required')">
-          La fecha inicial es obligatoria!!
+          La fecha inicial es obligatoria.
         </mat-error>
       </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label>Fecha Final del Objetivo</mat-label>
-        <input matInput [matDatepicker]="picker2" formControlName="fechaFinal">
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+
+      <!-- Fecha Final -->
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Fecha Final</mat-label>
+        <input matInput [matDatepicker]="picker2"
+               formControlName="fechaFinal"
+               [matDatepickerFilter]="deshabilitarFechasAnteriores" />
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
         <mat-error *ngIf="form.get('fechaFinal')?.hasError('required')">
-          La fecha inicial es obligatoria!!
+          La fecha final es obligatoria.
+        </mat-error>
+        <mat-error *ngIf="form.get('fechaFinal')?.hasError('fechaInvalida')">
+          La fecha final debe ser posterior a la inicial.
         </mat-error>
       </mat-form-field>
-      <br>
-      <mat-form-field class="example-full-width">
-        <mat-label>Monto Actual del Objetivo</mat-label>
-        <input matInput placeholder="120000" formControlName="montoActual">
+
+      <!-- Monto Actual -->
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Monto Actual</mat-label>
+        <input matInput placeholder="200.00" formControlName="montoActual" type="number" />
         <mat-error *ngIf="form.get('montoActual')?.hasError('required')">
-          El monto actual es obligatorio!!
+          El monto actual es obligatorio.
         </mat-error>
       </mat-form-field>
-      <br>
 
-<mat-form-field>
-  <mat-label>Estados del objetivo</mat-label>
-  <mat-select formControlName="estadoObjetivo">
-    @for (food of estadoObjetivos; track food) {
-      <mat-option [value]="food.value" [disabled]="!food.isActivo">
-        {{ food.viewValue }} 
-        <span *ngIf="!food.isActivo" style="color: red; font-style: italic;">
-          (Inactivo)
-        </span>
-      </mat-option>
-    }
-  </mat-select>
-</mat-form-field>
-
-
-      <br>
-      <mat-form-field>
-        <mat-label>Nombre del usuario</mat-label>
-        <mat-select formControlName="user">
-          @for (food of listaUsuarios; track food) {
-          <mat-option [value]="food.userId">{{food.nameUser}}</mat-option>
-          }
+      <!-- Estado -->
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Estado del Objetivo</mat-label>
+        <mat-select formControlName="estado">
+          <mat-option *ngFor="let estado of estadoObjetivos" [value]="estado.value">
+            {{ estado.viewValue }}
+          </mat-option>
         </mat-select>
+        <mat-error *ngIf="form.get('estado')?.hasError('required')">
+          El estado es obligatorio.
+        </mat-error>
       </mat-form-field>
-      <br>
-      <button mat-raised-button>{{ actualizar ? "Actualizar Objetivo Ahorro" : "Registro de Objetuvo Ahorro"}}</button>
+
+      <!-- Usuario -->
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="user">
+          <mat-option *ngFor="let u of listaUsuarios" [value]="u.userId">
+            {{ u.nameUser }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('user')?.hasError('required')">
+          El usuario es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Botón -->
+      <div style="text-align: center; margin-top: 25px;">
+        <button mat-raised-button color="primary">
+          {{ actualizar ? 'Actualizar Objetivo' : 'Registrar Objetivo' }}
+        </button>
+      </div>
 
     </form>
   </div>

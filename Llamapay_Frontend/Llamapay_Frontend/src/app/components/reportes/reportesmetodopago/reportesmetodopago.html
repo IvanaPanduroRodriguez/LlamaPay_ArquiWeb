@@ -1,18 +1,17 @@
-<div class="title-container">
-  <div style="text-align: center" class="title">
-    <h1>Cantidad de user por método de pago</h1>
-  </div>
+<div class="contenedor-grafico">
+  <h2 class="titulo-grafico">Cantidad de métodos de pago por usuario</h2>
+  <p class="subtitulo-grafico">Visualización de cuántos métodos de pago tiene registrado cada usuario</p>
 
-  <div *ngIf="users.length > 0" style="text-align: center" class="select-user">
-    <label>Selecciona Usuario:</label>
-    <select [(ngModel)]="selectedUserId" (change)="onUserChange($event)">
-      <option *ngFor="let user of users" [value]="user.userId">
-        {{ user.nameUser }}
-      </option>
-    </select>
-  </div>
+  <div class="envoltorio-grafico">
+    <div class="selector-usuario">
+      <label>Selecciona Usuario:</label>
+      <select [(ngModel)]="selectedUserId" (change)="onUserChange($event)">
+        <option *ngFor="let user of users" [value]="user.userId">
+          {{ user.nameUser }}
+        </option>
+      </select>
+    </div>
 
-  <div style="text-align: center" class="chart-container">
     <canvas baseChart
       [datasets]="barChartData"
       [labels]="barChartLabels"
@@ -20,5 +19,26 @@
       [legend]="barChartLegend"
       [type]="barChartType">
     </canvas>
+  </div>
+
+  <div class="leyenda-grafico">
+    <div class="titulo-leyenda">Información del Gráfico</div>
+    <div class="elementos-leyenda">
+      <div class="elemento-leyenda">
+        <div class="color-leyenda" style="background-color: #CC0000;"></div>
+        <span class="texto-leyenda">Cantidad de métodos por usuario</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="estadisticas-grafico" *ngIf="barChartData && barChartData[0]?.data?.length">
+    <div class="elemento-estadistica">
+      <span class="numero-estadistica">{{ totalMetodos() }}</span>
+      <span class="etiqueta-estadistica">Métodos Totales</span>
+    </div>
+    <div class="elemento-estadistica">
+      <span class="numero-estadistica">{{ barChartLabels.length }}</span>
+      <span class="etiqueta-estadistica">Tipos Distintos</span>
+    </div>
   </div>
 </div>
