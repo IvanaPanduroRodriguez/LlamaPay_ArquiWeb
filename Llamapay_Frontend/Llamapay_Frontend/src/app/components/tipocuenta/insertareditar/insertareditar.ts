@@ -48,7 +48,7 @@ export class InsertareditarTipoCuentaComponent implements OnInit {
       ],
       monedaTipoCuenta: ['', Validators.required],
       user: this.fb.group({
-        userId: [1, Validators.required] // Se puede reemplazar dinámicamente con el ID del usuario logueado
+        userId: [1, Validators.required]
       })
     });
   }
@@ -59,23 +59,29 @@ export class InsertareditarTipoCuentaComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
+      this.id = +params['id'];
       this.edicion = !!this.id;
 
       if (this.edicion) {
-        this.tipoCuentaService.getById(this.id).subscribe((tipoCuenta) => {
-          this.form.patchValue({
-            idTipoCuenta: tipoCuenta.idTipoCuenta,
-            nombreTipoCuenta: tipoCuenta.nombreTipoCuenta,
-            numeroTipoCuenta: tipoCuenta.numeroTipoCuenta,
-            tipodeCuenta: tipoCuenta.tipodeCuenta,
-            saldoTipoCuenta: tipoCuenta.saldoTipoCuenta,
-            monedaTipoCuenta: tipoCuenta.monedaTipoCuenta,
-            user: {
-              userId: tipoCuenta.user.userId
-            }
-          });
+        this.tipoCuentaService.list().subscribe(data => {
+          const cuenta = data.find(c => c.idTipoCuenta === this.id);
+          if (cuenta) {
+            this.form.setValue({
+              idTipoCuenta: cuenta.idTipoCuenta,
+              nombreTipoCuenta: cuenta.nombreTipoCuenta,
+              numeroTipoCuenta: cuenta.numeroTipoCuenta,
+              tipodeCuenta: cuenta.tipodeCuenta,
+              saldoTipoCuenta: cuenta.saldoTipoCuenta,
+              monedaTipoCuenta: cuenta.monedaTipoCuenta,
+              user: {
+                userId: cuenta.user?.userId || 1
+              }
+            });
+          }
         });
+      } else {
+        this.form.reset();
+        this.userIdControl.setValue(1);
       }
     });
   }
@@ -103,10 +109,6 @@ export class InsertareditarTipoCuentaComponent implements OnInit {
   }
 
   cancelar(): void {
-    this.tipoCuentaService.list().subscribe((data: TipoCuenta[]) => {
-      this.tipoCuentaService.setList(data); // actualiza el Subject manualmente
-      this.router.navigate(['/tipocuenta/listar']);
-    });
+    this.router.navigate(['/tipocuenta/listar']);
   }
-
 }
