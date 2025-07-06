@@ -1,8 +1,16 @@
+body {
+  background: linear-gradient(135deg, #c8ebd5 0%, #b2dfc5 100%);
+}
+
+mat-card-subtitle mat-icon {
+  font-size: 16px;
+  color: #2E7D32;
+}
 .container-tiendas {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: linear-gradient(135deg, #f5faf8 0%, #c3e2c8 100%);
   min-height: 100vh;
 }
 
@@ -107,7 +115,7 @@ mat-card-subtitle {
 
 mat-card-subtitle mat-icon {
   font-size: 16px;
-  color: #FF5722;
+  color: #3cff22;
 }
 
 mat-card-actions {

@@ -1,10 +1,11 @@
+
 /* Contenedor principal del formulario */
 .container-transaccion {
   display: flex;
   justify-content: center;               /* Centra horizontalmente */
   align-items: center;                   /* Centra verticalmente */
   min-height: 100vh;                     /* Ocupa toda la pantalla */
-  background: linear-gradient(to right, #e3f2fd, #ffffff); /* Fondo degradado */
+  background: linear-gradient(to right, #e3fded, #ffffff); /* Fondo degradado */
   padding: 20px;
 }
 
@@ -66,11 +67,11 @@ button[color="primary"]:hover {
 
 /* Botón rojo (cancelar) */
 button[color="warn"] {
-  background-color: #f44336;
+  background-color: #5cf436;
 }
 
 button[color="warn"]:hover {
-  background-color: #f3cba6;
+  background-color: #c9f3a6;
 }
 
 /* Reset del body */
