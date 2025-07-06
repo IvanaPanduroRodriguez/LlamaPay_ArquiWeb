@@ -39,6 +39,8 @@ import { seguridadGuard } from './guard/seguridad.guard';
 import { Perfil } from './components/user/perfil/perfil';
 import { Productosandpriceandunit } from './components/reportes/productosandpriceandunit/productosandpriceandunit';
 import { Montosobjetivo } from './components/reportes/montosobjetivo/montosobjetivo';
+import { CategoriaReporte } from './components/reportes/categoria/categoria';
+
 
 export const routes: Routes = [
 
@@ -127,6 +129,7 @@ export const routes: Routes = [
       { path: 'graficUser', component: ReportesuserComponent, data: { roles: ['ADMIN', 'TESTER'] } },
       { path: 'productospriceandunit', component: Productosandpriceandunit },
       { path: 'metacestaobjetivo', component: Montosobjetivo },
+      { path: 'montocategorias', component: CategoriaReporte }
     ]
   },
 //-----------------JOAO------------------------------------------

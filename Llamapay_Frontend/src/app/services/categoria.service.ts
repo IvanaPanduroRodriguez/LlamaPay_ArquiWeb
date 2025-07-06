@@ -3,6 +3,8 @@ import { HttpClient } from "@angular/common/http";
 import { Categoria } from "../models/categoria";
 import { Subject } from "rxjs";
 import { environment } from "../../environments/environment";
+import { Observable } from "rxjs";
+import { Montocategoria } from "../models/montocategoria";
 
 const base_url=environment.base;
 @Injectable({
@@ -41,4 +43,7 @@ export class CategoriaService {
   deleteC(id:number) {
     return this.http.delete(`${this.url}/${id}`)
   }
+  metacesta(): Observable<Montocategoria[]> {
+          return this.http.get<Montocategoria[]>(`${this.url}/montoxcategoria`);
+      }
 }
