@@ -40,7 +40,7 @@ export class CategoriaReporte implements OnInit {
   constructor(private cS: CategoriaService) { }
 
   ngOnInit(): void {
-    this.cS.metacesta().subscribe(data => {
+    this.cS.montocategoria().subscribe(data => {
       this.barChartLabels = data.map(item => item.nameCategory);
       this.barChartData = [{
         data: data.map(item => item.totalGasto),

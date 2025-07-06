@@ -43,7 +43,7 @@ export class CategoriaService {
   deleteC(id:number) {
     return this.http.delete(`${this.url}/${id}`)
   }
-  metacesta(): Observable<Montocategoria[]> {
+  montocategoria(): Observable<Montocategoria[]> {
           return this.http.get<Montocategoria[]>(`${this.url}/montoxcategoria`);
       }
 }

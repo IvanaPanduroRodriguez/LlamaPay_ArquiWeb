@@ -40,7 +40,7 @@ import { Perfil } from './components/user/perfil/perfil';
 import { Productosandpriceandunit } from './components/reportes/productosandpriceandunit/productosandpriceandunit';
 import { Montosobjetivo } from './components/reportes/montosobjetivo/montosobjetivo';
 import { CategoriaReporte } from './components/reportes/categoria/categoria';
-
+import { ServiciosReporte } from './components/reportes/servicio/servicio';
 
 export const routes: Routes = [
 
@@ -129,7 +129,8 @@ export const routes: Routes = [
       { path: 'graficUser', component: ReportesuserComponent, data: { roles: ['ADMIN', 'TESTER'] } },
       { path: 'productospriceandunit', component: Productosandpriceandunit },
       { path: 'metacestaobjetivo', component: Montosobjetivo },
-      { path: 'montocategorias', component: CategoriaReporte }
+      { path: 'montocategorias', component: CategoriaReporte },
+      { path: 'categoriaservicio', component: ServiciosReporte }
     ]
   },
 //-----------------JOAO------------------------------------------
