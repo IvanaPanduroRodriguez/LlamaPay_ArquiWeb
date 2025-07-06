@@ -59,23 +59,28 @@ export class InsertareditarTipoCuentaComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
+      this.id = +params['id'];
       this.edicion = !!this.id;
 
       if (this.edicion) {
-        this.tipoCuentaService.getById(this.id).subscribe((tipoCuenta) => {
-          this.form.patchValue({
-            idTipoCuenta: tipoCuenta.idTipoCuenta,
-            nombreTipoCuenta: tipoCuenta.nombreTipoCuenta,
-            numeroTipoCuenta: tipoCuenta.numeroTipoCuenta,
-            tipodeCuenta: tipoCuenta.tipodeCuenta,
-            saldoTipoCuenta: tipoCuenta.saldoTipoCuenta,
-            monedaTipoCuenta: tipoCuenta.monedaTipoCuenta,
-            user: {
-              userId: tipoCuenta.user.userId
-            }
-          });
+        this.tipoCuentaService.list().subscribe(data => {
+          const cuenta = data.find(c => c.idTipoCuenta === this.id);
+          if (cuenta) {
+            this.form.setValue({
+              idTipoCuenta: cuenta.idTipoCuenta,
+              nombreTipoCuenta: cuenta.nombreTipoCuenta,
+              numeroTipoCuenta: cuenta.numeroTipoCuenta,
+              tipodeCuenta: cuenta.tipodeCuenta,
+              saldoTipoCuenta: cuenta.saldoTipoCuenta,
+              monedaTipoCuenta: cuenta.monedaTipoCuenta,
+              user: {
+                userId: cuenta.user?.userId || 1
+              }
+            });
+          }
         });
+      } else {
+        this.form.reset();
       }
     });
   }
@@ -84,29 +89,33 @@ export class InsertareditarTipoCuentaComponent implements OnInit {
     if (this.form.valid) {
       const tipoCuenta: TipoCuenta = this.form.value;
 
+      const recargarYRedirigir = () => {
+        this.tipoCuentaService.list().subscribe(data => {
+          this.tipoCuentaService.setList(data);
+          setTimeout(() => {
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['/tipocuenta/listar']);
+            });
+          }, 0);
+        });
+      };
+
       if (this.edicion) {
-        this.tipoCuentaService.update(tipoCuenta).subscribe(() => {
-          this.tipoCuentaService.list().subscribe(data => {
-            this.tipoCuentaService.setList(data);
-            this.router.navigate(['/tipocuenta/listar']);
-          });
-        });
+        this.tipoCuentaService.update(tipoCuenta).subscribe(() => recargarYRedirigir());
       } else {
-        this.tipoCuentaService.insert(tipoCuenta).subscribe(() => {
-          this.tipoCuentaService.list().subscribe(data => {
-            this.tipoCuentaService.setList(data);
-            this.router.navigate(['/tipocuenta/listar']);
-          });
-        });
+        this.tipoCuentaService.insert(tipoCuenta).subscribe(() => recargarYRedirigir());
       }
     }
   }
 
   cancelar(): void {
     this.tipoCuentaService.list().subscribe((data: TipoCuenta[]) => {
-      this.tipoCuentaService.setList(data); // actualiza el Subject manualmente
-      this.router.navigate(['/tipocuenta/listar']);
+      this.tipoCuentaService.setList(data);
+      setTimeout(() => {
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/tipocuenta/listar']);
+        });
+      }, 0);
     });
   }
-
 }

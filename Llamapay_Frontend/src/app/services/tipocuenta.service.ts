@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TipoCuenta } from '../models/tipocuenta';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { environment } from '../../enviroments/enviroment'; 
 
 @Injectable({
@@ -10,7 +10,7 @@ import { environment } from '../../enviroments/enviroment';
 export class TipoCuentaService {
   private url: string = `${environment.base}/tiposcuentas`;
 
-  private listaCambio = new Subject<TipoCuenta[]>();
+  private listaCambio = new BehaviorSubject<TipoCuenta[]>([]);
 
   constructor(private http: HttpClient) {}
 
@@ -30,12 +30,12 @@ export class TipoCuentaService {
     return this.http.put<void>(`${this.url}/actualizar`, t);
   }
 
-  setList(lista: TipoCuenta[]) {
-    this.listaCambio.next(lista);
+  getList() {
+    return this.listaCambio.asObservable();
   }
 
-  getList(): Observable<TipoCuenta[]> {
-    return this.listaCambio.asObservable();
+  setList(lista: TipoCuenta[]) {
+    this.listaCambio.next(lista);
   }
 
   getById(id: number): Observable<TipoCuenta> {

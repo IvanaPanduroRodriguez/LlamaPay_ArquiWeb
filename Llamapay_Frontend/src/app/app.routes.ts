@@ -30,6 +30,7 @@ import { InsertareditarTipoCuentaComponent } from './components/tipocuenta/inser
 import { Home } from './components/home/home';
 import { seguridadGuard } from './guard/seguridad.guard';
 import { PerfilComponent } from './components/user/perfil/perfil';
+import { TipoCuenta } from './components/tipocuenta/tipocuenta';
 
 export const routes: Routes = [
   { path: '', component: Landing },
@@ -104,21 +105,22 @@ export const routes: Routes = [
     ]
   },
   {
-    path: 'tipotransaccion',
-    children: [
-      { path: 'listar', component: ListarTipoTransaccionComponent },
-      { path: 'insertar', component: InsertarEditarTipoTransaccionComponent },
-      { path: 'editar/:id', component: InsertarEditarTipoTransaccionComponent }
-    ]
-  },
-  {
     path: 'tipocuenta',
     children: [
       { path: 'listar', component: ListarTipoCuentaComponent },
       { path: 'insertar', component: InsertareditarTipoCuentaComponent },
-      { path: 'editar/:id', component: InsertareditarTipoCuentaComponent }
+      { path: 'insertar/:id', component: InsertareditarTipoCuentaComponent }
     ]
   },
+{
+  path: 'tipocuenta', component: TipoCuenta,
+  children: [
+    { path: '', redirectTo: 'listar', pathMatch: 'full' },
+    { path: 'listar', component: ListarTipoCuentaComponent },
+    { path: 'insertar', component: InsertareditarTipoCuentaComponent },
+    { path: 'insertar/:id', component: InsertareditarTipoCuentaComponent },
+  ]
+},
   {
     path: 'home',
     component: Home,
