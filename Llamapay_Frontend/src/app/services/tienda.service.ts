@@ -1,8 +1,8 @@
+import { environment } from '../../enviroments/enviroment';
+import { HttpClient } from '@angular/common/http';
 import { Tienda } from '../models/tienda';
 import {Subject} from 'rxjs';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { HttpClient } from '@angular/common/http';
 
 const base_url = environment.base
 @Injectable({
