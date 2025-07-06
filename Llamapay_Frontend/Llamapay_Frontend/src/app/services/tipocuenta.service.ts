@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { TipoCuenta } from '../models/tipocuenta';
 import { Observable, Subject } from 'rxjs';
-import { environment } from '../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { environment } from '../../enviroments/enviroment'; 
 
 @Injectable({
   providedIn: 'root'
@@ -37,4 +37,9 @@ export class TipoCuentaService {
   getList(): Observable<TipoCuenta[]> {
     return this.listaCambio.asObservable();
   }
+
+  getById(id: number): Observable<TipoCuenta> {
+    return this.http.get<TipoCuenta>(`${this.url}/${id}`);
+  }
+
 }

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,7 +17,8 @@ import { RolService } from '../../../services/rol.service';
 @Component({
   selector: 'app-insertareditar',
   providers: [provideNativeDateAdapter()],
-  imports: [ReactiveFormsModule,
+  imports: [
+    ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
     CommonModule,
@@ -30,53 +31,81 @@ import { RolService } from '../../../services/rol.service';
   styleUrl: './insertareditar.css'
 })
 export class InsertareditarRol implements OnInit {
-  form: FormGroup = new FormGroup({})
+  form: FormGroup = new FormGroup({});
+  rol: Rol = new Rol();
+  id: number = 0;
+  edicion: boolean = false;
 
-  rol: Rol = new Rol()
+  TipoRol = [
+    { value: 'ADMIN', viewValue: 'ADMIN' },
+    { value: 'TESTER', viewValue: 'TESTER' },
+    { value: 'USER', viewValue: 'USER' }
+  ];
 
-  TipoRol:{value:string;viewValue:string}[]=[
-    {value:'ROLE_ADMIN',viewValue:'ROLE_ADMIN'},
-    {value:'TESTER',viewValue:'TESTER'},
-    {value:'ROLE_USER',viewValue:'ROLE_USER'}
-  ]
-
-  listaUsuarios:User[]=[]
+  listaUsuarios: User[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private oS: RolService,
     private router: Router,
-    private uS:UserService
-  ) { }
+    private uS: UserService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    
-    this.form = this.formBuilder.group({
-      roles: ['', Validators.required],
-      user: ['', Validators.required]
-    })
-    this.uS.list().subscribe(data=>{
-      this.listaUsuarios=data
-    })
-  }
-aceptar() {
-  if (this.form.valid) {
-    const newRol = new Rol();
-    newRol.tipoRol = this.form.value.roles;
-
-    // Crear objeto User con solo el ID
-    const user = new User();
-    user.userId = this.form.value.user;
-
-    newRol.user = user;
-
-    this.oS.insert(newRol).subscribe(() => {
-      this.oS.list().subscribe(data => {
-        this.oS.setList(data);
-      });
+    this.route.params.subscribe((params: Params) => {
+      this.id = params['id'];
+      this.edicion = this.id != null;
+      this.init();
     });
 
-    this.router.navigate(['roles']);
+    this.form = this.formBuilder.group({
+      id: [''],
+      roles: ['', Validators.required],
+      user: ['', Validators.required]
+    });
+
+    this.uS.list().subscribe(data => {
+      this.listaUsuarios = data;
+    });
   }
-}
+
+  aceptar(): void {
+    if (this.form.valid) {
+      this.rol.rolId = this.form.value.id;
+      this.rol.tipoRol = this.form.value.roles;
+
+      const user = new User();
+      user.userId = this.form.value.user;
+      this.rol.user = user;
+
+      if (this.edicion) {
+        this.oS.update(this.rol).subscribe(() => {
+          this.oS.list().subscribe(data => {
+            this.oS.setList(data);
+          });
+        });
+      } else {
+        this.oS.insert(this.rol).subscribe(() => {
+          this.oS.list().subscribe(data => {
+            this.oS.setList(data);
+          });
+        });
+      }
+
+      this.router.navigate(['roles']);
+    }
+  }
+
+  init(): void {
+    if (this.edicion) {
+      this.oS.listaId(this.id).subscribe(data => {
+        this.form = new FormGroup({
+          id: new FormControl(data.rolId),
+          roles: new FormControl(data.tipoRol, Validators.required),
+          user: new FormControl(data.user.userId, Validators.required)
+        });
+      });
+    }
+  }
 }

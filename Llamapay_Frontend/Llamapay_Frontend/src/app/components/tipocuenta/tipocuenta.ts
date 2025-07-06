@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { ListarTipoCuentaComponent } from './listar/listar'; 
+import { RouterOutlet } from '@angular/router';
+
 @Component({
   selector: 'app-tipocuenta',
   standalone: true,
-  imports: [RouterOutlet, ListarTipoCuentaComponent],
-  templateUrl: './tipocuenta.html',
-  styleUrl: './tipocuenta.css'
+  imports: [RouterOutlet],
+  template: `<router-outlet></router-outlet>`
 })
-export class Tipocuenta {
-constructor(public route: ActivatedRoute) { }
-}
+export class TipoCuenta {}

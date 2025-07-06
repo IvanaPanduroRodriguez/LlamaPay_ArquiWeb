@@ -32,15 +32,15 @@ import { MatButtonModule } from '@angular/material/button';
 export class InsertareditarObjetivoAhorro implements OnInit {
   form: FormGroup = new FormGroup({})
   
-  ObjtivoAhorro: ObjetivoAhorro = new ObjetivoAhorro()
+  objetivoAhorro: ObjetivoAhorro = new ObjetivoAhorro()
 
   id:number=0;
   actualizar: boolean = false;
 
-estadoObjetivos: { value: string; viewValue: string; isActivo: boolean }[] = [
-  { value: 'En espera de Aceptación', viewValue: 'En espera de Aceptación', isActivo: true },
-  { value: 'En progreso', viewValue: 'En progreso', isActivo: true },
-  { value: 'Dado de Baja', viewValue: 'Dado de Baja', isActivo: false }
+estadoObjetivos: { value: string; viewValue: string; }[] = [
+  { value: 'En espera de Aceptación', viewValue: 'En espera de Aceptación' },
+  { value: 'En progreso', viewValue: 'En progreso',}, 
+  { value: 'Dado de Baja', viewValue: 'Dado de Baja', }
 ];
 
   listaUsuarios:User[]=[]
@@ -62,40 +62,41 @@ estadoObjetivos: { value: string; viewValue: string; isActivo: boolean }[] = [
     });
 
 
-    this.form = this.formBuilder.group({
-      codigo: [''],
-      meta: ['', Validators.required],
-      montoMeta: ['', Validators.required],
-      fechaInicial: ['', Validators.required],
-      fechaFinal: ['', Validators.required],
-      montoActual: ['', Validators.required],
-      estado: ['', Validators.required],
-      user: ['', Validators.required]
-    });
+this.form = this.formBuilder.group({
+  codigo: [''],
+  meta: ['', Validators.required],
+  montoMeta: ['', Validators.required],
+  fechaInicial: ['', Validators.required],
+  fechaFinal: ['', Validators.required],
+  montoActual: ['', Validators.required],
+  estado: ['', Validators.required],
+  user: ['', Validators.required]
+}, { validators: this.validarFechas() });
+
     this.uS.list().subscribe(data=>{
       this.listaUsuarios=data
     });
   }
   aceptar() {
     if (this.form.valid) {
-      this.ObjtivoAhorro.Objetivo_id = this.form.value.codigo
-      this.ObjtivoAhorro.nombreMeta = this.form.value.meta
-      this.ObjtivoAhorro.montoMeta = this.form.value.montoMeta
-      this.ObjtivoAhorro.fechaInicio = this.form.value.fechaInicial
-      this.ObjtivoAhorro.fechaFin = this.form.value.fechaFinal
-      this.ObjtivoAhorro.montoActual = this.form.value.montoActual
-      this.ObjtivoAhorro.estadoObjetivo = this.form.value.estado
-      this.ObjtivoAhorro.user.userId = this.form.value.user
+      this.objetivoAhorro.objetivoId = this.form.value.codigo
+      this.objetivoAhorro.nombreMeta = this.form.value.meta
+      this.objetivoAhorro.montoMeta = this.form.value.montoMeta
+      this.objetivoAhorro.fechaInicio = this.form.value.fechaInicial.toISOString().split('T')[0];
+      this.objetivoAhorro.fechaFin = this.form.value.fechaFinal.toISOString().split('T')[0];
+      this.objetivoAhorro.montoActual = this.form.value.montoActual
+      this.objetivoAhorro.estadoObjetivo = this.form.value.estado
+      this.objetivoAhorro.user = this.listaUsuarios.find(u => u.userId === this.form.value.user) ?? new User();
 
       if(this.actualizar){
-          this.oS.update(this.ObjtivoAhorro).subscribe(()=>{
+          this.oS.update(this.objetivoAhorro).subscribe(()=>{
             this.oS.list().subscribe(data=>{
               this.oS.setList(data);
             })
           })
       }
       else{
-      this.oS.insert(this.ObjtivoAhorro).subscribe(() => {
+      this.oS.insert(this.objetivoAhorro).subscribe(() => {
         this.oS.list().subscribe(data => {
           this.oS.setList(data)
         })
@@ -109,7 +110,7 @@ estadoObjetivos: { value: string; viewValue: string; isActivo: boolean }[] = [
     if(this.actualizar){
         this.oS.listaId(this.id).subscribe((data)=>{
           this.form = new FormGroup({
-           codigo: new FormControl(data.Objetivo_id),
+           codigo: new FormControl(data.objetivoId),
            meta: new FormControl(data.nombreMeta, Validators.required),
            montoMeta: new FormControl(data.montoMeta, Validators.required),
            fechaInicial: new FormControl(data.fechaInicio, Validators.required),
@@ -121,4 +122,42 @@ estadoObjetivos: { value: string; viewValue: string; isActivo: boolean }[] = [
         })
     }
   }
+  validarFechas() {
+  return (formGroup: FormGroup) => {
+    const fechaInicial = formGroup.get('fechaInicial')?.value;
+    const fechaFinal = formGroup.get('fechaFinal')?.value;
+
+    if (!fechaInicial || !fechaFinal) return null;
+
+    const fechaInicio = new Date(fechaInicial);
+    const fechaFin = new Date(fechaFinal);
+
+    if (fechaFin <= fechaInicio) {
+      formGroup.get('fechaFinal')?.setErrors({ fechaInvalida: true });
+    } else {
+      formGroup.get('fechaFinal')?.setErrors(null);
+    }
+
+    return null;
+  };
+}
+
+// No permitir fechas futuras en fechaInicial
+deshabilitarFechasFuturas = (fecha: Date | null): boolean => {
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+  return fecha ? fecha <= hoy : false;
+};
+
+// Solo permitir fechas después de la fechaInicial en fechaFinal
+deshabilitarFechasAnteriores = (fecha: Date | null): boolean => {
+  const fechaInicio = this.form.get('fechaInicial')?.value;
+  if (!fechaInicio) return false;
+
+  const inicio = new Date(fechaInicio);
+  inicio.setDate(inicio.getDate() + 1); // día siguiente
+  inicio.setHours(0, 0, 0, 0);
+  return fecha ? fecha >= inicio : false;
+};
+
 }

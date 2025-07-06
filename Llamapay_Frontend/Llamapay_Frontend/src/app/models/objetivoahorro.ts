@@ -1,7 +1,7 @@
 import { User} from "../models/user"
 
 export class ObjetivoAhorro{
-    Objetivo_id: number = 0;
+    objetivoId: number = 0;
     nombreMeta: string = "";
     montoMeta: number = 0;
     fechaInicio: Date=new Date(Date.now());
