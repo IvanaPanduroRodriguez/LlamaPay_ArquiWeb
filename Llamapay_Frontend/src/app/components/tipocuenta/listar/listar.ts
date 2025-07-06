@@ -48,9 +48,10 @@ export class ListarTipoCuentaComponent implements OnInit {
   eliminar(id: number) {
     if (confirm('¿Estás seguro de que deseas eliminar este tipo de cuenta?')) {
       this.tipoCuentaService.delete(id).subscribe(() => {
-        this.tipoCuentaService.list().subscribe(data => {
-          this.tipoCuentaService.setList(data);
-        });
+        // Filtra localmente la lista y actualiza
+        this.lista = this.lista.filter(t => t.idTipoCuenta !== id);
+        // También actualiza el BehaviorSubject si otros componentes lo usan
+        this.tipoCuentaService.setList(this.lista);
       });
     }
   }

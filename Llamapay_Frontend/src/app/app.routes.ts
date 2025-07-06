@@ -104,23 +104,27 @@ export const routes: Routes = [
       { path: 'editar/:id', component: InsertarEditarTransaccion }
     ]
   },
+
   {
-    path: 'tipocuenta',
+    path: 'tipotransaccion',
+    component: TipoTransaccion,
     children: [
-      { path: 'listar', component: ListarTipoCuentaComponent },
-      { path: 'insertar', component: InsertareditarTipoCuentaComponent },
-      { path: 'insertar/:id', component: InsertareditarTipoCuentaComponent }
+      { path: 'listar', component: ListarTipoTransaccionComponent },
+      { path: 'insertar', component: InsertarEditarTipoTransaccionComponent },
+      { path: 'insertar/:id', component: InsertarEditarTipoTransaccionComponent }
     ]
   },
-{
-  path: 'tipocuenta', component: TipoCuenta,
-  children: [
-    { path: '', redirectTo: 'listar', pathMatch: 'full' },
-    { path: 'listar', component: ListarTipoCuentaComponent },
-    { path: 'insertar', component: InsertareditarTipoCuentaComponent },
-    { path: 'insertar/:id', component: InsertareditarTipoCuentaComponent },
-  ]
-},
+
+  {
+    path: 'tipocuenta', component: TipoCuenta,
+    children: [
+      { path: '', redirectTo: 'listar', pathMatch: 'full' },
+      { path: 'listar', component: ListarTipoCuentaComponent },
+      { path: 'insertar', component: InsertareditarTipoCuentaComponent },
+      { path: 'insertar/:id', component: InsertareditarTipoCuentaComponent },
+    ]
+  },
+
   {
     path: 'home',
     component: Home,
