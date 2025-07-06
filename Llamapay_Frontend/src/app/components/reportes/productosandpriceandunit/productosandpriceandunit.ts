@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { CommonModule } from '@angular/common';
 import { ProductosService } from '../../../services/productos.service';
 import { ProduccionInfoDTO } from '../../../models/productoinfodto';
 @Component({
   selector: 'app-productosandpriceandunit',
-  imports: [BaseChartDirective],
+  imports: [BaseChartDirective, CommonModule],
   templateUrl: './productosandpriceandunit.html',
   styleUrl: './productosandpriceandunit.css'
 })
@@ -14,7 +15,7 @@ export class Productosandpriceandunit implements OnInit {
     responsive: true
   }
   barChartLabels: string[] = []
-  barChartType: ChartType = 'pie'
+  barChartType: ChartType = 'bar'
   barChartLegend = true
   barChartData: ChartDataset[] = []
 
@@ -80,5 +81,24 @@ export class Productosandpriceandunit implements OnInit {
     });
   }
 
+  getTotalUnidades(): number {
+    if (this.barChartData && this.barChartData[0]?.data) {
+      return this.barChartData[0].data.reduce((total: number, value: any) => total + (Number(value) || 0), 0);
+    }
+    return 0;
+  }
 
+  getTiendas(): number {
+    if (this.barChartLabels) {
+      const tiendas = new Set();
+      this.barChartLabels.forEach(label => {
+        const tiendaName = label.split(' - ')[1];
+        if (tiendaName) {
+          tiendas.add(tiendaName);
+        }
+      });
+      return tiendas.size;
+    }
+    return 0;
+  }
 }
