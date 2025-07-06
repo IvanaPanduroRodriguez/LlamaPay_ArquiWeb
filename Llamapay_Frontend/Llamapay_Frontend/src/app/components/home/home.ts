@@ -10,7 +10,12 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./home.css']
 })
 export class Home {
+  ppgsApi: any;
   mostrarBotones(): boolean {
     return false; // Nunca mostrar ingresar/registrarse aquí
+  }
+
+  pagar(){
+    this.ppgsApi.redirectToCheckout();
   }
 }

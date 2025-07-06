@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { loadStripe } from '@stripe/stripe-js';
-
+import { loadStripe } from '@stripe/stripe-js'; // Asegúrate de instalar @stripe/stripe-js
 @Injectable({
   providedIn: 'root'
 })

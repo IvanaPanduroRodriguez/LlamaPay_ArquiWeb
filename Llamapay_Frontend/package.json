@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@angular/cli": "^20.0.5",
+    "@angular/material": "^20.0.5",
+    "@stripe/stripe-js": "^7.4.0"
+  }
+}
