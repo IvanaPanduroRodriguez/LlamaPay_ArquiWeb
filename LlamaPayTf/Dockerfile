@@ -13,7 +13,12 @@
 ##ENTRYPOINT ["java", "-jar", "app.jar"]
 
 
+FROM openjdk:24 AS build
+WORKDIR /app
+COPY . .
+
 FROM openjdk:24
-COPY "./LlamaPayTf/target/LlamaPayTf-0.0.1-SNAPSHOT.jar" "app.jar"
+WORKDIR /app
+COPY --from=build /app/target/LlamaPayTf-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8085
 ENTRYPOINT ["java", "-jar", "app.jar"]
