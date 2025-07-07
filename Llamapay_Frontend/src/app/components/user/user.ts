@@ -5,8 +5,7 @@ import { Listaruser } from './listaruser/listaruser';
 @Component({
   selector: 'app-user',
   imports: [
-    RouterOutlet,
-    Listaruser
+    RouterOutlet
   ],
   templateUrl: './user.html',
   styleUrl: './user.css'

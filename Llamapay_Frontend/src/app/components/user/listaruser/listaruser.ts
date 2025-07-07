@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
 import { CommonModule } from '@angular/common';
@@ -10,47 +10,52 @@ import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-listaruser',
-  imports: [MatTableModule, CommonModule,
+  standalone: true,
+  imports: [
+    CommonModule,
     MatButtonModule,
     RouterLink,
     MatIconModule,
-  MatCardModule],
+    MatCardModule
+  ],
   templateUrl: './listaruser.html',
   styleUrl: './listaruser.css'
 })
 export class Listaruser implements OnInit {
-  dataSource: MatTableDataSource<User> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4','c5','c6','c7', 'c8'];
-  constructor(private uS: UserService) { }
+  dataSource: MatTableDataSource<User> = new MatTableDataSource<User>();
 
-  detalleSeleccionado: User | null = null;
-
-
-  verDetalle(element: User) {
-    this.detalleSeleccionado = this.detalleSeleccionado === element ? null : element;
-  }
-
-  cerrarDetalle() {
-    this.detalleSeleccionado = null;
-  }
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.uS.list().subscribe(data => {
-      this.dataSource = new MatTableDataSource(data)
-    })
-    this.uS.getList().subscribe(data => {
-      this.dataSource = new MatTableDataSource(data)
-    })
+    // Carga inicial
+    this.userService.list().subscribe(data => {
+      this.dataSource.data = data;
+    });
+
+    // Suscripción para mantener la lista sincronizada
+    this.userService.getList().subscribe(data => {
+      this.dataSource.data = data;
+    });
   }
 
-  eliminar(userId: number) {
-    this.uS.deleteS(userId).subscribe(data=>{
-      this.uS.list().subscribe(data=>{
-        this.uS.setList(data)
-      })
-    })
-    this.uS.getList().subscribe(data => { //actualiza la lista cuando se inserta o actualiza la data
-      this.dataSource = new MatTableDataSource(data)
-    })
-  } 
+  verDetalle(user: User): void {
+    alert(
+      `Nombre: ${user.nameUser} ${user.lastnameUser}\n` +
+      `Username: ${user.username}\n` +
+      `Correo: ${user.emailUser}\n` +
+      `Fecha de nacimiento: ${new Date(user.birthdayUser).toLocaleDateString()}\n` +
+      `Fecha de registro: ${new Date(user.registrationDateUser).toLocaleDateString()}`
+    );
+  }
+
+  eliminar(userId: number): void {
+    const confirmacion = confirm('¿Deseas eliminar este usuario? Esta acción no se puede deshacer.');
+    if (confirmacion) {
+      this.userService.deleteS(userId).subscribe(() => {
+        this.userService.list().subscribe(data => {
+          this.userService.setList(data); // actualiza lista compartida
+        });
+      });
+    }
+  }
 }

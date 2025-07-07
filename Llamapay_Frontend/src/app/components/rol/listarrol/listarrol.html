@@ -1,36 +1,45 @@
-<div class="container">
-  <div style="text-align: center;margin: 5%;">
-    <h1>Lista de Roles Registrados</h1>
-  </div>
-  <div>
-   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div class="container-transaccion-listar">
+  <h1>Lista de Roles</h1>
 
-   <!-- Position Column -->
-  <ng-container matColumnDef="c1">
-    <th mat-header-cell *matHeaderCellDef> ID. </th>
-    <td mat-cell *matCellDef="let element"> {{element.Rol_id}} </td>
-  </ng-container>
-
-  <!-- Type Column -->
-  <ng-container matColumnDef="c2">
-    <th mat-header-cell *matHeaderCellDef> Tipo </th>
-    <td mat-cell *matCellDef="let element"> {{element.TipoRol}} </td>
-  </ng-container>
-
-    <ng-container matColumnDef="c3">
-    <th mat-header-cell *matHeaderCellDef> Usuario </th>
-    <td mat-cell *matCellDef="let element"> {{element.user.nameUser}} </td>
-  </ng-container>
-<ng-container matColumnDef="c4">
-  <th mat-header-cell *matHeaderCellDef> Eliminar </th>
-  <td mat-cell *matCellDef="let element">
-    <button mat-button (click)="eliminar(element.Rol_id)">
-      <mat-icon>delete_forever</mat-icon>
+  <div class="acciones">
+    <button mat-raised-button color="primary" routerLink="/roles/formularioR">
+      <mat-icon>person_add</mat-icon> &nbsp; Registrar Rol
     </button>
-  </td>
-</ng-container>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+  </div>
+
+  <div class="contenedor-grid">
+    <mat-card class="transaccion-card" *ngFor="let rol of dataSource.data">
+      <mat-card-content>
+        <p><strong>Rol:</strong> {{ rol.nameRole }}</p>
+        <p><strong>Usuario:</strong> {{ rol.user?.nameUser }} {{ rol.user?.lastnameUser }}</p>
+        <p><strong>Correo:</strong> {{ rol.user?.emailUser }}</p>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <button mat-icon-button color="accent" (click)="verDetalle(rol)">
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="eliminar(rol.roleId)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div *ngIf="detalleSeleccionado" class="detalle-container" style="margin-top: 30px;">
+    <mat-card style="padding: 20px; border-radius: 12px; background-color: #f3f9f4;">
+      <mat-card-header>
+        <mat-card-title>Detalle del Rol</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>ID del Rol:</strong> {{ detalleSeleccionado.roleId }}</p>
+        <p><strong>Nombre del Rol:</strong> {{ detalleSeleccionado.nameRole }}</p>
+        <p><strong>Usuario Asignado:</strong> {{ detalleSeleccionado.user?.nameUser }} {{ detalleSeleccionado.user?.lastnameUser }}</p>
+        <p><strong>Correo del Usuario:</strong> {{ detalleSeleccionado.user?.emailUser }}</p>
+      </mat-card-content>
+      <mat-card-actions style="text-align: right;">
+        <button mat-stroked-button color="warn" (click)="cerrarDetalle()">Cerrar</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 </div>

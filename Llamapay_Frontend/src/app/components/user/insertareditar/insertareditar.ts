@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
@@ -37,12 +37,6 @@ export class InsertareditarUser implements OnInit {
   edicion: boolean = false;
   modoPerfil: boolean = false;
 
-  listaUsuarios: User[] = [];
-  estados = [
-    { value: true, viewValue: 'Activo' },
-    { value: false, viewValue: 'Deshabilitado' }
-  ];
-
   constructor(
     private uS: UserService,
     private router: Router,
@@ -53,14 +47,13 @@ export class InsertareditarUser implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      codigo: [''],
-      name: ['', Validators.required],
-      lastname: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      birthday: ['', Validators.required],
+      nameUser: ['', Validators.required],
+      lastnameUser: ['', Validators.required],
+      emailUser: ['', [Validators.required, Validators.email]],
+      birthdayUser: ['', Validators.required],
       username: ['', Validators.required],
-      password: ['', Validators.required],
-      estadoUsuario: ['', Validators.required]
+      password: [''],
+      enabled: [true, Validators.required]
     });
 
     this.route.url.subscribe(url => {
@@ -87,14 +80,12 @@ export class InsertareditarUser implements OnInit {
 
   setFormValues(user: User): void {
     this.form.patchValue({
-      codigo: user.userId,
-      name: user.nameUser,
-      lastname: user.lastnameUser,
-      email: user.emailUser,
-      birthday: user.birthdayUser,
+      nameUser: user.nameUser,
+      lastnameUser: user.lastnameUser,
+      emailUser: user.emailUser,
+      birthdayUser: user.birthdayUser,
       username: user.username,
-      password: user.password,
-      estadoUsuario: user.enabled
+      enabled: user.enabled
     });
   }
 
@@ -105,21 +96,22 @@ export class InsertareditarUser implements OnInit {
     });
   }
 
-  insertar(): void {
+  aceptar(): void {
     this.form.markAllAsTouched();
     if (this.form.invalid) {
-      console.log("Formulario inválido.");
       return;
     }
 
-    this.user.userId = this.form.value.codigo;
-    this.user.nameUser = this.form.value.name;
-    this.user.lastnameUser = this.form.value.lastname;
-    this.user.emailUser = this.form.value.email;
-    this.user.birthdayUser = this.form.value.birthday;
+    this.user.nameUser = this.form.value.nameUser;
+    this.user.lastnameUser = this.form.value.lastnameUser;
+    this.user.emailUser = this.form.value.emailUser;
+    this.user.birthdayUser = this.form.value.birthdayUser;
     this.user.username = this.form.value.username;
-    this.user.password = this.form.value.password;
-    this.user.enabled = this.form.value.estadoUsuario;
+    this.user.enabled = this.form.value.enabled;
+
+    if (!this.edicion) {
+      this.user.password = this.form.value.password;
+    }
 
     if (this.edicion) {
       this.uS.update(this.user).subscribe(() => {

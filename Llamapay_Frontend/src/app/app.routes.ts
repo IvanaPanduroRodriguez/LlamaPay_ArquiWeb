@@ -31,6 +31,7 @@ import { Home } from './components/home/home';
 import { seguridadGuard } from './guard/seguridad.guard';
 import { PerfilComponent } from './components/user/perfil/perfil';
 import { TipoCuenta } from './components/tipocuenta/tipocuenta';
+import { Listaruser } from './components/user/listaruser/listaruser';
 
 export const routes: Routes = [
   { path: '', component: Landing },
@@ -68,6 +69,7 @@ export const routes: Routes = [
     path: 'users',
     component: User,
     children: [
+      { path: '', component: Listaruser },
       { path: 'formularioU', component: InsertareditarUser },
       { path: 'ediciones/:id', component: InsertareditarUser }
     ]

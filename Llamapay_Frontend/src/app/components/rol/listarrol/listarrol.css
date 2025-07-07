@@ -1,112 +1,80 @@
-/* Contenedor general de la tabla */
-.container {
-  padding: 20px;
+.container-transaccion-listar {
+  padding: 24px;
+  background: linear-gradient(to right, #e3f2fd, #ffffff);
+  min-height: 100vh;
 }
 
-/* Título */
-.container h1 {
-  color: #506C4D; /* Azul turquesa */
+.container-transaccion-listar h1 {
   text-align: center;
-  font-size: 28px;
-  margin-bottom: 25px;
-  font-weight: bold;
-}
-
-/* Tabla principal */
-table {
-  width: 90%;
-  margin: 0 auto;
-  border-collapse: collapse;
-  background-color: #e0f7fa; /* Fondo azul turquesa claro */
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Cabecera y celdas */
-th, td {
-  padding: 12px 16px;
-  text-align: center;
-  font-size: 14px;
-}
-
-/* Cabecera */
-th {
-  background-color: #b2ebf2; /* Azul turquesa más claro */
-  color: #004d40;
+  margin-bottom: 24px;
+  color: #2e7d32;
   font-weight: 600;
-  border-bottom: 2px solid #4dd0e1;
+  font-size: 30px;
 }
 
-/* Celdas */
-td {
-  border-bottom: 1px solid #b2dfdb;
+.acciones {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
 }
 
-/* Hover en filas */
-tr:hover {
-  background-color: #d9ebe6;
-  transition: background-color 0.2s ease-in-out;
+.contenedor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 0 40px 40px 40px;
+  justify-items: stretch;
 }
 
-/* Bordes redondeados opcionales */
-tr:first-child th:first-child {
-  border-top-left-radius: 10px;
+.transaccion-card {
+  width: 100%;
+  background-color: #f6fff6;
+  border: 1.5px solid #b6e2b6;
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.15);
+  border-radius: 12px;
+  padding: 24px;
+  transition: transform 0.2s ease;
 }
 
-tr:first-child th:last-child {
-  border-top-right-radius: 10px;
+.transaccion-card:hover {
+  transform: scale(1.01);
 }
 
-tr:last-child td:first-child {
-  border-bottom-left-radius: 10px;
+mat-card-content p {
+  margin: 6px 0;
+  font-family: 'Roboto', sans-serif;
+  color: #388e3c;
+  font-size: 16px;
+  font-weight: 500;
 }
 
-tr:last-child td:last-child {
-  border-bottom-right-radius: 10px;
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+  gap: 8px;
 }
 
-/* Estilo para botones de acción */
-button[mat-button] {
-  padding: 6px 10px;
+button[mat-raised-button] {
+  font-weight: bold;
+  padding: 10px 24px;
   border-radius: 8px;
+  font-size: 14px;
+  background-color: #4caf50;
+  color: white;
   transition: background-color 0.3s ease;
 }
 
-/* Íconos: lápiz (editar) */
-button[mat-button] .mat-icon {
-  color: #33f321; /* Azul sombra para editar */
+button[mat-raised-button]:hover {
+  background-color: #388e3c;
 }
 
-button[mat-button]:hover .mat-icon {
-  color: #4caf50; /* Verde al hacer hover */
+button[mat-button] mat-icon {
+  color: #2e7d32 !important;
+  transition: color 0.2s;
+  font-size: 20px;
 }
 
-/* Íconos: tachito (eliminar) */
-button[mat-button].delete .mat-icon {
-  color: #f44336; /* Rojo sombra para eliminar */
-}
-
-button[mat-button].delete:hover .mat-icon {
-  color: #4caf50; /* Verde al hacer hover */
-}
-
-/* Ícono de editar (botón de actualizar) */
-button[mat-button]:hover .mat-icon {
-  color: #81c784; /* Verde pastel */
-  transition: color 0.3s ease;
-}
-
-/* Ícono de eliminar */
-button[mat-button].delete_forever:hover .mat-icon {
-  color: #ef9a9a; /* Rojo pastel */
-  transition: color 0.3s ease;
-}
-
-.edit:hover {
-    color: red; /* Cambia el color del lápiz a rojo */
-}
-
-.delete_forever:hover {
-    color: rgb(0, 255, 34); /* Cambia el color del lápiz a rojo */
+button[mat-button]:hover mat-icon {
+  color: #1b5e20 !important;
 }

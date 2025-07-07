@@ -1,28 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
 import { LoginService } from '../../../services/login.service';
 import { Router } from '@angular/router';
-import { User } from '../../../models/user';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.html',
-  styleUrls: ['./perfil.css'],
   standalone: true,
-  imports: [  CommonModule,
-  ReactiveFormsModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatDatepickerModule,
-  MatNativeDateModule,
-  MatButtonModule]
+  selector: 'app-perfil',
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonModule
+  ],
+  templateUrl: './perfil.html',
+  styleUrl: './perfil.css'
 })
 export class PerfilComponent implements OnInit {
   form: FormGroup = new FormGroup({});

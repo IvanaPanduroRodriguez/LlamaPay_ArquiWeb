@@ -1,30 +1,33 @@
 <div class="container">
-  <div style="text-align: center;margin: 5%;">
+  <div style="text-align: center; margin: 5%;">
     <h1>REGISTRO DE ROLES A LOS USUARIOS</h1>
   </div>
-  <div style="text-align: center;margin: 5%;">
 
-    <form [formGroup]="form" (submit)=" aceptar()">
-      <mat-form-field>
+  <div style="text-align: center; margin: 5%;">
+    <form [formGroup]="form" (ngSubmit)="aceptar()">
+
+      <mat-form-field appearance="fill" class="full-width">
         <mat-label>Roles</mat-label>
         <mat-select formControlName="roles">
-          @for (food of TipoRol; track food) {
-          <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
-          }
+          <mat-option *ngFor="let rol of TipoRol" [value]="rol.value">
+            {{ rol.viewValue }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
+      <br />
 
-      <br>
-      <mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
         <mat-label>Nombre del usuario</mat-label>
         <mat-select formControlName="user">
-          @for (food of listaUsuarios; track food) {
-          <mat-option [value]="food.userId">{{food.nameUser}}</mat-option>
-          }
+          <mat-option *ngFor="let usuario of listaUsuarios" [value]="usuario.userId">
+            {{ usuario.nameUser }} {{ usuario.lastnameUser }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
-      <br>
+
+      <br />
+
       <button mat-raised-button color="primary">Registrar rol al usuario</button>
 
     </form>

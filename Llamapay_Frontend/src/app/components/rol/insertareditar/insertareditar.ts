@@ -62,8 +62,7 @@ export class InsertareditarRol implements OnInit {
 aceptar() {
   if (this.form.valid) {
     const newRol = new Rol();
-    newRol.tipoRol = this.form.value.roles;
-
+    newRol.nameRole = this.form.value.roles;
     // Crear objeto User con solo el ID
     const user = new User();
     user.userId = this.form.value.user;
