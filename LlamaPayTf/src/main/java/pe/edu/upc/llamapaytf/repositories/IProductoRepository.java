@@ -28,14 +28,14 @@ public interface IProductoRepository extends JpaRepository<Producto,Integer> {
 
     @Query(value="SELECT \n" +
             "    u.username AS Nombre_del_Usuario, \n" +
-            "    SUM(p.precio_producto) AS MontoProductos, \n" +
+            "    SUM(p.precioproducto) AS MontoProductos, \n" +
             "    oa.monto_meta AS MontoMeta\n" +
             "FROM \n" +
             "    Users u\n" +
             "INNER JOIN \n" +
-            "    objetivo_ahorro oa ON  oa.user_id = u.userid\n" +
+            "    objetivo_ahorro oa ON  oa.user_id = u.user_id\n" +
             "INNER JOIN \n" +
-            "    Producto p ON u.user_id  = p.user_id \n" +
+            "    Producto p ON u.user_id = p.user_id\n" +
             "GROUP BY \n" +
             "    u.username, oa.monto_meta\n" +
             "ORDER BY \n" +
