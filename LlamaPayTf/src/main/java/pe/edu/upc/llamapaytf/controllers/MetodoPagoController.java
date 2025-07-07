@@ -20,8 +20,7 @@ public class MetodoPagoController {
     private IMetodoPagoService mpS;
 
     @GetMapping
-
-    @PreAuthorize("hasAnyAuthority('TESTER'|| hasAnyAuthority('ADMIN'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public List<MetodoPagoDTO> listar() {
         return mpS.list().stream().map(x->{
             ModelMapper modelMapper = new ModelMapper();
@@ -30,8 +29,7 @@ public class MetodoPagoController {
     }
 
     @PostMapping
-
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public void insertar(@RequestBody MetodoPagoDTO dto) {
         ModelMapper m = new ModelMapper();
         MetodoPago mp = m.map(dto, MetodoPago.class);
@@ -39,8 +37,7 @@ public class MetodoPagoController {
     }
 
     @GetMapping("/{id}")
-
-    @PreAuthorize("hasAnyAuthority('TESTER'|| hasAnyAuthority('ADMIN'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public MetodoPagoDTO buscarID(@PathVariable("id") int id) {
         ModelMapper m = new ModelMapper();
         MetodoPagoDTO dto=m.map(mpS.listId(id),MetodoPagoDTO.class);
@@ -48,7 +45,6 @@ public class MetodoPagoController {
     }
 
     @PutMapping
-
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void modificar(@RequestBody MetodoPagoDTO dto){
         ModelMapper m = new ModelMapper();
@@ -57,7 +53,6 @@ public class MetodoPagoController {
     }
 
     @DeleteMapping("/{id}")
-
     @PreAuthorize("hasAnyAuthority('ADMIN')")
 
     public void eliminar(@PathVariable("id") int id){
@@ -65,8 +60,7 @@ public class MetodoPagoController {
     }
 
     @GetMapping("/buscar-metodos-pagos-users")
-
-    @PreAuthorize("hasAnyAuthority('TESTER'|| hasAnyAuthority('ADMIN'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public List<ObtenerMetodosPagosPorUsersDTO> obtenerMetodosPagosPorUsers(@RequestParam int userId){
         List<String[]> fila = mpS.obtenerMetodosPagoPorUserId(userId);
         List<ObtenerMetodosPagosPorUsersDTO> dtoList = new ArrayList<>();
