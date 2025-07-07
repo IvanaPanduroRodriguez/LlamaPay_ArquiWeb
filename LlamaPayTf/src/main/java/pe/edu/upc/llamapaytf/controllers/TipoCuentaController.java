@@ -27,7 +27,7 @@ public class TipoCuentaController {
     }
 
     @PostMapping("registrar")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('CLIENTE'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENTE')")
     public void registrar(@RequestBody TipoCuentaDTO tc) {
         ModelMapper modelMapper = new ModelMapper();
         TipoCuenta tcs = modelMapper.map(tc, TipoCuenta.class);
@@ -35,13 +35,13 @@ public class TipoCuentaController {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('CLIENTE'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENTE')")
     public void eliminar(@PathVariable("id") int id) {
         tcS.delete(id);
     }
 
     @PutMapping("/actualizar")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('CLIENTE'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENTE')")
     public void actualizar(@RequestBody TipoCuentaDTO tcd) {
         ModelMapper modelMapper = new ModelMapper();
         TipoCuenta tc = modelMapper.map(tcd, TipoCuenta.class);
