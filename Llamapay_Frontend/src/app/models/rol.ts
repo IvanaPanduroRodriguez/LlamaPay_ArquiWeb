@@ -1,8 +1,7 @@
-import { User } from "./user";
+import { User } from '../models/user';
 
 export class Rol {
     rolId: number=0;
     tipoRol: string="";
-    user: User= new User();
-    
+    user: User= new User();    
 }

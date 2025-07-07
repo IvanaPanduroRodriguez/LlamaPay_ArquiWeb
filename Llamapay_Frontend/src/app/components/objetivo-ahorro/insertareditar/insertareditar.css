@@ -1,82 +1,112 @@
-/* Contenedor principal: centra el formulario vertical y horizontal */
-.container-metodopago {
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap');
+
+/* Contenedor del formulario */
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(to right, #759724, #ffffff);
-  padding: 20px;
+  padding: 2rem;
+  background: #f7f7f7;
+  min-height: 90vh;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Card */
+mat-card {
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  max-width: 520px;
+  width: 100%;
+  background: #f6fff6;
+  border: 1.5px solid #b6e2b6;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 }
 
 /* Título */
-.container h1 {
-  font-size: 36px;
-  font-weight: 600;
-  margin-bottom: 25px;
-  color: #506C4D;
+h1 {
   text-align: center;
+  color: #2e7d32;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
 }
 
-/* Formulario */
-form {
-  width: 100%;
-  max-width: 500px;
-  background-color: #98BE93;
-  padding: 35px 25px;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-/* Campos */
+/* Campos del formulario */
 mat-form-field {
   width: 100%;
 }
-div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 30px 15px;
-}
-/* Botonera */
-.btn-container {
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  margin-top: 10px;
+
+input[matInput],
+textarea[matInput],
+mat-select {
+  background-color: #f6fff6;
+  border-radius: 4px;
+  border: 1px solid #b6e2b6;
+  color: #2e7d32;
 }
 
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #7cbf7c;
+  border-color: #7cbf7c;
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #388e3c;
+  border-color: #388e3c;
+}
+
+.mat-form-field-label {
+  color: #388e3c !important;
+}
+
+input[matInput]:focus {
+  border-color: #388e3c;
+}
+
+/* Botones */
 button[mat-raised-button] {
-  flex: 1;
-  padding: 10px;
-  font-size: 16px;
-  font-weight: 500;
+  background-color: #a5d6a7;
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
   border-radius: 8px;
-  color: #ffffff;
-  transition: bac kground-color 0.3s ease;
+  font-size: 1.05rem;
+  min-width: 140px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 8px rgba(46, 125, 50, 0.08);
 }
 
-/* Botón primario */
-button[color="primary"] {
-  background-color: #4caf50;
+button[mat-raised-button]:hover {
+  background-color: #81c784;
 }
 
-button[color="primary"]:hover {
-  background-color: #d3fcdf;
+button[mat-raised-button][color="warn"] {
+  background-color: #e57373;
 }
 
-/* Botón cancelar */
-button[color="warn"] {
-  background-color: #f44336;
+button[mat-raised-button][color="warn"]:hover {
+  background-color: #ef5350;
 }
 
-button[color="warn"]:hover {
-  background-color: #f3cba6;
+/* Responsive */
+@media (max-width: 600px) {
+  mat-card {
+    padding: 1rem;
+    max-width: 95vw;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
 }
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+
+/* Fuente global */
+.container,
+mat-card,
+h1,
+mat-form-field,
+input[matInput],
+textarea[matInput],
+button[mat-raised-button] {
+  font-family: 'Roboto', sans-serif;
 }

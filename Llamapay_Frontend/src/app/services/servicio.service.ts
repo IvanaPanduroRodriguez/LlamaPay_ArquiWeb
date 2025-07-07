@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Servicio } from '../models/servicio';
 import { environment } from "../../environments/environment";
-import { Observable } from "rxjs";
 import { MontoServicioDTO } from "../models/montoserviciodto";
 
 const base_url=environment.base;
@@ -40,7 +39,8 @@ export class ServicioService {
   deleteS(id:number) {
     return this.http.delete(`${this.url}/${id}`);
   }
-  montoservicio(): Observable<MontoServicioDTO[]> {
+
+    montoservicio(): Observable<MontoServicioDTO[]> {
     return this.http.get<MontoServicioDTO[]>(`${this.url}/servicioxcategoria`);
   }
 }

@@ -12,7 +12,7 @@ import { ListarTransaccion } from './components/transaccion/listar/listar';
 import { InsertarEditarTransaccion } from './components/transaccion/insertareditar/insertareditar';
 import { TipoTransaccion } from './components/tipotransaccion/tipotransaccion';
 import { ListarTipoTransaccionComponent } from './components/tipotransaccion/listar/listar';
-import { InsertarTipoTransaccionComponent } from './components/tipotransaccion/insertareditar/insertareditar';
+import { InsertarEditarTipoTransaccionComponent } from './components/tipotransaccion/insertareditar/insertareditar';
 import { Rol } from './components/rol/rol';
 import { InsertareditarRol } from './components/rol/insertareditar/insertareditar';
 import { ObjetivoAhorro } from './components/objetivo-ahorro/objetivo-ahorro';
@@ -23,9 +23,9 @@ import { LoginComponent } from './components/login/login.component';
 import { Reportesmetodopago } from './components/reportes/reportesmetodopago/reportesmetodopago';
 import { Reportes } from './components/reportes/reportes';
 import { ReportesuserComponent } from './components/reportes/reportesuser/reportesuser';
-import { Tipocuenta } from './components/tipocuenta/tipocuenta';
+import { TipoCuenta } from './components/tipocuenta/tipocuenta';
 import { ListarTipoCuentaComponent } from './components/tipocuenta/listar/listar';
-import { InsertareditarTipoCuenta } from './components/tipocuenta/insertareditar/insertareditar';
+import { InsertareditarTipoCuentaComponent } from './components/tipocuenta/insertareditar/insertareditar';
 import { Producto } from './components/producto/producto';
 import { Insertareditarproducto } from './components/producto/insertareditarproducto/insertareditarproducto';
 import { Buscarproducto } from './components/producto/buscarproducto/buscarproducto';
@@ -39,13 +39,22 @@ import { seguridadGuard } from './guard/seguridad.guard';
 import { Perfil } from './components/user/perfil/perfil';
 import { Productosandpriceandunit } from './components/reportes/productosandpriceandunit/productosandpriceandunit';
 import { Montosobjetivo } from './components/reportes/montosobjetivo/montosobjetivo';
-import { CategoriaReporte } from './components/reportes/categoria/categoria';
+import { CategoriaReporte } from './components/reportes/categoria/cateogoria';
 import { ServiciosReporte } from './components/reportes/servicio/servicio';
+import { Cantidadtransaccionesporfecha } from './components/reportes/cantidadtransaccionesporfecha/cantidadtransaccionesporfecha';
+import { Montotransaccionesporfecha } from './components/reportes/montotransaccionesporfecha/montotransaccionesporfecha';
+
+
 
 export const routes: Routes = [
 
   {
-    path: '', component: Landing // ← Landing page por defecto
+    path: '',
+    component: Home,
+  },
+  {
+    path: 'home', component: Landing,
+    canActivate: [seguridadGuard] // ← Landing page por defecto
   },
   {
     path: 'registro', component:RegisterComponent
@@ -81,7 +90,7 @@ export const routes: Routes = [
     component: MetodoPago,
     canActivate: [seguridadGuard],
     canActivateChild: [seguridadGuard],
-    data: { roles: ['CLIENTE'] },
+    
     children: [
       { path: 'formularioM', component: InsertareditarMetodoPago },
       { path: 'ediciones/:id', component: InsertareditarMetodoPago }
@@ -108,14 +117,17 @@ export const routes: Routes = [
       { path: 'formularioR', component: InsertareditarRol }
     ]
   },
-  {
+   {
     path: 'objetivoahorros',
     component: ObjetivoAhorro,
     canActivate: [seguridadGuard],
     canActivateChild: [seguridadGuard],
     data: { roles: ['CLIENTE'] },
     children: [
-      { path: 'formularioOA', component: InsertareditarObjetivoAhorro }
+      { path: 'formularioOA', component: InsertareditarObjetivoAhorro },
+      {
+        path: 'ediciones/:id', component:InsertareditarObjetivoAhorro
+      }
     ]
   },
 {
@@ -130,7 +142,10 @@ export const routes: Routes = [
       { path: 'productospriceandunit', component: Productosandpriceandunit },
       { path: 'metacestaobjetivo', component: Montosobjetivo },
       { path: 'montocategorias', component: CategoriaReporte },
-      { path: 'categoriaservicio', component: ServiciosReporte }
+      { path: 'categoriaservicio', component: ServiciosReporte },
+      { path: 'cantidadTransanccionesporFecha', component: Cantidadtransaccionesporfecha},
+      { path: 'montotransaccionesporfecha', component: Montotransaccionesporfecha}
+
     ]
   },
 //-----------------JOAO------------------------------------------
@@ -154,20 +169,20 @@ export const routes: Routes = [
     data: { roles: ['CLIENTE'] },
     children: [
       { path: 'listar', component: ListarTipoTransaccionComponent },
-      { path: 'insertar', component: InsertarTipoTransaccionComponent },
-      { path: 'editar/:id', component: InsertarTipoTransaccionComponent }
+      { path: 'insertar', component: InsertarEditarTipoTransaccionComponent },
+      { path: 'editar/:id', component: InsertarEditarTipoTransaccionComponent }
     ]
   },
   {
     path: 'tipocuenta',
-    component: Tipocuenta,
+    component: TipoCuenta,
     canActivate: [seguridadGuard],
     canActivateChild: [seguridadGuard],
     data: { roles: ['CLIENTE'] },
     children: [
       { path: 'listar', component: ListarTipoCuentaComponent },
-      { path: 'insertar', component: InsertareditarTipoCuenta },
-      { path: 'editar/:id', component: InsertareditarTipoCuenta }
+      { path: 'insertar', component: InsertareditarTipoCuentaComponent },
+      { path: 'editar/:id', component: InsertareditarTipoCuentaComponent }
     ]
   },
   {
@@ -202,11 +217,6 @@ export const routes: Routes = [
       { path: 'ediciones/:id', component: Insertareditartienda },
       { path: 'buscartienda', component: Buscartienda }
     ]
-  },
-  {
-    path: 'home',
-    component: Home,
-  canActivate: [seguridadGuard]
   },
     {
     path: 'perfil',

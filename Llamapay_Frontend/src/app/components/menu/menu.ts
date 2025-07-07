@@ -29,7 +29,7 @@ export class Menu {
 
   constructor(private loginService: LoginService, private router: Router) {}
 
-verificar(): boolean {
+  verificar(): boolean {
     return this.loginService.verificar();
   }
 

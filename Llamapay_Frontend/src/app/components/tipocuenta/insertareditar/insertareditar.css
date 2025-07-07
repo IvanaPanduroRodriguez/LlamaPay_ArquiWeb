@@ -20,7 +20,8 @@
 form {
   width: 100%;
   max-width: 500px;        /* Ancho máximo del formulario */
-  background-color: #98BE93; /* Color de fondo verde claro */
+  background-color: #f6fff6;
+  border: 1.5px solid #b6e2b6;
   padding: 35px 25px;      /* Relleno interno (arriba/abajo, izquierda/derecha) */
   border-radius: 16px;     /* Bordes redondeados */
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12); /* Sombra suave */
@@ -64,11 +65,11 @@ button[color="primary"]:hover {
 
 /* Estilo para botón de cancelar (rojo) */
 button[color="warn"] {
-  background-color: #f44336;
+  background-color: #5cf436;
 }
 
 button[color="warn"]:hover {
-  background-color: #f3cba6;
+  background-color: #94d32f;
 }
 
 /* Ajustes generales para el body y html */

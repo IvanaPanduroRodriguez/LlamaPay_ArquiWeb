@@ -41,12 +41,12 @@ export class InsertareditarUser implements OnInit{
     { value: true, viewValue: 'Activo' },
     { value: false, viewValue: 'Deshabilitado' },
   ];
-  constructor(private uS: UserService,private router: Router,private formBuilder: FormBuilder, private route: ActivatedRoute ){ 
+  constructor(private uS: UserService,
+    private router: Router,
+    private formBuilder: FormBuilder,
+     private route: ActivatedRoute ){ 
   }
   
-
-
-
   ngOnInit(): void {
     
     this.route.params.subscribe((data: Params) => {
@@ -64,7 +64,6 @@ export class InsertareditarUser implements OnInit{
         lastname: ['', Validators.required],
         email:['', Validators.required],
         birthday:['', Validators.required],
-        registrationDate:['', Validators.required],
         username:['', Validators.required],
         password:['', Validators.required],
         estadoUsuario:['', Validators.required],
@@ -83,7 +82,6 @@ export class InsertareditarUser implements OnInit{
       this.user.lastnameUser = this.form.value.lastname;
       this.user.emailUser = this.form.value.email;
       this.user.birthdayUser=this.form.value.birthday;
-      this.user.registrationDateUser=this.form.value.registrationDate;
       this.user.username = this.form.value.username;
       this.user.password = this.form.value.password;
       this.user.enabled = this.form.value.estadoUsuario;
@@ -115,9 +113,7 @@ export class InsertareditarUser implements OnInit{
           lastname: new FormControl(data.lastnameUser),
           email: new FormControl(data.emailUser),
           birthday: new FormControl(data.birthdayUser),
-          registrationDate: new FormControl(data.registrationDateUser),
           username: new FormControl(data.username),
-          password: new FormControl(data.password),
           estadoUsuario: new FormControl(data.enabled),
           })
       })

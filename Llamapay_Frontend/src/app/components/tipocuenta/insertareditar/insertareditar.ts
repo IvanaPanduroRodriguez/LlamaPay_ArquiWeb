@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TipoCuenta } from '../../../models/tipocuenta';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { TipoCuentaService } from '../../../services/tipocuenta.service';
+import { TipoCuenta } from '../../../models/tipocuenta';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -10,8 +10,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-insertareditar',
+  selector: 'app-insertareditar-tipocuenta',
   standalone: true,
+  templateUrl: './insertareditar.html',
+  styleUrl: './insertareditar.css',
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -19,11 +21,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatSelectModule,
     MatButtonModule
-  ],
-  templateUrl: './insertareditar.html',
-  styleUrl: './insertareditar.css'
+  ]
 })
-export class InsertareditarTipoCuenta implements OnInit {
+export class InsertareditarTipoCuentaComponent implements OnInit {
   form: FormGroup;
   edicion: boolean = false;
   id: number = 0;
@@ -37,23 +37,18 @@ export class InsertareditarTipoCuenta implements OnInit {
     this.form = this.fb.group({
       idTipoCuenta: [0],
       nombreTipoCuenta: ['', Validators.required],
-      numeroTipoCuenta: ['',
-    [
-      Validators.required,
-      Validators.pattern(/^\d{8,20}$/) // solo números, entre 8 y 20 dígitos
-    ]
-  ],
+      numeroTipoCuenta: [
+        '',
+        [Validators.required, Validators.pattern(/^\d{8,20}$/)]
+      ],
       tipodeCuenta: ['', Validators.required],
-      saldoTipoCuenta: [0,
-    [
-      Validators.required,
-      Validators.min(0),
-      Validators.max(1000000)
-    ]
-  ],
+      saldoTipoCuenta: [
+        0,
+        [Validators.required, Validators.min(0), Validators.max(1000000)]
+      ],
       monedaTipoCuenta: ['', Validators.required],
       user: this.fb.group({
-        userId: [1, Validators.required] // puedes reemplazar el 1 por un valor dinámico más adelante
+        userId: [1, Validators.required]
       })
     });
   }
@@ -64,26 +59,29 @@ export class InsertareditarTipoCuenta implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
+      this.id = +params['id'];
       this.edicion = !!this.id;
 
       if (this.edicion) {
-        this.tipoCuentaService.list().subscribe((data: TipoCuenta[]) => {
-          const tipoCuenta = data.find(t => t.idTipoCuenta === +this.id);
-          if (tipoCuenta) {
-            this.form.patchValue({
-              idTipoCuenta: tipoCuenta.idTipoCuenta,
-              nombreTipoCuenta: tipoCuenta.nombreTipoCuenta,
-              numeroTipoCuenta: tipoCuenta.numeroTipoCuenta,
-              tipodeCuenta: tipoCuenta.tipodeCuenta,
-              saldoTipoCuenta: tipoCuenta.saldoTipoCuenta,
-              monedaTipoCuenta: tipoCuenta.monedaTipoCuenta,
+        this.tipoCuentaService.list().subscribe(data => {
+          const cuenta = data.find(c => c.idTipoCuenta === this.id);
+          if (cuenta) {
+            this.form.setValue({
+              idTipoCuenta: cuenta.idTipoCuenta,
+              nombreTipoCuenta: cuenta.nombreTipoCuenta,
+              numeroTipoCuenta: cuenta.numeroTipoCuenta,
+              tipodeCuenta: cuenta.tipodeCuenta,
+              saldoTipoCuenta: cuenta.saldoTipoCuenta,
+              monedaTipoCuenta: cuenta.monedaTipoCuenta,
               user: {
-                userId: tipoCuenta.user.userId
+                userId: cuenta.user?.userId || 1
               }
             });
           }
         });
+      } else {
+        this.form.reset();
+        this.userIdControl.setValue(1);
       }
     });
   }
@@ -94,14 +92,14 @@ export class InsertareditarTipoCuenta implements OnInit {
 
       if (this.edicion) {
         this.tipoCuentaService.update(tipoCuenta).subscribe(() => {
-          this.tipoCuentaService.list().subscribe((data: TipoCuenta[]) => {
+          this.tipoCuentaService.list().subscribe(data => {
             this.tipoCuentaService.setList(data);
             this.router.navigate(['/tipocuenta/listar']);
           });
         });
       } else {
         this.tipoCuentaService.insert(tipoCuenta).subscribe(() => {
-          this.tipoCuentaService.list().subscribe((data: TipoCuenta[]) => {
+          this.tipoCuentaService.list().subscribe(data => {
             this.tipoCuentaService.setList(data);
             this.router.navigate(['/tipocuenta/listar']);
           });

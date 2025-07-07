@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Categoria } from "../models/categoria";
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { environment } from "../../environments/environment";
-import { Observable } from "rxjs";
 import { Montocategoria } from "../models/montocategoria";
 
 const base_url=environment.base;

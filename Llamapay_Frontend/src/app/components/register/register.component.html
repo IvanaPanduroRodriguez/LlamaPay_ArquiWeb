@@ -1,89 +1,76 @@
 <body>
-    <header id="navbar">
-        <a href="../index.html">
-            <img class="logo" src="./assets/images/Logo2.svg" alt="LlamaPay_logo">
-        </a>
-    </header>
-    <main class="main">
-        <div class="container-form">
-            <div class="title-form">
-                <h2>Regístrate</h2>
-                <p>Es rápido y fácil</p>
-            </div>
-            <div class="confirmacion" id="confirmacion">
-                <img src="../public/assets/images/check.png" width="80" height="80" id="profile-img" alt="check">
-                <p class="mensaje">¡Registro exitoso!</p>
-            </div>
-            <form class="register-form">
-                <div class="input-container">
-                    <h3 class="subtitle-input">
-                        Nombre
-                    </h3>
-                    <input type="text" id="nombre-input" placeholder="Nombre" onblur="validarNombre()">
-                    <p class="invalid-input-text" id="invalid-name">El nombre debe ser de, al menos, 3 caractéres</p>
-                </div>
-                <div class="input-container">
-                    <h3 class="subtitle-input">
-                        Apellidos
-                    </h3>
-                    <input type="text" id="apellidos-input" placeholder="Apellidos" onblur="validarApellido()">
-                    <p class="invalid-input-text" id="invalid-lastname">El nombre debe ser de, al menos, 3 caractéres</p>
-                </div>
-                <div class="input-container">
-                    <h3 class="subtitle-input">
-                        Usuario
-                    </h3>
-                    <input type="text" id="usuario-input" placeholder="Nombre de usuario" onblur="validarUserName()">
-                    <p class="invalid-input-text" id="invalid-username">Nombre de usuario ingresado no válido</p>
-                </div>
-                <div class="input-container">
-                    <h3 class="subtitle-input">
-                        Email
-                    </h3>
-                    <input type="email" id="email-input" placeholder="Email" onblur="validarEmail()">
-                    <p class="invalid-input-text" id="invalid-email">Email ingresado no válido</p>
-                </div>
-                <div class="input-container">
-                    <h3 class="subtitle-input">
-                        Contraseña
-                    </h3>
-                    <input type="password" id="password-input" placeholder="Contraseña" onblur="validarContrasena()">
-                    <p class="invalid-input-text" id="invalid-password">La contraseña debe tener, al menos, 8 caracteres, 
-                        contener mayúsculas, minúsculas, dígitos (0-9) y caractéres especiales</p>
-                </div>
-                <div class="input-container">
-                    <h3 class="subtitle-input">
-                        Género
-                    </h3>
-                    <div class="buttons-gen-container">
-                        <button type="button" class="btn-gen">Masculino</button>
-                        <button type="button" class="btn-gen">Femenino</button>
-                        <button type="button" class="btn-gen">Otro</button>
-                    </div>
-                    <p class="invalid-input-text" id="invalid-button">Debe elegir un género para registrarse</p>
-                </div>
-                <div class="input-container">
-                    <button type="button" class="btn-register" id="btn-register">Regístrate</button>
-                </div>
-                <div class="input-container" id="separation-register">
-                    <span>- O -</span>
-                </div>
-                <div class="input-container">
-                    <div class="buttons-sm-container">
-                        <button type="button" href="#" class="btn-sm">
-                            <img src="./assets/images/logo-google.svg" alt="google_logo">
-                        </button>
-                        <button type="button" href="#" class="btn-sm">
-                            <img src="./assets/images/logo-facebook.svg" alt="facebook_logo">
-                        </button>
-                    </div>
-                </div>
-            </form>
-            <hr>
-            <div class="footer-form">
-                <p>¿Ya tienes cuenta?</p><a href="./login.html" id="log-in">Inicia sesión</a>
-            </div>
+  <header id="navbar">
+    <a routerLink="/">
+      <img class="logo" src="./assets/images/Logo2.svg" alt="LlamaPay_logo">
+    </a>
+  </header>
+  <main class="main">
+    <div class="container-form">
+      <div class="title-form">
+        <h2>{{ edicion ? 'Actualizar tus datos' : 'Regístrate' }}</h2>
+        <p *ngIf="!edicion">Es rápido y fácil</p>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="insertar()" class="register-form">
+        <div class="input-container" *ngIf="edicion">
+          <h3 class="subtitle-input">ID</h3>
+          <input type="text" formControlName="codigo" readonly />
         </div>
-    </main>
+
+        <div class="input-container">
+          <h3 class="subtitle-input">Nombre</h3>
+          <input type="text" formControlName="name" placeholder="Nombre" />
+        </div>
+
+        <div class="input-container">
+          <h3 class="subtitle-input">Apellidos</h3>
+          <input type="text" formControlName="lastname" placeholder="Apellidos" />
+        </div>
+
+        <div class="input-container">
+          <h3 class="subtitle-input">Usuario</h3>
+          <input type="text" formControlName="username" placeholder="Nombre de usuario" />
+        </div>
+
+        <div class="input-container">
+          <h3 class="subtitle-input">Email</h3>
+          <input type="email" formControlName="email" placeholder="Correo electrónico" />
+        </div>
+
+        <div class="input-container">
+          <h3 class="subtitle-input">Contraseña</h3>
+          <input type="password" formControlName="password" placeholder="Contraseña" />
+        </div>
+
+        <div class="input-container">
+          <h3 class="subtitle-input">Fecha de nacimiento</h3>
+          <input type="date" formControlName="birthday" />
+        </div>
+
+        <div class="input-container">
+          <h3 class="subtitle-input">Estado</h3>
+          <select formControlName="estadoUsuario">
+            <option *ngFor="let u of estados" [value]="u.value">{{ u.viewValue }}</option>
+          </select>
+        </div>
+
+        <div class="input-container">
+          <button type="submit" class="btn-register">
+            {{ edicion ? 'Actualizar usuario' : 'Regístrate' }}
+          </button>
+        </div>
+
+        <div class="input-container" *ngIf="mostrarEliminar()">
+          <button type="button" class="btn-register btn-danger" (click)="eliminar()">
+            Eliminar cuenta
+          </button>
+        </div>
+
+        <div class="footer-form">
+          <p>¿Ya tienes cuenta?</p>
+          <a routerLink="/login">Inicia sesión</a>
+        </div>
+      </form>
+    </div>
+  </main>
 </body>
-<script src="./assets/scripts/registration.js"></script>

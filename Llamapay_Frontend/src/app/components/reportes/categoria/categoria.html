@@ -1,43 +1,14 @@
 <div class="container-categoria">
   <div class="header">
-    <h1>Gastos por Categoría</h1>
-    <p>Filtra por mes y año para ver los gastos específicos</p>
+    <h1>Monto por Categoría</h1>
   </div>
 
-  <!-- Filtros -->
-  <div class="filtros-container">
-    <div class="filtros-row">
-      <mat-form-field appearance="outline">
-        <mat-label>Mes (1-12)</mat-label>
-        <input matInput type="number" [(ngModel)]="mes" min="1" max="12" placeholder="Ej: 6">
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Año</mat-label>
-        <input matInput type="number" [(ngModel)]="anio" min="2020" max="2030" placeholder="Ej: 2024">
-      </mat-form-field>
-
-      <div class="botones-filtros">
-        <button mat-raised-button color="primary" (click)="aplicarFiltros()">
-          Aplicar Filtros
-        </button>
-        <button mat-button (click)="limpiarFiltros()">
-          Limpiar
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <div class="chart-container" *ngIf="barChartData.length > 0">
+  <div class="chart-container">
     <canvas baseChart
       [data]="{ labels: barChartLabels, datasets: barChartData }"
       [type]="barChartType"
       [options]="barChartOptions"
       [legend]="barChartLegend">
     </canvas>
-  </div>
-
-  <div class="no-data" *ngIf="barChartData.length === 0">
-    <p>No hay datos para mostrar. Aplica filtros para ver los resultados.</p>
   </div>
 </div>

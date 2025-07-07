@@ -34,5 +34,12 @@ export class RolService{
     update(r: Rol) {
         return this.http.put(this.url, r);
     }
+    obtenerPorTipoRol(tipo: string) {
+  return this.http.get<any[]>(`${this.url}/tipoRol/${tipo}`);
+}
 
+obtenerPorUsuario(id: number) {
+  return this.http.get<any[]>(`${this.url}/usuario/${id}`);
+}
+    
 }

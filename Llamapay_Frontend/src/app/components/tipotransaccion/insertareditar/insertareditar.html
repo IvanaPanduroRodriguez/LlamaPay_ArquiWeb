@@ -1,20 +1,22 @@
-<div class="container-tipotransaccion">
-  <h1>{{ edicion ? 'Editar Tipo de Transacción' : 'Registrar Tipo de Transacción' }}</h1>
+<div class="form-container">
+  <h2 class="form-title">
+    {{ edicion ? 'Actualizar Tipo de Transacción' : 'Registrar Tipo de Transacción' }}
+  </h2>
 
-  <form [formGroup]="form" (ngSubmit)="aceptar()">
-    <mat-form-field appearance="fill">
-      <mat-label>Descripción</mat-label>
+  <form [formGroup]="form" (ngSubmit)="aceptar()" class="form-content">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Descripción*</mat-label>
       <input matInput formControlName="descripcion" />
       <mat-error *ngIf="form.get('descripcion')?.hasError('required')">
         La descripción es obligatoria
       </mat-error>
     </mat-form-field>
 
-    <div class="btn-container">
-      <button mat-raised-button color="primary" type="submit">
+    <div class="form-buttons">
+      <button mat-raised-button color="primary" type="submit" class="btn-primary">
         {{ edicion ? 'Guardar Cambios' : 'Registrar' }}
       </button>
-      <button mat-raised-button color="warn" type="button" (click)="cancelar()">
+      <button mat-raised-button color="warn" type="button" (click)="cancelar()" class="btn-cancel">
         Cancelar
       </button>
     </div>

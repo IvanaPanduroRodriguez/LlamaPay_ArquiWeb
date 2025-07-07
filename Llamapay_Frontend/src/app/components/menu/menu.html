@@ -1,7 +1,7 @@
 <mat-toolbar class="custom-toolbar" *ngIf="verificar()">
   <!-- HOME -->
   <div>
-    <button mat-button [routerLink]="['']" style="color: white">
+    <button mat-button [routerLink]="['home']" style="color: white">
       <mat-icon>home</mat-icon> Home
     </button>
   </div>
@@ -131,7 +131,7 @@
 
 <!-- Menú Reportes -->
 <mat-menu #menuReportes="matMenu">
-  <button mat-menu-item routerLink="/reportes/metodospagosgrafica">
+    <button mat-menu-item routerLink="/reportes/metodospagosgrafica">
     <mat-icon>bar_chart</mat-icon> Métodos de Pago
   </button>
   <button mat-menu-item routerLink="/reportes/productospriceandunit">
@@ -148,6 +148,12 @@
   </button>
   <button mat-menu-item routerLink="/reportes/categoriaservicio">
     <mat-icon>insert_chart</mat-icon> Categoria Servicios
+  </button>
+    <button mat-menu-item routerLink="/reportes/cantidadTransanccionesporFecha">
+    <mat-icon>insert_chart</mat-icon> Cantidad transacciones por Fecha
+  </button>
+    <button mat-menu-item routerLink="/reportes/montotransaccionesporfecha">
+    <mat-icon>insert_chart</mat-icon> MontoTransacciones por fecha
   </button>
 </mat-menu>
 
