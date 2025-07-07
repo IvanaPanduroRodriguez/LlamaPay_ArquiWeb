@@ -41,6 +41,8 @@ import { Productosandpriceandunit } from './components/reportes/productosandpric
 import { Montosobjetivo } from './components/reportes/montosobjetivo/montosobjetivo';
 import { CategoriaReporte } from './components/reportes/categoria/cateogoria';
 import { ServiciosReporte } from './components/reportes/servicio/servicio';
+import { Cantidadtransaccionesporfecha } from './components/reportes/cantidadtransaccionesporfecha/cantidadtransaccionesporfecha';
+import { Montotransaccionesporfecha } from './components/reportes/montotransaccionesporfecha/montotransaccionesporfecha';
 
 
 
@@ -140,7 +142,10 @@ export const routes: Routes = [
       { path: 'productospriceandunit', component: Productosandpriceandunit },
       { path: 'metacestaobjetivo', component: Montosobjetivo },
       { path: 'montocategorias', component: CategoriaReporte },
-      { path: 'categoriaservicio', component: ServiciosReporte }
+      { path: 'categoriaservicio', component: ServiciosReporte },
+      { path: 'cantidadTransanccionesporFecha', component: Cantidadtransaccionesporfecha},
+      { path: 'montotransaccionesporfecha', component: Montotransaccionesporfecha}
+
     ]
   },
 //-----------------JOAO------------------------------------------

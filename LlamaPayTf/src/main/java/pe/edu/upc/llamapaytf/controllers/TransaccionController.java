@@ -22,7 +22,7 @@ public class TransaccionController {
     private ITransaccionService transaccionS;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public List<TransaccionDTO> listar() {
         return transaccionS.list().stream().map(x -> {
             ModelMapper modelMapper = new ModelMapper();
@@ -31,7 +31,7 @@ public class TransaccionController {
     }
 
     @PostMapping("registrar")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public void registrar(@RequestBody TransaccionDTO tr) {
         ModelMapper modelMapper = new ModelMapper();
         Transaccion trs = modelMapper.map(tr, Transaccion.class);
@@ -39,13 +39,13 @@ public class TransaccionController {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public void eliminar(@PathVariable("id") int id) {
         transaccionS.delete(id);
     }
 
     @PutMapping("/actualizar")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public void actualizar(@RequestBody TransaccionDTO trd) {
         ModelMapper modelMapper = new ModelMapper();
         Transaccion tr = modelMapper.map(trd, Transaccion.class);
@@ -53,7 +53,7 @@ public class TransaccionController {
     }
 
     @GetMapping("/cantidad-por-fecha")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public List<CantidadTransaccionesPorFechaDTO> cantidadTransaccionesPorFecha() {
         return transaccionS.contarTransaccionesPorFecha().stream().map(fila -> {
             CantidadTransaccionesPorFechaDTO dto = new CantidadTransaccionesPorFechaDTO();
@@ -64,7 +64,7 @@ public class TransaccionController {
     }
 
     @GetMapping("/monto-por-fecha")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public List<MontoTransaccionesPorFechaDTO> montoTransaccionesPorFecha() {
         return transaccionS.sumarMontosPorFecha().stream().map(fila -> {
             MontoTransaccionesPorFechaDTO dto = new MontoTransaccionesPorFechaDTO();
@@ -74,7 +74,7 @@ public class TransaccionController {
         }).collect(Collectors.toList());
     }
     @GetMapping("/descripcion/{descripcion}")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public List<TransaccionDTO> buscarPorDescripcion(@PathVariable("descripcion") String descripcion) {
         return transaccionS.findByDescripcion(descripcion).stream().map(t -> {
             ModelMapper modelMapper = new ModelMapper();
@@ -83,7 +83,7 @@ public class TransaccionController {
     }
 
     @GetMapping("/transacciones-monto-mes-joao")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public List<TransaccionInfoDTO> transaccionesPorMontoYMes(@RequestParam BigDecimal monto, @RequestParam int mes) {
         List<TransaccionInfoDTO> dtoLista = new ArrayList<>();
         List<String[]> lista = transaccionS.findByMontoMayorAndMes(monto, mes);
@@ -98,7 +98,7 @@ public class TransaccionController {
     }
 
     @GetMapping("/transacciones-descripcion-mes-joao")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public List<TransaccionInfoDTO> transaccionesPorDescripcionYMes(@RequestParam String descripcion, @RequestParam int mes) {
         List<TransaccionInfoDTO> dtoLista = new ArrayList<>();
         List<String[]> lista = transaccionS.findByDescripcionAndMes(descripcion, mes);

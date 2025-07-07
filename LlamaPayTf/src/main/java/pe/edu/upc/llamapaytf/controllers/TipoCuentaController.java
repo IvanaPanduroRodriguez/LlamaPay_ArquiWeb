@@ -18,7 +18,7 @@ public class TipoCuentaController {
     private ITipoCuentaService tcS;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public List<TipoCuentaDTO> listar() {
         return tcS.list().stream().map(x -> {
             ModelMapper modelMapper = new ModelMapper();
@@ -49,7 +49,7 @@ public class TipoCuentaController {
     }
 
     @GetMapping("/usuario/{userId}")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public List<TipoCuentaDTO> obtenerTiposCuentasPorUsuario(@PathVariable int userId) {
         return tcS.findTipoCuentaByUserId(userId).stream().map(x -> {
             ModelMapper modelMapper = new ModelMapper();
@@ -58,7 +58,7 @@ public class TipoCuentaController {
     }
 
     @GetMapping("/buscar")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public List<TipoCuentaDTO> buscarPorNombre(@RequestParam("nombre") String nombre) {
         List<TipoCuenta> lista = tcS.buscarPorNombre(nombre);
         return lista.stream().map(tc -> {

@@ -18,7 +18,7 @@ public class TipoTransaccionController {
     private ITipoTransaccionService tS;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public List<TipoTransaccionDTO> listar() {
         return tS.list().stream().map(t -> {
             ModelMapper m = new ModelMapper();
@@ -49,7 +49,7 @@ public class TipoTransaccionController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public TipoTransaccionDTO buscarPorId(@PathVariable("id") int id) {
         ModelMapper m = new ModelMapper();
         TipoTransaccionDTO dto = m.map(tS.listID(id), TipoTransaccionDTO.class);
