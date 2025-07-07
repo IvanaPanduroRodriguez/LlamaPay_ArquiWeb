@@ -1,0 +1,23 @@
+{
+  "routes": {
+    "/": {},
+    "/cancel": {},
+    "/categorias": {},
+    "/home": {},
+    "/login": {},
+    "/metodopagos": {},
+    "/objetivoahorros": {},
+    "/perfil": {},
+    "/productos": {},
+    "/registro": {},
+    "/reportes": {},
+    "/roles": {},
+    "/servicios": {},
+    "/succes": {},
+    "/tiendas": {},
+    "/tipocuenta": {},
+    "/tipotransaccion": {},
+    "/transaccion": {},
+    "/users": {}
+  }
+}
