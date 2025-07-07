@@ -13,7 +13,7 @@ import { TransaccionService } from '../../../services/transaccion.service';
 export class Montotransaccionesporfecha implements OnInit {
   barChartOptions: ChartOptions = { responsive: true };
   barChartLabels: string[] = [];
-  barChartType: ChartType = 'line';
+  barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartData: ChartDataset[] = [];
 
@@ -25,8 +25,17 @@ export class Montotransaccionesporfecha implements OnInit {
       this.barChartData = [{
         data: data.map(item => item.montoTotal),
         label: 'Monto Total por Fecha',
-        backgroundColor: ['#90CAF9'],
-        borderColor: '#1565C0',
+        backgroundColor: [
+          '#2E7D32',
+          '#388E3C',
+          '#43A047',
+          '#4CAF50',
+          '#66BB6A',
+          '#81C784',
+          '#A5D6A7',
+          '#C8E6C9'
+        ],
+        borderColor: '#1B5E20',
         fill: true
       }];
     });
