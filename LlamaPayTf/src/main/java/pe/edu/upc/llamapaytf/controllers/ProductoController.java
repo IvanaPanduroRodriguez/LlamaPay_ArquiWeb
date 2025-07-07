@@ -22,7 +22,7 @@ public class ProductoController {
     private IProductoService pS;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER')) || hasAnyAuthority('CLIENTE')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENTE','TESTER')")
     public List<ProductoDTO> listar() {
         return pS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -30,7 +30,7 @@ public class ProductoController {
         }).collect(Collectors.toList());
     }
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('CLIENTE'))")
+    @PreAuthorize("hasAnyAuthority('TESTER')")
     public void insertar(@RequestBody ProductoDTO productoDTO) {
         productoDTO.setIdproducto(0);
         ModelMapper m = new ModelMapper();
@@ -39,20 +39,20 @@ public class ProductoController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('CLIENTE'))")
+    @PreAuthorize("hasAnyAuthority('TESTER')")
     public void modificar(@RequestBody ProductoDTO productoDTO) {
         ModelMapper m = new ModelMapper();
         Producto p = m.map(productoDTO, Producto.class);
         pS.update(p);
     }
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('CLIENTE'))")
+    @PreAuthorize("hasAnyAuthority('TESTER')")
     public void eliminar(@PathVariable("id") int id) {
         pS.delete(id);
     }
 
     @GetMapping("/buscar/{producto}")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('CLIENTE'))")
+    @PreAuthorize("hasAnyAuthority('TESTER')")
     public List<ProductoDTO> buscarPorProducto(@PathVariable("producto") String producto) {
         return pS.buscarPorProducto(producto).stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -61,7 +61,7 @@ public class ProductoController {
     }
 
     @GetMapping("/objetivo_cesta")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('CLIENTE'))")
+    @PreAuthorize("hasAnyAuthority('TESTER')")
     public List<PrMetaCestaDTO> montosobjetivo() {
         List<String[]> fila = pS.montosobjetivo();
         List<PrMetaCestaDTO> dtoLista=new ArrayList<>();
@@ -75,7 +75,7 @@ public class ProductoController {
         return dtoLista;
     }
     @GetMapping("/producto_precio_unidad")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('CLIENTE')) || hasAnyAuthority('TESTER')")
+    @PreAuthorize("hasAnyAuthority('TESTER')")
     public List<ProductoInfoDTO> productosandpriceandunit() {
         List<String[]> fila = pS.productosandpriceandunit();
         List<ProductoInfoDTO> dtoLista=new ArrayList<>();

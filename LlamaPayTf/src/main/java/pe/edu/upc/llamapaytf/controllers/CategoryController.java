@@ -23,7 +23,7 @@ public class CategoryController {
     private ICategoryService cS;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public List<CategoryDTO> listar() {
         return cS.list().stream().map(x->{
             ModelMapper modelMapper = new ModelMapper();
@@ -40,7 +40,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public CategoryDTO buscarID(@PathVariable("id") int id) {
         ModelMapper m = new ModelMapper();
         CategoryDTO dto=m.map(cS.listID(id),CategoryDTO.class);
@@ -48,7 +48,7 @@ public class CategoryController {
     }
 
     @GetMapping("/montoxcategoria")
-    @PreAuthorize("hasAnyAuthority('ADMIN'|| hasAnyAuthority('TESTER'))")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TESTER')")
     public List<CategoriaMontoDTO>buscarMontoCategoria(@RequestParam(required = false) Integer mes, @RequestParam(required = false) Integer anio) {
         List<CategoriaMontoDTO> dtoLista=new ArrayList<>();
         List<String[]> lista = new ArrayList<>();

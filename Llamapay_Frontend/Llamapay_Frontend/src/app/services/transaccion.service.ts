@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Transaccion } from '../models/transaccion';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from "../../environments/environment";
 
 const base_url = environment.base;
@@ -54,5 +54,13 @@ export class TransaccionService {
 
   getId() {
     return this.idCambio.asObservable();
+  }
+
+   getCantidadPorFecha(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}/cantidad-por-fecha`);
+  }
+
+  getMontoPorFecha(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.url}/monto-por-fecha`);
   }
 }
